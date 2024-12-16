@@ -29,6 +29,8 @@ enum
 //------------------------------------------------------------------------
 void Init()
 {
+	
+	
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -48,18 +50,33 @@ void Init()
 //------------------------------------------------------------------------
 void Update(const float deltaTime)
 {
+
+
+
+
+
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite->Update(deltaTime);
-	if (App::GetController().GetLeftThumbStickX() > 0.5f)
+	/*if (App::GetController().GetLeftThumbStickX() > 0.5f)
 	{
 		testSprite->SetAnimation(ANIM_RIGHT);
 		float x, y;
 		testSprite->GetPosition(x, y);
 		x += 1.0f;
 		testSprite->SetPosition(x, y);
+	}*/
+
+	if (App::IsKeyPressed(VK_RIGHT))
+	{
+		testSprite->SetAnimation(ANIM_RIGHT);
+		float x, y;
+		testSprite->GetPosition(x, y);
+		x += 1.0f;
+		testSprite->SetPosition(x, y);
+		
 	}
-	if (App::GetController().GetLeftThumbStickX() < -0.5f)
+	if (App::IsKeyPressed(VK_LEFT))
 	{
 		testSprite->SetAnimation(ANIM_LEFT);
 		float x, y;

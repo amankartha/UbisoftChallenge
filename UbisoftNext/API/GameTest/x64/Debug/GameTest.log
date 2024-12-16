@@ -1,13 +1,4 @@
-﻿  stdafx.cpp
-  app.cpp
-  main.cpp
-  SimpleController.cpp
-  SimpleSound.cpp
-  SimpleSprite.cpp
-  GameTest.cpp
-  miniaudio.cpp
-  stb_image.cpp
-  Generating Code...
+﻿  main.cpp
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied
