@@ -1,4 +1,5 @@
 #pragma once
+#include <App/app.h>
 
 class GameObject;
 

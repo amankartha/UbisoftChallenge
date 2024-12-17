@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------
 #include "app\app.h"
 #include <GameObject.h>
+#include <CRenderer.h>
 //------------------------------------------------------------------------
 
 //------------------------------------------------------------------------
@@ -17,8 +18,7 @@
 //------------------------------------------------------------------------
 CSimpleSprite *testSprite;
 std::shared_ptr<GameObject> player;
-std::shared_ptr<GameObject> player2;
-std::shared_ptr<GameObject> player3;
+
 enum
 {
 	ANIM_FORWARDS,
@@ -36,9 +36,10 @@ enum
 void Init()
 {
 	player = GameObject::Create("Player");
-	player2 = GameObject::Create("Player");
-	player3 = GameObject::Create("Player");
 
+
+	player->AddComponent<CRenderer>();
+	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 	
 
 	//------------------------------------------------------------------------
@@ -78,11 +79,11 @@ void Update(const float deltaTime)
 
 	if (App::IsKeyPressed(VK_RIGHT))
 	{
-		testSprite->SetAnimation(ANIM_RIGHT);
+	/*	testSprite->SetAnimation(ANIM_RIGHT);
 		float x, y;
 		testSprite->GetPosition(x, y);
 		x += 1.0f;
-		testSprite->SetPosition(x, y);
+		testSprite->SetPosition(x, y);*/
 		player->GetComponent<Ctransform>()->OffsetPosition(1, 0);
 		
 	}
@@ -97,11 +98,11 @@ void Update(const float deltaTime)
 	}
 	if (App::IsKeyPressed(VK_LEFT))
 	{
-		testSprite->SetAnimation(ANIM_LEFT);
+		/*testSprite->SetAnimation(ANIM_LEFT);
 		float x, y;
 		testSprite->GetPosition(x, y);
 		x -= 1.0f;
-		testSprite->SetPosition(x, y);
+		testSprite->SetPosition(x, y);*/
 		player->GetComponent<Ctransform>()->OffsetPosition(-1, 0);
 	}
     if (App::GetController().GetLeftThumbStickY() > 0.5f)
@@ -152,6 +153,10 @@ void Update(const float deltaTime)
 		App::StopSound(".\\TestData\\Test.wav");
 	}
 
+	for (auto& it : GameObject::GAMEOBJECTSMAP) {
+
+		it.second->Update();
+	}
 	
 }
 

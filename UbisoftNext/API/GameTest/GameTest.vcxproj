@@ -189,6 +189,7 @@
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Ctransform.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GOcursor.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Ctransform.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTest.cpp" />

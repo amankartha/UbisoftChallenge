@@ -38,6 +38,7 @@
     <ClCompile Include="Ctransform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="CRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Ctransform.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="CRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
