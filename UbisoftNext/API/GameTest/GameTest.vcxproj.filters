@@ -25,8 +25,15 @@
       <Filter>API\third_party\miniaudio</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -58,8 +65,15 @@
       <Filter>API\third_party\miniaudio</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Component.h" />
+    <ClInclude Include="Component.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -73,6 +87,12 @@
     </Filter>
     <Filter Include="API\third_party\stb_image">
       <UniqueIdentifier>{61cfc19b-c57e-4021-b530-bac172fcba86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{5a734412-d55e-4909-abba-9455b85c2aeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{62618a28-5725-481d-a121-b127d48f1aac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
