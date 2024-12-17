@@ -16,14 +16,19 @@ class GameObject
 
 private:
 
-	
+	//if the name already exists add the count of the name next to it like how unity does it, default is empty
 	static std::string generateUniqueName(const std::string& name)
 	{
 		std::string modifiedName = name;
-		if (GAMEOBJECTSMAP.find(name) != GAMEOBJECTSMAP.end())
-		{
-			modifiedName = name + "(" + std::to_string(GAMEOBJECTSMAP.count(name)) + ")";
+		int count = GAMEOBJECTSMAP.count(modifiedName);
+		int Counter = 0;
+		
+		while (count > 0) {
+			modifiedName = name + "(" + std::to_string(Counter++) + ")";
+			count = GAMEOBJECTSMAP.count(modifiedName);
+			
 		}
+
 		return modifiedName;
 	}
 
@@ -39,17 +44,31 @@ public:
 
 	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP;
 
-	//Constructor attempts to make a game object with the name given, if the name already exists add the count of the name next to it like how unity does it, default is empty
-	GameObject(const std::string& name  = generateUniqueName("")) : name(generateUniqueName(name))
+	
+	GameObject()
 	{
-		GAMEOBJECTSMAP[this->name] = std::shared_ptr<GameObject>(this);
+		//GAMEOBJECTSMAP[this->name] = std::shared_ptr<GameObject>(this);
 		this->AddComponent<Ctransform>();
 	}
 	~GameObject()
 	{
-		GAMEOBJECTSMAP.erase(this->name);
-		//std::cout << name << "Has been destroyed" << std::endl;
+		
 	}
+
+	//ONLY USE THIS TO MAKE GAMEOBJECTS SO THAT THEY ARE STORED
+	static std::shared_ptr<GameObject> GameObject::Create(const std::string& name)
+	{
+		std::string uniqueName = generateUniqueName(name);
+		auto newObject = std::make_shared<GameObject>();
+
+	
+		GAMEOBJECTSMAP[uniqueName] = newObject;
+		GAMEOBJECTSMAP[uniqueName]->name = uniqueName;
+		
+		return newObject;
+	}
+
+
 	virtual void Init();
 	virtual void Update();
 	virtual void Render();

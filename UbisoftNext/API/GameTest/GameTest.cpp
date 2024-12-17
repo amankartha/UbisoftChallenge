@@ -17,6 +17,8 @@
 //------------------------------------------------------------------------
 CSimpleSprite *testSprite;
 std::shared_ptr<GameObject> player;
+std::shared_ptr<GameObject> player2;
+std::shared_ptr<GameObject> player3;
 enum
 {
 	ANIM_FORWARDS,
@@ -33,8 +35,12 @@ enum
 //------------------------------------------------------------------------
 void Init()
 {
-	player = std::make_shared<GameObject>("Player");
+	player = GameObject::Create("Player");
+	player2 = GameObject::Create("Player");
+	player3 = GameObject::Create("Player");
+
 	
+
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -57,8 +63,7 @@ void Update(const float deltaTime)
 	
 
 
-	player->Update();
-
+	
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite->Update(deltaTime);
@@ -80,6 +85,15 @@ void Update(const float deltaTime)
 		testSprite->SetPosition(x, y);
 		player->GetComponent<Ctransform>()->OffsetPosition(1, 0);
 		
+	}
+	if (App::IsKeyPressed(VK_UP))
+	{
+		GameObject::Create("Generated");
+	}
+	if (App::IsKeyPressed(VK_DOWN))
+	{
+		if(!GameObject::GAMEOBJECTSMAP.empty())
+		GameObject::GAMEOBJECTSMAP.erase(std::prev(GameObject::GAMEOBJECTSMAP.end()));
 	}
 	if (App::IsKeyPressed(VK_LEFT))
 	{
@@ -157,6 +171,7 @@ void Render()
 	// Example Text.
 	//------------------------------------------------------------------------
 	App::Print(100, 100, "Sample Text");
+	App::Print(100, 300,std::to_string(GameObject::GAMEOBJECTSMAP.size()).c_str());
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
 	// ---------------------------------------------------------------------

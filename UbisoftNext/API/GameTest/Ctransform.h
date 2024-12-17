@@ -9,12 +9,20 @@ class Ctransform :
 {
 
 public:
+    static int Count;
+    int id;
     float x = 0.0f;
     float y = 0.0f;
     float rotation = 0.0f;
 
-    Ctransform(GameObject* go) : Component(go) {}
-
+    Ctransform(GameObject* go) : Component(go) 
+    {
+        id = Count++;
+    }
+    ~Ctransform() override
+    {
+        --Count;
+    }
 
     void SetPosition(float _x, float _y)
     {

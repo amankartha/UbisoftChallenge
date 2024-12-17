@@ -1,7 +1,16 @@
 ﻿  Ctransform.cpp
-  GameObject.cpp
-  GameTest.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(23,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(28,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\Ctransform.cpp(16,22): warning C4244: 'argument': conversion from 'int' to 'const float', possible loss of data
   GOcursor.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(23,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(28,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  GameObject.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(23,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(28,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  GameTest.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(23,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(28,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
