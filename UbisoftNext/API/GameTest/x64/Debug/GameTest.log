@@ -1,4 +1,8 @@
-﻿  GameObject.cpp
+﻿  Ctransform.cpp
+  GameObject.cpp
+  GameTest.cpp
+  GOcursor.cpp
+  Generating Code...
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied

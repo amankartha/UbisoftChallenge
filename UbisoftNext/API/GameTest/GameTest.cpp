@@ -9,12 +9,14 @@
 #include <math.h>  
 //------------------------------------------------------------------------
 #include "app\app.h"
+#include <GameObject.h>
 //------------------------------------------------------------------------
 
 //------------------------------------------------------------------------
 // Example data....
 //------------------------------------------------------------------------
 CSimpleSprite *testSprite;
+std::shared_ptr<GameObject> player;
 enum
 {
 	ANIM_FORWARDS,
@@ -24,12 +26,14 @@ enum
 };
 //------------------------------------------------------------------------
 
+
+
 //------------------------------------------------------------------------
 // Called before first update. Do any initial setup here.
 //------------------------------------------------------------------------
 void Init()
 {
-	
+	player = std::make_shared<GameObject>("Player");
 	
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
@@ -50,10 +54,10 @@ void Init()
 //------------------------------------------------------------------------
 void Update(const float deltaTime)
 {
+	
 
 
-
-
+	player->Update();
 
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
@@ -74,6 +78,7 @@ void Update(const float deltaTime)
 		testSprite->GetPosition(x, y);
 		x += 1.0f;
 		testSprite->SetPosition(x, y);
+		player->GetComponent<Ctransform>()->OffsetPosition(1, 0);
 		
 	}
 	if (App::IsKeyPressed(VK_LEFT))
@@ -83,6 +88,7 @@ void Update(const float deltaTime)
 		testSprite->GetPosition(x, y);
 		x -= 1.0f;
 		testSprite->SetPosition(x, y);
+		player->GetComponent<Ctransform>()->OffsetPosition(-1, 0);
 	}
     if (App::GetController().GetLeftThumbStickY() > 0.5f)
     {
@@ -131,6 +137,8 @@ void Update(const float deltaTime)
 	{
 		App::StopSound(".\\TestData\\Test.wav");
 	}
+
+	
 }
 
 //------------------------------------------------------------------------
@@ -139,16 +147,24 @@ void Update(const float deltaTime)
 //------------------------------------------------------------------------
 void Render()
 {	
+
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
-	testSprite->Draw();
+    testSprite->Draw();
 	//------------------------------------------------------------------------
 
 	//------------------------------------------------------------------------
 	// Example Text.
 	//------------------------------------------------------------------------
 	App::Print(100, 100, "Sample Text");
-
+	//----------------------------------------------------------------------
+	// Render all Gameobjects
+	// ---------------------------------------------------------------------
+	for (auto& it : GameObject::GAMEOBJECTSMAP) {
+	
+		it.second->Render();
+	}
+	
 	//------------------------------------------------------------------------
 	// Example Line Drawing.
 	//------------------------------------------------------------------------

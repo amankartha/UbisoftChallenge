@@ -34,6 +34,10 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="GOcursor.cpp" />
+    <ClCompile Include="Ctransform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -73,6 +77,11 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="appUtility.h" />
+    <ClInclude Include="GOcursor.h" />
+    <ClInclude Include="Ctransform.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

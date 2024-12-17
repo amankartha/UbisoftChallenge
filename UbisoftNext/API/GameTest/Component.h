@@ -9,7 +9,7 @@ public:
 
 public:
 	Component(GameObject* go) { attachedGameObject = go; }
-	virtual ~Component(){}
+	virtual ~Component() = default;
 	
 	virtual void Init() {};
 	virtual void Update() {};
