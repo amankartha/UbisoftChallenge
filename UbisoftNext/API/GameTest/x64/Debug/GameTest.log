@@ -1,7 +1,4 @@
-﻿  CameraComponent.cpp
-  Component.cpp
-  GameObject.cpp
-  Generating Code...
+﻿  GameObject.cpp
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied

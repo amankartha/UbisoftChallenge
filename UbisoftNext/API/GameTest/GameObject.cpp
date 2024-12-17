@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 
-int GameObject::ID = 0;
+
 
 
 void GameObject::Update()
