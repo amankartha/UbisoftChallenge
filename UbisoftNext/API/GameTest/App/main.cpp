@@ -36,6 +36,7 @@ double gLastTime;
 extern void Init();
 extern void Update(const float deltaTime);
 extern void Render();
+extern void PhysicsUpdate();
 extern void Shutdown();
 //---------------------------------------------------------------------------------
 void StartCounter()
@@ -169,7 +170,7 @@ void CheckMemCallback()
 //---------------------------------------------------------------------------------
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, 	_In_opt_ HINSTANCE hPrevInstance,	_In_ LPWSTR    lpCmdLine, _In_ int       nCmdShow)
 {	
-	int argc = 0;	char* argv = "";
+	int argc = 0;	  char* argv = { const_cast<char*>("") }; //Needed change to work with C++20
 
 	// Exit handler to check memory on exit.
 	const int result_1 = std::atexit(CheckMemCallback);

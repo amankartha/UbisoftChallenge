@@ -39,6 +39,9 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="CRenderer.cpp" />
+    <ClCompile Include="CustomMath.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -85,6 +88,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="CRenderer.h" />
+    <ClInclude Include="CustomMath.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -104,6 +110,9 @@
     </Filter>
     <Filter Include="GameObjects">
       <UniqueIdentifier>{62618a28-5725-481d-a121-b127d48f1aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{fc032ef5-67bd-427b-970c-6b86f564a31c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

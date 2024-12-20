@@ -121,6 +121,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -191,6 +192,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Ctransform.h" />
+    <ClInclude Include="CustomMath.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GOcursor.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
@@ -209,6 +211,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Ctransform.cpp" />
+    <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="GOcursor.cpp" />

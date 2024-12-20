@@ -56,7 +56,7 @@ public:
 	}
 
 	//ONLY USE THIS TO MAKE GAMEOBJECTS SO THAT THEY ARE STORED
-	static std::shared_ptr<GameObject> GameObject::Create(const std::string& name)
+	static std::shared_ptr<GameObject> Create(const std::string& name)
 	{
 		std::string uniqueName = generateUniqueName(name);
 		auto newObject = std::make_shared<GameObject>();

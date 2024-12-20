@@ -36,7 +36,7 @@ enum
 void Init()
 {
 	player = GameObject::Create("Player");
-
+	OutputDebugStringW(L"My output string.");
 
 	player->AddComponent<CRenderer>();
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -62,7 +62,7 @@ void Init()
 void Update(const float deltaTime)
 {
 	
-
+	 
 
 	
 	//------------------------------------------------------------------------
@@ -84,7 +84,7 @@ void Update(const float deltaTime)
 		testSprite->GetPosition(x, y);
 		x += 1.0f;
 		testSprite->SetPosition(x, y);*/
-		player->GetComponent<Ctransform>()->OffsetPosition(1, 0);
+		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
 		
 	}
 	if (App::IsKeyPressed(VK_UP))
@@ -103,7 +103,7 @@ void Update(const float deltaTime)
 		testSprite->GetPosition(x, y);
 		x -= 1.0f;
 		testSprite->SetPosition(x, y);*/
-		player->GetComponent<Ctransform>()->OffsetPosition(-1, 0);
+		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::LEFT);
 	}
     if (App::GetController().GetLeftThumbStickY() > 0.5f)
     {
@@ -159,7 +159,10 @@ void Update(const float deltaTime)
 	}
 	
 }
+void PhysicsUpdate()
+{
 
+}
 //------------------------------------------------------------------------
 // Add your display calls here (DrawLine,Print, DrawSprite.) 
 // See App.h 

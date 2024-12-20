@@ -5,11 +5,15 @@
 
 void CRenderer::Update()
 {
-	std::shared_ptr<Ctransform> transform = getAttachedGameObject()->GetComponent<Ctransform>();
-	sprite->SetPosition(transform->x,transform->y);
+	if (enabled)
+	{
+		std::shared_ptr<Ctransform> transform = getAttachedGameObject()->GetComponent<Ctransform>();
+		sprite->SetPosition(transform->position.x,transform->position.y);
+	}
 }
 
 void CRenderer::Render()
 {
+	if (enabled)
 	sprite->Draw();
 }

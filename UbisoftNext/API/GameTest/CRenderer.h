@@ -26,7 +26,7 @@ public:
     void CreateSprite(const char* fileName,int columns, int rows)
     {
         sprite = App::CreateSprite(fileName, columns, rows);
-    }
+    } 
 
     void Update() override;
 

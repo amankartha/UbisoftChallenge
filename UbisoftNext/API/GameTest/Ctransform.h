@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
+#include "CustomMath.h"
 #include <iostream>
+
 
 class GameObject;
 
@@ -11,8 +13,8 @@ class Ctransform :
 public:
     static int Count;
     int id;
-    float x = 0.0f;
-    float y = 0.0f;
+    Vector2 position;
+    
     float rotation = 0.0f;
 
     Ctransform(GameObject* go) : Component(go) 
@@ -24,15 +26,13 @@ public:
         --Count;
     }
 
-    void SetPosition(float _x, float _y)
+    void SetPosition(Vector2 vec)
     {
-        x = _x;
-        y = _y;
+        position = vec;
     }
-    void OffsetPosition(float _x, float _y)
+    void OffsetPosition(Vector2 vec)
     {
-        x += _x;
-        y += _y;
+        position = position + vec;
     }
 
     void Update() override;
