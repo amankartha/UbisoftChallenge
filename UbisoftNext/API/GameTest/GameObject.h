@@ -55,7 +55,7 @@ public:
 		
 	}
 
-	//ONLY USE THIS TO MAKE GAMEOBJECTS SO THAT THEY ARE STORED
+	//ONLY USE THIS TO MAKE GAMEOBJECTS SO THAT THEY ARE STORED IN THE MAP   ---- how to enforce??
 	static std::shared_ptr<GameObject> Create(const std::string& name)
 	{
 		std::string uniqueName = generateUniqueName(name);

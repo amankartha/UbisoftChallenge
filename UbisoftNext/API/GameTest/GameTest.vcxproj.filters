@@ -25,9 +25,6 @@
       <Filter>API\third_party\miniaudio</Filter>
     </ClCompile>
     <ClCompile Include="Observer.cpp" />
-    <ClCompile Include="CameraComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -42,6 +39,7 @@
     <ClCompile Include="CustomMath.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="appUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -74,9 +72,6 @@
     </ClInclude>
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Component.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">

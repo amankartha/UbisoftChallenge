@@ -8,9 +8,10 @@
 #include <windows.h> 
 #include <math.h>  
 //------------------------------------------------------------------------
-#include "app\app.h"
+#include "appUtility.h"
 #include <GameObject.h>
 #include <CRenderer.h>
+#include <GOcursor.h>
 //------------------------------------------------------------------------
 
 //------------------------------------------------------------------------
@@ -18,6 +19,7 @@
 //------------------------------------------------------------------------
 CSimpleSprite *testSprite;
 std::shared_ptr<GameObject> player;
+std::shared_ptr<GameObject> mouse;
 
 enum
 {
@@ -35,8 +37,13 @@ enum
 //------------------------------------------------------------------------
 void Init()
 {
+	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
+	
 	player = GameObject::Create("Player");
-	OutputDebugStringW(L"My output string.");
+	mouse = GameObject::Create("Mouse");
+	mouse->AddComponent<CRenderer>();
+	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
+	
 
 	player->AddComponent<CRenderer>();
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -62,7 +69,7 @@ void Init()
 void Update(const float deltaTime)
 {
 	
-	 
+	mouse->GetComponent<Ctransform>()->SetPosition(App::GetMousePosVec2());
 
 	
 	//------------------------------------------------------------------------
@@ -89,7 +96,8 @@ void Update(const float deltaTime)
 	}
 	if (App::IsKeyPressed(VK_UP))
 	{
-		GameObject::Create("Generated");
+		auto g =GameObject::Create("Generated");
+	
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
