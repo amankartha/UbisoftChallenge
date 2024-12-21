@@ -24,22 +24,28 @@
     <ClCompile Include="miniaudio\miniaudio.cpp">
       <Filter>API\third_party\miniaudio</Filter>
     </ClCompile>
-    <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="IObserver.cpp" />
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="GOcursor.cpp" />
     <ClCompile Include="Ctransform.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="CustomMath.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
-    <ClCompile Include="appUtility.cpp" />
+    <ClCompile Include="appUtility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Crigidbody.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -70,21 +76,27 @@
     <ClInclude Include="miniaudio\miniaudio.h">
       <Filter>API\third_party\miniaudio</Filter>
     </ClInclude>
-    <ClInclude Include="Observer.h" />
+    <ClInclude Include="IObserver.h" />
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="appUtility.h" />
-    <ClInclude Include="GOcursor.h" />
     <ClInclude Include="Ctransform.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="CRenderer.h" />
     <ClInclude Include="CustomMath.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="appUtility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Crigidbody.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

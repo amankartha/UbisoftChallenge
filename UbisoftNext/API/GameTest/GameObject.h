@@ -1,14 +1,15 @@
 #pragma once
-#include <Component.h>
+#include "Component.h"
+#include "Ctransform.h"
 #include <vector>
 #include <unordered_map>
 #include <typeindex>
 #include <memory>
 #include <string>
 #include <iostream>
-#include <Ctransform.h>
 
-class Component;
+
+
 
 class GameObject
 {
@@ -41,7 +42,7 @@ private:
 public:
 	std::string name;
 	
-
+	//This is a map of all the gameobjects in the game currently, if its not in here it doesnt exist or hasnt been loaded in.
 	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP;
 
 	

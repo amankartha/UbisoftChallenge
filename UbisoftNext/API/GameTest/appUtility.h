@@ -10,7 +10,7 @@ namespace App
 	//{
 	//	//App:DrawLine();
 	//}
-	
+
 	Vector2 GetMousePosVec2();
 
 
@@ -18,6 +18,6 @@ namespace App
 		return a + (b - a) * i;
 	}*/
 
-}
+};
 
 

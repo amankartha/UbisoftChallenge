@@ -21,6 +21,12 @@ public:
     {
         id = Count++;
     }
+
+    Ctransform(GameObject* go,float x,float y) : Component(go)
+    {
+        id = Count++;
+        position = Vector2(x, y);
+    }
     ~Ctransform() override
     {
         --Count;
