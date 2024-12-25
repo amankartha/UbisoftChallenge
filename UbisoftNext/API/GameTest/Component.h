@@ -9,7 +9,7 @@ public:
 	bool enabled = true;
 
 public:
-	Component(GameObject* go) { attachedGameObject = go; }
+	Component() = default;
 	virtual ~Component() = default;
 	
 	virtual void Init() {};
@@ -17,9 +17,14 @@ public:
 	virtual void Render() {};
 
 	//get the gameobject that this component is attached to
-	GameObject* getAttachedGameObject() { return attachedGameObject; }
+	std::weak_ptr<GameObject> getAttachedGameObject() { return attachedGameObject; }
+
+	void SetGameObject(std::weak_ptr<GameObject> go)
+	{
+		attachedGameObject = go;
+	}
 
 private:
-	GameObject* attachedGameObject = nullptr;
+	std::weak_ptr<GameObject> attachedGameObject;
 };
 

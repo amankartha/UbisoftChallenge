@@ -188,6 +188,7 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="Ccursor.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
@@ -195,7 +196,7 @@
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
-    <ClInclude Include="IObserver.h" />
+    <ClInclude Include="ObserverPattern.h" />
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="Ccursor.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
@@ -215,7 +217,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameTest.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
-    <ClCompile Include="IObserver.cpp" />
+    <ClCompile Include="ObserverPattern.cpp" />
     <ClCompile Include="stb_image\stb_image.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

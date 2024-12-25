@@ -17,12 +17,12 @@ public:
     
     float rotation = 0.0f;
 
-    Ctransform(GameObject* go) : Component(go) 
+    Ctransform() : Component() 
     {
         id = Count++;
     }
 
-    Ctransform(GameObject* go,float x,float y) : Component(go)
+    Ctransform(float x,float y) : Component()
     {
         id = Count++;
         position = Vector2(x, y);

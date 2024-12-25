@@ -40,16 +40,16 @@ private:
 	
 
 public:
-	std::string name;
+	std::string m_name;
 	
 	//This is a map of all the gameobjects in the game currently, if its not in here it doesnt exist or hasnt been loaded in.
-	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP;
+	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP; // this shud be an int but keeping it a string because its easier to remember for now
 
 	
 	GameObject()
 	{
 		//GAMEOBJECTSMAP[this->name] = std::shared_ptr<GameObject>(this);
-		this->AddComponent<Ctransform>();
+		
 	}
 	~GameObject()
 	{
@@ -64,7 +64,8 @@ public:
 
 	
 		GAMEOBJECTSMAP[uniqueName] = newObject;
-		GAMEOBJECTSMAP[uniqueName]->name = uniqueName;
+		GAMEOBJECTSMAP[uniqueName]->m_name = uniqueName;
+		GAMEOBJECTSMAP[uniqueName]->AddComponent<Ctransform>();
 		
 		return newObject;
 	}
@@ -88,9 +89,8 @@ public:
 		if (_components.find(type) != _components.end()) {  // This makes sure theres only 1 of each type of component added to the GameObject
 			throw std::logic_error("Component of this type already exists in GameObject");
 		}
-
-		_components[type] = std::make_shared<T>(this, std::forward<Args>(args)...); //make_shared is to make a shared_ptr and forward forwards the args to the constructor of the template
-
+		_components[type] = std::make_shared<T>(); //make_shared is to make a shared_ptr and forward forwards the args to the constructor of the template
+		_components[type]->SetGameObject(GameObject::GAMEOBJECTSMAP[m_name]);
 	}
 
 	template<typename T>

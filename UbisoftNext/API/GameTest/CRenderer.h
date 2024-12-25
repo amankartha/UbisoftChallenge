@@ -14,7 +14,7 @@ private:
 
 public:
 
-    CRenderer(GameObject* go) : Component(go)
+    CRenderer() : Component()
     {
         sprite = nullptr;
     }

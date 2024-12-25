@@ -24,7 +24,7 @@
     <ClCompile Include="miniaudio\miniaudio.cpp">
       <Filter>API\third_party\miniaudio</Filter>
     </ClCompile>
-    <ClCompile Include="IObserver.cpp" />
+    <ClCompile Include="ObserverPattern.cpp" />
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -44,6 +44,9 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Crigidbody.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Ccursor.cpp">
       <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,7 +79,7 @@
     <ClInclude Include="miniaudio\miniaudio.h">
       <Filter>API\third_party\miniaudio</Filter>
     </ClInclude>
-    <ClInclude Include="IObserver.h" />
+    <ClInclude Include="ObserverPattern.h" />
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -96,6 +99,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Crigidbody.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Ccursor.h">
       <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
