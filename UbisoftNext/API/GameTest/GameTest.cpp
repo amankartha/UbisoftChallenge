@@ -11,6 +11,7 @@
 #include "appUtility.h"
 #include <GameObject.h>
 #include <CRenderer.h>
+#include "Renderer.h"
 
 //------------------------------------------------------------------------
 
@@ -38,12 +39,12 @@ enum
 void Init()
 {
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
-	
-	player = GameObject::Create("Player");
 	mouse = GameObject::Create("Mouse");
+	player = GameObject::Create("Player");
+
 	mouse->AddComponent<CRenderer>();
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
-	
+	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
 	player->AddComponent<CRenderer>();
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -97,6 +98,9 @@ void Update(const float deltaTime)
 	if (App::IsKeyPressed(VK_UP))
 	{
 		auto g =GameObject::Create("Generated");
+		g->AddComponent<CRenderer>();
+		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
 	
 	}
 	if (App::IsKeyPressed(VK_DOWN))
@@ -191,10 +195,7 @@ void Render()
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
 	// ---------------------------------------------------------------------
-	for (auto& it : GameObject::GAMEOBJECTSMAP) {
-	
-		it.second->Render();
-	}
+	Renderer::RenderAll();
 	
 	//------------------------------------------------------------------------
 	// Example Line Drawing.

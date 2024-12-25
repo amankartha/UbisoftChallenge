@@ -28,7 +28,7 @@ const Vector2 AABB::GetMin() const
 {
 	if (std::shared_ptr<Ctransform> transform = m_transform.lock()) // this checks if m_transform still exists and creates a shared pointer to it , supposed to be safer  
 	{
-		return m_min + transform->position;
+		return m_min + transform->GetPosition();
 	}
 	return m_min;
 }
@@ -38,7 +38,7 @@ const Vector2 AABB::GetMax() const {
 
 	if (std::shared_ptr<Ctransform>  transform = m_transform.lock()) // this checks if m_transform still exists and creates a shared pointer to it , supposed to be safer  
 	{
-		return m_max + transform->position;
+		return m_max + transform->GetPosition();
 	}
 	return m_max;
 

@@ -8,9 +8,6 @@
 #include <string>
 #include <iostream>
 
-
-
-
 class GameObject
 {
 	
@@ -34,16 +31,13 @@ private:
 	}
 
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> _components;
-
-
-
-	
+	std::shared_ptr<Ctransform> m_transform;
 
 public:
 	std::string m_name;
 	
 	//This is a map of all the gameobjects in the game currently, if its not in here it doesnt exist or hasnt been loaded in.
-	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP; // this shud be an int but keeping it a string because its easier to remember for now
+	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP; // this shud be a GUID but keeping it a string because its easier to remember for now
 
 	
 	GameObject()
@@ -60,39 +54,52 @@ public:
 	static std::shared_ptr<GameObject> Create(const std::string& name)
 	{
 		std::string uniqueName = generateUniqueName(name);
-		auto newObject = std::make_shared<GameObject>();
-
-	
-		GAMEOBJECTSMAP[uniqueName] = newObject;
-		GAMEOBJECTSMAP[uniqueName]->m_name = uniqueName;
-		GAMEOBJECTSMAP[uniqueName]->AddComponent<Ctransform>();
+		auto createdGO = std::make_shared<GameObject>();
+		createdGO->m_name = uniqueName;
+		createdGO->m_transform = createdGO->AddComponent<Ctransform>();
+		GAMEOBJECTSMAP[uniqueName] = createdGO;
 		
-		return newObject;
+		return createdGO;
+	}
+	//ONLY USE THIS TO DESTROY GAMEOBJECTS
+	static void Destroy(const std::string& name)
+	{
+		GAMEOBJECTSMAP.erase(name);
+	}
+	static void Destroy(std::shared_ptr<GameObject> go)
+	{
+		GAMEOBJECTSMAP.erase(go->m_name);
 	}
 
-
-	virtual void Init();
-	virtual void Update();
-	virtual void Render();
-
-	//typename... Args is a parameter pack which means it can hold 0 or more types
-
-	
-
-
-	template <typename T, typename... Args>
-	void AddComponent(Args&&... args)
+	//returns a weak pointer to this gameobjects transform;
+	std::shared_ptr<Ctransform> GetTransform()
 	{
-		static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");  // This splits out an error on compile if I add something thats not a component
+		return m_transform;
+	}
+	//Adds component to the gameobject and returns it
+	template <typename T, typename... Args>
+	std::shared_ptr<T> AddComponent(Args&&... args)
+	{
+		static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
+
 		auto type = std::type_index(typeid(T));
 
-		if (_components.find(type) != _components.end()) {  // This makes sure theres only 1 of each type of component added to the GameObject
+		if (_components.find(type) != _components.end()) {
 			throw std::logic_error("Component of this type already exists in GameObject");
 		}
-		_components[type] = std::make_shared<T>(); //make_shared is to make a shared_ptr and forward forwards the args to the constructor of the template
-		_components[type]->SetGameObject(GameObject::GAMEOBJECTSMAP[m_name]);
-	}
 
+		
+		auto component = std::make_shared<T>(std::forward<Args>(args)...);
+
+		
+		component->SetGameObject(GameObject::GAMEOBJECTSMAP[m_name]);
+
+		
+		_components[type] = component;
+
+		return component;
+	}
+	//Returns a shared pointer to the component
 	template<typename T>
 	std::shared_ptr<T> GetComponent()
 	{
@@ -107,14 +114,25 @@ public:
 		}
 
 	}
-
+	//Remove component type from this gameobject, Cannot remove Ctransform
 	template<typename T>
 	void RemoveComponent()
 	{
+		if (std::is_same<T, Ctransform>::value) {
+			throw std::logic_error("Ctransform cannot be removed.");
+			return;
+		}
+
 		auto type = std::type_index(typeid(T));
 		_components.erase(type);
 	}
 
+
+
+
+	virtual void Init();
+	virtual void Update();
+	virtual void Render();
 
 
 };

@@ -1,28 +1,7 @@
-﻿  Ccursor.cpp
+﻿  GameTest.cpp
 D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  CRenderer.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Ctransform.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  CustomMath.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  GameObject.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  GameTest.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(24,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(29,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied

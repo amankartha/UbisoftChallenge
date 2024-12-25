@@ -10,10 +10,12 @@ class Ctransform :
     public Component
 {
 
+private:
+    Vector2 position;
 public:
     static int Count;
     int id;
-    Vector2 position;
+  
     
     float rotation = 0.0f;
 
@@ -35,6 +37,10 @@ public:
     void SetPosition(Vector2 vec)
     {
         position = vec;
+    }
+    Vector2 GetPosition()
+    {
+        return position;
     }
     void OffsetPosition(Vector2 vec)
     {

@@ -7,8 +7,8 @@ void CRenderer::Update()
 {
 	if (enabled)
 	{
-		std::shared_ptr<Ctransform> transform = getAttachedGameObject().lock()->GetComponent<Ctransform>(); //TODO CHANGE THIS
-		sprite->SetPosition(transform->position.x,transform->position.y);
+		std::shared_ptr<Ctransform> transform = getAttachedGameObject().lock()->GetTransform();
+		sprite->SetPosition(transform->GetPosition().x, transform->GetPosition().y);
 	}
 }
 
