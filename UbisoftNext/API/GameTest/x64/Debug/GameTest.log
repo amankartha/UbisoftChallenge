@@ -1,8 +1,48 @@
-﻿  GameTest.cpp
+﻿  stdafx.cpp
+  appUtility.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  app.cpp
+  main.cpp
+  SimpleController.cpp
+  SimpleSound.cpp
+  SimpleSprite.cpp
+  Ccursor.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Component.cpp
+  CRenderer.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\Renderer.h(16,3): warning C4091: 'static ': ignored on left of 'Renderer::RenderLayer' when no variable is declared
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Crigidbody.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Ctransform.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  CustomMath.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  GameObject.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  GameTest.cpp
 D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(21,1): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
 D:\UbisoftChallenge\UbisoftNext\API\GameTest\GameObject.h(26,1): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 D:\UbisoftChallenge\UbisoftNext\API\GameTest\Renderer.h(16,3): warning C4091: 'static ': ignored on left of 'Renderer::RenderLayer' when no variable is declared
+  miniaudio.cpp
+  ObserverPattern.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Renderer.cpp
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\UbisoftChallenge\UbisoftNext\API\GameTest\Renderer.h(16,3): warning C4091: 'static ': ignored on left of 'Renderer::RenderLayer' when no variable is declared
+  stb_image.cpp
+  Generating Code...
   GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
   D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
   1 File(s) copied
