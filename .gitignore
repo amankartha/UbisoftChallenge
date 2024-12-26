@@ -400,3 +400,4 @@ FodyWeavers.xsd
 *.sln.iml
 UbisoftNext/API/.vs/GameTest/v17/Browse.VC.db
 UbisoftNext/API/.vs/GameTest/v17/.suo
+/UbisoftNext/API/GameTest/x64
