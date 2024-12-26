@@ -5,6 +5,9 @@
 
 using timePoint = std::chrono::time_point<std::chrono::high_resolution_clock>;
 
+/// <summary>
+/// task object that
+/// </summary>
 class Task {
 private:
     timePoint m_StartTime;
