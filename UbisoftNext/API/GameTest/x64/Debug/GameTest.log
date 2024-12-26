@@ -1,6 +1,0 @@
-﻿  Renderer.cpp
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\CustomMath.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\UbisoftChallenge\UbisoftNext\API\GameTest\Renderer.h(16,3): warning C4091: 'static ': ignored on left of 'Renderer::RenderLayer' when no variable is declared
-  GameTest.vcxproj -> D:\UbisoftChallenge\UbisoftNext\API\x64\Debug\GameTest.exe
-  D:\UbisoftChallenge\UbisoftNext\API\\GameTest\glut\bin\x64\freeglut.dll
-  1 File(s) copied
