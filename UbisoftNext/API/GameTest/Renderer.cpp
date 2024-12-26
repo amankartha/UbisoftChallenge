@@ -52,4 +52,8 @@ namespace Renderer
     {
         isShake = b;
     }
+    void TurnOffShake()
+    {
+        isShake = false;
+    }
 }

@@ -11,7 +11,8 @@ class Ctransform :
 {
 
 private:
-    Vector2 position;
+    Vector2 m_position;
+    float scale;
 public:
     static int Count;
     int id;
@@ -27,7 +28,7 @@ public:
     Ctransform(float x,float y) : Component()
     {
         id = Count++;
-        position = Vector2(x, y);
+        m_position = Vector2(x, y);
     }
     ~Ctransform() override
     {
@@ -36,15 +37,15 @@ public:
 
     void SetPosition(Vector2 vec)
     {
-        position = vec;
+        m_position = vec;
     }
     Vector2 GetPosition()
     {
-        return position;
+        return m_position;
     }
     void OffsetPosition(Vector2 vec)
     {
-        position = position + vec;
+        m_position = m_position + vec;
     }
 
     void Update() override;

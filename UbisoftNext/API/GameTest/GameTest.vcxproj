@@ -198,6 +198,7 @@
     <ClInclude Include="miniaudio\miniaudio.h" />
     <ClInclude Include="ObserverPattern.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scheduler.h" />
     <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

@@ -27,6 +27,8 @@ namespace Renderer
 	 void RemoveRendererComponent(CRenderer& renderer);
 
 	 void SetShake(bool b);
+
+	 void TurnOffShake();
 	
 };
 

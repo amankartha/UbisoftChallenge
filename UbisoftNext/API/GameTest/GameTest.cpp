@@ -12,6 +12,7 @@
 #include <GameObject.h>
 #include <CRenderer.h>
 #include "Renderer.h"
+#include "Scheduler.h"
 
 //------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@
 CSimpleSprite *testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
-
+Scheduler* scheduler;
 enum
 {
 	ANIM_FORWARDS,
@@ -39,6 +40,9 @@ enum
 void Init()
 {
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
+
+	scheduler = new Scheduler();
+
 	mouse = GameObject::Create("Mouse");
 	player = GameObject::Create("Player");
 
@@ -74,7 +78,7 @@ void Update(const float deltaTime)
 {
 	
 	mouse->GetComponent<Ctransform>()->SetPosition(App::GetMousePosVec2());
-
+	scheduler->Update();
 	
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
@@ -105,6 +109,9 @@ void Update(const float deltaTime)
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 		
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
+
+		//Renderer::TurnOffShake();
+		scheduler->AddTask(Renderer::TurnOffShake, 3000);
 	
 	}
 	if (App::IsKeyPressed(VK_DOWN))
