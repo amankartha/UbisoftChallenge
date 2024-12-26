@@ -42,9 +42,12 @@ void Init()
 	mouse = GameObject::Create("Mouse");
 	player = GameObject::Create("Player");
 
+
+	Renderer::SetShake(true);
+
 	mouse->AddComponent<CRenderer>();
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
-	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
+	mouse->GetComponent<CRenderer>()->SetRenderLayer(Renderer::RenderLayer::UI);
 
 	player->AddComponent<CRenderer>();
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -100,6 +103,7 @@ void Update(const float deltaTime)
 		auto g =GameObject::Create("Generated");
 		g->AddComponent<CRenderer>();
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+		
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
 	
 	}
@@ -184,13 +188,13 @@ void Render()
 
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
-    testSprite->Draw();
+    //testSprite->Draw();
 	//------------------------------------------------------------------------
 
 	//------------------------------------------------------------------------
 	// Example Text.
 	//------------------------------------------------------------------------
-	App::Print(100, 100, "Sample Text");
+	//App::Print(100, 100, "Sample Text");
 	App::Print(100, 300,std::to_string(GameObject::GAMEOBJECTSMAP.size()).c_str());
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
@@ -200,7 +204,7 @@ void Render()
 	//------------------------------------------------------------------------
 	// Example Line Drawing.
 	//------------------------------------------------------------------------
-	static float a = 0.0f;
+	/*static float a = 0.0f;
 	const float r = 1.0f;
 	float g = 1.0f;
 	float b = 1.0f;
@@ -215,7 +219,7 @@ void Render()
 		g = (float)i / 20.0f;
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey, r, g, b);
-	}
+	}*/
 }
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.

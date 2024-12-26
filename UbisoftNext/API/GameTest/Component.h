@@ -1,5 +1,5 @@
 #pragma once
-#include <appUtility.h>
+#include <memory>
 
 class GameObject;
 

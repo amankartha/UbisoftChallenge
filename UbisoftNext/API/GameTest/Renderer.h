@@ -1,26 +1,32 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <CustomMath.h>
 
 class CRenderer;
 //Should this be a singleton?
-enum RenderLayer
+
+namespace Renderer
 {
-	Background = 0,
-	Default = 1,
-	UI = 3
-};
-class Renderer
-{
-public:
-	static std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
+	static enum RenderLayer
+	{
+		Background = 0,
+		Default = 1,
+		UI = 3
+	};
+
+	 static Vector2 shakeValue;
+	 static bool isShake;
+
+	 static std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
 	
-	static void RenderAll();
+	 void RenderAll();
 
-	static void AddRendererComponent(CRenderer& renderer);
+	 void AddRendererComponent(CRenderer& renderer);
 
-	static void RemoveRendererComponent(CRenderer& renderer);
+	 void RemoveRendererComponent(CRenderer& renderer);
 
+	 void SetShake(bool b);
 	
 };
 

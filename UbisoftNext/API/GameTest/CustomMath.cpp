@@ -44,7 +44,6 @@ const Vector2 AABB::GetMax() const {
 
 }
 
-#pragma endregion
 
 bool AABB::CheckAABBCollision(AABB a, AABB b)
 {
@@ -60,5 +59,12 @@ bool AABB::CheckAABBCollision(AABB a, AABB b)
 
 }
 
+#pragma endregion
+
+#pragma region Circle
 Circle::Circle(GameObject& go, float radius, Vector2 position) : m_transform(go.GetComponent<Ctransform>()), m_radius(radius), m_position(position) {}
+
+#pragma endregion
+
+
 

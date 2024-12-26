@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+#include "appUtility.h"
+
 class Crigidbody :
     public Component
 {
