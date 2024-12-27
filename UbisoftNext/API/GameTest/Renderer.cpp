@@ -4,9 +4,8 @@
 #include "appUtility.h"
 
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
-namespace Renderer
-{
-    void RenderAll()
+
+    void Renderer::RenderAll()
     {
 
         if (isShake)
@@ -33,12 +32,12 @@ namespace Renderer
         }
     }
 
-    void AddRendererComponent(CRenderer& renderer)
+    void Renderer::AddRendererComponent(CRenderer& renderer)
     {
         RENDERMAP[renderer.GetRenderLayer()].push_back(&renderer);
     }
 
-    void RemoveRendererComponent(CRenderer& renderer)
+    void Renderer::RemoveRendererComponent(CRenderer& renderer)
     {
         auto& renderVector = RENDERMAP[renderer.GetRenderLayer()];
 
@@ -48,12 +47,11 @@ namespace Renderer
             renderVector.end()
         );
     }
-    void SetShake(bool b)
+    void Renderer::SetShake(bool b)
     {
         isShake = b;
     }
-    void SetShakeOff()
+    void Renderer::SetShakeOff()
     {
         isShake = false;
     }
-}

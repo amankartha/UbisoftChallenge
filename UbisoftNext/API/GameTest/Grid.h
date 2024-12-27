@@ -6,6 +6,13 @@
 
 namespace PHYSICS
 {
+	class Cell
+	{
+		AABB cellBounds;
+		std::vector<Collider*> bodies;
+		void AddCell(Collider* body);
+		void RemoveCell(Collider* body);
+	};
 
 	class Body
 	{
@@ -14,7 +21,7 @@ namespace PHYSICS
 
 		std::vector<Body*> GetNearbyBodies()
 		{
-			std::vector<Body*> result;
+			/*std::vector<Body*> result;
 			for (auto& c : currentCells)
 			{
 				for (auto& b : c->GetBodies())
@@ -22,17 +29,11 @@ namespace PHYSICS
 					result.push_back(b);
 				}
 			}
-			return result;
+			return result;*/
 		}
 	};
 
-	class Cell
-	{
-		AABB cellBounds;
-		std::vector<Collider*> bodies;
-		void AddCell(Collider* body);
-		void RemoveCell(Collider* body);
-	};
+
 
 	class Grid
 	{

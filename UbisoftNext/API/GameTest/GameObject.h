@@ -14,63 +14,31 @@ class GameObject
 
 private:
 
-	//if the name already exists add the count of the name next to it like how unity does it, default is empty
-	static std::string generateUniqueName(const std::string& name)
-	{
-		std::string modifiedName = name;
-		int count = GAMEOBJECTSMAP.count(modifiedName);
-		int Counter = 0;
-		
-		while (count > 0) {
-			modifiedName = name + "(" + std::to_string(Counter++) + ")";
-			count = GAMEOBJECTSMAP.count(modifiedName);
-			
-		}
-
-		return modifiedName;
-	}
+	
 
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> _components;
 	std::shared_ptr<Ctransform> m_transform;
+	std::weak_ptr<GameObject> m_selfPointer;
 
 public:
 	std::string m_name;
 	
-	//This is a map of all the gameobjects in the game currently, if its not in here it doesnt exist or hasnt been loaded in.
-	static std::unordered_map<std::string, std::shared_ptr<GameObject>> GAMEOBJECTSMAP; // this shud be a GUID but keeping it a string because its easier to remember for now
 
+	
 	
 	GameObject()
 	{
-		//GAMEOBJECTSMAP[this->name] = std::shared_ptr<GameObject>(this);
 		
+		m_transform = AddComponent<Ctransform>();
 	}
 	~GameObject()
 	{
 		
 	}
-
-	//ONLY USE THIS TO MAKE GAMEOBJECTS SO THAT THEY ARE STORED IN THE MAP   ---- how to enforce??
-	static std::shared_ptr<GameObject> Create(const std::string& name)
+	void SetSelfPointer(std::shared_ptr<GameObject> pointer)
 	{
-		std::string uniqueName = generateUniqueName(name);
-		auto createdGO = std::make_shared<GameObject>();
-		createdGO->m_name = uniqueName;
-		createdGO->m_transform = createdGO->AddComponent<Ctransform>();
-		GAMEOBJECTSMAP[uniqueName] = createdGO;
-		
-		return createdGO;
+		m_selfPointer = pointer;
 	}
-	//ONLY USE THIS TO DESTROY GAMEOBJECTS
-	static void Destroy(const std::string& name)
-	{
-		GAMEOBJECTSMAP.erase(name);
-	}
-	static void Destroy(std::shared_ptr<GameObject> go)
-	{
-		GAMEOBJECTSMAP.erase(go->m_name);
-	}
-
 	//returns a weak pointer to this gameobjects transform;
 	std::shared_ptr<Ctransform> GetTransform()
 	{
@@ -92,7 +60,7 @@ public:
 		auto component = std::make_shared<T>(std::forward<Args>(args)...);
 
 		
-		component->SetGameObject(GameObject::GAMEOBJECTSMAP[m_name]);
+		component->SetGameObject(m_selfPointer);
 
 		
 		_components[type] = component;

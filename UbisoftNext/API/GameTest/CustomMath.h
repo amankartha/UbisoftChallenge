@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>>
 #include <math.h>
+#include <algorithm> 
 
 class GameObject;
 class Ctransform;

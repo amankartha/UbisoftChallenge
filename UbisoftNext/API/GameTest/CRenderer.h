@@ -10,36 +10,38 @@ class CRenderer :
 
 private:
 
+    Renderer* mainRenderer;
     CSimpleSprite* sprite;
-    Renderer::RenderLayer m_renderLayer;
+    RenderLayer m_renderLayer;
     bool m_isShake;
 
 public:
 
   
 
-    CRenderer() : Component()
+    CRenderer(Renderer* renderer) 
     {
+        mainRenderer = renderer;
         m_isShake = false;
         sprite = nullptr;
-        m_renderLayer = Renderer::RenderLayer::Default;
-        Renderer::AddRendererComponent(*this);
+        m_renderLayer = RenderLayer::Default;
+        mainRenderer->AddRendererComponent(*this);
     }
     ~CRenderer() override
     {
-        Renderer::RemoveRendererComponent(*this);
+        mainRenderer->RemoveRendererComponent(*this);
     }
 
-    Renderer::RenderLayer GetRenderLayer()
+    RenderLayer GetRenderLayer()
     {
         return m_renderLayer;
     }
 
-    void SetRenderLayer(Renderer::RenderLayer layer)
+    void SetRenderLayer(RenderLayer layer)
     {
-        Renderer::RemoveRendererComponent(*this);
+        mainRenderer->RemoveRendererComponent(*this);
         m_renderLayer = layer;
-        Renderer::AddRendererComponent(*this);
+        mainRenderer->AddRendererComponent(*this);
     }
 
 

@@ -13,4 +13,10 @@ namespace PHYSICS
     {
         return { position.x / cellWidth,position.y / cellHeight };
     }
+    void Cell::AddCell(Collider* body)
+    {
+    }
+    void Cell::RemoveCell(Collider* body)
+    {
+    }
 };

@@ -5,19 +5,23 @@
 
 class CRenderer;
 
+enum RenderLayer
+{
+	Background = 0,
+	Default = 1,
+	UI = 3
+};
+
 class Renderer
 {
-	static enum RenderLayer
-	{
-		Background = 0,
-		Default = 1,
-		UI = 3
-	};
+	std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
+public:
+	
 
 	  Vector2 shakeValue;
 	  bool isShake;
 
-	  std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
+	  
 	
 	 void RenderAll();
 

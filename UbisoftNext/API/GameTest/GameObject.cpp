@@ -2,7 +2,6 @@
 #include "GameObject.h"
 
 
-std::unordered_map<std::string, std::shared_ptr<GameObject>> GameObject::GAMEOBJECTSMAP;
 
 
 void GameObject::Update()

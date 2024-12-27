@@ -1,10 +1,6 @@
-///////////////////////////////////////////////////////////////////////////////
-// Filename: GameTest.cpp
-// Provides a demo of how to use the API
-///////////////////////////////////////////////////////////////////////////////
-//------------------------------------------------------------------------
 #include "stdafx.h"
-//------------------------------------------------------------------------
+#include "TestGame.h"
+
 #include <windows.h> 
 #include <math.h>  
 //------------------------------------------------------------------------
@@ -13,12 +9,8 @@
 #include <CRenderer.h>
 #include "Renderer.h"
 #include "Scheduler.h"
-//------------------------------------------------------------------------
 
-//------------------------------------------------------------------------
-// Example data....
-//------------------------------------------------------------------------
-CSimpleSprite *testSprite;
+CSimpleSprite* testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
 Scheduler* scheduler;
@@ -29,29 +21,25 @@ enum
 	ANIM_LEFT,
 	ANIM_RIGHT,
 };
-//------------------------------------------------------------------------
 
 
 
-//------------------------------------------------------------------------
-// Called before first update. Do any initial setup here.
-//------------------------------------------------------------------------
-void Init()
+void TestGame::InternalInit()
 {
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
-	mouse = GameObject::Create("Mouse");
-	player = GameObject::Create("Player");
+	mouse = Create("Mouse");
+	player = Create("Player");
 	scheduler = new Scheduler();
 
-	Renderer::SetShake(true);
+	m_renderer->SetShake(true);
 
-	mouse->AddComponent<CRenderer>();
+	mouse->AddComponent<CRenderer>(m_renderer.get());
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
-	mouse->GetComponent<CRenderer>()->SetRenderLayer(Renderer::RenderLayer::UI);
+	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
-	player->AddComponent<CRenderer>();
+	player->AddComponent<CRenderer>(m_renderer.get());
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
-	
+
 
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
@@ -66,16 +54,12 @@ void Init()
 	//------------------------------------------------------------------------
 }
 
-//------------------------------------------------------------------------
-// Update your simulation here. deltaTime is the elapsed time since the last update in ms.
-// This will be called at no greater frequency than the value of APP_MAX_FRAME_RATE
-//------------------------------------------------------------------------
-void Update(const float deltaTime)
+void TestGame::InternalUpdate(const float deltaTime)
 {
 	scheduler->Update();
 	mouse->GetComponent<Ctransform>()->SetPosition(App::GetMousePosVec2());
 
-	
+
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite->Update(deltaTime);
@@ -90,27 +74,27 @@ void Update(const float deltaTime)
 
 	if (App::IsKeyPressed(VK_RIGHT))
 	{
-	/*	testSprite->SetAnimation(ANIM_RIGHT);
-		float x, y;
-		testSprite->GetPosition(x, y);
-		x += 1.0f;
-		testSprite->SetPosition(x, y);*/
+		/*	testSprite->SetAnimation(ANIM_RIGHT);
+			float x, y;
+			testSprite->GetPosition(x, y);
+			x += 1.0f;
+			testSprite->SetPosition(x, y);*/
 		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
-		
+
 	}
 	if (App::IsKeyPressed(VK_UP))
 	{
-		auto g =GameObject::Create("Generated");
-		g->AddComponent<CRenderer>();
+		auto g = Create("Generated");
+		g->AddComponent<CRenderer>(m_renderer.get());
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
-		
+
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
-		scheduler->AddTask(Renderer::SetShakeOff, 1500);
+		scheduler->AddTask([this]() { m_renderer->SetShakeOff();}, 1500);
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
-		if(!GameObject::GAMEOBJECTSMAP.empty())
-		GameObject::GAMEOBJECTSMAP.erase(std::prev(GameObject::GAMEOBJECTSMAP.end()));
+		if (!GAMEOBJECTSMAP.empty())
+			GAMEOBJECTSMAP.erase(std::prev(GAMEOBJECTSMAP.end()));
 	}
 	if (App::IsKeyPressed(VK_LEFT))
 	{
@@ -121,14 +105,14 @@ void Update(const float deltaTime)
 		testSprite->SetPosition(x, y);*/
 		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::LEFT);
 	}
-    if (App::GetController().GetLeftThumbStickY() > 0.5f)
-    {
-        testSprite->SetAnimation(ANIM_FORWARDS);
-        float x, y;
-        testSprite->GetPosition(x, y);
-        y += 1.0f;
-        testSprite->SetPosition(x, y);
-    }
+	if (App::GetController().GetLeftThumbStickY() > 0.5f)
+	{
+		testSprite->SetAnimation(ANIM_FORWARDS);
+		float x, y;
+		testSprite->GetPosition(x, y);
+		y += 1.0f;
+		testSprite->SetPosition(x, y);
+	}
 	if (App::GetController().GetLeftThumbStickY() < -0.5f)
 	{
 		testSprite->SetAnimation(ANIM_BACKWARDS);
@@ -169,38 +153,29 @@ void Update(const float deltaTime)
 		App::StopSound(".\\TestData\\Test.wav");
 	}
 
-	for (auto& it : GameObject::GAMEOBJECTSMAP) {
+	for (auto& it : GAMEOBJECTSMAP) {
 
 		it.second->Update();
 	}
-	
 }
-void PhysicsUpdate()
+
+void TestGame::InternalRender()
 {
-
-}
-//------------------------------------------------------------------------
-// Add your display calls here (DrawLine,Print, DrawSprite.) 
-// See App.h 
-//------------------------------------------------------------------------
-void Render()
-{	
-
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
-    //testSprite->Draw();
+	//testSprite->Draw();
 	//------------------------------------------------------------------------
 
 	//------------------------------------------------------------------------
 	// Example Text.
 	//------------------------------------------------------------------------
 	//App::Print(100, 100, "Sample Text");
-	App::Print(100, 300,std::to_string(GameObject::GAMEOBJECTSMAP.size()).c_str());
+	App::Print(100, 300, std::to_string(GAMEOBJECTSMAP.size()).c_str());
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
 	// ---------------------------------------------------------------------
-	Renderer::RenderAll();
-	
+	m_renderer->RenderAll();
+
 	//------------------------------------------------------------------------
 	// Example Line Drawing.
 	//------------------------------------------------------------------------
@@ -222,14 +197,8 @@ void Render()
 		App::DrawLine(sx, sy, ex, ey, r, g, b);
 	}
 }
-//------------------------------------------------------------------------
-// Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.
-// Just before the app exits.
-//------------------------------------------------------------------------
-void Shutdown()
-{	
-	//------------------------------------------------------------------------
-	// Example Sprite Code....
+
+void TestGame::InteralShutdown()
+{
 	delete testSprite;
-	//------------------------------------------------------------------------
 }
