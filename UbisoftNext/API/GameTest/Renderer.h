@@ -4,9 +4,8 @@
 #include <CustomMath.h>
 
 class CRenderer;
-//Should this be a singleton?
 
-namespace Renderer
+class Renderer
 {
 	static enum RenderLayer
 	{
@@ -15,10 +14,10 @@ namespace Renderer
 		UI = 3
 	};
 
-	 static Vector2 shakeValue;
-	 static bool isShake;
+	  Vector2 shakeValue;
+	  bool isShake;
 
-	 static std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
+	  std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
 	
 	 void RenderAll();
 
@@ -27,6 +26,8 @@ namespace Renderer
 	 void RemoveRendererComponent(CRenderer& renderer);
 
 	 void SetShake(bool b);
+
+	 void SetShakeOff();
 	
 };
 

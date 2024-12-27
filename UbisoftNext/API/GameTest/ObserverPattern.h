@@ -5,7 +5,8 @@
 class GameObject;
 
 
-
+namespace Events
+{
 
 	struct Event
 	{
@@ -73,4 +74,6 @@ class GameObject;
 		std::vector<std::weak_ptr<IObserver>> m_observers;
 
 	};
+}
+
 

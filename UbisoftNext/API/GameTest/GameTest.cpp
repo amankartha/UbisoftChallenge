@@ -12,7 +12,7 @@
 #include <GameObject.h>
 #include <CRenderer.h>
 #include "Renderer.h"
-
+#include "Scheduler.h"
 //------------------------------------------------------------------------
 
 //------------------------------------------------------------------------
@@ -21,7 +21,7 @@
 CSimpleSprite *testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
-
+Scheduler* scheduler;
 enum
 {
 	ANIM_FORWARDS,
@@ -41,7 +41,7 @@ void Init()
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = GameObject::Create("Mouse");
 	player = GameObject::Create("Player");
-
+	scheduler = new Scheduler();
 
 	Renderer::SetShake(true);
 
@@ -72,7 +72,7 @@ void Init()
 //------------------------------------------------------------------------
 void Update(const float deltaTime)
 {
-	
+	scheduler->Update();
 	mouse->GetComponent<Ctransform>()->SetPosition(App::GetMousePosVec2());
 
 	
@@ -105,7 +105,7 @@ void Update(const float deltaTime)
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 		
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
-	
+		scheduler->AddTask(Renderer::SetShakeOff, 1500);
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
@@ -204,7 +204,7 @@ void Render()
 	//------------------------------------------------------------------------
 	// Example Line Drawing.
 	//------------------------------------------------------------------------
-	/*static float a = 0.0f;
+	static float a = 0.0f;
 	const float r = 1.0f;
 	float g = 1.0f;
 	float b = 1.0f;
@@ -213,13 +213,14 @@ void Render()
 	{
 
 		const float sx = 200 + sinf(a + i * 0.1f) * 60.0f;
+
 		const float sy = 200 + cosf(a + i * 0.1f) * 60.0f;
 		const float ex = 700 - sinf(a + i * 0.1f) * 60.0f;
 		const float ey = 700 - cosf(a + i * 0.1f) * 60.0f;
 		g = (float)i / 20.0f;
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey, r, g, b);
-	}*/
+	}
 }
 //------------------------------------------------------------------------
 // Add your shutdown code here. Called when the APP_QUIT_KEY is pressed.

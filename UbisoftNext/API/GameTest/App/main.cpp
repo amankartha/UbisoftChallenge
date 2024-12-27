@@ -36,7 +36,6 @@ double gLastTime;
 extern void Init();
 extern void Update(const float deltaTime);
 extern void Render();
-extern void PhysicsUpdate();
 extern void Shutdown();
 //---------------------------------------------------------------------------------
 void StartCounter()

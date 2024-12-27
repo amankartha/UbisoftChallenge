@@ -7,7 +7,6 @@ class GameObject;
 class Ctransform;
 #pragma region VECTOR2
 
-
 struct Vector2
 {
 	float x;
@@ -41,6 +40,15 @@ struct Vector2
 		return (inDir - (inNorm*2) * Dot(inDir, inNorm));
 	}
 
+	Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
+	{
+		t = std::clamp(t, 0.0f, 1.0f);
+		return {
+			a.x + (b.x - a.x) * t,
+			a.y + (b.y - a.y) * t
+		};
+	}
+
 
 	Vector2 operator*(float s) const
 	{
@@ -70,10 +78,18 @@ struct Vector2
 #pragma endregion
 
 
+
+struct Collider
+{
+	~Collider() {}
+};
+
+
+
 //Real time collision Dection page 79
 #pragma region AABB 
 
-struct AABB
+struct AABB : Collider
 {
 private:
 	Vector2 m_min;
@@ -100,7 +116,7 @@ public:
 
 #pragma region Circle
 
-struct Circle
+struct Circle : Collider
 {
 	Vector2 m_position;
 	std::weak_ptr<Ctransform> m_transform;

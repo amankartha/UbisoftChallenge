@@ -4,6 +4,7 @@
 #include "GameObject.h"
 
 
+
 #pragma region Vector2
 
 const Vector2 Vector2::UP(0, 1);

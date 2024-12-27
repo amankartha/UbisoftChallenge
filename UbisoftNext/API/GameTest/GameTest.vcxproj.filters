@@ -50,6 +50,11 @@
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Grid.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSimulation.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -106,6 +111,14 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scheduler.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSimulation.h" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -128,6 +141,9 @@
     </Filter>
     <Filter Include="Utility">
       <UniqueIdentifier>{fc032ef5-67bd-427b-970c-6b86f564a31c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{4184aade-8647-4117-a657-ac158d750138}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
