@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Ccursor.h"
 #include "GameObject.h"
-
+#include "appUtility.h"
 void Ccursor::Init()
 {
 
@@ -13,5 +13,8 @@ void Ccursor::Init()
 
 void Ccursor::Update()
 {
-	
+	if (App::IsKeyPressed(WM_LBUTTONDOWN))
+	{
+
+	}
 }

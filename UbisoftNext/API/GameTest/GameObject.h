@@ -13,19 +13,13 @@ class GameObject
 	
 
 private:
-
-	
-
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> _components;
 	std::shared_ptr<Ctransform> m_transform;
 	std::weak_ptr<GameObject> m_selfPointer;
 
 public:
 	std::string m_name;
-	
-
-	
-	
+public:
 	GameObject()
 	{
 		

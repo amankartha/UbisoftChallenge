@@ -13,7 +13,6 @@
 CSimpleSprite* testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
-Scheduler* scheduler;
 enum
 {
 	ANIM_FORWARDS,
@@ -93,8 +92,8 @@ void TestGame::InternalUpdate(const float deltaTime)
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
-		if (!GAMEOBJECTSMAP.empty())
-			GAMEOBJECTSMAP.erase(std::prev(GAMEOBJECTSMAP.end()));
+		if (!m_gameObjectMap.empty())
+			m_gameObjectMap.erase(std::prev(m_gameObjectMap.end()));
 	}
 	if (App::IsKeyPressed(VK_LEFT))
 	{
@@ -153,7 +152,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 		App::StopSound(".\\TestData\\Test.wav");
 	}
 
-	for (auto& it : GAMEOBJECTSMAP) {
+	for (auto& it : m_gameObjectMap) {
 
 		it.second->Update();
 	}
@@ -170,7 +169,7 @@ void TestGame::InternalRender()
 	// Example Text.
 	//------------------------------------------------------------------------
 	//App::Print(100, 100, "Sample Text");
-	App::Print(100, 300, std::to_string(GAMEOBJECTSMAP.size()).c_str());
+	App::Print(100, 300, std::to_string(m_gameObjectMap.size()).c_str());
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
 	// ---------------------------------------------------------------------
@@ -201,4 +200,5 @@ void TestGame::InternalRender()
 void TestGame::InteralShutdown()
 {
 	delete testSprite;
+	delete scheduler;
 }

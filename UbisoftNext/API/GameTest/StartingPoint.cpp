@@ -2,7 +2,7 @@
 // Filename: GameTest.cpp
 // Provides a demo of how to use the API
 // 
-// THIS IS AMAN I RENAMED THIS AND MADE IT CLEAER IT NOW ACTS AS THE STARTING POINT
+// I RENAMED THIS AND MADE IT CLEAER IT NOW ACTS AS THE STARTING POINT
 // IDEALLY I WOULD SPLIT THE ENGINE INTO ANOTHER SOLUTION BUT I DIDN'T WANT TO DISRUPT THE FLOW GIVEN
 ///////////////////////////////////////////////////////////////////////////////
 //------------------------------------------------------------------------

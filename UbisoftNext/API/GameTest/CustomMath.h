@@ -147,4 +147,9 @@ public:
 #pragma endregion
 
 
+float LinearTween(float t,float b,float c,float d)
+{
+	return c * t / d + b;
+}
+
 
