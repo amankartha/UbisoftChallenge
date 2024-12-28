@@ -56,6 +56,11 @@
     <ClCompile Include="PhysicsSimulation.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="TestGame.cpp" />
+    <ClCompile Include="Ccamera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -121,6 +126,11 @@
     <ClInclude Include="PhysicsSimulation.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="TestGame.h" />
+    <ClInclude Include="Ccamera.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

@@ -5,7 +5,7 @@
 
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
-    void Renderer::RenderAll()
+    void Renderer::RenderAll(Vector2 currentCameraPosition)
     {
 
         if (isShake)
@@ -16,7 +16,7 @@
             {
                 for (CRenderer* renderer : renderers)
                 {
-                    renderer->Render(shakeValue);
+                    renderer->RenderWithCamera(shakeValue+currentCameraPosition);
                 }
             }
         }
@@ -26,7 +26,7 @@
             {
                 for (CRenderer* renderer : renderers)
                 {
-                    renderer->Render();
+                    renderer->RenderWithCamera(currentCameraPosition);
                 }
             }
         }

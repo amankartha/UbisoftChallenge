@@ -17,14 +17,14 @@ public:
 	virtual void Render() {};
 
 	//get the gameobject that this component is attached to
-	std::weak_ptr<GameObject> getAttachedGameObject() { return attachedGameObject; }
+	 GameObject* getAttachedGameObject() { return attachedGameObject; }
 
-	void SetGameObject(std::weak_ptr<GameObject> go)
+	void SetGameObject(GameObject& go)
 	{
-		attachedGameObject = go;
+		attachedGameObject = &go;
 	}
 
 private:
-	std::weak_ptr<GameObject> attachedGameObject;
+	GameObject* attachedGameObject;
 };
 

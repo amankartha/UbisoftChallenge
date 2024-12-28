@@ -11,7 +11,7 @@ namespace PHYSICS
 		float m_gravity;
 
 	public:
-		PhysicsSimulation(float gravity) : m_gravity(gravity) 
+		PhysicsSimulation(float gravity = 9.8f) : m_gravity(gravity) 
 		{
 			m_bodies.reserve(150);
 		}

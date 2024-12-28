@@ -10,26 +10,22 @@ class CRenderer :
 
 private:
 
-    Renderer* mainRenderer;
+    Renderer& mainRenderer;
     CSimpleSprite* sprite;
     RenderLayer m_renderLayer;
     bool m_isShake;
 
 public:
-
-  
-
-    CRenderer(Renderer* renderer) 
+    CRenderer(Renderer& renderer) : mainRenderer(renderer)
     {
-        mainRenderer = renderer;
         m_isShake = false;
         sprite = nullptr;
         m_renderLayer = RenderLayer::Default;
-        mainRenderer->AddRendererComponent(*this);
+        mainRenderer.AddRendererComponent(*this);
     }
     ~CRenderer() override
     {
-        mainRenderer->RemoveRendererComponent(*this);
+        mainRenderer.RemoveRendererComponent(*this);
     }
 
     RenderLayer GetRenderLayer()
@@ -39,9 +35,9 @@ public:
 
     void SetRenderLayer(RenderLayer layer)
     {
-        mainRenderer->RemoveRendererComponent(*this);
+        mainRenderer.RemoveRendererComponent(*this);
         m_renderLayer = layer;
-        mainRenderer->AddRendererComponent(*this);
+        mainRenderer.AddRendererComponent(*this);
     }
 
 
@@ -61,6 +57,8 @@ public:
     void Render() override;
 
     void Render(Vector2& offset);
+    
+    void RenderWithCamera(Vector2 offset);
 
 };
 

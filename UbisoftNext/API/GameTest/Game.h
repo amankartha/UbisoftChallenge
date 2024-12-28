@@ -1,27 +1,26 @@
 #pragma once
-#include "PhysicsSimulation.h"
 #include <memory>
+#include "PhysicsSimulation.h"
 #include "Renderer.h"
+#include "CameraManager.h"
 #include "GameObject.h"
 #include "Scheduler.h"
 class Game
 {
 protected:
-	std::unique_ptr<PHYSICS::PhysicsSimulation> m_physicsSimulation;
-	std::unique_ptr<Renderer> m_renderer;
 	std::unordered_map<std::string, std::shared_ptr<GameObject>> m_gameObjectMap;
+	
+	Renderer m_renderer;
+	CameraManager m_cameraManager;
 	Scheduler* scheduler;
+	PHYSICS::PhysicsSimulation m_physicsSimulation;
 public:
-	Game() 
-	{
-		m_physicsSimulation = std::make_unique<PHYSICS::PhysicsSimulation>(9.81f);
-		m_renderer = std::make_unique<Renderer>();
-	}
+	
 	~Game() {}
 
-	virtual void InternalInit() = 0;
+	virtual void InternalInit();
 	virtual	void InternalUpdate(const float deltaTime) = 0;
-	virtual void InternalRender() = 0;
+	virtual void InternalRender();
 	virtual void InteralShutdown() = 0;
 
 
@@ -37,7 +36,7 @@ public:
 		createdGO->m_name = uniqueName;
 		
 		m_gameObjectMap[uniqueName] = createdGO;
-		createdGO->SetSelfPointer(createdGO);
+		//createdGO->SetSelfPointer(createdGO);
 
 		return createdGO;
 	}

@@ -23,7 +23,7 @@ public:
 
 	  
 	
-	 void RenderAll();
+	 void RenderAll(Vector2 CurrentCameraPosition);
 
 	 void AddRendererComponent(CRenderer& renderer);
 

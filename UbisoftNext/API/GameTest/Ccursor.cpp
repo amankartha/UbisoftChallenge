@@ -5,10 +5,9 @@
 void Ccursor::Init()
 {
 
-	if (auto gameobject = getAttachedGameObject().lock())
-	{
-		m_transform = gameobject->GetComponent<Ctransform>();
-	}
+	
+	m_transform = getAttachedGameObject()->GetComponent<Ctransform>();
+	
 }
 
 void Ccursor::Update()

@@ -9,10 +9,12 @@
 #include <CRenderer.h>
 #include "Renderer.h"
 #include "Scheduler.h"
+#include "Ccamera.h"
 
 CSimpleSprite* testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
+std::shared_ptr<GameObject> camera;
 enum
 {
 	ANIM_FORWARDS,
@@ -25,18 +27,26 @@ enum
 
 void TestGame::InternalInit()
 {
+	Game::InternalInit();
+
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = Create("Mouse");
 	player = Create("Player");
+	camera = Create("Camera");
 	scheduler = new Scheduler();
 
-	m_renderer->SetShake(true);
+	m_renderer.SetShake(true);
 
-	mouse->AddComponent<CRenderer>(m_renderer.get());
+	
+	camera->AddComponent<Ccamera>(m_cameraManager);
+	
+
+
+	mouse->AddComponent<CRenderer>(m_renderer);
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
 	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
-	player->AddComponent<CRenderer>(m_renderer.get());
+	player->AddComponent<CRenderer>(m_renderer);
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 
 
@@ -79,16 +89,16 @@ void TestGame::InternalUpdate(const float deltaTime)
 			x += 1.0f;
 			testSprite->SetPosition(x, y);*/
 		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
-
+		
 	}
 	if (App::IsKeyPressed(VK_UP))
 	{
 		auto g = Create("Generated");
-		g->AddComponent<CRenderer>(m_renderer.get());
+		g->AddComponent<CRenderer>(m_renderer);
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
-		scheduler->AddTask([this]() { m_renderer->SetShakeOff();}, 1500);
+		scheduler->AddTask([this]() { m_renderer.SetShakeOff(); }, 1500);
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
@@ -160,6 +170,8 @@ void TestGame::InternalUpdate(const float deltaTime)
 
 void TestGame::InternalRender()
 {
+
+	Game::InternalRender();
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	//testSprite->Draw();
@@ -173,7 +185,7 @@ void TestGame::InternalRender()
 	//----------------------------------------------------------------------
 	// Render all Gameobjects
 	// ---------------------------------------------------------------------
-	m_renderer->RenderAll();
+
 
 	//------------------------------------------------------------------------
 	// Example Line Drawing.

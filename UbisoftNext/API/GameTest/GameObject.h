@@ -29,15 +29,18 @@ public:
 	{
 		
 	}
-	void SetSelfPointer(std::shared_ptr<GameObject> pointer)
-	{
-		m_selfPointer = pointer;
-	}
+	
+	//void SetSelfPointer(std::shared_ptr<GameObject> pointer)
+	//{
+	//	m_selfPointer = pointer;
+	//}
+
 	//returns a weak pointer to this gameobjects transform;
 	std::shared_ptr<Ctransform> GetTransform()
 	{
 		return m_transform;
 	}
+
 	//Adds component to the gameobject and returns it
 	template <typename T, typename... Args>
 	std::shared_ptr<T> AddComponent(Args&&... args)
@@ -54,7 +57,7 @@ public:
 		auto component = std::make_shared<T>(std::forward<Args>(args)...);
 
 		
-		component->SetGameObject(m_selfPointer);
+		component->SetGameObject(*this);
 
 		
 		_components[type] = component;

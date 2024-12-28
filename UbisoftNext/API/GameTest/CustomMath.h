@@ -1,11 +1,13 @@
 #pragma once
+
 #include <string>
 #include <iostream>>
 #include <math.h>
-#include <algorithm> 
+#include <algorithm>
 
 class GameObject;
 class Ctransform;
+
 #pragma region VECTOR2
 
 struct Vector2
@@ -147,9 +149,9 @@ public:
 #pragma endregion
 
 
-float LinearTween(float t,float b,float c,float d)
-{
-	return c * t / d + b;
-}
+//float LinearTween(float t,float b,float c,float d)
+//{
+//	return c * t / d + b;
+//}
 
 
