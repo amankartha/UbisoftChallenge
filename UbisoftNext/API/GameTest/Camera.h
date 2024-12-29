@@ -1,12 +1,16 @@
 #pragma once
 #include <iostream>
+
 #include "CustomMath.h"
+#include <App/AppSettings.h>
 class Camera
 {
-private: 
-	Vector2 m_positon;
+
 public:
-	Camera( Vector2 position = Vector2(0, 0)) :m_positon(position) {}
+	Camera( Vector2 position = Vector2(0, 0), float angle = 0.0) {
+		m_transform =Transform(position.x, position.y, angle);
+		m_zoomFactor = 1;
+	}
 
 	~Camera()
 	{
@@ -14,11 +18,36 @@ public:
 	}
 	void SetPosition(Vector2 newPos)
 	{
-		m_positon = newPos;
+		m_transform.position = newPos;
 	}
 	Vector2 GetPosition()
 	{
-		return m_positon;
+		return m_transform.position;
 	}
+
+	Transform GetTransform()
+	{
+		return m_transform;
+	}
+	float GetZoom()
+	{
+		return m_zoomFactor;
+	}
+	void SetTransform(Transform transform)
+	{
+		m_transform = transform;
+	}
+	void SetZoom(float zoom)
+	{
+		m_zoomFactor = zoom;
+	}
+
+	
+private:
+	Transform m_transform;
+
+	float m_zoomFactor;
+	
+	
 };
 

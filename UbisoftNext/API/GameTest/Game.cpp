@@ -8,5 +8,5 @@ void Game::InternalInit()
 
 void Game::InternalRender()
 {
-	m_renderer.RenderAll(m_cameraManager.GetMainCamera().GetPosition());
+	m_renderer.RenderAll(m_cameraManager.GetMainCamera().GetTransform(),m_cameraManager.GetMainCamera().GetZoom());
 }

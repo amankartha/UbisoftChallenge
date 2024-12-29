@@ -58,7 +58,7 @@ public:
 
     void Render(Vector2& offset);
     
-    void RenderWithCamera(Vector2 offset);
+    void RenderWithCamera(Vector2 offset,float a,float zoom);
 
 };
 

@@ -48,6 +48,8 @@ public:
         return *m_mainCamera;
     }
 
+
+
   
      void RemoveCamera(int id) {
         if (m_mainCamera == m_cameras[id].get()) {

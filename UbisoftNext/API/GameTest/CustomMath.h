@@ -80,7 +80,17 @@ struct Vector2
 
 #pragma endregion
 
+struct Transform
+{
+	Vector2 position;
+	float angle;
 
+	Transform(float x = 0.0f, float y = 0.0f,float a = 0.0f) {
+		position.x = x;
+		position.y = y;
+		angle = a;
+	}
+};
 
 struct Collider
 {

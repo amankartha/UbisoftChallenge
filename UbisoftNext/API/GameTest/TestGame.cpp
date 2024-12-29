@@ -88,7 +88,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 			testSprite->GetPosition(x, y);
 			x += 1.0f;
 			testSprite->SetPosition(x, y);*/
-		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
+	//	player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
 		
 	}
 	if (App::IsKeyPressed(VK_UP))
@@ -112,7 +112,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 		testSprite->GetPosition(x, y);
 		x -= 1.0f;
 		testSprite->SetPosition(x, y);*/
-		player->GetComponent<Ctransform>()->OffsetPosition(Vector2::LEFT);
+	//	player->GetComponent<Ctransform>()->OffsetPosition(Vector2::LEFT);
 	}
 	if (App::GetController().GetLeftThumbStickY() > 0.5f)
 	{

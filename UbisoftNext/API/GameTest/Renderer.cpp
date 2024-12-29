@@ -5,7 +5,8 @@
 
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
-    void Renderer::RenderAll(Vector2 currentCameraPosition)
+
+    void Renderer::RenderAll(Transform currentCameraTransform,float zoom)
     {
 
         if (isShake)
@@ -14,9 +15,22 @@
             shakeValue.y = FRAND_RANGE(-4, 4);
             for (const auto& [m_renderLayer, renderers] : RENDERMAP)
             {
-                for (CRenderer* renderer : renderers)
+             
+                if (m_renderLayer == RenderLayer::UI)
                 {
-                    renderer->RenderWithCamera(shakeValue+currentCameraPosition);
+                    for (CRenderer* renderer : renderers)
+                    {
+
+                        renderer->Render();
+                    }
+                }
+                else
+                {
+                    for (CRenderer* renderer : renderers)
+                    {
+
+                        renderer->RenderWithCamera(shakeValue + currentCameraTransform.position,currentCameraTransform.angle,zoom);
+                    }
                 }
             }
         }
@@ -24,9 +38,21 @@
         {
             for (const auto& [m_renderLayer, renderers] : RENDERMAP)
             {
-                for (CRenderer* renderer : renderers)
+                if (m_renderLayer == RenderLayer::UI)
                 {
-                    renderer->RenderWithCamera(currentCameraPosition);
+                    for (CRenderer* renderer : renderers)
+                    {
+
+                        renderer->Render();
+                    }
+                }
+                else
+                {
+                    for (CRenderer* renderer : renderers)
+                    {
+
+                        renderer->RenderWithCamera(currentCameraTransform.position, currentCameraTransform.angle,zoom);
+                    }
                 }
             }
         }

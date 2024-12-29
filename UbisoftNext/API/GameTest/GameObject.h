@@ -40,6 +40,10 @@ public:
 	{
 		return m_transform;
 	}
+	Transform GetTransformCopy()
+	{
+		return m_transform->GetTransformCopy();
+	}
 
 	//Adds component to the gameobject and returns it
 	template <typename T, typename... Args>

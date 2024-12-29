@@ -23,7 +23,7 @@ public:
 
 	  
 	
-	 void RenderAll(Vector2 CurrentCameraPosition);
+	 void RenderAll(Transform CurrentCameraTransform,float zoom);
 
 	 void AddRendererComponent(CRenderer& renderer);
 
@@ -32,6 +32,8 @@ public:
 	 void SetShake(bool b);
 
 	 void SetShakeOff();
+	 
 	
+
 };
 

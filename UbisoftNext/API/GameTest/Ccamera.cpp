@@ -18,7 +18,19 @@ void Ccamera::Update()
 	{
 		getAttachedGameObject()->GetTransform()->OffsetPosition(Vector2(-1,0));
 	}
+	if (App::IsKeyPressed('M'))
+	{
+		getAttachedGameObject()->GetTransform()->OffsetRotation(1.0);
+	}
+	if (App::IsKeyPressed('Z'))
+	{
+		m_camera->SetZoom(m_camera->GetZoom() + 0.05);
+	}
+	if (App::IsKeyPressed('X'))
+	{
+		m_camera->SetZoom(m_camera->GetZoom() - 0.05);
+	}
 
-
-	m_camera->SetPosition(getAttachedGameObject()->GetTransform()->GetPosition());
+	//m_camera->SetPosition(getAttachedGameObject()->GetTransform()->GetPosition());
+	m_camera->SetTransform(getAttachedGameObject()->GetTransformCopy());
 }
