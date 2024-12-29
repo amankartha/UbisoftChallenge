@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include <algorithm>
 #include "CustomMath.h"
 #include <App/AppSettings.h>
 class Camera
@@ -39,7 +39,7 @@ public:
 	}
 	void SetZoom(float zoom)
 	{
-		m_zoomFactor = zoom;
+		m_zoomFactor = std::clamp(zoom,0.5f,2.0f);
 	}
 
 	
