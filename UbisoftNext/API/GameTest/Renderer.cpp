@@ -8,7 +8,7 @@
 
     void Renderer::RenderAll(Transform currentCameraTransform,float zoom)
     {
-
+        App::Print(1000, 300, std::to_string(RENDERMAP[RenderLayer::Default].size()).c_str());
         if (isShake)
         {
             shakeValue.x = FRAND_RANGE(-4, 4);

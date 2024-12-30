@@ -3,6 +3,8 @@
 
 void Game::InternalInit()
 {
+	m_gameObjectMap.reserve(5000);
+
 	auto camera = m_cameraManager.CreateCamera(0);
 }
 

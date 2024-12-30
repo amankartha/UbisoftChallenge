@@ -198,11 +198,11 @@ void TestGame::InternalRender()
 	for (int i = 0; i < 20; i++)
 	{
 
-		const float sx = 200 + sinf(a + i * 0.1f) * 60.0f;
+		const float sx = -200 + sinf(a + i * 0.1f) * 60.0f;
 
-		const float sy = 200 + cosf(a + i * 0.1f) * 60.0f;
-		const float ex = 700 - sinf(a + i * 0.1f) * 60.0f;
-		const float ey = 700 - cosf(a + i * 0.1f) * 60.0f;
+		const float sy = -200 + cosf(a + i * 0.1f) * 60.0f;
+		const float ex = 7000 - sinf(a + i * 0.1f) * 60.0f;
+		const float ey = 7000 - cosf(a + i * 0.1f) * 60.0f;
 		g = (float)i / 20.0f;
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey, r, g, b);

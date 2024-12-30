@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="App\app.cpp">
       <Filter>API</Filter>
@@ -24,7 +23,6 @@
     <ClCompile Include="miniaudio\miniaudio.cpp">
       <Filter>API\third_party\miniaudio</Filter>
     </ClCompile>
-    <ClCompile Include="ObserverPattern.cpp" />
     <ClCompile Include="Component.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -49,18 +47,39 @@
     <ClCompile Include="Ccursor.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Grid.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsSimulation.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="TestGame.cpp" />
     <ClCompile Include="Ccamera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="CameraManager.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Camera.cpp">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="ObserverPattern.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="TestGame.cpp">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="StartingPoint.cpp">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsSimulation.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -91,7 +110,6 @@
     <ClInclude Include="miniaudio\miniaudio.h">
       <Filter>API\third_party\miniaudio</Filter>
     </ClInclude>
-    <ClInclude Include="ObserverPattern.h" />
     <ClInclude Include="Component.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -116,21 +134,39 @@
     <ClInclude Include="Ccursor.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scheduler.h">
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Physics</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsSimulation.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="TestGame.h" />
     <ClInclude Include="Ccamera.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="ObserverPattern.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGame.h">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsSimulation.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Cameras&amp;Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -156,6 +192,18 @@
     </Filter>
     <Filter Include="Physics">
       <UniqueIdentifier>{4184aade-8647-4117-a657-ac158d750138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{60657d4f-a298-4252-a069-924d50b18ec0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game&amp;StartPoint">
+      <UniqueIdentifier>{cac4cf7d-b950-4dba-b2f1-a7a92a07934a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras&amp;Rendering">
+      <UniqueIdentifier>{e3ebe493-783f-4f96-b14b-d650d252ea85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{2b71b6c0-6aff-4956-a50a-6d69b81d0f86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

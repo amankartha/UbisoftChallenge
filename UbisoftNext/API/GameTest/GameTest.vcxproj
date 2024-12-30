@@ -193,6 +193,7 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Ccamera.h" />
     <ClInclude Include="Ccursor.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
@@ -222,6 +223,7 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="Ccursor.cpp" />
+    <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />

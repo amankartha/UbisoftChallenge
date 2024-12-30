@@ -17,7 +17,14 @@ class Renderer
 	std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
 public:
 	
+	Renderer()
+	{
+		RENDERMAP[RenderLayer::Default].reserve(10000);
+	}
+	~Renderer()
+	{
 
+	}
 	  Vector2 shakeValue;
 	  bool isShake;
 

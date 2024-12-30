@@ -40,7 +40,7 @@ void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom)
 	float angleRadians = a * (PI / 180.0);
 	float cosAngle = cos(angleRadians);
 	float sinAngle = sin(angleRadians);
-	App::Print( 300, 300,std::to_string(a).c_str());
+
 
 	Vector2 currentPosition =  getAttachedGameObject()->GetTransform()->GetPosition();
 	
