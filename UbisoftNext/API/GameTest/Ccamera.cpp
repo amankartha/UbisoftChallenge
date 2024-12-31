@@ -18,6 +18,14 @@ void Ccamera::Update()
 	{
 		getAttachedGameObject()->GetTransform()->OffsetPosition(Vector2(-1,0));
 	}
+	if (App::IsKeyPressed(VK_UP))
+	{
+		getAttachedGameObject()->GetTransform()->OffsetPosition(Vector2(0, 1));
+	}
+	if (App::IsKeyPressed(VK_DOWN))
+	{
+		getAttachedGameObject()->GetTransform()->OffsetPosition(Vector2(0, -1));
+	}
 	if (App::IsKeyPressed('M'))
 	{
 		getAttachedGameObject()->GetTransform()->OffsetRotation(1.0);

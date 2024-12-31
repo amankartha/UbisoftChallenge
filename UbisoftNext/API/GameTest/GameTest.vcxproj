@@ -201,8 +201,8 @@
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="TestGame.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
     <ClInclude Include="ObserverPattern.h" />
     <ClInclude Include="PhysicsSimulation.h" />
@@ -231,8 +231,8 @@
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
     <ClCompile Include="ObserverPattern.cpp" />
     <ClCompile Include="PhysicsSimulation.cpp" />

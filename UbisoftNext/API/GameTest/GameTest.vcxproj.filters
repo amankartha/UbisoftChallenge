@@ -47,9 +47,6 @@
     <ClCompile Include="Ccursor.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp">
-      <Filter>Physics</Filter>
-    </ClCompile>
     <ClCompile Include="Ccamera.cpp">
       <Filter>Components</Filter>
     </ClCompile>
@@ -80,6 +77,7 @@
     <ClCompile Include="Command.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="Grid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -137,9 +135,6 @@
     <ClInclude Include="Scheduler.h">
       <Filter>Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Physics</Filter>
-    </ClInclude>
     <ClInclude Include="Ccamera.h">
       <Filter>Components</Filter>
     </ClInclude>
@@ -167,6 +162,7 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

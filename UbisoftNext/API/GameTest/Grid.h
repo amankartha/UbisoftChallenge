@@ -1,55 +1,48 @@
 #pragma once
-#include <vector>
 #include "CustomMath.h"
-
-
-
-namespace PHYSICS
+#include <vector>
+#include <unordered_map>
+namespace GRID
 {
-	class Cell
+	struct Cell
 	{
-		AABB cellBounds;
-		std::vector<Collider*> bodies;
-		void AddCell(Collider* body);
-		void RemoveCell(Collider* body);
+	public:
+		bool isObstacle;
 	};
 
-	class Body
+	class GridSystem
 	{
+	public:
+		GridSystem(float cellSize = 50.0, Vector2 origin = Vector2(0,0))
+			: m_cellSize(cellSize), m_origin(origin) {}
 
-		std::vector<Cell*> currentCells;
-
-		std::vector<Body*> GetNearbyBodies()
+		Vector2 GetOrigin() const
 		{
-			/*std::vector<Body*> result;
-			for (auto& c : currentCells)
-			{
-				for (auto& b : c->GetBodies())
-				{
-					result.push_back(b);
-				}
-			}
-			return result;*/
+			return m_origin;
 		}
-	};
+		int GetCellSize() const
+		{
+			return m_cellSize;
+		}
 
+		IntVector2 WorldToGrid(Vector2 worldPosition) const;
+		
+		Vector2 GridToWorld(IntVector2 gridPosition) const;
 
-
-	class Grid
-	{
+		void SetObstacle(IntVector2 gridPosition);
+		
+		void AddCell(IntVector2 gridPosition, bool isObstacle);
+		
+		Cell* GetCell(IntVector2 gridPosition);
+		
+		bool CellExists(IntVector2 gridPosition);
 
 
 	private:
-		std::vector<std::vector<Cell*>> cells;
-		int cellWidth, cellHeight;
-	public:
-		Grid(int width, int height) :cellWidth(width), cellHeight(height) {}
-
-
-		Cell* GetCell(int x, int y);
-
-		Vector2 GetIndex(Vector2 position);
-
+		int m_cellSize;
+		Vector2 m_origin;
+		std::unordered_map<IntVector2, Cell> m_grid;
 	};
+
 };
 

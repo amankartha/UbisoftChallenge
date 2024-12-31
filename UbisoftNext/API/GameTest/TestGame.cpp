@@ -190,7 +190,7 @@ void TestGame::InternalRender()
 	//------------------------------------------------------------------------
 	// Example Line Drawing.
 	//------------------------------------------------------------------------
-	static float a = 0.0f;
+	/*static float a = 0.0f;
 	const float r = 1.0f;
 	float g = 1.0f;
 	float b = 1.0f;
@@ -206,7 +206,9 @@ void TestGame::InternalRender()
 		g = (float)i / 20.0f;
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey, r, g, b);
-	}
+	}*/
+	m_renderer.DrawGridWithCamera(m_cameraManager.GetMainCamera(), m_gridSystem);
+
 }
 
 void TestGame::InteralShutdown()

@@ -3,8 +3,14 @@
 #include <map>
 #include <CustomMath.h>
 
-class CRenderer;
 
+class CRenderer;
+class Camera;
+
+namespace GRID
+{
+	class GridSystem;
+};
 enum RenderLayer
 {
 	Background = 0,
@@ -14,33 +20,33 @@ enum RenderLayer
 
 class Renderer
 {
-	std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
 public:
 	
 	Renderer()
 	{
-		RENDERMAP[RenderLayer::Default].reserve(10000);
+		RENDERMAP[RenderLayer::Default].reserve(1000);
 	}
 	~Renderer()
 	{
 
 	}
-	  Vector2 shakeValue;
-	  bool isShake;
-
-	  
 	
-	 void RenderAll(Transform CurrentCameraTransform,float zoom);
+	void RenderAll(Transform CurrentCameraTransform,float zoom);
 
-	 void AddRendererComponent(CRenderer& renderer);
+	void AddRendererComponent(CRenderer& renderer);
 
-	 void RemoveRendererComponent(CRenderer& renderer);
+	void RemoveRendererComponent(CRenderer& renderer);
 
-	 void SetShake(bool b);
+	void SetShake(bool b);
 
-	 void SetShakeOff();
+	void SetShakeOff();
+
+	void DrawGridWithCamera(const Camera& camera,const GRID::GridSystem& gridSystem) const;
 	 
-	
-
+public:
+	Vector2 shakeValue;
+	bool isShake;
+private:
+	std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
 };
 

@@ -4,6 +4,8 @@
 #include <iostream>>
 #include <math.h>
 #include <algorithm>
+#include <unordered_map>
+#include <functional>
 
 class GameObject;
 class Ctransform;
@@ -52,6 +54,9 @@ struct Vector2
 		};
 	}
 
+	bool operator==(const Vector2& other) const {
+		return x == other.x && y == other.y;
+	}
 
 	Vector2 operator*(float s) const
 	{
@@ -67,6 +72,10 @@ struct Vector2
 	{
 		return  Vector2(x - a.x, y - a.y);
 	}
+
+	
+
+
 	//Returns distance but sqrt is bad and slow so avoid if possible
 	static float Distance(Vector2 a, Vector2 b);
 
@@ -77,6 +86,95 @@ struct Vector2
 	}
 
 };
+
+//Custom hash needed so I can use Vector2s as a key
+
+template <>
+struct std::hash<Vector2> {
+	size_t operator()(const Vector2& v) const {
+		return hash<int>()(v.x) ^ (hash<int>()(v.y) << 1);
+	}
+};
+
+
+struct IntVector2 {
+	int x;
+	int y;
+
+	
+	IntVector2(int x = 0, int y = 0) : x(x), y(y) {}
+
+
+	static const IntVector2 UP;
+	static const IntVector2 DOWN;
+	static const IntVector2 LEFT;
+	static const IntVector2 RIGHT;
+
+	
+	int SquaredMagnitude() const {
+		return x * x + y * y;
+	}
+
+	
+	int Dot(const IntVector2& a) const {
+		return a.x * x + a.y * y;
+	}
+
+	
+	IntVector2 Reflect(const IntVector2& inDir, const IntVector2& inNorm) const {
+		int dotProduct = inDir.Dot(inNorm);
+		return inDir - (inNorm * (2 * dotProduct));
+	}
+
+	
+	IntVector2 Lerp(const IntVector2& a, const IntVector2& b, float t) const {
+		t = std::clamp(t, 0.0f, 1.0f);
+		return IntVector2(
+			static_cast<int>(a.x + (b.x - a.x) * t),
+			static_cast<int>(a.y + (b.y - a.y) * t)
+		);
+	}
+
+	
+	bool operator==(const IntVector2& other) const {
+		return x == other.x && y == other.y;
+	}
+
+	IntVector2 operator*(int s) const {
+		return IntVector2(x * s, y * s);
+	}
+
+	IntVector2 operator+(const IntVector2& a) const {
+		return IntVector2(x + a.x, y + a.y);
+	}
+
+	IntVector2 operator-(const IntVector2& a) const {
+		return IntVector2(x - a.x, y - a.y);
+	}
+
+	// Static method for distance (Manhattan distance for integers)
+	static int Distance(const IntVector2& a, const IntVector2& b) {
+		return std::abs(a.x - b.x) + std::abs(a.y - b.y);
+	}
+
+	
+	std::string Print() const {
+		return std::to_string(x) + "," + std::to_string(y);
+	}
+};
+
+
+
+// Custom hash needed to use IntVector2 as a key in std::unordered_map
+namespace std {
+	template <>
+	struct hash<IntVector2> {
+		size_t operator()(const IntVector2& v) const {
+			return hash<int>()(v.x) ^ (hash<int>()(v.y) << 1);
+		}
+	};
+}
+
 
 #pragma endregion
 

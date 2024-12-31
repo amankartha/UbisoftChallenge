@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "CRenderer.h"
 #include "appUtility.h"
+#include "Grid.h"
+#include "Camera.h"
+#include <algorithm>
 
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
@@ -81,3 +84,29 @@
     {
         isShake = false;
     }
+
+    void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
+    {
+        Vector2 camPos = camera.GetPosition();
+        Vector2 gridPos = gridSystem.GetOrigin();
+        int cellSize = gridSystem.GetCellSize();
+
+        Vector2 relativePos = gridPos - camPos  + Vector2(APP_VIRTUAL_WIDTH/2,APP_VIRTUAL_HEIGHT/2) + cellSize/2;
+
+        float start_x = fmod(relativePos.x, cellSize);
+        float start_y = fmod(relativePos.y, cellSize);
+
+        for (float x = start_x  ; x < APP_VIRTUAL_WIDTH; x +=cellSize)
+        {
+            App::DrawLine(x, 0, x, APP_VIRTUAL_HEIGHT);
+        }
+        for (float y = start_y; y < APP_VIRTUAL_HEIGHT; y += cellSize)
+        {
+            App::DrawLine(0, y, APP_VIRTUAL_WIDTH, y);
+        }
+    }
+
+
+    
+
+ 

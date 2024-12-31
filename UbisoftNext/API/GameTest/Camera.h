@@ -20,7 +20,7 @@ public:
 	{
 		m_transform.position = newPos;
 	}
-	Vector2 GetPosition()
+	Vector2 GetPosition() const
 	{
 		return m_transform.position;
 	}
