@@ -13,7 +13,7 @@ namespace GRID
 	class GridSystem
 	{
 	public:
-		GridSystem(float cellSize = 50.0, Vector2 origin = Vector2(0,0))
+		GridSystem(float cellSize = 10.0, Vector2 origin = Vector2(0,0))
 			: m_cellSize(cellSize), m_origin(origin) {}
 
 		Vector2 GetOrigin() const
