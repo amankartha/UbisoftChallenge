@@ -4,8 +4,10 @@
 #include <algorithm>
 IntVector2 GRID::GridSystem::WorldToGrid(Vector2 worldPosition) const
 {
-	int gridX = (int)std::floor((worldPosition.x - m_origin.x) / m_cellSize);
-	int gridY = (int)std::floor((worldPosition.y - m_origin.y) / m_cellSize);
+	Vector2 centeredOrigin = m_origin - Vector2(m_gridSize.x * m_cellSize / 2.0f, m_gridSize.y * m_cellSize / 2.0f);
+
+	int gridX = (int)std::floor((worldPosition.x - centeredOrigin.x) / m_cellSize);
+	int gridY = (int)std::floor((worldPosition.y - centeredOrigin.y) / m_cellSize);
 
 	gridX = std::clamp(gridX, 0, m_gridSize.x - 1);
 	gridY = std::clamp(gridY, 0, m_gridSize.y - 1);
@@ -15,13 +17,25 @@ IntVector2 GRID::GridSystem::WorldToGrid(Vector2 worldPosition) const
 
 Vector2 GRID::GridSystem::GridToWorld(IntVector2 gridPosition) const
 {
-	return Vector2((m_origin.x + gridPosition.x * m_cellSize + m_cellSize/2),(m_origin.y + gridPosition.y * m_cellSize + m_cellSize / 2));
+	Vector2 centeredOrigin = m_origin - Vector2(m_gridSize.x * m_cellSize / 2.0f, m_gridSize.y * m_cellSize / 2.0f);
+
+	return Vector2(
+		centeredOrigin.x + gridPosition.x * m_cellSize + m_cellSize / 2,
+		centeredOrigin.y + gridPosition.y * m_cellSize + m_cellSize / 2
+	);
 }
 
 void GRID::GridSystem::SetObstacle(IntVector2 gridPosition)
 {
 	m_grid[gridPosition.x][gridPosition.y].m_isObstacle = true;
 
+}
+
+void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
+{
+	IntVector2 gridPos = WorldToGrid(worldPosition);
+
+	m_grid[gridPos.x][gridPos.y].m_isObstacle = true;
 }
 
 //returns null_ptr if cell does not exist

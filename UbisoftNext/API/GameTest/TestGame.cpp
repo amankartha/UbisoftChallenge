@@ -15,6 +15,7 @@ CSimpleSprite* testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
 std::shared_ptr<GameObject> camera;
+std::shared_ptr<GameObject> CenterObject;
 
 std::shared_ptr<Pathfinding> pathFinder;
 std::vector<GRID::Cell*> pathToDraw;
@@ -33,11 +34,19 @@ void TestGame::InternalInit()
 	Game::InternalInit();
 
 	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
+	m_gridSystem.SetObstacle(Vector2(1, 1));
+	m_gridSystem.SetObstacle(Vector2(0, 1));
+	m_gridSystem.SetObstacle(Vector2(1, 0));
+	m_gridSystem.SetObstacle(Vector2(-1, -1));
+	m_gridSystem.SetObstacle(Vector2(-1, 1));
+
+
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = Create("Mouse");
 	player = Create("Player");
 	camera = Create("Camera");
+	CenterObject = Create("Center");
 	scheduler = new Scheduler();
 
 	m_renderer.SetShake(true);
@@ -50,6 +59,13 @@ void TestGame::InternalInit()
 	mouse->AddComponent<CRenderer>(m_renderer);
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
 	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
+
+
+
+	CenterObject->AddComponent<CRenderer>(m_renderer);
+	CenterObject->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\tile_grey.png", 1, 1);
+	
+
 
 	player->AddComponent<CRenderer>(m_renderer);
 	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
@@ -99,6 +115,11 @@ void TestGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed(MK_LBUTTON))
 	{
 		pathToDraw = pathFinder->FindPath(Vector2(0, 0), (App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition());
+	}
+
+	if (App::IsKeyPressed(MK_RBUTTON))
+	{
+		m_gridSystem.SetObstacle((App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition());
 	}
 	if (App::IsKeyPressed(VK_UP))
 	{

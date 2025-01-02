@@ -51,8 +51,19 @@ std::vector<GRID::Cell*> Pathfinding::FindPath(Vector2 startPos, Vector2 endPos)
 {
 
 
+	
+
 	GRID::Cell* startCell = m_grid.GetCellFromWorldPosition(startPos);
 	GRID::Cell* endCell = m_grid.GetCellFromWorldPosition(endPos);
+
+	//Return out if endPos is an Obstacle for now
+	if (endCell->m_isObstacle)
+	{
+		std::vector<GRID::Cell*> empty;
+		return  empty;
+	}
+
+
 	
 	std::vector<GRID::Cell*> openSet;
 	std::unordered_set<GRID::Cell*> closedSet;

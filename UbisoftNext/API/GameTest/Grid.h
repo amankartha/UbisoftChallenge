@@ -63,6 +63,7 @@ namespace GRID
 
         void SetObstacle(IntVector2 gridPosition);
 
+        void SetObstacle(Vector2 worldPosition);
 
 
         Cell* GetCell(IntVector2 gridPosition);
