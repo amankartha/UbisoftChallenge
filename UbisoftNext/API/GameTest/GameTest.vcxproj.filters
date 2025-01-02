@@ -77,7 +77,12 @@
     <ClCompile Include="Command.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Grid.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Pathfinding.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -162,7 +167,12 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Grid.h" />
+    <ClInclude Include="Grid.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding.h">
+      <Filter>AI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -200,6 +210,9 @@
     </Filter>
     <Filter Include="Commands">
       <UniqueIdentifier>{2b71b6c0-6aff-4956-a50a-6d69b81d0f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AI">
+      <UniqueIdentifier>{de125200-899f-4b67-b536-13e9a614cb2f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
