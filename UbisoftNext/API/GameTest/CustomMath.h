@@ -170,7 +170,8 @@ namespace std {
 	template <>
 	struct hash<IntVector2> {
 		size_t operator()(const IntVector2& v) const {
-			return hash<int>()(v.x) ^ (hash<int>()(v.y) << 1);
+			
+			return std::hash<int>()(v.x) ^ std::hash<int>()(v.y << 1);
 		}
 	};
 }

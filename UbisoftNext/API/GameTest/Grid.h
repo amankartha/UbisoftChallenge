@@ -9,7 +9,9 @@ namespace GRID
     struct Cell
     {
     public:
-        Cell(IntVector2 gridPosition,bool isObstacle) : m_gridPosition(gridPosition), m_isObstacle(false), m_gCost(0), m_hCost(0) {}
+        Cell(IntVector2 gridPosition,bool isObstacle) : m_gridPosition(gridPosition), m_isObstacle(false), m_gCost(0), m_hCost(0) {
+         
+        }
         Cell() : m_gridPosition(IntVector2(0,0)), m_isObstacle(false), m_gCost(0), m_hCost(0) {}
 
         int GetFCost() const
@@ -26,6 +28,7 @@ namespace GRID
                // m_parentGridPosition == other.m_parentGridPosition;
         }
 
+
     public:
         bool m_isObstacle;
         IntVector2 m_gridPosition;
@@ -38,9 +41,11 @@ namespace GRID
     class GridSystem
     {
     public:
-        GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0))
-            : m_cellSize(cellSize), m_origin(origin) 
-        {}
+        GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0), IntVector2 gridSize = IntVector2(50, 50))
+            : m_cellSize(cellSize), m_origin(origin), m_gridSize(gridSize)
+        {
+            CreateGrid();
+        }
 
         Vector2 GetOrigin() const
         {
@@ -58,21 +63,29 @@ namespace GRID
 
         void SetObstacle(IntVector2 gridPosition);
 
-        void AddCell(IntVector2 gridPosition, bool isObstacle);
 
-        std::shared_ptr<Cell> GetCell(IntVector2 gridPosition);
 
-        Cell GetCellFromWorldPosition(Vector2 worldPosition);
+        Cell* GetCell(IntVector2 gridPosition);
 
-        bool CellExists(IntVector2 gridPosition);
+        Cell* GetCellFromWorldPosition(Vector2 worldPosition);
 
-        std::array<Cell,8>& GetNeighbours(IntVector2 gridPosition);
 
+
+        std::vector<Cell*> GetNeighbours(Cell* cell);
+    
+    
+    
+    
+    private:
+        void CreateGrid();
+
+    public:
+        IntVector2 m_gridSize;
     private:
         int m_cellSize;
+      
         Vector2 m_origin;
-        std::unordered_map<IntVector2, std::shared_ptr<Cell>> m_grid; 
-        std::array<Cell,8>m_neighbourGrid; //array of placeholder cells that are used for A* pathfinding
+        std::vector<std::vector<Cell>> m_grid;
     };
 
 };

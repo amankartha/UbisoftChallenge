@@ -88,21 +88,51 @@
     void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
     {
         Vector2 camPos = camera.GetPosition();
-        Vector2 gridPos = gridSystem.GetOrigin();
+        Vector2 gridOrigin = gridSystem.GetOrigin();
         int cellSize = gridSystem.GetCellSize();
+        IntVector2 gridSize = gridSystem.m_gridSize;
 
-        Vector2 relativePos = gridPos - camPos  + Vector2(APP_VIRTUAL_WIDTH/2,APP_VIRTUAL_HEIGHT/2) + cellSize/2;
+        // Grid boundaries in world space
+        float gridWorldLeft = gridOrigin.x;
+        float gridWorldRight = gridOrigin.x + gridSize.x * cellSize;
+        float gridWorldTop = gridOrigin.y;
+        float gridWorldBottom = gridOrigin.y + gridSize.y * cellSize;
 
-        float start_x = fmod(relativePos.x, cellSize);
-        float start_y = fmod(relativePos.y, cellSize);
+        // Screen space boundaries of the camera
+        float camLeft = camPos.x - APP_VIRTUAL_WIDTH / 2;
+        float camRight = camPos.x + APP_VIRTUAL_WIDTH / 2;
+        float camTop = camPos.y - APP_VIRTUAL_HEIGHT / 2;
+        float camBottom = camPos.y + APP_VIRTUAL_HEIGHT / 2;
 
-        for (float x = start_x  ; x < APP_VIRTUAL_WIDTH; x +=cellSize)
+        // Determine the range of grid lines visible in the camera view
+        float startX = (std::max)(gridWorldLeft, std::floor(camLeft / cellSize) * cellSize);
+        float endX = (std::min)(gridWorldRight, std::ceil(camRight / cellSize) * cellSize);
+        float startY =( std::max)(gridWorldTop, std::floor(camTop / cellSize) * cellSize);
+        float endY = (std::min)(gridWorldBottom, std::ceil(camBottom / cellSize) * cellSize);
+
+        for (float x = startX; x <= endX; x += cellSize)
         {
-            App::DrawLine(x, 0, x, APP_VIRTUAL_HEIGHT);
+            // Convert world space to screen space
+            float screenX = x - camPos.x + APP_VIRTUAL_WIDTH / 2;
+
+            // Draw line only up to grid boundaries in world space (convert bounds to screen space)
+            float screenStartY = (std::max)(0.0f, gridWorldTop - camPos.y + APP_VIRTUAL_HEIGHT / 2);
+            float screenEndY = (std::min)((float)APP_VIRTUAL_HEIGHT, gridWorldBottom - camPos.y + APP_VIRTUAL_HEIGHT / 2);
+
+            App::DrawLine(screenX, screenStartY, screenX, screenEndY);
         }
-        for (float y = start_y; y < APP_VIRTUAL_HEIGHT; y += cellSize)
+
+        // Draw horizontal grid lines
+        for (float y = startY; y <= endY; y += cellSize)
         {
-            App::DrawLine(0, y, APP_VIRTUAL_WIDTH, y);
+            // Convert world space to screen space
+            float screenY = y - camPos.y + APP_VIRTUAL_HEIGHT / 2;
+
+            // Draw line only up to grid boundaries in world space (convert bounds to screen space)
+            float screenStartX = (std::max)(0.0f, gridWorldLeft - camPos.x + APP_VIRTUAL_WIDTH / 2);
+            float screenEndX = (std::min)((float)APP_VIRTUAL_WIDTH, gridWorldRight - camPos.x + APP_VIRTUAL_WIDTH / 2);
+
+            App::DrawLine(screenStartX, screenY, screenEndX, screenY);
         }
     }
 

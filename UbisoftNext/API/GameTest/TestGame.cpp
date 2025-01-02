@@ -10,11 +10,14 @@
 #include "Renderer.h"
 #include "Scheduler.h"
 #include "Ccamera.h"
-
+#include "Pathfinding.h"
 CSimpleSprite* testSprite;
 std::shared_ptr<GameObject> player;
 std::shared_ptr<GameObject> mouse;
 std::shared_ptr<GameObject> camera;
+
+std::shared_ptr<Pathfinding> pathFinder;
+std::vector<GRID::Cell*> pathToDraw;
 enum
 {
 	ANIM_FORWARDS,
@@ -28,6 +31,8 @@ enum
 void TestGame::InternalInit()
 {
 	Game::InternalInit();
+
+	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = Create("Mouse");
@@ -53,7 +58,7 @@ void TestGame::InternalInit()
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
-	testSprite->SetPosition(400.0f, 400.0f);
+	testSprite->SetPosition(APP_VIRTUAL_WIDTH/2, APP_VIRTUAL_HEIGHT/2);
 	const float speed = 1.0f / 15.0f;
 	testSprite->CreateAnimation(ANIM_BACKWARDS, speed, { 0,1,2,3,4,5,6,7 });
 	testSprite->CreateAnimation(ANIM_LEFT, speed, { 8,9,10,11,12,13,14,15 });
@@ -91,6 +96,10 @@ void TestGame::InternalUpdate(const float deltaTime)
 	//	player->GetComponent<Ctransform>()->OffsetPosition(Vector2::RIGHT);
 		
 	}
+	if (App::IsKeyPressed(MK_LBUTTON))
+	{
+		pathToDraw = pathFinder->FindPath(Vector2(0, 0), (App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition());
+	}
 	if (App::IsKeyPressed(VK_UP))
 	{
 		auto g = Create("Generated");
@@ -102,8 +111,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
-		if (!m_gameObjectMap.empty())
-			m_gameObjectMap.erase(std::prev(m_gameObjectMap.end()));
+		
 	}
 	if (App::IsKeyPressed(VK_LEFT))
 	{
@@ -209,10 +217,24 @@ void TestGame::InternalRender()
 	}*/
 	m_renderer.DrawGridWithCamera(m_cameraManager.GetMainCamera(), m_gridSystem);
 
+	if (pathToDraw.empty() || pathToDraw.size() < 2) {
+		return; // No path to draw, exit the function
+	}
+
+	for (int i = 0; i < pathToDraw.size()-1; i++)
+	{
+		Vector2 relativePos = m_gridSystem.GridToWorld(pathToDraw[i]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
+		Vector2 relativePos2 = m_gridSystem.GridToWorld(pathToDraw[i+1]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
+		App::DrawLine(relativePos.x, relativePos.y, relativePos2.x, relativePos2.y);
+		//App::Print(100, 100 + i * 20, pathToDraw[i]->m_gridPosition.Print().c_str());
+		//App::Print(100, 100 + i * 20, pathToDraw[i+1]->m_gridPosition.Print().c_str());
+	}
+	App::Print(100,100, ((App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition()).Print().c_str());
 }
 
 void TestGame::InteralShutdown()
 {
 	delete testSprite;
 	delete scheduler;
+	
 }

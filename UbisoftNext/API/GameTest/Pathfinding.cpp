@@ -10,15 +10,17 @@
 //Helper Functions
 //----------------------------------------------------------------------
 
-std::vector<IntVector2> Pathfinding::ReTracePath(GRID::Cell startCell, GRID::Cell endCell,std::vector<GRID::Cell> cells)
-{
-	std::vector<IntVector2> path;
-	GRID::Cell currentCell = endCell;
 
-	while (currentCell.m_gridPosition != startCell.m_gridPosition)
+
+std::vector<GRID::Cell*> Pathfinding::ReTracePath(GRID::Cell* startCell, GRID::Cell* endCell)
+{
+	std::vector<GRID::Cell*> path;
+	GRID::Cell* currentCell = endCell;
+
+	while (currentCell != startCell)
 	{
-		path.push_back(currentCell.m_gridPosition);
-		currentCell = *currentCell.m_parentCell;
+		path.push_back(currentCell);
+		currentCell = currentCell->m_parentCell;
 	}
 
 	std::reverse(path.begin(), path.end());
@@ -26,10 +28,10 @@ std::vector<IntVector2> Pathfinding::ReTracePath(GRID::Cell startCell, GRID::Cel
 	return path;
 }
 
-int GetDistance(GRID::Cell A, GRID::Cell B) //manhattan distance
+int GetDistance(GRID::Cell* A, GRID::Cell* B) //manhattan distance
 {
-	int distance_x = std::abs(A.m_gridPosition.x - B.m_gridPosition.x);
-	int distance_y = std::abs(A.m_gridPosition.y - B.m_gridPosition.y);
+	int distance_x = std::abs(A->m_gridPosition.x - B->m_gridPosition.x);
+	int distance_y = std::abs(A->m_gridPosition.y - B->m_gridPosition.y);
 
 	if (distance_x > distance_y)
 	{
@@ -44,53 +46,58 @@ int GetDistance(GRID::Cell A, GRID::Cell B) //manhattan distance
 // Functions
 //----------------------------------------------------------------------
 
-std::vector<IntVector2> Pathfinding::FindPath(Vector2 startPos, Vector2 endPos)
+
+std::vector<GRID::Cell*> Pathfinding::FindPath(Vector2 startPos, Vector2 endPos)
 {
-	GRID::Cell startCell = m_grid.GetCellFromWorldPosition(startPos);
-	GRID::Cell endCell = m_grid.GetCellFromWorldPosition(endPos);
+
+
+	GRID::Cell* startCell = m_grid.GetCellFromWorldPosition(startPos);
+	GRID::Cell* endCell = m_grid.GetCellFromWorldPosition(endPos);
 	
-	std::vector<GRID::Cell> openSet;
-	std::unordered_set<IntVector2> closedSet;
+	std::vector<GRID::Cell*> openSet;
+	std::unordered_set<GRID::Cell*> closedSet;
 
 	openSet.push_back(startCell);
 
+
 	while(openSet.size() >  0)
 	{
-		GRID::Cell currentNode = openSet[0];
+		GRID::Cell* currentNode = openSet[0];
 
 		for (int i = 1; i < openSet.size(); i++)
 		{
-			if (openSet[i].GetFCost() < currentNode.GetFCost() ||
-				(openSet[i].GetFCost() == currentNode.GetFCost() && openSet[i].m_hCost < currentNode.m_hCost))
+			if (openSet[i]->GetFCost() < currentNode->GetFCost() ||
+				(openSet[i]->GetFCost() == currentNode->GetFCost() && openSet[i]->m_hCost < currentNode->m_hCost))
 			{
 				currentNode = openSet[i];
 			}
 		}
 
 		openSet.erase(find(openSet.begin(),openSet.end(),currentNode));
-		closedSet.insert(currentNode.m_gridPosition);
+		closedSet.insert(currentNode);
 
-		if (currentNode.m_gridPosition == endCell.m_gridPosition)
+		if (currentNode == endCell)
 		{
-		  return  ReTracePath(startCell, endCell,openSet);
+		  return  ReTracePath(startCell, endCell);
 			
 		}
 
-		for (auto neighbour : m_grid.GetNeighbours(currentNode.m_gridPosition))
+		for (auto neighbour : m_grid.GetNeighbours(currentNode))
 		{
-			if (!neighbour.m_isObstacle || 
-				closedSet.find(neighbour.m_gridPosition) != closedSet.end())
+			if (neighbour->m_isObstacle || 
+				closedSet.find(neighbour) != closedSet.end())
 			{
 				continue;
 			}
 
-			int newMovementCostToNeighbour = currentNode.m_gCost + GetDistance(currentNode, neighbour);
+			int newMovementCostToNeighbour = currentNode->m_gCost + GetDistance(currentNode, neighbour);
 
-			if (newMovementCostToNeighbour < neighbour.m_gCost || std::find(openSet.begin(), openSet.end(), neighbour) == openSet.end())
+			if (newMovementCostToNeighbour < neighbour->m_gCost || std::find(openSet.begin(), openSet.end(), neighbour) == openSet.end())
 			{
-				neighbour.m_gCost = newMovementCostToNeighbour;
-				neighbour.m_hCost = GetDistance(neighbour, endCell);
-				neighbour.m_parentCell = &currentNode;
+				neighbour->m_gCost = newMovementCostToNeighbour;
+				neighbour->m_hCost = GetDistance(neighbour, endCell);
+				
+				neighbour->m_parentCell = currentNode;
 
 				if (std::find(openSet.begin(), openSet.end(), neighbour) == openSet.end())
 				{
@@ -100,6 +107,4 @@ std::vector<IntVector2> Pathfinding::FindPath(Vector2 startPos, Vector2 endPos)
 		}
 
 	}
-
-
 }
