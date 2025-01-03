@@ -34,22 +34,22 @@ void TestGame::InternalInit()
 	Game::InternalInit();
 
 	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
-	m_gridSystem.SetObstacle(Vector2(1, 1));
+	/*m_gridSystem.SetObstacle(Vector2(1, 1));
 	m_gridSystem.SetObstacle(Vector2(0, 1));
 	m_gridSystem.SetObstacle(Vector2(1, 0));
 	m_gridSystem.SetObstacle(Vector2(-1, -1));
-	m_gridSystem.SetObstacle(Vector2(-1, 1));
+	m_gridSystem.SetObstacle(Vector2(-1, 1));*/
 
 
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = Create("Mouse");
-	player = Create("Player");
+	//player = Create("Player");
 	camera = Create("Camera");
 	CenterObject = Create("Center");
 	scheduler = new Scheduler();
 
-	m_renderer.SetShake(true);
+	//m_renderer.SetShake(true);
 
 	
 	camera->AddComponent<Ccamera>(m_cameraManager);
@@ -64,11 +64,12 @@ void TestGame::InternalInit()
 
 	CenterObject->AddComponent<CRenderer>(m_renderer);
 	CenterObject->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\tile_grey.png", 1, 1);
+	CenterObject->GetComponent<Ctransform>()->SetScale(0.1f);
 	
 
 
-	player->AddComponent<CRenderer>(m_renderer);
-	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+	//player->AddComponent<CRenderer>(m_renderer);
+	//player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 
 
 	//------------------------------------------------------------------------
@@ -123,12 +124,13 @@ void TestGame::InternalUpdate(const float deltaTime)
 	}
 	if (App::IsKeyPressed(VK_UP))
 	{
-		auto g = Create("Generated");
+		/*auto g = Create("Generated");
 		g->AddComponent<CRenderer>(m_renderer);
 		g->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+		
 
 		g->GetTransform()->SetPosition(Vector2(FRAND_RANGE(0, APP_VIRTUAL_WIDTH), FRAND_RANGE(0, APP_VIRTUAL_WIDTH)));
-		scheduler->AddTask([this]() { m_renderer.SetShakeOff(); }, 1500);
+		scheduler->AddTask([this]() { m_renderer.SetShakeOff(); }, 1500);*/
 	}
 	if (App::IsKeyPressed(VK_DOWN))
 	{
@@ -211,9 +213,7 @@ void TestGame::InternalRender()
 	//------------------------------------------------------------------------
 	//App::Print(100, 100, "Sample Text");
 	App::Print(100, 300, std::to_string(m_gameObjectMap.size()).c_str());
-	//----------------------------------------------------------------------
-	// Render all Gameobjects
-	// ---------------------------------------------------------------------
+	
 
 
 	//------------------------------------------------------------------------

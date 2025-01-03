@@ -42,6 +42,22 @@ public:
     {
         return m_transform.position;
     }
+    float GetAngle()
+    {
+        return m_transform.angle;
+    }
+    void SetAngle(float angle)
+    {
+        m_transform.angle = angle;
+    }
+    void SetScale(float scale)
+    {
+        m_transform.scale = scale;
+    }
+    float GetScale()
+    {
+        return m_transform.scale;
+    }
     void OffsetPosition(Vector2 vec)
     {
         m_transform.position = m_transform.position + vec;

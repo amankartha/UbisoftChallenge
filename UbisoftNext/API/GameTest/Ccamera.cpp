@@ -30,6 +30,11 @@ void Ccamera::Update()
 	{
 		getAttachedGameObject()->GetTransform()->OffsetRotation(1.0);
 	}
+
+	if (App::IsKeyPressed('Y'))
+	{
+		getAttachedGameObject()->GetTransform()->SetAngle(0);
+	}
 	if (App::IsKeyPressed('Z'))
 	{
 		m_camera->SetZoom(m_camera->GetZoom() + 0.05);

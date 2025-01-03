@@ -183,11 +183,13 @@ struct Transform
 {
 	Vector2 position;
 	float angle;
+	float scale;
 
-	Transform(float x = 0.0f, float y = 0.0f,float a = 0.0f) {
+	Transform(float x = 0.0f, float y = 0.0f,float a = 0.0f,float s = 1.0f) {
 		position.x = x;
 		position.y = y;
 		angle = a;
+		scale = 1.0f;
 	}
 };
 

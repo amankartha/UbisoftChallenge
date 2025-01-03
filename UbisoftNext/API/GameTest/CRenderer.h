@@ -28,6 +28,11 @@ public:
         mainRenderer.RemoveRendererComponent(*this);
     }
 
+    CSimpleSprite* GetSprite()
+    {
+        return sprite;
+    }
+
     RenderLayer GetRenderLayer()
     {
         return m_renderLayer;
