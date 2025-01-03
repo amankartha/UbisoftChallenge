@@ -17,6 +17,12 @@ enum RenderLayer
 	Default = 1,
 	UI = 3
 };
+class IRenderable
+{
+public:
+	virtual ~IRenderable() {};
+	virtual void Render() = 0;
+};
 
 class Renderer
 {
