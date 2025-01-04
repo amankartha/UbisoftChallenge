@@ -10,8 +10,3 @@ void Ctransform::Update()
 	Component::Update();
 	
 }
-
-void Ctransform::Render()
-{
-	//App::Print(500, 100 + id * 20, (this->getAttachedGameObject()->name + "has a transform at" + position.Print()).c_str()); 
-}

@@ -4,7 +4,7 @@
 #include "appUtility.h"
 
 class CRenderer :
-    public Component
+    public Component, public IRenderable
 {
 
 
@@ -37,7 +37,6 @@ public:
     {
         return m_renderLayer;
     }
-
     void SetRenderLayer(RenderLayer layer)
     {
         mainRenderer.RemoveRendererComponent(*this);
@@ -59,9 +58,8 @@ public:
 
     void Update() override;
 
-    void Render() override;
+    void Render(const Camera camera,bool isUI) override;
 
-    void Render(Vector2& offset);
     
     void RenderWithCamera(Vector2 offset,float a,float zoom);
 

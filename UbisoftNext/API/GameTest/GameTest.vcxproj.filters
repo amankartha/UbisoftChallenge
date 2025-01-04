@@ -83,6 +83,7 @@
     <ClCompile Include="Pathfinding.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Pathfinding.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="GameObjectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

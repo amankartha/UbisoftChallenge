@@ -21,7 +21,9 @@ class IRenderable
 {
 public:
 	virtual ~IRenderable() {};
-	virtual void Render() = 0;
+	virtual void Render(const Camera camera, bool isUI = false) = 0;
+	virtual RenderLayer GetRenderLayer() = 0;
+	virtual void SetRenderLayer(RenderLayer layer) = 0;
 };
 
 class Renderer
@@ -31,13 +33,15 @@ public:
 	Renderer()
 	{
 		RENDERMAP[RenderLayer::Default].reserve(1000);
+		m_shakeValue = Vector2(0, 0);
+		m_isShake = false;
 	}
 	~Renderer()
 	{
 
 	}
 	
-	void RenderAll(Transform CurrentCameraTransform,float zoom);
+	void RenderAll(Camera& currentCamera);
 
 	void AddRendererComponent(CRenderer& renderer);
 
@@ -50,9 +54,9 @@ public:
 	void DrawGridWithCamera(const Camera& camera,const GRID::GridSystem& gridSystem) const;
 	 
 public:
-	Vector2 shakeValue;
-	bool isShake;
+	Vector2 m_shakeValue;
+	bool m_isShake;
 private:
-	std::map<RenderLayer, std::vector<CRenderer*>> RENDERMAP;
+	std::map<RenderLayer, std::vector<IRenderable*>> RENDERMAP;
 };
 

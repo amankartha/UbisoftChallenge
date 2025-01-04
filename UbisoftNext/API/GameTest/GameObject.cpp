@@ -14,15 +14,15 @@ void GameObject::Update()
 		component->Update();             
 	}
 }
-
-void GameObject::Render()
-{
-	for (auto& pair : _components) {
-		auto& type = pair.first;
-		auto& component = pair.second;
-		component->Render();
-	}
-}
+//
+//void GameObject::Render()   moved to Renderer
+//{
+//	for (auto& pair : _components) {
+//		auto& type = pair.first;
+//		auto& component = pair.second;
+//		component->Render();
+//	}
+//}
 
 void GameObject::Init()
 {

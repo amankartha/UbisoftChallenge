@@ -24,12 +24,15 @@ public:
 	{
 		return m_transform.position;
 	}
-
-	Transform GetTransform()
+	float GetAngle() const
+	{
+		return m_transform.angle;
+	}
+	Transform GetTransform() const
 	{
 		return m_transform;
 	}
-	float GetZoom()
+	float GetZoom() const
 	{
 		return m_zoomFactor;
 	}

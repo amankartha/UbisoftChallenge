@@ -12,8 +12,5 @@ void Ccursor::Init()
 
 void Ccursor::Update()
 {
-	if (App::IsKeyPressed(WM_LBUTTONDOWN))
-	{
-
-	}
+	
 }

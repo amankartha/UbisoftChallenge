@@ -201,6 +201,7 @@
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="TestGame.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="StartingPoint.cpp" />

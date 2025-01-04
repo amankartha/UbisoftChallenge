@@ -14,7 +14,6 @@ public:
 	
 	virtual void Init() {};
 	virtual void Update() {};
-	virtual void Render() {};
 
 	//get the gameobject that this component is attached to
 	 GameObject* getAttachedGameObject() { return attachedGameObject; }

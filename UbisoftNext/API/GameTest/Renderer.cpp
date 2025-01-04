@@ -9,30 +9,30 @@
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
 
-    void Renderer::RenderAll(Transform currentCameraTransform,float zoom)
+    void Renderer::RenderAll(Camera& currentCamera)
     {
         App::Print(1000, 300, std::to_string(RENDERMAP[RenderLayer::Default].size()).c_str());
-        if (isShake)
+        if (m_isShake)
         {
-            shakeValue.x = FRAND_RANGE(-4, 4);
-            shakeValue.y = FRAND_RANGE(-4, 4);
+            m_shakeValue.x = FRAND_RANGE(-4, 4);
+            m_shakeValue.y = FRAND_RANGE(-4, 4);
             for (const auto& [m_renderLayer, renderers] : RENDERMAP)
             {
              
                 if (m_renderLayer == RenderLayer::UI)
                 {
-                    for (CRenderer* renderer : renderers)
+                    for (IRenderable* renderer : renderers)
                     {
 
-                        renderer->Render();
+                        renderer->Render(currentCamera,true);
                     }
                 }
                 else
                 {
-                    for (CRenderer* renderer : renderers)
+                    for (IRenderable* renderer : renderers)
                     {
 
-                        renderer->RenderWithCamera(shakeValue + currentCameraTransform.position,currentCameraTransform.angle,zoom);
+                        renderer->Render(currentCamera);
                     }
                 }
             }
@@ -43,18 +43,18 @@
             {
                 if (m_renderLayer == RenderLayer::UI)
                 {
-                    for (CRenderer* renderer : renderers)
+                    for (IRenderable* renderer : renderers)
                     {
 
-                        renderer->Render();
+                        renderer->Render(currentCamera,true);
                     }
                 }
                 else
                 {
-                    for (CRenderer* renderer : renderers)
+                    for (IRenderable* renderer : renderers)
                     {
 
-                        renderer->RenderWithCamera(currentCameraTransform.position, currentCameraTransform.angle,zoom);
+                        renderer->Render(currentCamera);
                     }
                 }
             }
@@ -78,11 +78,11 @@
     }
     void Renderer::SetShake(bool b)
     {
-        isShake = b;
+        m_isShake = b;
     }
     void Renderer::SetShakeOff()
     {
-        isShake = false;
+        m_isShake = false;
     }
 
     void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
@@ -140,41 +140,7 @@
         }
     }
 
-    void RenderWithCamera(const Camera& camera,IRenderable renderable, )
-    {
-
-        float angleRadians = a * (PI / 180.0);
-        float cosAngle = cos(-angleRadians);
-        float sinAngle = sin(-angleRadians);
-
-
-        Vector2 currentPosition = getAttachedGameObject()->GetTransform()->GetPosition();
-
-        Vector2 relativePosition = currentPosition - offset;
-
-
-        Vector2 rotatedPosition = Vector2(cosAngle * (relativePosition.x) - sinAngle * (relativePosition.y),
-            sinAngle * (relativePosition.x) + cosAngle * (relativePosition.y)
-
-        );
-
-        Vector2 scaledPosition = rotatedPosition * zoom;
-
-        Vector2 calculatedPosition = scaledPosition + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
-
-        //TODO DONT DRAW IF NOT ON SCREEN
-
-        sprite->SetScale(sprite->GetScale() * zoom);
-
-        sprite->SetPosition(calculatedPosition.x, calculatedPosition.y);
-
-
-        if (calculatedPosition.x >= 0 && calculatedPosition.x <= APP_VIRTUAL_WIDTH &&
-            calculatedPosition.y >= 0 && calculatedPosition.y <= APP_VIRTUAL_HEIGHT) {
-            sprite->Draw();
-        }
-
-    }
+    
 
 
     

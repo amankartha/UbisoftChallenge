@@ -3,6 +3,7 @@
 #include "Ctransform.h"
 #include "GameObject.h"
 #include "appUtility.h"
+#include "Camera.h"
 void CRenderer::Update()
 {
 	if (enabled)
@@ -14,27 +15,19 @@ void CRenderer::Update()
 	}
 }
 
-void CRenderer::Render()
+void CRenderer::Render(const Camera camera,bool isUI)
 {
-	if (enabled)
+	if (isUI)
 	{
-		if (m_isShake)
-		{
-			sprite->SetPositionWithOffset(FRAND_RANGE(-1, 1), FRAND_RANGE(-1, 1));
-			sprite->Draw();
-		}
-		else
-		{
-			sprite->Draw();
-		}
+		sprite->Draw();
+	}
+	else
+	{
+		RenderWithCamera(camera.GetPosition(), camera.GetAngle(), camera.GetZoom());
 	}
 }
 
-void CRenderer::Render(Vector2& offset)
-{
-	sprite->SetPositionWithOffset(offset.x, offset.y);
-	sprite->Draw();
-}
+
 
 void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom) 
 {
@@ -59,9 +52,9 @@ void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom)
 
 	//TODO DONT DRAW IF NOT ON SCREEN
 	
-	sprite->SetScale(sprite->GetScale()*zoom);
+	sprite->SetScale(sprite->GetScale() * zoom);
 
-	sprite->SetPosition(calculatedPosition.x , calculatedPosition.y );
+	sprite->SetPosition(calculatedPosition.x , calculatedPosition.y);
 	
 	
 	if (calculatedPosition.x >= 0 && calculatedPosition.x <= APP_VIRTUAL_WIDTH &&

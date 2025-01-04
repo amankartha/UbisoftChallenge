@@ -12,6 +12,7 @@ class Ctransform :
 
 private:
     Transform m_transform;
+    Transform m_transform_local;
 public:
     static int Count;
     int id;
@@ -73,6 +74,6 @@ public:
     }
     
     void Update() override;
-    void Render() override;
+   
 };
 

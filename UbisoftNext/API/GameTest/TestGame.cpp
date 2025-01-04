@@ -12,10 +12,10 @@
 #include "Ccamera.h"
 #include "Pathfinding.h"
 CSimpleSprite* testSprite;
-std::shared_ptr<GameObject> player;
-std::shared_ptr<GameObject> mouse;
-std::shared_ptr<GameObject> camera;
-std::shared_ptr<GameObject> CenterObject;
+GameObject* player;
+GameObject* mouse;
+GameObject* camera;
+GameObject* CenterObject;
 
 std::shared_ptr<Pathfinding> pathFinder;
 std::vector<GRID::Cell*> pathToDraw;
@@ -32,6 +32,7 @@ enum
 void TestGame::InternalInit()
 {
 	Game::InternalInit();
+	m_gameObjectManager.InitAll();
 
 	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
 	/*m_gridSystem.SetObstacle(Vector2(1, 1));
@@ -43,10 +44,10 @@ void TestGame::InternalInit()
 
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
-	mouse = Create("Mouse");
-	//player = Create("Player");
-	camera = Create("Camera");
-	CenterObject = Create("Center");
+	mouse = &m_gameObjectManager.Create("Mouse");
+	player = &m_gameObjectManager.Create("Player");
+	camera = &m_gameObjectManager.Create("Camera");
+	CenterObject = &m_gameObjectManager.Create("Center");
 	scheduler = new Scheduler();
 
 	//m_renderer.SetShake(true);
@@ -68,8 +69,8 @@ void TestGame::InternalInit()
 	
 
 
-	//player->AddComponent<CRenderer>(m_renderer);
-	//player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+	player->AddComponent<CRenderer>(m_renderer);
+	player->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 
 
 	//------------------------------------------------------------------------
@@ -193,10 +194,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 		App::StopSound(".\\TestData\\Test.wav");
 	}
 
-	for (auto& it : m_gameObjectMap) {
-
-		it.second->Update();
-	}
+	m_gameObjectManager.UpdateAll();
 }
 
 void TestGame::InternalRender()
@@ -212,8 +210,8 @@ void TestGame::InternalRender()
 	// Example Text.
 	//------------------------------------------------------------------------
 	//App::Print(100, 100, "Sample Text");
-	App::Print(100, 300, std::to_string(m_gameObjectMap.size()).c_str());
 	
+
 
 
 	//------------------------------------------------------------------------
@@ -236,20 +234,20 @@ void TestGame::InternalRender()
 		b = (float)i / 20.0f;
 		App::DrawLine(sx, sy, ex, ey, r, g, b);
 	}*/
-	m_renderer.DrawGridWithCamera(m_cameraManager.GetMainCamera(), m_gridSystem);
+	//m_renderer.DrawGridWithCamera(m_cameraManager.GetMainCamera(), m_gridSystem);
 
-	if (pathToDraw.empty() || pathToDraw.size() < 2) {
-		return; // No path to draw, exit the function
-	}
+	//if (pathToDraw.empty() || pathToDraw.size() < 2) {
+	//	return; // No path to draw, exit the function
+	//}
 
-	for (int i = 0; i < pathToDraw.size()-1; i++)
-	{
-		Vector2 relativePos = m_gridSystem.GridToWorld(pathToDraw[i]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
-		Vector2 relativePos2 = m_gridSystem.GridToWorld(pathToDraw[i+1]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
-		App::DrawLine(relativePos.x, relativePos.y, relativePos2.x, relativePos2.y);
-		//App::Print(100, 100 + i * 20, pathToDraw[i]->m_gridPosition.Print().c_str());
-		//App::Print(100, 100 + i * 20, pathToDraw[i+1]->m_gridPosition.Print().c_str());
-	}
+	//for (int i = 0; i < pathToDraw.size()-1; i++)
+	//{
+	//	Vector2 relativePos = m_gridSystem.GridToWorld(pathToDraw[i]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
+	//	Vector2 relativePos2 = m_gridSystem.GridToWorld(pathToDraw[i+1]->m_gridPosition) - m_cameraManager.GetMainCamera().GetPosition() + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
+	//	App::DrawLine(relativePos.x, relativePos.y, relativePos2.x, relativePos2.y);
+	//	//App::Print(100, 100 + i * 20, pathToDraw[i]->m_gridPosition.Print().c_str());
+	//	//App::Print(100, 100 + i * 20, pathToDraw[i+1]->m_gridPosition.Print().c_str());
+	// }
 	App::Print(100,100, ((App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition()).Print().c_str());
 }
 
