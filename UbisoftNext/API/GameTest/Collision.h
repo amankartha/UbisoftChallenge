@@ -14,12 +14,13 @@ namespace physics
 		Vector2 normal;
 	};
 
-	struct Pair
+	/*struct Pair
 	{
 		RigidBody* A;
 		RigidBody* B;
 
-	};
+		Pair(RigidBodyA* A,)
+	};*/
 
 	bool CircleVsCircle(Collision* collision)
 	{

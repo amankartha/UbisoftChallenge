@@ -7,6 +7,10 @@
 /// <typeparam name="T"></typeparam>
 template <typename T>
 struct DataArray {
+
+   
+
+
     struct Item {
         T item;
         int id; // (key << 16 | index) for allocated entries, (0 | nextFreeIndex) for free list entries
@@ -31,7 +35,7 @@ struct DataArray {
 
    
     void Dispose() {
-        delete[] items;
+        delete items;
         items = nullptr;
         maxSize = 0;
         maxUsed = 0;
@@ -89,7 +93,7 @@ struct DataArray {
 
     
     int GetID(T& item) {
-        for (int i = 0; i < maxSize; ++i) {
+        for (int i = 0; i < maxUsed; ++i) {
             if (items[i].item == item) {
                 return items[i].id;
             }
@@ -115,8 +119,8 @@ struct DataArray {
 
    
     bool Next(T*& outItem) {
-        for (int i = 0; i < maxSize; ++i) {
-            if (items[i].id != 0) {
+        for (int i = 0; i < maxUsed; ++i) {
+            if ((items[i].id & 0xFFFF0000) != 0) {
                 outItem = &items[i].item;
                 return true;
             }

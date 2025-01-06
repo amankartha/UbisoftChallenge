@@ -11,6 +11,12 @@
 class GameObject
 {
 public:
+	GameObject()
+	{
+		m_transform = AddComponent<Ctransform>();
+	}
+	~GameObject() = default;
+
 	std::shared_ptr<Ctransform> GetTransform()
 	{
 		return m_transform;
@@ -66,12 +72,7 @@ public:
 	}
 	virtual void Init();
 	virtual void Update();
-private:
-	GameObject()
-	{
-		m_transform = AddComponent<Ctransform>();
-	}
-	~GameObject() = default;
+
 private:
 	std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
 	std::shared_ptr<Ctransform> m_transform;
