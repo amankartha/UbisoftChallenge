@@ -199,11 +199,13 @@
     <ClInclude Include="Crigidbody.h" />
     <ClInclude Include="Ctransform.h" />
     <ClInclude Include="CustomMath.h" />
+    <ClInclude Include="DataStructure.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
     <ClInclude Include="ObserverPattern.h" />
@@ -225,6 +227,9 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="Ccursor.cpp" />
+    <ClCompile Include="Collider.cpp" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="Collision.h" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="CRenderer.cpp" />
@@ -236,6 +241,7 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
     <ClCompile Include="ObserverPattern.cpp" />

@@ -42,6 +42,7 @@ void TestGame::InternalInit()
 	m_gridSystem.SetObstacle(Vector2(-1, 1));*/
 
 
+	OutputDebugStringW(L"My output string.");
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
 	mouse = &m_gameObjectManager.Create("Mouse");
@@ -248,10 +249,10 @@ void TestGame::InternalRender()
 	//	//App::Print(100, 100 + i * 20, pathToDraw[i]->m_gridPosition.Print().c_str());
 	//	//App::Print(100, 100 + i * 20, pathToDraw[i+1]->m_gridPosition.Print().c_str());
 	// }
-	App::Print(100,100, ((App::GetMousePosVec2() - Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2)) + m_cameraManager.GetMainCamera().GetPosition()).Print().c_str());
+	App::Print(100,100,App::ScreenToWorld(m_cameraManager.GetMainCamera(), App::GetMousePosVec2()).Print().c_str());
 }
 
-void TestGame::InteralShutdown()
+void TestGame::InternalShutdown()
 {
 	delete testSprite;
 	delete scheduler;

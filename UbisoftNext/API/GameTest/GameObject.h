@@ -10,42 +10,11 @@
 
 class GameObject
 {
-	
-
-private:
-	std::unordered_map<std::type_index, std::shared_ptr<Component>> _components;
-	std::shared_ptr<Ctransform> m_transform;
-	std::weak_ptr<GameObject> m_selfPointer;
-
 public:
-	std::string m_name;
-public:
-	GameObject()
-	{
-		
-		m_transform = AddComponent<Ctransform>();
-	}
-	~GameObject()
-	{
-		
-	}
-	
-	//void SetSelfPointer(std::shared_ptr<GameObject> pointer)
-	//{
-	//	m_selfPointer = pointer;
-	//}
-
-	//returns a weak pointer to this gameobjects transform;
 	std::shared_ptr<Ctransform> GetTransform()
 	{
 		return m_transform;
 	}
-	Transform GetTransformCopy()
-	{
-		return m_transform->GetTransformCopy();
-	}
-
-	//Adds component to the gameobject and returns it
 	template <typename T, typename... Args>
 	std::shared_ptr<T> AddComponent(Args&&... args)
 	{
@@ -53,7 +22,7 @@ public:
 
 		auto type = std::type_index(typeid(T));
 
-		if (_components.find(type) != _components.end()) {
+		if (m_components.find(type) != m_components.end()) {
 			throw std::logic_error("Component of this type already exists in GameObject");
 		}
 
@@ -64,18 +33,18 @@ public:
 		component->SetGameObject(*this);
 
 		
-		_components[type] = component;
+		m_components[type] = component;
 
 		return component;
 	}
-	//Returns a shared pointer to the component
+	
 	template<typename T>
 	std::shared_ptr<T> GetComponent()
 	{
 		auto type = std::type_index(typeid(T));
-		if (_components.find(type) != _components.end())
+		if (m_components.find(type) != m_components.end())
 		{
-			return std::static_pointer_cast<T>(_components[type]);
+			return std::static_pointer_cast<T>(m_components[type]);
 		}
 		else
 		{
@@ -83,7 +52,7 @@ public:
 		}
 
 	}
-	//Remove component type from this gameobject, Cannot remove Ctransform
+	
 	template<typename T>
 	void RemoveComponent()
 	{
@@ -93,15 +62,23 @@ public:
 		}
 
 		auto type = std::type_index(typeid(T));
-		_components.erase(type);
+		m_components.erase(type);
 	}
-
-
-
-
 	virtual void Init();
 	virtual void Update();
+private:
+	GameObject()
+	{
+		m_transform = AddComponent<Ctransform>();
+	}
+	~GameObject() = default;
+private:
+	std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
+	std::shared_ptr<Ctransform> m_transform;
 
+
+public:
+	std::string m_name;
 
 };
 

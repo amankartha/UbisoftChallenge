@@ -1,6 +1,6 @@
 #pragma once
 #include "Grid.h"
-class Vector2;
+struct Vector2;
 
 
 class Pathfinding

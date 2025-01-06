@@ -26,5 +26,5 @@ void Render()
 }
 void Shutdown()
 {	
-	GAME.InteralShutdown();
+	GAME.InternalShutdown();
 }

@@ -43,7 +43,4 @@ void Ccamera::Update()
 	{
 		m_camera->SetZoom(m_camera->GetZoom() - 0.05);
 	}
-
-	//m_camera->SetPosition(getAttachedGameObject()->GetTransform()->GetPosition());
-	m_camera->SetTransform(getAttachedGameObject()->GetTransformCopy());
 }

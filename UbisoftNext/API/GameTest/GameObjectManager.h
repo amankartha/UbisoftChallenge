@@ -1,6 +1,7 @@
 #pragma once
 #include <unordered_map>
 #include "GameObject.h"
+#include "DataStructure.h"
 
 class GameObjectManager
 {

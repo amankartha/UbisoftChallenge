@@ -75,7 +75,7 @@
       <Filter>Cameras&amp;Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Command.cpp">
-      <Filter>Commands</Filter>
+      <Filter>Input\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>AI</Filter>
@@ -83,7 +83,15 @@
     <ClCompile Include="Pathfinding.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -166,7 +174,7 @@
       <Filter>Cameras&amp;Rendering</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Commands</Filter>
+      <Filter>Input\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>AI</Filter>
@@ -174,7 +182,21 @@
     <ClInclude Include="Pathfinding.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructure.h">
+      <Filter>DataStructure</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -210,11 +232,17 @@
     <Filter Include="Cameras&amp;Rendering">
       <UniqueIdentifier>{e3ebe493-783f-4f96-b14b-d650d252ea85}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Commands">
-      <UniqueIdentifier>{2b71b6c0-6aff-4956-a50a-6d69b81d0f86}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AI">
       <UniqueIdentifier>{de125200-899f-4b67-b536-13e9a614cb2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{0c773365-e466-428b-8596-9506f3fbab05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input\Commands">
+      <UniqueIdentifier>{2b71b6c0-6aff-4956-a50a-6d69b81d0f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure">
+      <UniqueIdentifier>{026224c3-ecee-4a92-b14f-8248ab112150}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -63,6 +63,10 @@ struct Vector2
 		return  Vector2(x*s,y*s);
 	}
 
+	Vector2 operator/(float s) const
+	{
+		return  Vector2(x / s, y / s);
+	}
 
 	Vector2 operator+(Vector2 const& a) const
 	{
@@ -73,12 +77,9 @@ struct Vector2
 		return  Vector2(x - a.x, y - a.y);
 	}
 
-	
-
 
 	//Returns distance but sqrt is bad and slow so avoid if possible
 	static float Distance(Vector2 a, Vector2 b);
-
 
 	std::string Print()
 	{
@@ -86,6 +87,14 @@ struct Vector2
 	}
 
 };
+
+
+
+Vector2 operator*(float s,const Vector2& v) 
+{
+	return  Vector2(v.x * s, v.y * s);
+}
+
 
 //Custom hash needed so I can use Vector2s as a key
 
@@ -144,6 +153,8 @@ struct IntVector2 {
 		return IntVector2(x * s, y * s);
 	}
 
+
+
 	IntVector2 operator+(const IntVector2& a) const {
 		return IntVector2(x + a.x, y + a.y);
 	}
@@ -193,9 +204,22 @@ struct Transform
 	}
 };
 
+enum Shape
+{
+	AABB,
+	CIRCLE
+};
+
 struct Collider
 {
 	~Collider() {}
+
+	Shape GetShape()
+	{
+		return m_shape;
+	}
+protected:
+	Shape m_shape;
 };
 
 

@@ -3,8 +3,6 @@
 
 void Game::InternalInit()
 {
-	
-
 	auto camera = m_cameraManager.CreateCamera(0);
 }
 

@@ -8,7 +8,7 @@ class Camera
 
 public:
 	Camera( Vector2 position = Vector2(0, 0), float angle = 0.0) {
-		m_transform =Transform(position.x, position.y, angle);
+		m_transform = nullptr;
 		m_zoomFactor = 1;
 	}
 
@@ -18,25 +18,25 @@ public:
 	}
 	void SetPosition(Vector2 newPos)
 	{
-		m_transform.position = newPos;
+		m_transform->position = newPos;
 	}
 	Vector2 GetPosition() const
 	{
-		return m_transform.position;
+		return m_transform->position;
 	}
 	float GetAngle() const
 	{
-		return m_transform.angle;
+		return m_transform->angle;
 	}
-	Transform GetTransform() const
+	Transform& GetTransform() const
 	{
-		return m_transform;
+		return *m_transform;
 	}
 	float GetZoom() const
 	{
 		return m_zoomFactor;
 	}
-	void SetTransform(Transform transform)
+	void SetTransform(Transform* transform)
 	{
 		m_transform = transform;
 	}
@@ -47,7 +47,7 @@ public:
 
 	
 private:
-	Transform m_transform;
+	Transform* m_transform;
 
 	float m_zoomFactor;
 	

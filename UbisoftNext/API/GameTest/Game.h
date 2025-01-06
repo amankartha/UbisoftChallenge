@@ -14,15 +14,15 @@ protected:
 	Renderer m_renderer;
 	CameraManager m_cameraManager;
 	Scheduler* scheduler;
-	PHYSICS::PhysicsSimulation m_physicsSimulation;
+	physics::PhysicsSimulation m_physicsSimulation;
 public:
 	
-	~Game() {}
+	~Game() = default;
 
 	virtual void InternalInit();
 	virtual	void InternalUpdate(const float deltaTime) = 0;
 	virtual void InternalRender();
-	virtual void InteralShutdown() = 0;
+	virtual void InternalShutdown() = 0;
 
 protected:
 	

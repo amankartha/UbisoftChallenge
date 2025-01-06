@@ -63,4 +63,9 @@
 #define FRAND_RANGE(_MIN_, _MAX_ ) (FRAND * ((_MAX_)-(_MIN_)) + (_MIN_))
 #define PI		(3.14159265359f)
 
+
+
+
+#define MIN_BODY_SIZE (0.25f)
+
 #endif

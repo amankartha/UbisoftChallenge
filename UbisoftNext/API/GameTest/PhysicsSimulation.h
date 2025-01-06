@@ -1,13 +1,17 @@
 #pragma once
 #include <vector>
+#include <memory>
 
-class Crigidbody;
-namespace PHYSICS
+struct Pair;
+class RigidBody;
+
+namespace physics
 {
 	class PhysicsSimulation
 	{
 	private:
-		std::vector<Crigidbody* > m_bodies;
+		std::vector<std::unique_ptr<RigidBody>> m_bodies;
+		std::vector<Pair> m_pairs;
 		float m_gravity;
 
 	public:
@@ -16,10 +20,17 @@ namespace PHYSICS
 			m_bodies.reserve(150);
 		}
 
-		void AddBody(Crigidbody& m_bodies);
-		void RemoveBody(Crigidbody& m_bodies);
+		RigidBody* AddBody(RigidBody& m_bodies);
+		void RemoveBody(RigidBody& m_bodies);
 
+		
+		
 		void Update();
+
+	private:
+		void ResolveCollision(RigidBody* A,RigidBody* B);
+
+		void BroadPhasePairGeneration();
 	};
 
 };
