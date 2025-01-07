@@ -53,10 +53,10 @@ void TestGame::InternalInit()
 
 	//m_renderer.SetShake(true);
 
+	camera->AddComponent<Ccamera>(m_cameraManager,0);
+	camera->GetComponent<Ccamera>()->SetTransform(&camera->GetTransform());
 	
-	camera->AddComponent<Ccamera>(m_cameraManager);
-	
-
+	m_cameraManager.SetMainCamera(0);
 
 	mouse->AddComponent<CRenderer>(m_renderer);
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
@@ -202,6 +202,7 @@ void TestGame::InternalRender()
 {
 
 	Game::InternalRender();
+	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
 	//------------------------------------------------------------------------
 	// Example Sprite Code....
 	//testSprite->Draw();

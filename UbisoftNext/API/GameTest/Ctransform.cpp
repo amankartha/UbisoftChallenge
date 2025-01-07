@@ -3,7 +3,7 @@
 #include "GameObject.h"
 #include "App/app.h"
 
-int Ctransform::Count;
+
 
 void Ctransform::Update() 
 {

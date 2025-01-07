@@ -1,11 +1,10 @@
-#pragma once
 #include "stdafx.h"
 #include "CustomMath.h"
-#include "GameObject.h"
 
 
 
-#pragma region Vector2
+
+
 
 const Vector2 Vector2::UP(0, 1);
 const Vector2 Vector2::DOWN(0, -1);
@@ -25,6 +24,9 @@ float Vector2::Distance(Vector2 a, Vector2 b)
 }
 
 
-#pragma endregion
 
+Vector2 operator*(float s, const Vector2& v)
+{
+	return  Vector2(v.x * s, v.y * s);
+}
 

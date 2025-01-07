@@ -5,25 +5,24 @@ class GameObject;
 
 class Component
 {
-public:
-	bool enabled = true;
+	
 
 public:
-	Component() = default;
+	bool enabled = true;
+	GameObject* attachedGameObject;
+public:
+	Component()
+	{
+		attachedGameObject = 0;
+	};
 	virtual ~Component() = default;
-	
 	virtual void Init() {};
 	virtual void Update() {};
 
-	//get the gameobject that this component is attached to
+	
 	 GameObject* getAttachedGameObject() { return attachedGameObject; }
 
-	void SetGameObject(GameObject& go)
-	{
-		attachedGameObject = &go;
-	}
+	void SetGameObject(GameObject* go)  {   attachedGameObject = go;  }
 
-private:
-	GameObject* attachedGameObject;
 };
 

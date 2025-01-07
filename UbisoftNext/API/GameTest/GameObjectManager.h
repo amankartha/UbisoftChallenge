@@ -9,7 +9,7 @@ public:
 	GameObjectManager() {
 		m_gameObjectMap.reserve(500);
 	}
-	~GameObjectManager() {}
+	~GameObjectManager() = default;
 
 	GameObject& Create(const std::string& name);
 
@@ -23,26 +23,26 @@ public:
 	{
 		m_gameObjectMap.erase(go->m_name);
 	}
-	GameObject& Find(std::string name)
+	GameObject* Find(std::string name)
 	{
 		auto it = m_gameObjectMap.find(name);
 		if (it != m_gameObjectMap.end())
 		{
-			return it->second; 
+			return it->second.get(); 
 		}
 	}
 	void InitAll()
 	{
 		for (auto& it : m_gameObjectMap) {
 
-			it.second.Init();
+			it.second->Init();
 		}
 	}
 	void UpdateAll()
 	{
 		for (auto& it : m_gameObjectMap) {
 
-			it.second.Update();
+			it.second->Update();
 		}
 	}
 private:
@@ -50,6 +50,6 @@ private:
 
 private:
 
-	std::unordered_map<std::string, GameObject> m_gameObjectMap;
+	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_gameObjectMap;
 };
 

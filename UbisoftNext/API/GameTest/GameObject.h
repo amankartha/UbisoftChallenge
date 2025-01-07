@@ -11,12 +11,16 @@
 class GameObject
 {
 public:
-	std::shared_ptr<Ctransform> GetTransform()
+	Transform& GetTransform() 
 	{
-		return m_transform;
+		return this->GetComponent<Ctransform>()->GetTransform();
+	}
+	Ctransform& GetTransformComponent() 
+	{
+		return *this->GetComponent<Ctransform>();
 	}
 	template <typename T, typename... Args>
-	std::shared_ptr<T> AddComponent(Args&&... args)
+	T* AddComponent(Args&&... args)
 	{
 		static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
 
@@ -26,30 +30,23 @@ public:
 			throw std::logic_error("Component of this type already exists in GameObject");
 		}
 
-		
-		auto component = std::make_shared<T>(std::forward<Args>(args)...);
+		auto component = std::make_unique<T>(std::forward<Args>(args)...);
 
-		
-		component->SetGameObject(*this);
+		m_components[type] = std::move(component);
+		m_components[type]->SetGameObject(this);
 
-		
-		m_components[type] = component;
-
-		return component;
+		return  dynamic_cast<T*>(m_components[type].get());
 	}
 	
 	template<typename T>
-	std::shared_ptr<T> GetComponent()
+	T* GetComponent()
 	{
 		auto type = std::type_index(typeid(T));
-		if (m_components.find(type) != m_components.end())
-		{
-			return std::static_pointer_cast<T>(m_components[type]);
+		auto it = m_components.find(type);
+		if (it != m_components.end()) {
+			return dynamic_cast<T*>(it->second.get());
 		}
-		else
-		{
-			return nullptr;
-		}
+		return nullptr;
 
 	}
 	
@@ -66,15 +63,15 @@ public:
 	}
 	virtual void Init();
 	virtual void Update();
-private:
+
 	GameObject()
 	{
-		m_transform = AddComponent<Ctransform>();
+		
 	}
 	~GameObject() = default;
 private:
-	std::unordered_map<std::type_index, std::shared_ptr<Component>> m_components;
-	std::shared_ptr<Ctransform> m_transform;
+	std::unordered_map<std::type_index, std::unique_ptr<Component>> m_components;
+	
 
 
 public:

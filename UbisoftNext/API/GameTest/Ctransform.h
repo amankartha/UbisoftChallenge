@@ -14,27 +14,23 @@ private:
     Transform m_transform;
     Transform m_transform_local;
 public:
-    static int Count;
-    int id;
+
+
   
     
 
     Ctransform() : Component() 
     {
-        id = Count++;
+       
     }
 
     Ctransform(float x,float y) : Component()
     {
-        id = Count++;
+     
         m_transform.position = Vector2(x, y);
         m_transform.angle = 0.0f;
     }
-    ~Ctransform() override
-    {
-        --Count;
-    }
-
+    
     void SetPosition(Vector2 vec)
     {
         m_transform.position = vec;
@@ -68,7 +64,7 @@ public:
         m_transform.angle += a;
     }
 
-    Transform GetTransformCopy()
+    Transform& GetTransform() 
     {
         return m_transform;
     }

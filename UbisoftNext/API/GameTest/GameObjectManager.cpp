@@ -4,12 +4,12 @@
 GameObject& GameObjectManager::Create(const std::string& name)
 {
 	std::string uniqueName = generateUniqueName(name);
-	auto& createdGO = m_gameObjectMap[uniqueName];
-	createdGO.m_name = uniqueName;
-	m_gameObjectMap[uniqueName] = createdGO;
-	
+	auto createdGO = std::make_unique<GameObject>();
+	m_gameObjectMap[uniqueName] = std::move(createdGO);
+	m_gameObjectMap[uniqueName]->m_name = uniqueName;
+	m_gameObjectMap[uniqueName]->AddComponent<Ctransform>();
 
-	return createdGO;
+	return *m_gameObjectMap[uniqueName].get();
    
 }
 

@@ -27,7 +27,6 @@ public:
     {
         mainRenderer.RemoveRendererComponent(*this);
     }
-
     CSimpleSprite* GetSprite()
     {
         return sprite;

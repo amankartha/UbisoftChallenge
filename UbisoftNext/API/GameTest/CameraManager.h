@@ -19,11 +19,11 @@ public:
 		auto camera = std::make_unique<Camera>();
 		Camera& ref = *camera;
 		m_cameras[id] = std::move(camera);
-
 		if (!m_mainCamera)
 		{
 			m_mainCamera = &ref;
 		}
+       
 		return *m_cameras[id];
 	}
     
