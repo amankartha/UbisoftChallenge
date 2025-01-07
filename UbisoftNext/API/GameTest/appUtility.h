@@ -10,9 +10,15 @@ namespace App
 
 	Vector2 GetMousePosVec2();
 	
-	Vector2 WorldToScreen(Camera& camera, Vector2 worldPos);
+	Vector2 WorldToScreen(const Camera& camera, Vector2 worldPos);
 
-	Vector2 ScreenToWorld(Camera& camera, Vector2 screenPos);
+	Vector2 ScreenToWorld(const Camera& camera, Vector2 screenPos);
+
+	template<typename T>
+	inline void remove(std::vector<T>& v, const T& item)
+	{
+		v.erase(std::remove(v.begin(), v.end(), item), v.end());
+	}
 
 };
 

@@ -21,11 +21,11 @@ public:
         m_isShake = false;
         sprite = nullptr;
         m_renderLayer = RenderLayer::Default;
-        mainRenderer.AddRendererComponent(*this);
+        mainRenderer.AddRenderer(*this);
     }
     ~CRenderer() override
     {
-        mainRenderer.RemoveRendererComponent(*this);
+        mainRenderer.RemoveRenderer(*this);
     }
     CSimpleSprite* GetSprite()
     {
@@ -38,9 +38,9 @@ public:
     }
     void SetRenderLayer(RenderLayer layer)
     {
-        mainRenderer.RemoveRendererComponent(*this);
+        mainRenderer.RemoveRenderer(*this);
         m_renderLayer = layer;
-        mainRenderer.AddRendererComponent(*this);
+        mainRenderer.AddRenderer(*this);
     }
 
 

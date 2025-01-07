@@ -72,6 +72,16 @@ struct Vector2
 	{
 		return  Vector2(x + a.x, y + a.y);
 	}
+	Vector2& operator+=(const Vector2& other) {
+		x += other.x;
+		y += other.y;
+		return *this;
+	}
+	Vector2& operator-=(const Vector2& other) {
+		x -= other.x;
+		y -= other.y;
+		return *this;
+	}
 	Vector2 operator-(Vector2 const& a) const
 	{
 		return  Vector2(x - a.x, y - a.y);
@@ -197,6 +207,53 @@ struct Transform
 		position.y = y;
 		angle = a;
 		scale = 1.0f;
+	}
+
+	bool operator==(const Transform& other) const {
+		return position == other.position &&
+			std::abs(angle - other.angle) < 1e-6 &&     //cus they floats
+			std::abs(scale - other.scale) < 1e-6;
+	}
+
+
+	bool operator!=(const Transform& other) const {
+		return !(*this == other);
+	}
+
+
+	Transform operator+(const Transform& other) const {
+		return Transform(
+			position.x + other.position.x,
+			position.y + other.position.y,
+			angle + other.angle,
+			scale * other.scale
+		);
+	}
+
+	
+	Transform operator-(const Transform& other) const {
+		return Transform(
+			position.x - other.position.x,
+			position.y - other.position.y,
+			angle - other.angle,
+			scale / other.scale
+		);
+	}
+
+
+	Transform& operator+=(const Transform& other) {
+		position += other.position;
+		angle += other.angle;
+		scale *= other.scale;
+		return *this;
+	}
+
+	
+	Transform& operator-=(const Transform& other) {
+		position -= other.position;
+		angle -= other.angle;
+		scale /= other.scale;
+		return *this;
 	}
 };
 

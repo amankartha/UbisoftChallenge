@@ -4,15 +4,10 @@
 class Ccursor :
     public Component
 {
-private:
+
     
 public:
-    Ccursor() : Component()
-    {
-       
-    }
-  
-       
+    
     void Init() override;
     void Update() override;
 };

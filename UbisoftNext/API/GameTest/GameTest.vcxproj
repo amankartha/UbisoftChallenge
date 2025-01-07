@@ -205,6 +205,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
@@ -255,6 +256,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

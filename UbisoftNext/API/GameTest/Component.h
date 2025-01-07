@@ -20,7 +20,7 @@ public:
 	virtual void Update() {};
 
 	
-	 GameObject* getAttachedGameObject() { return attachedGameObject; }
+	GameObject* getAttachedGameObject() { return attachedGameObject; }
 
 	void SetGameObject(GameObject* go)  {   attachedGameObject = go;  }
 

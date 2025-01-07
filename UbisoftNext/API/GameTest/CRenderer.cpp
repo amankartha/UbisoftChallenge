@@ -10,7 +10,7 @@ void CRenderer::Update()
 	{
 		Ctransform* transform = &getAttachedGameObject()->GetTransformComponent();
 		
-		sprite->SetPosition(transform->GetPosition().x , transform->GetPosition().y );   //TODO: does this need to be called every time hmmmmmmmmmmm
+		sprite->SetPosition(transform->GetWorldPosition().x , transform->GetWorldPosition().y );   //TODO: does this need to be called every time hmmmmmmmmmmm
 		sprite->SetScale(transform->GetScale());
 	}
 }
@@ -36,7 +36,7 @@ void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom)
 	float sinAngle = sin(-angleRadians);
 
 
-	Vector2 currentPosition =  getAttachedGameObject()->GetTransformComponent().GetPosition();
+	Vector2 currentPosition =  getAttachedGameObject()->GetTransformComponent().GetWorldPosition();
 	
 	Vector2 relativePosition = currentPosition - offset ;
 
