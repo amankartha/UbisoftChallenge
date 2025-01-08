@@ -87,6 +87,14 @@ void TestGame::InternalRender()
 
 	Game::InternalRender();
 	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
+
+	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+	for (int i = 0; i < 15000; ++i)
+	{
+		testSprite->SetPositionWithOffset(20, 20);
+		testSprite->Draw();
+	}
+	
 	App::Print(200, 500, CenterObject->m_parent->m_name.c_str());
 	App::Print(200, 200, CenterObject->GetTransformComponent().GetWorldPosition().Print().c_str());
 	App::Print(100,100,App::ScreenToWorld(m_cameraManager.GetMainCamera(), App::GetMousePosVec2()).Print().c_str());

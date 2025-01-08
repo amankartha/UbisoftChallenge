@@ -66,6 +66,7 @@ void Ctransform::OffsetRotation(float a)
 void Ctransform::Update()
 {
 	Component::Update();
+   
 }
 
 Transform Ctransform::CombineTransform()
