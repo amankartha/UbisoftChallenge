@@ -9,6 +9,28 @@ void Ctransform::SetPosition(Vector2 vec)
     MarkAllChildrenDirty();
 }
 
+void Ctransform::ResetLocalPosition()
+{
+    m_transform_local.ResetTransform();
+}
+
+void Ctransform::RecalculateWithNewParent(GameObject* parent)
+{
+    Ctransform& parentTransform = parent->GetTransformComponent();
+    
+
+    Vector2 parentWorldPos = parentTransform.GetWorldPosition();
+    Vector2 childWorldPos = GetWorldPosition();
+
+    SetPosition(childWorldPos - parentWorldPos);
+    SetAngle(GetAngle() - parentTransform.GetAngle());
+    SetScale(GetScale() / parentTransform.GetScale());
+
+
+    CombineTransform();
+    MarkAllChildrenDirty();
+}
+
 void Ctransform::OffsetPosition(Vector2 vec)
 {
     m_transform_local.position += vec;

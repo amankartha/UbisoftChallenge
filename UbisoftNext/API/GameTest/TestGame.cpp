@@ -65,7 +65,7 @@ void TestGame::InternalInit()
 
 
 
-	player->GetTransformComponent().OffsetPosition(Vector2(1, 1));
+	player->GetTransformComponent().OffsetPosition(Vector2(-APP_VIRTUAL_WIDTH/2, -APP_VIRTUAL_HEIGHT/2));
 	CenterObject->GetTransformComponent().OffsetPosition(Vector2(100, 100));
 
 	mouse->SetChild(player);
@@ -76,8 +76,18 @@ void TestGame::InternalInit()
 void TestGame::InternalUpdate(const float deltaTime)
 {
 	scheduler->Update();
-	mouse->GetComponent<Ctransform>()->SetPosition(App::ScreenToWorld(m_cameraManager.GetMainCamera(),App::GetMousePosVec2()));
+	mouse->GetComponent<Ctransform>()->SetPosition(m_cameraManager.GetMainCamera().GetPosition() + App::GetMousePosVec2());
 
+
+	if (App::IsKeyPressed('M'))
+	{
+		CenterObject->RemoveParent();
+	}
+
+	if (App::IsKeyPressed('N'))
+	{
+		CenterObject->SetParent(player);
+	}
 
 	m_gameObjectManager.UpdateAll();
 }
@@ -88,16 +98,11 @@ void TestGame::InternalRender()
 	Game::InternalRender();
 	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
 
-	testSprite = App::CreateSprite(".\\TestData\\Test.bmp", 8, 4);
-	for (int i = 0; i < 15000; ++i)
-	{
-		testSprite->SetPositionWithOffset(20, 20);
-		testSprite->Draw();
-	}
+
 	
-	App::Print(200, 500, CenterObject->m_parent->m_name.c_str());
+	//App::Print(200, 500, CenterObject->m_parent->m_name.c_str());
 	App::Print(200, 200, CenterObject->GetTransformComponent().GetWorldPosition().Print().c_str());
-	App::Print(100,100,App::ScreenToWorld(m_cameraManager.GetMainCamera(), App::GetMousePosVec2()).Print().c_str());
+	//App::Print(100,100,App::ScreenToWorld(m_cameraManager.GetMainCamera(), App::GetMousePosVec2()).Print().c_str());
 }
 
 void TestGame::InternalShutdown()

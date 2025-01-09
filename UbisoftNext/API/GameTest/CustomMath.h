@@ -209,6 +209,14 @@ struct Transform
 		scale = 1.0f;
 	}
 
+	void ResetTransform()
+	{
+		position.x = 0;
+		position.y = 0;
+		angle = 0;
+		scale = 1.0f;
+	}
+
 	bool operator==(const Transform& other) const {
 		return position == other.position &&
 			std::abs(angle - other.angle) < 1e-6 &&     //cus they floats

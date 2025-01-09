@@ -17,7 +17,9 @@ public:
 
 	void RemoveChild(GameObject* childObject);
 
+	void RemoveParent();
 
+	void SetParent(GameObject* parenteObject);
 
 	Ctransform& GetTransformComponent();
 

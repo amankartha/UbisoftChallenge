@@ -47,11 +47,26 @@ void GameObject::RemoveChild(GameObject* childObject)
 	App::remove(m_children, childObject);
 }
 
+void GameObject::RemoveParent()
+{
+	GetTransformComponent().SetPosition(GetTransformComponent().GetWorldPosition());
+	m_parent = nullptr;
+}
+
+void GameObject::SetParent(GameObject* parenteObject)
+{
+ 
+	GetTransformComponent().RecalculateWithNewParent(parenteObject);
+	m_parent = parenteObject;
+	parenteObject->SetChild(this);
+}
 
 
 Ctransform& GameObject::GetTransformComponent()
 {
-	return *this->GetComponent<Ctransform>();
+	//return *this->GetComponent<Ctransform>();
+	auto* transform = dynamic_cast<Ctransform*>(m_components[std::type_index(typeid(Ctransform))].get());
+	return *transform;
 }
 
 void GameObject::Init()

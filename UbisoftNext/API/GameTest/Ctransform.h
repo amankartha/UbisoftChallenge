@@ -24,6 +24,10 @@ public:
 
     void SetPosition(Vector2 vec);
 
+    void ResetLocalPosition();
+
+    void RecalculateWithNewParent(GameObject* parent);
+
     Vector2 GetWorldPosition() ;
 
     float GetAngle();
