@@ -32,7 +32,7 @@ public:
 	
 	Renderer()
 	{
-		RENDERMAP[RenderLayer::Default].reserve(1000);
+		m_rendermap_[RenderLayer::Default].reserve(1000);
 		m_shakeValue = Vector2(0, 0);
 		m_isShake = false;
 	}
@@ -43,9 +43,9 @@ public:
 	
 	void RenderAll(Camera& currentCamera);
 
-	void AddRendererComponent(CRenderer& renderer);
+	void AddRenderer(IRenderable& renderer);
 
-	void RemoveRendererComponent(CRenderer& renderer);
+	void RemoveRenderer(IRenderable& renderer);
 
 	void SetShake(bool b);
 
@@ -57,6 +57,6 @@ public:
 	Vector2 m_shakeValue;
 	bool m_isShake;
 private:
-	std::map<RenderLayer, std::vector<IRenderable*>> RENDERMAP;
+	std::map<RenderLayer, std::vector<IRenderable*>> m_rendermap_;
 };
 

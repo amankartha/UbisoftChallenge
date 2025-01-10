@@ -92,6 +92,15 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Physics</Filter>
     </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="PushDownAutomata.cpp">
+      <Filter>AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CPDAcontroller.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -197,6 +206,16 @@
     <ClInclude Include="DataStructure.h">
       <Filter>DataStructure</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="State.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="PushDownAutomata.h">
+      <Filter>AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CPDAcontroller.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -249,5 +268,8 @@
     <Text Include="ReadMe.txt">
       <Filter>API</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
 </Project>

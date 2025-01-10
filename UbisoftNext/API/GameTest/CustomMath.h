@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <iostream>>
+#include <iostream>
 #include <math.h>
 #include <algorithm>
 #include <unordered_map>
@@ -72,6 +72,16 @@ struct Vector2
 	{
 		return  Vector2(x + a.x, y + a.y);
 	}
+	Vector2& operator+=(const Vector2& other) {
+		x += other.x;
+		y += other.y;
+		return *this;
+	}
+	Vector2& operator-=(const Vector2& other) {
+		x -= other.x;
+		y -= other.y;
+		return *this;
+	}
 	Vector2 operator-(Vector2 const& a) const
 	{
 		return  Vector2(x - a.x, y - a.y);
@@ -90,10 +100,6 @@ struct Vector2
 
 
 
-Vector2 operator*(float s,const Vector2& v) 
-{
-	return  Vector2(v.x * s, v.y * s);
-}
 
 
 //Custom hash needed so I can use Vector2s as a key
@@ -101,7 +107,7 @@ Vector2 operator*(float s,const Vector2& v)
 template <>
 struct std::hash<Vector2> {
 	size_t operator()(const Vector2& v) const {
-		return hash<int>()(v.x) ^ (hash<int>()(v.y) << 1);
+		return hash<int>()(static_cast<int>(v.x)) ^ (hash<int>()(static_cast<int>(v.y)) << 1);
 	}
 };
 
@@ -202,91 +208,64 @@ struct Transform
 		angle = a;
 		scale = 1.0f;
 	}
-};
 
-enum Shape
-{
-	AABB,
-	CIRCLE
-};
-
-struct Collider
-{
-	~Collider() {}
-
-	Shape GetShape()
+	void ResetTransform()
 	{
-		return m_shape;
-	}
-protected:
-	Shape m_shape;
-};
-
-
-
-//Real time collision Dection page 79
-#pragma region AABB 
-
-struct AABB : Collider
-{
-private:
-	Vector2 m_min;
-	Vector2 m_max;
-	std::weak_ptr<Ctransform> m_transform;
-public:
-
-	AABB(GameObject& go, Vector2 min, Vector2 max);
-
-	
-
-
-
-	const Vector2 GetMin() const;
-
-	const Vector2 GetMax() const;
-	  
-	//Checks to see if there is an intersection between boxes
-	static bool CheckAABBCollision(AABB a, AABB b);
-
-
-};
-#pragma endregion
-
-#pragma region Circle
-
-struct Circle : Collider
-{
-	Vector2 m_position;
-	std::weak_ptr<Ctransform> m_transform;
-public:
-
-	float m_radius;
-	Circle(GameObject& go, float radius, Vector2 position);
-
-
-	const Vector2 GetPosition() const;
-
-	
-	bool CheckCircleCollision(Circle a, Circle b)
-
-	{
-
-		float r = a.m_radius + b.m_radius;
-
-		r *= r;
-
-		return r < (std::pow((a.GetPosition().x + b.GetPosition().x),2)  + std::pow((a.GetPosition().y + b.GetPosition().y) ,2));
+		position.x = 0;
+		position.y = 0;
+		angle = 0;
+		scale = 1.0f;
 	}
 
+	bool operator==(const Transform& other) const {
+		return position == other.position &&
+			std::abs(angle - other.angle) < 1e-6 &&     //cus they floats
+			std::abs(scale - other.scale) < 1e-6;
+	}
+
+
+	bool operator!=(const Transform& other) const {
+		return !(*this == other);
+	}
+
+
+	Transform operator+(const Transform& other) const {
+		return Transform(
+			position.x + other.position.x,
+			position.y + other.position.y,
+			angle + other.angle,
+			scale * other.scale
+		);
+	}
+
+	
+	Transform operator-(const Transform& other) const {
+		return Transform(
+			position.x - other.position.x,
+			position.y - other.position.y,
+			angle - other.angle,
+			scale / other.scale
+		);
+	}
+
+
+	Transform& operator+=(const Transform& other) {
+		position += other.position;
+		angle += other.angle;
+		scale *= other.scale;
+		return *this;
+	}
+
+	
+	Transform& operator-=(const Transform& other) {
+		position -= other.position;
+		angle -= other.angle;
+		scale /= other.scale;
+		return *this;
+	}
 };
 
 
-#pragma endregion
 
-
-//float LinearTween(float t,float b,float c,float d)
-//{
-//	return c * t / d + b;
-//}
 
 

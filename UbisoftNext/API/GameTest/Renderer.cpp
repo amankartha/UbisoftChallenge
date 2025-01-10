@@ -11,12 +11,12 @@
 
     void Renderer::RenderAll(Camera& currentCamera)
     {
-        App::Print(1000, 300, std::to_string(RENDERMAP[RenderLayer::Default].size()).c_str());
+        App::Print(1000, 300, std::to_string(m_rendermap_[RenderLayer::Default].size()).c_str());
         if (m_isShake)
         {
             m_shakeValue.x = FRAND_RANGE(-4, 4);
             m_shakeValue.y = FRAND_RANGE(-4, 4);
-            for (const auto& [m_renderLayer, renderers] : RENDERMAP)
+            for (const auto& [m_renderLayer, renderers] : m_rendermap_)
             {
              
                 if (m_renderLayer == RenderLayer::UI)
@@ -39,7 +39,7 @@
         }
         else
         {
-            for (const auto& [m_renderLayer, renderers] : RENDERMAP)
+            for (const auto& [m_renderLayer, renderers] : m_rendermap_)
             {
                 if (m_renderLayer == RenderLayer::UI)
                 {
@@ -61,14 +61,14 @@
         }
     }
 
-    void Renderer::AddRendererComponent(CRenderer& renderer)
+    void Renderer::AddRenderer(IRenderable& renderer)
     {
-        RENDERMAP[renderer.GetRenderLayer()].push_back(&renderer);
+        m_rendermap_[renderer.GetRenderLayer()].push_back(&renderer);
     }
 
-    void Renderer::RemoveRendererComponent(CRenderer& renderer)
+    void Renderer::RemoveRenderer(IRenderable& renderer)
     {
-        auto& renderVector = RENDERMAP[renderer.GetRenderLayer()];
+        auto& renderVector = m_rendermap_[renderer.GetRenderLayer()];
 
 
         renderVector.erase(

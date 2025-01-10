@@ -36,9 +36,9 @@ public:
 	{
 		return m_zoomFactor;
 	}
-	void SetTransform(Transform* transform)
+	void SetTransform(Transform& transform)
 	{
-		m_transform = transform;
+		m_transform = &transform;
 	}
 	void SetZoom(float zoom)
 	{

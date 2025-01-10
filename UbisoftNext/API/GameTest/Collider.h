@@ -1,25 +1,16 @@
 #pragma once
 #include "stdafx.h"
-#include "CustomMath.h"
 
 namespace physics
 {
 
 	enum class Shape
 	{
-		AABB = 0,
+		BOX = 0,
 		CIRCLE = 1
 	};
 
-	struct Collider
-	{
-	
-	};
-
-
-
-	//Real time collision Dection page 79
-
+	struct Collider{};
 
 	struct AABB : Collider
 	{
@@ -30,21 +21,12 @@ namespace physics
 		float m_width;
 	};
 
-
-
-
 	struct Circle : Collider
 	{
-		
 	public:
 		Circle(float radius) : m_radius(radius) {}
 	public:
 		float m_radius;
 	};
-
-
-
-
-
 
 };

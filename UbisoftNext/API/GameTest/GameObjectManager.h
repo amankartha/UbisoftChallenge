@@ -7,59 +7,49 @@ class GameObjectManager
 {
 public:
 	GameObjectManager() {
-		m_gameObjects.Init(2000);
+		m_gameObjectMap.reserve(500);
 	}
-	~GameObjectManager()
-	{
-		m_gameObjects.Dispose();
-	}
+	~GameObjectManager() = default;
 
 	GameObject& Create(const std::string& name);
 
 
-	/*void Destroy(const std::string& name)
+	void Destroy(const std::string& name)
 	{
-		m_gameObjects.Free(name);
-	}*/
-
-	void Destroy(GameObject& go)
-	{
-		m_gameObjects.Free(go);
+		m_gameObjectMap.erase(name);
 	}
-	GameObject* Find(int ID)
-	{
-		return m_gameObjects.TryToGet(ID);
-	}
-	//GameObject& Find(std::string name)
-	//{
-	//	auto it = m_gameObjects.find(name);
-	//	if (it != m_gameObjects.end())
-	//	{
-	//		return it->second;
-	//	}
-	//}
 
+	void Destroy(std::shared_ptr<GameObject> go)
+	{
+		m_gameObjectMap.erase(go->m_name);
+	}
+	GameObject* Find(std::string name)
+	{
+		auto it = m_gameObjectMap.find(name);
+		if (it != m_gameObjectMap.end())
+		{
+			return it->second.get(); 
+		}
+	}
 	void InitAll()
 	{
-		GameObject* GO;
-		while (m_gameObjects.Next(GO)) {
+		for (auto& it : m_gameObjectMap) {
 
-			GO->Init();
+			it.second->Init();
 		}
 	}
 	void UpdateAll()
 	{
-		GameObject* GO;
-		while (m_gameObjects.Next(GO)) {
+		for (auto& it : m_gameObjectMap) {
 
-			GO->Update();
+			it.second->Update();
 		}
 	}
 private:
 	std::string generateUniqueName(const std::string& name);
 
 private:
+	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_gameObjectMap;
 
-	DataArray<GameObject> m_gameObjects;  //Storage of all Gameobjects
 };
 

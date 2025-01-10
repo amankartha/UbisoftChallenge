@@ -195,6 +195,7 @@
     <ClInclude Include="Ccursor.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CPDAcontroller.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
     <ClInclude Include="Ctransform.h" />
@@ -205,7 +206,10 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="PushDownAutomata.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
     <ClInclude Include="ObserverPattern.h" />
@@ -232,6 +236,7 @@
     <ClInclude Include="Collision.h" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CPDAcontroller.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
     <ClCompile Include="Ctransform.cpp" />
@@ -241,12 +246,14 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="PushDownAutomata.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
     <ClCompile Include="ObserverPattern.cpp" />
     <ClCompile Include="PhysicsSimulation.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="stb_image\stb_image.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -255,6 +262,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TestGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
