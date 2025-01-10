@@ -9,6 +9,8 @@
 
 #include "appUtility.h"
 
+using CallBack = std::function<void()>;
+
 class GameObject
 {
 public:
@@ -76,7 +78,7 @@ public:
 
 private:
 	std::unordered_map<std::type_index, std::unique_ptr<Component>> m_components;
-
+	
 public:
 	std::string m_name;
 	GameObject* m_parent;

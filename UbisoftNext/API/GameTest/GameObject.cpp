@@ -44,7 +44,7 @@ void GameObject::SetChild(GameObject* childObject)
 
 void GameObject::RemoveChild(GameObject* childObject)
 {
-	App::remove(m_children, childObject);
+	App::RemoveFromVector(m_children, childObject);
 }
 
 void GameObject::RemoveParent()
@@ -55,7 +55,6 @@ void GameObject::RemoveParent()
 
 void GameObject::SetParent(GameObject* parenteObject)
 {
- 
 	GetTransformComponent().RecalculateWithNewParent(parenteObject);
 	m_parent = parenteObject;
 	parenteObject->SetChild(this);

@@ -15,9 +15,10 @@ namespace App
 	Vector2 ScreenToWorld(const Camera& camera, Vector2 screenPos);
 
 	template<typename T>
-	inline void remove(std::vector<T>& v, const T& item)
+	inline void RemoveFromVector(std::vector<T>& v, const T& item)
 	{
-		v.erase(std::remove(v.begin(), v.end(), item), v.end());
+		auto new_end = std::remove(v.begin(), v.end(), item);
+		v.erase(new_end, v.end());
 	}
 
 };
