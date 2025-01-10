@@ -49,7 +49,7 @@ private:
 	std::string generateUniqueName(const std::string& name);
 
 private:
-
 	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_gameObjectMap;
+
 };
 
