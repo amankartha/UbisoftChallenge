@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "RigidBody.h"
-
+#include "Collider.h"
 namespace physics
 {
 	std::shared_ptr<RigidBody> RigidBody::CreateCircleRigidBody(bool is_static, float radius, float density, Material material)

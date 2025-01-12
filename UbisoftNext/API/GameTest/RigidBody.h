@@ -1,7 +1,6 @@
 #pragma once
 #include "appUtility.h"
 #include "Collider.h"
-
 namespace physics
 {
 	struct MassData
@@ -26,8 +25,6 @@ namespace physics
 	{
 	public:
 
-#pragma region Getters and Setters
-
 		Vector2 GetPosition() const
 		{
 			return m_transform->position;
@@ -49,9 +46,6 @@ namespace physics
 		{
 			return m_massData;
 		}
-
-#pragma endregion
-
 
 		static std::shared_ptr<RigidBody> CreateCircleRigidBody(bool is_static, float radius, float density, Material material);
 		static std::shared_ptr<RigidBody> CreateAABBRigidBody(bool is_static, float length, float width, float density, Material material);

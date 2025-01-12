@@ -72,7 +72,11 @@ public:
 	virtual void Init();
 	virtual void Update();
 
-	GameObject() = default;
+	GameObject() : m_components()
+	{
+		m_isEnabled = false;
+		m_parent = nullptr;
+	};
 
 	~GameObject() = default;
 
@@ -80,6 +84,7 @@ private:
 	std::unordered_map<std::type_index, std::unique_ptr<Component>> m_components;
 	
 public:
+	bool m_isEnabled;
 	std::string m_name;
 	GameObject* m_parent;
 	std::vector<GameObject*> m_children;

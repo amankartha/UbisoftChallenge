@@ -84,6 +84,14 @@ void TestGame::InternalUpdate(const float deltaTime)
 		CenterObject->RemoveParent();
 	}
 
+	if (App::IsKeyPressed('C'))
+	{
+		for (int i = 0; i < 100; ++i)
+		{
+			m_gameObjectManager.Create("");
+		}
+	}
+
 	if (App::IsKeyPressed('N'))
 	{
 		CenterObject->SetParent(player);
@@ -98,7 +106,8 @@ void TestGame::InternalRender()
 	Game::InternalRender();
 	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
 
-
+	App::Print(100, 500,std::to_string(m_gameObjectManager.GetNumberOfGameObjects()).c_str());
+	
 	
 	//App::Print(200, 500, CenterObject->m_parent->m_name.c_str());
 	App::Print(200, 200, CenterObject->GetTransformComponent().GetWorldPosition().Print().c_str());

@@ -1,55 +1,37 @@
 #pragma once
 #include <unordered_map>
-#include "GameObject.h"
-#include "DataStructure.h"
+#include <memory>
+#include <string>
 
-class GameObjectManager
+#include "IIDSystem.h"
+class GameObject;
+
+class GameObjectManager : public IIDSystem
 {
 public:
-	GameObjectManager() {
-		m_gameObjectMap.reserve(500);
-	}
-	~GameObjectManager() = default;
+	GameObjectManager();
+	~GameObjectManager();
 
 	GameObject& Create(const std::string& name);
 
 
-	void Destroy(const std::string& name)
-	{
-		m_gameObjectMap.erase(name);
-	}
+	void Destroy(int ID);
 
-	void Destroy(std::shared_ptr<GameObject> go)
-	{
-		m_gameObjectMap.erase(go->m_name);
-	}
-	GameObject* Find(std::string name)
-	{
-		auto it = m_gameObjectMap.find(name);
-		if (it != m_gameObjectMap.end())
-		{
-			return it->second.get(); 
-		}
-	}
-	void InitAll()
-	{
-		for (auto& it : m_gameObjectMap) {
+	//void Destroy(std::shared_ptr<GameObject> go);
 
-			it.second->Init();
-		}
-	}
-	void UpdateAll()
-	{
-		for (auto& it : m_gameObjectMap) {
+	GameObject* Find(int ID);
 
-			it.second->Update();
-		}
-	}
+	void InitAll();
+
+	void UpdateAll();
+
+	int GetNumberOfGameObjects() const;
+
 private:
 	std::string generateUniqueName(const std::string& name);
 
 private:
-	std::unordered_map<std::string, std::unique_ptr<GameObject>> m_gameObjectMap;
+	std::unordered_map<int, std::unique_ptr<GameObject>> m_gameObjectMap;
 
 };
 

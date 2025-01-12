@@ -205,10 +205,13 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Grid.h" />
+    <ClInclude Include="IIDSystem.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PushDownAutomata.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
@@ -245,6 +248,8 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="IIDSystem.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PushDownAutomata.cpp" />
     <ClCompile Include="RigidBody.cpp" />

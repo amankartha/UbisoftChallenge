@@ -101,6 +101,8 @@
     <ClCompile Include="CPDAcontroller.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="IIDSystem.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -215,6 +217,11 @@
     </ClInclude>
     <ClInclude Include="CPDAcontroller.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="IIDSystem.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="RingBuffer.h">
+      <Filter>DataStructure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
