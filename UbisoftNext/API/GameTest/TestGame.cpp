@@ -34,6 +34,7 @@ void TestGame::InternalInit()
 	m_gridSystem.SetObstacle(Vector2(-1, 1));*/
 
 
+
 	OutputDebugStringW(L"My output string.");
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
@@ -41,7 +42,7 @@ void TestGame::InternalInit()
 	player = &m_gameObjectManager.Create("Player");
 	camera = &m_gameObjectManager.Create("Camera");
 	CenterObject = &m_gameObjectManager.Create("Center");
-	scheduler = new Scheduler();
+	m_scheduler = new Scheduler();
 
 	//m_renderer.SetShake(true);
 
@@ -75,16 +76,21 @@ void TestGame::InternalInit()
 
 void TestGame::InternalUpdate(const float deltaTime)
 {
-	scheduler->Update();
+	Game::InternalUpdate(deltaTime);
+
+
+	m_input_handler.SetKeysToTrack(std::vector<int>{'A','B','C'});
+
+
 	mouse->GetComponent<Ctransform>()->SetPosition(m_cameraManager.GetMainCamera().GetPosition() + App::GetMousePosVec2());
 
 
-	if (App::IsKeyPressed('M'))
+	if (m_input_handler.IsKeyPressed('A'))
 	{
 		CenterObject->RemoveParent();
 	}
 
-	if (App::IsKeyPressed('C'))
+	if (m_input_handler.IsKeyPressed('B'))
 	{
 		for (int i = 0; i < 100; ++i)
 		{
@@ -106,9 +112,12 @@ void TestGame::InternalRender()
 	Game::InternalRender();
 	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
 
+	App::Print(100, 700,m_input_handler.GetCurrentString().c_str());
+	App::Print(100, 600,m_input_handler.GetBufferString().c_str());
 	App::Print(100, 500,std::to_string(m_gameObjectManager.GetNumberOfGameObjects()).c_str());
 	
-	
+
+
 	//App::Print(200, 500, CenterObject->m_parent->m_name.c_str());
 	App::Print(200, 200, CenterObject->GetTransformComponent().GetWorldPosition().Print().c_str());
 	//App::Print(100,100,App::ScreenToWorld(m_cameraManager.GetMainCamera(), App::GetMousePosVec2()).Print().c_str());
@@ -117,6 +126,6 @@ void TestGame::InternalRender()
 void TestGame::InternalShutdown()
 {
 	delete testSprite;
-	delete scheduler;
+	delete m_scheduler;
 	
 }

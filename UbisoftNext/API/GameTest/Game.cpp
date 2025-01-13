@@ -12,6 +12,13 @@ void Game::InternalInit()
 	*/
 }
 
+void Game::InternalUpdate(const float deltaTime)
+{
+	m_input_handler.Update();
+	m_input_handler.PollInputs();
+	m_scheduler->Update();
+}
+
 void Game::InternalRender()
 {
 	
