@@ -11,6 +11,8 @@
 
 using CallBack = std::function<void()>;
 
+class Game;
+
 class GameObject
 {
 public:
@@ -72,17 +74,18 @@ public:
 	virtual void Init();
 	virtual void Update();
 
-	GameObject() : m_components()
+	GameObject(Game* gameInstance) : m_components()
 	{
 		m_isEnabled = false;
 		m_parent = nullptr;
+		GameInstace = gameInstance;
 	};
 
 	~GameObject() = default;
 
 private:
 	std::unordered_map<std::type_index, std::unique_ptr<Component>> m_components;
-	
+	Game* GameInstace;
 public:
 	bool m_isEnabled;
 	std::string m_name;

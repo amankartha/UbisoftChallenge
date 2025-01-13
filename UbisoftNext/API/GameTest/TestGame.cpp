@@ -85,7 +85,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 	mouse->GetComponent<Ctransform>()->SetPosition(m_cameraManager.GetMainCamera().GetPosition() + App::GetMousePosVec2());
 
 
-	if (m_input_handler.IsKeyPressed('A'))
+	if (m_input_handler.IsKeyHeld('A'))
 	{
 		CenterObject->RemoveParent();
 	}

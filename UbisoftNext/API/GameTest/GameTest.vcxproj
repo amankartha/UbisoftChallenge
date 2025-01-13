@@ -189,6 +189,7 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="CAgent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Ccamera.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameplaySystem.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IIDSystem.h" />
     <ClInclude Include="InputHandler.h" />
@@ -230,6 +232,7 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="CAgent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Ccamera.cpp" />

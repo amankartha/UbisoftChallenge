@@ -32,6 +32,16 @@ namespace AI
 		void Update() override;
 		void Exit() override;
 	};
+	class PatrollingState : public State
+	{
+		explicit PatrollingState(PushDownAutomata* pda)
+			: State(pda)
+		{
+		}
+		void Enter() override;
+		void Update() override;
+		void Exit() override;
+	};
 };
 
 

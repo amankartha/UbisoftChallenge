@@ -3,6 +3,7 @@
 
 #include "Ccamera.h"
 
+
 void Game::InternalInit()
 {
 	/*auto GO = m_gameObjectManager.Create("MAINCAMERA");

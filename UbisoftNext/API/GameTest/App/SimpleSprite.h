@@ -34,13 +34,14 @@ public:
     unsigned int GetFrame()  const { return m_frame; }
 	void SetColor(const float r, const float g, const float b) { m_red = r; m_green = g; m_blue = b; }
 
-    //ADDED
+  
 
 #pragma region Additional
 
+//Just added this - aman
+
+
     void SetPositionWithOffset(const float x, const float y) { m_xpos += x;  m_ypos += y; }
-
-
 
 #pragma endregion
 

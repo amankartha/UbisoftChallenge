@@ -6,7 +6,7 @@
 #include "Camera.h"
 void CRenderer::Update()
 {
-	if (enabled)
+	if (m_enabled)
 	{
 		Ctransform* transform = &getAttachedGameObject()->GetTransformComponent();
 		

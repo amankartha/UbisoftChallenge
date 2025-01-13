@@ -15,7 +15,9 @@ protected:
 	physics::PhysicsSimulation m_physicsSimulation;
 	InputHandler m_input_handler;
 public:
-	
+
+	Game() : m_gameObjectManager(this) {}
+
 	~Game() = default;
 
 	virtual void InternalInit();

@@ -107,6 +107,7 @@
     <ClCompile Include="IIDSystem.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="CAgent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -230,6 +231,10 @@
     </ClInclude>
     <ClInclude Include="IIDSystem.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="CAgent.h" />
+    <ClInclude Include="GameplaySystem.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,12 +2,7 @@
 #include "GameObjectManager.h"
 #include "Gameobject.h"
 
-GameObjectManager::GameObjectManager()
-{
-	m_gameObjectMap.reserve(1000);
-}
 
-GameObjectManager::~GameObjectManager() = default;
 
 void GameObjectManager::Destroy(int ID)
 {
@@ -54,7 +49,7 @@ int GameObjectManager::GetNumberOfGameObjects() const
 GameObject& GameObjectManager::Create(const std::string& name)
 {
 	//std::string uniqueName = generateUniqueName(name);
-	auto createdGO = std::make_unique<GameObject>();
+	auto createdGO = std::make_unique<GameObject>(GetGameInstance());
 	int id = GenerateID();
 	m_gameObjectMap[id] = std::move(createdGO);
 	m_gameObjectMap[id]->m_name = name;

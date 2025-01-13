@@ -10,7 +10,7 @@ class InputHandler
 {
 public:
 
-	InputHandler(int BufferLength = 5) : m_ring_buffer_((std::max)(1,BufferLength)){}
+	InputHandler(int BufferLength = 10) : m_ring_buffer_((std::max)(1,BufferLength)){}
 
 	void SetKeysToTrack(std::vector<int> keys);
 
@@ -19,6 +19,8 @@ public:
 	bool IsKeyHeld(int key);
 	   
 	bool IsKeyReleased(int key);
+
+	bool IsKeySequence(std::vector<int> sequence);
 
 	void PollInputs();
 
@@ -32,4 +34,9 @@ private:
 	RingBuffer<std::bitset<32>> m_ring_buffer_;        // History of input states
 	std::bitset<32> m_currentState;                    // Current bitmask state
 };
+
+
+
+
+
 

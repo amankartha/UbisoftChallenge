@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "appUtility.h"
+#include "GameObject.h"
 
 class Crigidbody :
     public Component

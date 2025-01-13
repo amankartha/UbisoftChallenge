@@ -28,7 +28,7 @@ bool InputHandler::IsKeyHeld(int key)
 	auto it = m_keyToBit.find(key);
 	if (it != m_keyToBit.end())
 	{
-		return m_currentState[it->second] && m_ring_buffer_.Back()[it->second];
+		return m_currentState[it->second] && m_ring_buffer_.Front()[it->second];
 	}
 	return false;
 }
@@ -43,6 +43,15 @@ bool InputHandler::IsKeyReleased(int key)
 	}
 	return false;
 }
+
+
+bool InputHandler::IsKeySequence(std::vector<int> sequence)
+{
+ //TODO
+	return false;
+}
+
+
 
 void InputHandler::PollInputs()
 {

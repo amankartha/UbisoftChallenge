@@ -3,14 +3,19 @@
 #include <memory>
 #include <string>
 
+#include "GameplaySystem.h"
 #include "IIDSystem.h"
-class GameObject;
+#include "GameObject.h"
 
-class GameObjectManager : public IIDSystem
+class GameObjectManager : public GameplaySystem, public IIDSystem
 {
 public:
-	GameObjectManager();
-	~GameObjectManager();
+	GameObjectManager(Game* gameinstance): GameplaySystem(gameinstance)
+	{
+		m_gameObjectMap.reserve(1000);
+	}
+
+	~GameObjectManager() = default;
 
 	GameObject& Create(const std::string& name);
 
