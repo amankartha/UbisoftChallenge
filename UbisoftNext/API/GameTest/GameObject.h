@@ -7,7 +7,6 @@
 #include <string>
 #include <iostream>
 
-#include "appUtility.h"
 
 using CallBack = std::function<void()>;
 

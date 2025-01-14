@@ -1,34 +1,49 @@
 #pragma once
-#include "PhysicsSimulation.h"
-#include "Renderer.h"
-#include "CameraManager.h"
-#include "GameObjectManager.h"
-#include "InputHandler.h"
-#include "Scheduler.h"
+#include <memory>  
+
+
+class GameObjectManager;
+class Renderer;
+class CameraManager;
+class Scheduler;
+namespace physics {
+    class PhysicsSimulation;
+}
+class InputHandler;
+
+
+
 class Game
 {
 protected:
-	GameObjectManager m_gameObjectManager;
-	Renderer m_renderer;
-	CameraManager m_cameraManager;
-	Scheduler* m_scheduler;
-	physics::PhysicsSimulation m_physicsSimulation;
-	InputHandler m_input_handler;
+   
+    std::unique_ptr<GameObjectManager> m_gameObjectManager;
+    std::unique_ptr<Renderer> m_renderer;
+    std::unique_ptr<CameraManager> m_cameraManager;
+    std::unique_ptr<Scheduler> m_scheduler;
+    std::unique_ptr<physics::PhysicsSimulation> m_physicsSimulation;
+    std::unique_ptr<InputHandler> m_input_handler;
+
 public:
+    
+    Game();
 
-	Game() : m_gameObjectManager(this) {}
+    
+    virtual ~Game();
 
-	~Game() = default;
+    
+    virtual void InternalInit();
+    virtual void InternalUpdate(const float deltaTime);
+    virtual void InternalRender();
+    virtual void InternalShutdown() = 0;
 
-	virtual void InternalInit();
-	virtual	void InternalUpdate(const float deltaTime);
-	virtual void InternalRender();
-	virtual void InternalShutdown() = 0;
+   
+    Renderer* GetRenderer() const;
+    GameObjectManager* GetGameObjectManager() const;
+    CameraManager* GetCameraManager() const;
+    Scheduler* GetScheduler() const;
+    physics::PhysicsSimulation* GetPhysicsSimulation() const;
+    InputHandler* GetInputHandler();
 
-protected:
-	
 
-	
-	
 };
-

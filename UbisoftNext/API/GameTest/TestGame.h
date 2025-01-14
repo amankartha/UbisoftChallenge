@@ -6,6 +6,7 @@ class TestGame :
 {
     
 public:
+	 
 	 void InternalInit() override;
 	 void InternalUpdate(const float deltaTime) override;
 	 void InternalRender() override;

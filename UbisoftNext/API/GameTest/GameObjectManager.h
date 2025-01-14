@@ -6,6 +6,7 @@
 #include "GameplaySystem.h"
 #include "IIDSystem.h"
 #include "GameObject.h"
+#include "ObjectPool.h"
 
 class GameObjectManager : public GameplaySystem, public IIDSystem
 {

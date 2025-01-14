@@ -189,6 +189,7 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="BulletGameObject.h" />
     <ClInclude Include="CAgent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
@@ -209,6 +210,9 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IIDSystem.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="IPoolable.h" />
+    <ClInclude Include="ObjectPool.h" />
+    <ClInclude Include="ParticleGameObject.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PushDownAutomata.h" />
     <ClInclude Include="resource.h" />
@@ -232,6 +236,7 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="BulletGameObject.cpp" />
     <ClCompile Include="CAgent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -253,6 +258,7 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="IIDSystem.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="ParticleGameObject.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PushDownAutomata.cpp" />
     <ClCompile Include="RigidBody.cpp" />

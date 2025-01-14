@@ -10,22 +10,22 @@ class CRenderer :
 
 private:
 
-    Renderer& mainRenderer;
+    Renderer* mainRenderer;
     CSimpleSprite* sprite;
     RenderLayer m_renderLayer;
     bool m_isShake;
 
 public:
-    CRenderer(Renderer& renderer) : mainRenderer(renderer)
+    CRenderer(Renderer* renderer) : mainRenderer(renderer)
     {
         m_isShake = false;
         sprite = nullptr;
         m_renderLayer = RenderLayer::Default;
-        mainRenderer.AddRenderer(*this);
+        mainRenderer->AddRenderer(*this);
     }
     ~CRenderer() override
     {
-        mainRenderer.RemoveRenderer(*this);
+        mainRenderer->RemoveRenderer(*this);
     }
     CSimpleSprite* GetSprite()
     {
@@ -38,9 +38,9 @@ public:
     }
     void SetRenderLayer(RenderLayer layer)
     {
-        mainRenderer.RemoveRenderer(*this);
+        mainRenderer->RemoveRenderer(*this);
         m_renderLayer = layer;
-        mainRenderer.AddRenderer(*this);
+        mainRenderer->AddRenderer(*this);
     }
 
 

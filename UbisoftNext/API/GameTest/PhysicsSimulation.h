@@ -3,6 +3,11 @@
 
 namespace physics
 {
+	enum class Shape;
+}
+
+namespace physics
+{
 	class RigidBody;
 
 	class PhysicsSimulation
@@ -12,7 +17,7 @@ namespace physics
 		{
 			Init(MAX_RIGIDBODIES);
 		}
-		void AddBody(std::shared_ptr<RigidBody> rigid_body);
+		RigidBody* AddBody(Shape rigidBodyShape);
 		void RemoveBody(std::shared_ptr<RigidBody> rigid_body);
 		void Update();
 

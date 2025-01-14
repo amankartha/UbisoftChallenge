@@ -2,7 +2,6 @@
 #include <bitset>
 #include <unordered_map>
 
-#include "App/app.h"
 #include "RingBuffer.h"
 
 
@@ -10,7 +9,9 @@ class InputHandler
 {
 public:
 
-	InputHandler(int BufferLength = 10) : m_ring_buffer_((std::max)(1,BufferLength)){}
+	InputHandler(int BufferLength = 10);
+
+	~InputHandler();
 
 	void SetKeysToTrack(std::vector<int> keys);
 

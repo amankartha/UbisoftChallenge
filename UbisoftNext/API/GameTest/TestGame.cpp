@@ -2,7 +2,6 @@
 #include "TestGame.h"
 
 #include <windows.h> 
-#include <math.h>  
 //------------------------------------------------------------------------
 #include "appUtility.h"
 #include <GameObject.h>
@@ -11,7 +10,10 @@
 #include "Scheduler.h"
 #include "Ccamera.h"
 #include "Pathfinding.h"
-CSimpleSprite* testSprite;
+#include "GameObjectManager.h"
+#include "InputHandler.h"
+
+
 GameObject* player;
 GameObject* mouse;
 GameObject* camera;
@@ -20,11 +22,10 @@ GameObject* CenterObject;
 std::shared_ptr<Pathfinding> pathFinder;
 std::vector<GRID::Cell*> pathToDraw;
 
-
 void TestGame::InternalInit()
 {
 	Game::InternalInit();
-	m_gameObjectManager.InitAll();
+	GetGameObjectManager()->InitAll();
 
 	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
 	/*m_gridSystem.SetObstacle(Vector2(1, 1));
@@ -38,29 +39,28 @@ void TestGame::InternalInit()
 	OutputDebugStringW(L"My output string.");
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
-	mouse = &m_gameObjectManager.Create("Mouse");
-	player = &m_gameObjectManager.Create("Player");
-	camera = &m_gameObjectManager.Create("Camera");
-	CenterObject = &m_gameObjectManager.Create("Center");
-	m_scheduler = new Scheduler();
+	mouse = &GetGameObjectManager()->Create("Mouse");
+	player = &GetGameObjectManager()->Create("Player");
+	camera = &GetGameObjectManager()->Create("Camera");
+	CenterObject = &GetGameObjectManager()->Create("Center");
 
 	//m_renderer.SetShake(true);
 
-	camera->AddComponent<Ccamera>(m_cameraManager,0);
+	camera->AddComponent<Ccamera>(GetCameraManager(),0);
 	camera->GetComponent<Ccamera>()->SetTransform(camera->GetTransformComponent().GetTransform());
 	
-	m_cameraManager.SetMainCamera(0);
+	GetCameraManager()->SetMainCamera(0);
 
-	player->AddComponent<CRenderer>(m_renderer)->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
+	player->AddComponent<CRenderer>(GetRenderer())->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 	player->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
 
 
-	mouse->AddComponent<CRenderer>(m_renderer);
+	mouse->AddComponent<CRenderer>(GetRenderer());
 	mouse->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
 	mouse->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
 
-	CenterObject->AddComponent<CRenderer>(m_renderer);
+	CenterObject->AddComponent<CRenderer>(GetRenderer());
 	CenterObject->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\tile_grey.png", 1, 1);
 	CenterObject->GetComponent<Ctransform>()->SetScale(0.1f);
 
@@ -79,22 +79,22 @@ void TestGame::InternalUpdate(const float deltaTime)
 	Game::InternalUpdate(deltaTime);
 
 
-	m_input_handler.SetKeysToTrack(std::vector<int>{'A','B','C'});
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{'A','B','C'});
 
 
-	mouse->GetComponent<Ctransform>()->SetPosition(m_cameraManager.GetMainCamera().GetPosition() + App::GetMousePosVec2());
+	mouse->GetComponent<Ctransform>()->SetPosition(GetCameraManager()->GetMainCamera().GetPosition() + App::GetMousePosVec2());
 
 
-	if (m_input_handler.IsKeyHeld('A'))
+	if (GetInputHandler()->IsKeyHeld('A'))
 	{
 		CenterObject->RemoveParent();
 	}
 
-	if (m_input_handler.IsKeyPressed('B'))
+	if (GetInputHandler()->IsKeyPressed('B'))
 	{
 		for (int i = 0; i < 100; ++i)
 		{
-			m_gameObjectManager.Create("");
+			GetGameObjectManager()-> Create("");
 		}
 	}
 
@@ -103,18 +103,18 @@ void TestGame::InternalUpdate(const float deltaTime)
 		CenterObject->SetParent(player);
 	}
 
-	m_gameObjectManager.UpdateAll();
+	GetGameObjectManager()->UpdateAll();
 }
 
 void TestGame::InternalRender()
 {
 
 	Game::InternalRender();
-	m_renderer.RenderAll(m_cameraManager.GetMainCamera());
+	GetRenderer()->RenderAll(GetCameraManager()->GetMainCamera());
 
-	App::Print(100, 700,m_input_handler.GetCurrentString().c_str());
-	App::Print(100, 600,m_input_handler.GetBufferString().c_str());
-	App::Print(100, 500,std::to_string(m_gameObjectManager.GetNumberOfGameObjects()).c_str());
+	App::Print(100, 700,GetInputHandler()->GetCurrentString().c_str());
+	App::Print(100, 600,GetInputHandler()->GetBufferString().c_str());
+	App::Print(100, 500,std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
 	
 
 
@@ -125,7 +125,5 @@ void TestGame::InternalRender()
 
 void TestGame::InternalShutdown()
 {
-	delete testSprite;
-	delete m_scheduler;
-	
+
 }

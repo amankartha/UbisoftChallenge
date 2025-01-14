@@ -51,12 +51,16 @@ namespace physics
 		static std::shared_ptr<RigidBody> CreateAABBRigidBody(bool is_static, float length, float width, float density, Material material);
 
 
-		RigidBody(bool m_is_static,
-			Shape m_shape,
-			const Collider& m_collider,
-			const Material& m_material,
-			const MassData& m_mass_data,
-			const Vector2& m_linear_velocity = 0, const Vector2& m_rotational_velocity = 0, float m_gravity_scale = 1, const Vector2& m_force = Vector2(0, 0))
+
+		RigidBody(bool m_is_static = false,
+			Shape m_shape = Shape::BOX,
+			const Collider& m_collider  = Collider(),
+			const Material& m_material = Material(),
+			const MassData& m_mass_data = MassData(1),
+			const Vector2& m_linear_velocity = 0,
+			const Vector2& m_rotational_velocity = 0,
+			float m_gravity_scale = 1,
+			const Vector2& m_force = Vector2(0, 0))
 			: m_linearVelocity(m_linear_velocity),
 			m_rotationalVelocity(m_rotational_velocity),
 			m_gravityScale(m_gravity_scale),

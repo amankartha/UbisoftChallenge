@@ -1,5 +1,13 @@
 #include "stdafx.h"
 #include "InputHandler.h"
+#include "appUtility.h"
+
+InputHandler::InputHandler(int BufferLength): m_ring_buffer_((std::max)(1,BufferLength))
+{}
+
+InputHandler::~InputHandler()
+{
+}
 
 void InputHandler::SetKeysToTrack(std::vector<int> keys)
 {
