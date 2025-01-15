@@ -23,4 +23,9 @@ Vector2 App::ScreenToWorld(const Camera& camera, Vector2 screenPos)
 					+ camera.GetPosition());
 }
 
+void App::PrintOutputMessage(std::string message)
+{
+	OutputDebugStringA(message.c_str());
+}
+
 

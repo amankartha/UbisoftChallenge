@@ -21,6 +21,7 @@ namespace App
 		v.erase(new_end, v.end());
 	}
 
+	void PrintOutputMessage(std::string message);
 };
 
 

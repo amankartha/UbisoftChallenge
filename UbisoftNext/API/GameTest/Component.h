@@ -14,10 +14,23 @@ public:
 		m_useTick = false;
 	};
 	virtual ~Component() = default;
+
+	// Move constructor
+	Component(Component&& other) noexcept
+		: m_enabled(other.m_enabled),
+		m_attachedGameObject(other.m_attachedGameObject),
+		m_useTick(other.m_useTick),
+		m_tick_frame_count(other.m_tick_frame_count),
+		m_tick_counter(other.m_tick_counter)
+	{
+		//// Ensure the moved-from object doesn't retain the original `GameObject*`
+		//other.m_attachedGameObject = nullptr;
+	}
+
 	virtual void Init() {};
 	virtual void Update();
 	
-	GameObject* getAttachedGameObject() { return m_attachedGameObject; }
+	GameObject* GetAttachedGameObject() { return m_attachedGameObject; }
 
 	void SetGameObject(GameObject* go)  {   m_attachedGameObject = go;  }
 public:

@@ -8,7 +8,7 @@ class CAgent :
     public Component
 {
 
-    CAgent() : Component(), m_PDA(AI::Context()), m_transform_(this->getAttachedGameObject()->GetTransformComponent().GetTransform())
+    CAgent() : Component(), m_PDA(AI::Context()), m_transform_(this->GetAttachedGameObject()->GetTransformComponent().GetTransform())
     {
     }
 

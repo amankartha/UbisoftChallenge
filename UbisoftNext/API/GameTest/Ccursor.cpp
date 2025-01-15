@@ -9,5 +9,5 @@ void Ccursor::Init()
 
 void Ccursor::Update()
 {
-	getAttachedGameObject()->GetTransformComponent().SetPosition(App::GetMousePosVec2());
+	GetAttachedGameObject()->GetTransformComponent().SetPosition(App::GetMousePosVec2());
 }

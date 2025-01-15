@@ -26,7 +26,7 @@ protected:
 
 public:
     
-    Game();
+     Game();
 
     
     virtual ~Game();

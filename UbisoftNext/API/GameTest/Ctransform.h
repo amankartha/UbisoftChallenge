@@ -13,13 +13,14 @@ class Ctransform :
 public:
     Ctransform() : Component()
     {
-
+        MarkAllChildrenDirty();
     }
 
     Ctransform(float x, float y) : Component()
     {
         m_transform_local.position = Vector2(x, y);
         m_transform_world.angle = 0.0f;
+        MarkAllChildrenDirty();
     }
 
     void SetPosition(Vector2 vec);

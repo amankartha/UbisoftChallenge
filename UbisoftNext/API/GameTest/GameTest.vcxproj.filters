@@ -104,7 +104,6 @@
     <ClCompile Include="InputHandler.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="CAgent.cpp" />
     <ClCompile Include="ParticleGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -113,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="IIDSystem.cpp">
       <Filter>Interfaces</Filter>
+    </ClCompile>
+    <ClCompile Include="CPoolManager.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CAgent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +240,6 @@
     <ClInclude Include="InputHandler.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="CAgent.h" />
     <ClInclude Include="GameplaySystem.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
@@ -253,6 +257,12 @@
     </ClInclude>
     <ClInclude Include="IPoolable.h">
       <Filter>Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="CPoolManager.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CAgent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "GameObjectManager.h"
-#include "Gameobject.h"
 
+
+#include "appUtility.h"
+#include "Gameobject.h"
 
 
 void GameObjectManager::Destroy(int ID)
@@ -46,7 +48,7 @@ int GameObjectManager::GetNumberOfGameObjects() const
 	return m_gameObjectMap.size();
 }
 
-GameObject& GameObjectManager::Create(const std::string& name)
+int GameObjectManager::Create(const std::string& name)
 {
 	//std::string uniqueName = generateUniqueName(name);
 	auto createdGO = std::make_unique<GameObject>(GetGameInstance());
@@ -54,8 +56,8 @@ GameObject& GameObjectManager::Create(const std::string& name)
 	m_gameObjectMap[id] = std::move(createdGO);
 	m_gameObjectMap[id]->m_name = name;
 	m_gameObjectMap[id]->AddComponent<Ctransform>();
-
-	return *m_gameObjectMap[id].get();
+	App::PrintOutputMessage("GameObject " + name + " Created\n");
+	return id;
    
 }
 

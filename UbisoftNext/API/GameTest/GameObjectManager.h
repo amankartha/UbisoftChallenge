@@ -18,7 +18,7 @@ public:
 
 	~GameObjectManager() = default;
 
-	GameObject& Create(const std::string& name);
+	int Create(const std::string& name);
 
 
 	void Destroy(int ID);

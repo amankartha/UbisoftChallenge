@@ -2,7 +2,7 @@
 #include <cassert>
 #include <stack>
 #include <vector>
-#include <concepts>
+
 
 
 //TODO: shud this be an interface instead???                 //Future Self IPoolable would need to use pointers instead of storing in an array directly
@@ -16,26 +16,32 @@
 
 
 template <typename T>
-concept HasRequiredFunctions = requires(T obj) {
+concept HasRequiredFunctions = requires( T obj) {
   
-    { obj.Clear() } -> std::same_as<void>;                                              
-    { obj.Start() } -> std::same_as<void>;
-    { obj.Update() } -> std::same_as<void>;
+    { obj.Clear() } ->std::same_as<void> ;                                              
+    { obj.Start() }->std::same_as<void>;
+    { obj.Update() } ->std::same_as<void>;
 };
 
+
+
 /// <summary>
-/// REQUIRES Clear(), Start() , Update() functions declared in the T class 
+/// Clear(), Start() , Update() functions declared in the T class will be called on Release, Get and Update
 /// </summary>
 /// <typeparam name="T"></typeparam>
-template <HasRequiredFunctions T>
+template <typename T>
 class ObjectPool {
 public:
     ObjectPool(Game* gameInstance, size_t initialSize = 100) {
+
+       static_assert(std::is_constructible<T, Game*, ObjectPool<T>*>::value,
+            "T must have a constructor that accepts Game* and ObjectPool<T>*");
+
         m_game_instance_ = gameInstance;
-        m_pool.reserve(initialSize * 2);
+        m_pool.reserve(initialSize);
         inUseFlags.resize(initialSize, false);
         for (size_t i = 0; i < initialSize; ++i) {
-            m_pool.emplace_back(gameInstance, this);
+            m_pool.emplace_back(gameInstance,this);
             availableIndices.push(i);
         }
     }
@@ -47,7 +53,12 @@ public:
         size_t index = availableIndices.top();
         availableIndices.pop();
         inUseFlags[index] = true;
-        m_pool[index].Start();
+
+        if constexpr (HasRequiredFunctions<T>)
+        {
+            m_pool[index].Start();
+        }
+        
         return &m_pool[index];
     }
 
@@ -55,7 +66,12 @@ public:
         size_t index = object - m_pool.data(); // Calculate index using pointer arithmetic
         assert(index < m_pool.size() && "Object not from this pool");
         assert(inUseFlags[index] && "Object already released");
-        m_pool[index].Clear();
+
+        if constexpr (HasRequiredFunctions<T>)
+        {
+            m_pool[index].Clear();
+        }
+
         availableIndices.push(index);
         inUseFlags[index] = false; 
     }
@@ -65,7 +81,7 @@ public:
 
     // Iterate through in-use objects and call function on them, the function uses the object as its parameter
     template <typename Func>
-    void ApplyToEachInUse(Func func) const {
+    void ApplyToEachInUse(Func func)  {
         for (size_t i = 0; i < m_pool.size(); ++i) {
             if (inUseFlags[i]) {
                 func(m_pool[i]);
@@ -74,10 +90,13 @@ public:
     }
 
     // Iterate through in-use objects and Update them
-    void UpdateEachInUse() const {
-        for (size_t i = 0; i < m_pool.size(); ++i) {
-            if (inUseFlags[i]) {
-               m_pool[i].Update();
+    void UpdateEachInUse()  {
+        if constexpr (HasRequiredFunctions<T>)
+        {
+            for (size_t i = 0; i < m_pool.size(); ++i) {
+                if (inUseFlags[i]) {
+                    m_pool[i].Update();
+                }
             }
         }
     }
@@ -87,7 +106,7 @@ private:
         size_t currentSize = m_pool.size();
         size_t newSize = currentSize * 1.5 + 1;
         m_pool.reserve(newSize);
-        m_pool.resize(newSize);
+		m_pool.resize(newSize);
         inUseFlags.resize(newSize, false);
         for (size_t i = currentSize; i < newSize; ++i) {
             m_pool.emplace_back(m_game_instance_, this);

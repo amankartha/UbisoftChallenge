@@ -6,7 +6,7 @@
 #include <memory>
 #include <string>
 #include <iostream>
-
+#include "Windows.h"
 
 using CallBack = std::function<void()>;
 
@@ -73,19 +73,57 @@ public:
 	virtual void Init();
 	virtual void Update();
 
-	GameObject(Game* gameInstance) : m_components()
+	GameObject() 
 	{
-		m_isEnabled = false;
+		m_isEnabled = true;
 		m_parent = nullptr;
-		GameInstace = gameInstance;
+	}
+
+	GameObject(Game* gameInstance) 
+	{
+		m_isEnabled = true;
+		m_parent = nullptr;
+		GameInstance = gameInstance;
+		
 	};
 
-	~GameObject() = default;
 
-private:
+	GameObject(GameObject&& other) noexcept            //move constructor for unique pointers
+		: m_components(std::move(other.m_components)),
+		GameInstance(other.GameInstance),
+		m_isEnabled(other.m_isEnabled),
+		m_name(std::move(other.m_name)),
+		m_parent(other.m_parent),
+		m_children(std::move(other.m_children))
+	{
+		other.m_parent = nullptr;
+		for (auto& [type, component] : m_components) {
+			component->SetGameObject(this);
+		}
+	}
+
+	//GameObject& operator=(GameObject&& other) noexcept
+	//{
+	//	if (this != &other)
+	//	{
+	//		m_components = std::move(other.m_components);
+	//		GameInstance = other.GameInstance;
+	//		m_isEnabled = other.m_isEnabled;
+	//		m_name = std::move(other.m_name);
+	//		m_parent = other.m_parent;
+	//		m_children = std::move(other.m_children);
+
+	//		other.m_parent = nullptr;
+	//	}
+	//	return *this;
+	//}
+	virtual ~GameObject() = default;
+
+protected:
 	std::unordered_map<std::type_index, std::unique_ptr<Component>> m_components;
-	Game* GameInstace;
+	
 public:
+	Game* GameInstance;
 	bool m_isEnabled;
 	std::string m_name;
 	GameObject* m_parent;

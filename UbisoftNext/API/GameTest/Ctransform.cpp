@@ -93,7 +93,7 @@ void Ctransform::Update()
 
 Transform Ctransform::CombineTransform()
 {
-    GameObject* parentObject = getAttachedGameObject()->m_parent;
+    GameObject* parentObject = GetAttachedGameObject()->m_parent;
 
     if (parentObject)
     {
@@ -122,7 +122,7 @@ void Ctransform::MarkAllChildrenDirty()
 
     m_dirty = true;
 
-    for (GameObject* child : getAttachedGameObject()->m_children)
+    for (GameObject* child : GetAttachedGameObject()->m_children)
     {
         child->GetTransformComponent().MarkAllChildrenDirty();
     }
