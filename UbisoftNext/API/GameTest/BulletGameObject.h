@@ -10,7 +10,7 @@ public:
 		
 	}
 
-	BulletGameObject(Game* instance,ObjectPool<BulletGameObject>* pool);
+	BulletGameObject(Game* instance);
 
 	
 	void Init() override;

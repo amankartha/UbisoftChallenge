@@ -92,6 +92,9 @@ void TestGame::InternalUpdate(const float deltaTime)
 	if (GetInputHandler()->IsKeyHeld('A'))
 	{
 		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
+
 	}
 
 	if (GetInputHandler()->IsKeyPressed('B'))
@@ -115,9 +118,10 @@ void TestGame::InternalRender()
 	Game::InternalRender();
 	GetRenderer()->RenderAll(GetCameraManager()->GetMainCamera());
 
-	App::Print(100, 700,GetInputHandler()->GetCurrentString().c_str());
-	//App::Print(100, 600,GetGameObjectManager()->Find(mouse)->GetComponent<Ctransform>()->GetWorldPosition().Print().c_str());
-	App::Print(100, 500,std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
+	//App::Print(100, 700,GetInputHandler()->GetCurrentString().c_str());
+	App::Print(100, 600, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->GetObjectPoolSize()).c_str());
+	App::Print(100, 300, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->GetObjectPoolSize()).c_str());
+	//App::Print(100, 500,std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
 	
 
 

@@ -102,21 +102,21 @@ public:
 		}
 	}
 
-	//GameObject& operator=(GameObject&& other) noexcept
-	//{
-	//	if (this != &other)
-	//	{
-	//		m_components = std::move(other.m_components);
-	//		GameInstance = other.GameInstance;
-	//		m_isEnabled = other.m_isEnabled;
-	//		m_name = std::move(other.m_name);
-	//		m_parent = other.m_parent;
-	//		m_children = std::move(other.m_children);
+	GameObject& operator=(GameObject&& other) noexcept  //Copy Constructor 
+	{
+		if (this != &other)
+		{
+			m_components = std::move(other.m_components);
+			GameInstance = other.GameInstance;
+			m_isEnabled = other.m_isEnabled;
+			m_name = std::move(other.m_name);
+			m_parent = other.m_parent;
+			m_children = std::move(other.m_children);
 
-	//		other.m_parent = nullptr;
-	//	}
-	//	return *this;
-	//}
+			other.m_parent = nullptr;
+		}
+		return *this;
+	}
 	virtual ~GameObject() = default;
 
 protected:

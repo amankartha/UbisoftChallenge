@@ -24,6 +24,8 @@ public:
 	virtual void Render(const Camera camera, bool isUI = false) = 0;
 	virtual RenderLayer GetRenderLayer() = 0;
 	virtual void SetRenderLayer(RenderLayer layer) = 0;
+
+	bool m_isOn = true;
 };
 
 class Renderer
@@ -58,5 +60,6 @@ public:
 	bool m_isShake;
 private:
 	std::map<RenderLayer, std::vector<IRenderable*>> m_rendermap_;
+
 };
 

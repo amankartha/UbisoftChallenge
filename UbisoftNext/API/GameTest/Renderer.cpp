@@ -41,12 +41,12 @@
         {
             for (const auto& [m_renderLayer, renderers] : m_rendermap_)
             {
+                
                 if (m_renderLayer == RenderLayer::UI)
                 {
                     for (IRenderable* renderer : renderers)
                     {
-
-                        renderer->Render(currentCamera,true);
+                        if (renderer->m_isOn)  renderer->Render(currentCamera,true);
                     }
                 }
                 else
@@ -54,7 +54,7 @@
                     for (IRenderable* renderer : renderers)
                     {
 
-                        renderer->Render(currentCamera);
+                        if (renderer->m_isOn) renderer->Render(currentCamera);
                     }
                 }
             }
