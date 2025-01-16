@@ -3,29 +3,35 @@
 #include "Collider.h"
 namespace physics
 {
-	RigidBody RigidBody::CreateCircleRigidBody(bool is_static, float radius, float density, Material material)
+	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
 	{
 		float area = PI * radius * radius;
 
 		if (area < MIN_BODY_SIZE)
 		{
-			return NULL;
+			return ;
 		}
+		this->m_shape = Shape::CIRCLE;
+		this->m_isStatic = is_static;
+		this->m_collider = Circle(radius);
+		this->m_material = material;
+		this->m_massData = MassData(area * density);
 
+	
 
-		RigidBody body = RigidBody(is_static, physics::Shape::CIRCLE, physics::Circle(radius), material, MassData(area * density));
-
-		return body;
+		
 	}
 
-	RigidBody RigidBody::CreateAABBRigidBody(bool is_static, float length, float width, float density,
+	void RigidBody::SetAABBRigidBody(bool is_static, float length, float width, float density,
 		Material material)
 	{
 		float area = width * length;
 		float mass = area * density;
 
-		RigidBody body = RigidBody(is_static, physics::Shape::BOX, physics::AABB(length, width), material, MassData(area * density));
-
-		return body;
+		this->m_shape = Shape::CIRCLE;
+		this->m_isStatic = is_static;
+		this->m_collider = AABB(length,width);
+		this->m_material = material;
+		this->m_massData = MassData(area * density);
 	}
 };

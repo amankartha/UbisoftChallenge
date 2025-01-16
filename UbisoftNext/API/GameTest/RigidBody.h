@@ -47,8 +47,8 @@ namespace physics
 			return m_massData;
 		}
 
-		static RigidBody CreateCircleRigidBody(bool is_static, float radius, float density, Material material);
-		static RigidBody CreateAABBRigidBody(bool is_static, float length, float width, float density, Material material);
+		void SetCircleRigidBody(bool is_static, float radius, float density, Material material);
+		void SetAABBRigidBody(bool is_static, float length, float width, float density, Material material);
 
 
 

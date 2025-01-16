@@ -68,6 +68,11 @@ public:
         return &m_pool[index];
     }
 
+    T* Get(size_t index)
+    {
+        return &m_pool[index].obj;
+    }
+
     // Release an object back to the pool
     void Release(size_t index) {
         if constexpr (HasRequiredFunctions<T>) {

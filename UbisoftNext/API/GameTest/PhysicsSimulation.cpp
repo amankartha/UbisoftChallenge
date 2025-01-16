@@ -7,17 +7,11 @@ namespace physics
 
 	RigidBody* PhysicsSimulation::AddBody(Shape rigidBodyShape)
 	{
-		/*switch (rigidBodyShape)
-		{
-		case Shape::BOX:
-			m_bodies[RigidBody::CreateAABBRigidBody();
+		RigidBody* rb = &m_rigidbody_pool_.Get()->obj;
 
-			break;
-		case Shape::CIRCLE:
-			break;
-		}*/
-
-		return nullptr;
+	
+		
+		return rb;
 	}
 
 	void PhysicsSimulation::RemoveBody(std::shared_ptr<RigidBody> rigid_body)
@@ -30,6 +24,6 @@ namespace physics
 
 	void PhysicsSimulation::Init(int rigidBodyCount)
 	{
-		//m_bodies = new RigidBody[rigidBodyCount];
+		m_rigidbody_pool_.InitializePool(rigidBodyCount);
 	}
 };
