@@ -1,6 +1,8 @@
 #pragma once
 #include <memory>
 
+#include "ObjectPool.h"
+#include "RigidBody.h"
 namespace physics
 {
 	enum class Shape;
@@ -8,12 +10,12 @@ namespace physics
 
 namespace physics
 {
-	class RigidBody;
+	
 
 	class PhysicsSimulation
 	{
 	public:
-		PhysicsSimulation(float gravity = 9.8f,int MAX_RIGIDBODIES = 1000) : m_gravity(gravity) 
+		PhysicsSimulation(Game* instance,float gravity = 9.8f,int MAX_RIGIDBODIES = 1000) : m_gravity(gravity),m_rigidbody_pool_(instance,MAX_RIGIDBODIES)
 		{
 			Init(MAX_RIGIDBODIES);
 		}
@@ -27,8 +29,8 @@ namespace physics
 		void ResolveCollision(RigidBody* A,RigidBody* B);
 
 	private:
-		//RigidBody m_bodies[];
 		float m_gravity;
+		ObjectPool<RigidBody> m_rigidbody_pool_;
 	};
 
 };

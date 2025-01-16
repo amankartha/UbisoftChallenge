@@ -8,6 +8,7 @@
 #include <CRenderer.h>
 
 
+#include "BulletGameObject.h"
 #include "Renderer.h"
 #include "Scheduler.h"
 #include "Ccamera.h"
@@ -56,7 +57,7 @@ void TestGame::InternalInit()
 
 	GetGameObjectManager()->Find(player)->AddComponent<CRenderer>(GetRenderer())->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
 	GetGameObjectManager()->Find(player)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
-	GetGameObjectManager()->Find(player)->AddComponent<CPoolManager>(this);
+	GetGameObjectManager()->Find(player)->AddComponent<CPoolManager<BulletGameObject>> (this,100,this);
 
 
 	GetGameObjectManager()->Find(mouse)->AddComponent<CRenderer>(GetRenderer());
@@ -91,9 +92,9 @@ void TestGame::InternalUpdate(const float deltaTime)
 
 	if (GetInputHandler()->IsKeyHeld('A'))
 	{
-		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
-		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
-		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
 
 	}
 
@@ -119,8 +120,8 @@ void TestGame::InternalRender()
 	GetRenderer()->RenderAll(GetCameraManager()->GetMainCamera());
 
 	//App::Print(100, 700,GetInputHandler()->GetCurrentString().c_str());
-	App::Print(100, 600, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->GetObjectPoolSize()).c_str());
-	App::Print(100, 300, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager>()->GetObjectPoolSize()).c_str());
+	App::Print(100, 600, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->GetObjectPoolSize()).c_str());
+	App::Print(100, 300, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->GetObjectPoolSize()).c_str());
 	//App::Print(100, 500,std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
 	
 

@@ -6,9 +6,6 @@
 class BulletGameObject : public GameObject
 {
 public:
-	BulletGameObject() {
-		
-	}
 
 	BulletGameObject(Game* instance);
 

@@ -14,7 +14,7 @@ Game::Game()
 	m_renderer(std::make_unique<Renderer>()),
 	m_cameraManager(std::make_unique<CameraManager>()),
 	m_scheduler(std::make_unique<Scheduler>()),
-	m_physicsSimulation(std::make_unique<physics::PhysicsSimulation>()),
+	m_physicsSimulation(std::make_unique<physics::PhysicsSimulation>(this)),
 	m_input_handler(std::make_unique<InputHandler>())
 {
 	// You can initialize other members here if needed

@@ -47,8 +47,8 @@ namespace physics
 			return m_massData;
 		}
 
-		static std::shared_ptr<RigidBody> CreateCircleRigidBody(bool is_static, float radius, float density, Material material);
-		static std::shared_ptr<RigidBody> CreateAABBRigidBody(bool is_static, float length, float width, float density, Material material);
+		static RigidBody CreateCircleRigidBody(bool is_static, float radius, float density, Material material);
+		static RigidBody CreateAABBRigidBody(bool is_static, float length, float width, float density, Material material);
 
 
 

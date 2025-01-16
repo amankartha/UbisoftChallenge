@@ -102,7 +102,7 @@ public:
 		}
 	}
 
-	GameObject& operator=(GameObject&& other) noexcept  //Copy Constructor 
+	GameObject& operator=(GameObject&& other) noexcept  //Copy assignment Constructor 
 	{
 		if (this != &other)
 		{
@@ -117,6 +117,10 @@ public:
 		}
 		return *this;
 	}
+
+	GameObject(const GameObject&) = delete;
+	GameObject& operator=(const GameObject&) = delete;
+
 	virtual ~GameObject() = default;
 
 protected:
