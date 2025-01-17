@@ -137,7 +137,7 @@ void TestGame::InternalRender()
 {
 
 	Game::InternalRender();
-	GetRenderer()->RenderAll(GetCameraManager()->GetMainCamera());
+	//GetRenderer()->RenderAll(GetCameraManager()->GetMainCamera());
 
 	//App::Print(100, 700,GetInputHandler()->GetCurrentString().c_str());
 	App::Print(100, 600, std::to_string(GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->GetObjectPoolSize()).c_str());

@@ -8,7 +8,7 @@
 CursorGameObject::CursorGameObject(Game* instance) : GameObject(instance)
 {
 	AddComponent<Ccursor>();
-	AddComponent<CRenderer>(instance->GetRenderer(),true)->SetSprite(*App::CreateSprite(".\\TestData\\cursor.png", 1, 1));
+	AddComponent<CRenderer>(instance->GetRenderer(),true,RenderLayer::UI)->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
 }
 
 void CursorGameObject::Init()
