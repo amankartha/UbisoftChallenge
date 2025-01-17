@@ -6,10 +6,7 @@
 
 void GameObject::Update()
 {
-
-	
 	for (auto& pair : m_components) {
-		auto& type = pair.first;          
 		auto& component = pair.second;   
 		component->Update();             
 	}

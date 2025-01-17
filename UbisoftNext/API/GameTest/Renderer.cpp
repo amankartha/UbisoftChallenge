@@ -9,7 +9,7 @@
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
 
-    void Renderer::RenderAll(Camera& currentCamera)
+    void Renderer::RenderAll(Camera& currentCamera)   //todo:: this is slow must optimize
     {
         App::Print(1000, 300, std::to_string(m_rendermap_[RenderLayer::Default].size()).c_str());
         if (m_isShake)
