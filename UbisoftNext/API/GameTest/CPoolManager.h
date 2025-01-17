@@ -48,7 +48,7 @@ T* CPoolManager<T>::Spawn()
 {
     PoolableObject<T>* g = m_pool_.Get(m_game_);
     size_t id = g->m_index;
-    m_game_->GetScheduler()->AddTask([this, id]() {m_pool_.Release(id); }, 1500);
+    //m_game_->GetScheduler()->AddTask([this, id]() {m_pool_.Release(id); }, 5000);
     return &g->obj;
 }
 

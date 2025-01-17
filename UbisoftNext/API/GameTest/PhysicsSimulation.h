@@ -19,7 +19,7 @@ namespace physics
 		{
 			Init(MAX_RIGIDBODIES);
 		}
-		RigidBody* AddBody(Shape rigidBodyShape);
+		int AddBody(Shape rigidBodyShape);
 		void RemoveBody(std::shared_ptr<RigidBody> rigid_body);
 		void Update();
 

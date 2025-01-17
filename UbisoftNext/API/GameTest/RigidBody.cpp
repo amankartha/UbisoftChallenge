@@ -11,7 +11,7 @@ namespace physics
 		{
 			return ;
 		}
-		this->m_shape = Shape::CIRCLE;
+		this->m_shape = Shape::CIRCLE; 
 		this->m_isStatic = is_static;
 		this->m_collider = Circle(radius);
 		this->m_material = material;

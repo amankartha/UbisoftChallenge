@@ -4,6 +4,7 @@
 #include <vector>
 #include <utility>
 #include <optional>
+
 // Concept to ensure T has required functions
 template <typename T>
 concept HasRequiredFunctions = requires(T obj) {
@@ -24,7 +25,7 @@ struct PoolableObject {
     T obj;
     ObjectPool<T>* m_pool;
 
-    PoolableObject(): m_pool(nullptr), m_index(-1),obj()
+    PoolableObject() : m_pool(nullptr), m_index(-1), obj()
     {
     }
 
@@ -33,6 +34,11 @@ struct PoolableObject {
         : m_pool(pool), m_index(index), obj(std::forward<Args>(args)...) {
     }
 };
+
+/// <summary>
+/// Creates an ObjectPool of Type T which will run Clear(), Start() and Update() functions if they exists in the type T
+/// </summary>
+/// <typeparam name="T"></typeparam>
 template <typename T>
 class ObjectPool {
 public:
@@ -42,7 +48,7 @@ public:
         inUseFlags.resize(initialSize, false);
     }
 
-    // Initialize the pool with objects
+    // Initialize the pool with objects using arguments 
     template <typename... Args>
     void InitializePool(size_t initialSize, Args&&... args) {
         for (size_t i = 0; i < initialSize; ++i) {
@@ -50,7 +56,7 @@ public:
         }
     }
 
-    // Get an object from the pool
+    // Get an object from the pool, returns a PoolableObject not T directly
     template <typename... Args>
     PoolableObject<T>* Get(Args&&... args) {
         if (availableIndices.empty()) {
@@ -60,6 +66,7 @@ public:
         size_t index = availableIndices.top();
         availableIndices.pop();
         inUseFlags[index] = true;
+        activeIndices.push_back(index);
 
         if constexpr (HasRequiredFunctions<T>) {
             m_pool[index].obj.Start();
@@ -68,9 +75,11 @@ public:
         return &m_pool[index];
     }
 
-    T* Get(size_t index)
-    {
-        return &m_pool[index].obj;
+    // Get The T object directly from the pool, if the index is not in use it returns false 
+    T* Get(size_t index) {
+        if (inUseFlags[index]) return &m_pool[index].obj;
+
+        return nullptr;
     }
 
     // Release an object back to the pool
@@ -81,6 +90,7 @@ public:
 
         availableIndices.push(index);
         inUseFlags[index] = false;
+        activeIndices.erase(std::remove(activeIndices.begin(), activeIndices.end(), index), activeIndices.end());
     }
 
     size_t size() const { return m_pool.size(); }
@@ -89,26 +99,23 @@ public:
     // Apply a function to all in-use objects
     template <typename Func>
     void ApplyToEachInUse(Func func) {
-        for (size_t i = 0; i < m_pool.size(); ++i) {
-            if (inUseFlags[i]) {
-                func(m_pool[i]);
-            }
+        for (size_t i : activeIndices) {
+            func(m_pool[i]);
         }
     }
 
-    // Update all in-use objects
+    // Update all in-use objects   //TODO: this needs to be optimized
     void UpdateEachInUse() {
-        if constexpr (HasRequiredFunctions<T>) {
-            for (size_t i = 0; i < m_pool.size(); ++i) {
-                if (inUseFlags[i]) {
-                    m_pool[i].obj.Update();
-                }
-            }
+        if constexpr (!HasRequiredFunctions<T>) {
+            return;
+        }
+        for (size_t i : activeIndices) {
+            m_pool[i].obj.Update();
         }
     }
 
 private:
-    // Expand the pool with new objects
+    // Expand the pool with new objects 
     template <typename... Args>
     void ExpandPool(Args&&... args) {
         size_t currentSize = m_pool.size();
@@ -124,14 +131,15 @@ private:
     // Emplace a new object in the pool
     template <typename... Args>
     void EmplaceNewObject(size_t index, Args&&... args) {
-        m_pool.emplace_back(this, index, std::forward<Args>(args)... );
+        m_pool.emplace_back(this, index, std::forward<Args>(args)...);
         inUseFlags[index] = false;
         availableIndices.push(index);
     }
-
+    
 private:
     Game* m_game_instance_;
     std::vector<PoolableObject<T>> m_pool;
     std::vector<bool> inUseFlags;
     std::stack<size_t> availableIndices;
+    std::vector<size_t> activeIndices;
 };

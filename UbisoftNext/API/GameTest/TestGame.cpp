@@ -95,15 +95,34 @@ void TestGame::InternalUpdate(const float deltaTime)
 		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
 		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
 		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
+		GetGameObjectManager()->Find(player)->GetComponent<CPoolManager<BulletGameObject>>()->Spawn();
 
 	}
 
 	if (GetInputHandler()->IsKeyPressed('B'))
 	{
-		for (int i = 0; i < 100; ++i)
-		{
-			GetGameObjectManager()-> Create("");
-		}
+		GetGameObjectManager()->Find(player)->RemoveComponent<CPoolManager<BulletGameObject>>();
 	}
 
 	if (App::IsKeyPressed('N'))

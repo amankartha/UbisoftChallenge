@@ -7,12 +7,12 @@
 
 BulletGameObject::BulletGameObject(Game* instance) : GameObject(instance)
 {
-	AddComponent<Ctransform>();
+	m_transform = AddComponent<Ctransform>();
 	AddComponent<CRenderer>(instance->GetRenderer())->CreateSprite(".\\TestData\\bulletRed.png", 1, 1);
 	GetComponent<CRenderer>()->m_isOn = false;
 	//GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
 //	GetComponent<CRenderer>()->SetGameObject(this);
-	
+	m_direction = Vector2(FRAND_RANGE(-1, 1), FRAND_RANGE(-1, 1));
 	m_isActive = false;
 }
 
@@ -25,8 +25,8 @@ void BulletGameObject::Update()
 {
 	if (m_isActive)
 	{
-		GameObject::Update();
-		GetTransformComponent().OffsetPosition(Vector2(1, 1));
+		//GameObject::Update();
+		m_transform->OffsetPosition(m_direction);
 	}
 }
 
@@ -34,7 +34,7 @@ void BulletGameObject::Update()
 
 void BulletGameObject::Clear()
 {
-	GetTransformComponent().ResetLocalPosition();
+	m_transform->ResetLocalPosition();
 	GetComponent<CRenderer>()->m_isOn = false;
 	m_isActive = false;
 }

@@ -17,7 +17,8 @@ public:
 private:
 	ObjectPool<BulletGameObject>* m_pool_;
 	bool m_isActive = false;
-	
+	Vector2 m_direction;
+	Ctransform* m_transform;
 };
 
 

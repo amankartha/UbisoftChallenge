@@ -5,13 +5,9 @@ namespace physics
 {
 	
 
-	RigidBody* PhysicsSimulation::AddBody(Shape rigidBodyShape)
+	int PhysicsSimulation::AddBody(Shape rigidBodyShape)
 	{
-		RigidBody* rb = &m_rigidbody_pool_.Get()->obj;
-
-	
-		
-		return rb;
+		return m_rigidbody_pool_.Get()->m_index;
 	}
 
 	void PhysicsSimulation::RemoveBody(std::shared_ptr<RigidBody> rigid_body)
