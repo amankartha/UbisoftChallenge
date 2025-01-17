@@ -215,6 +215,7 @@
     <ClInclude Include="IIDSystem.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPoolable.h" />
+    <ClInclude Include="IRenderable.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleGameObject.h" />
     <ClInclude Include="Pathfinding.h" />

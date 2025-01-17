@@ -11,7 +11,7 @@
 
 Game::Game()
 	: m_gameObjectManager(std::make_unique<GameObjectManager>(this)),  // Initialize with new instances
-	m_renderer(std::make_unique<Renderer>()),
+	m_renderer(std::make_unique<Renderer>(this)),
 	m_cameraManager(std::make_unique<CameraManager>()),
 	m_scheduler(std::make_unique<Scheduler>()),
 	m_physicsSimulation(std::make_unique<physics::PhysicsSimulation>(this)),

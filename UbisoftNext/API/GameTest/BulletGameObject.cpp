@@ -8,8 +8,7 @@
 BulletGameObject::BulletGameObject(Game* instance) : GameObject(instance)
 {
 	m_transform = AddComponent<Ctransform>();
-	AddComponent<CRenderer>(instance->GetRenderer())->CreateSprite(".\\TestData\\bulletRed.png", 1, 1);
-	GetComponent<CRenderer>()->m_isOn = false;
+	AddComponent<CRenderer>(instance->GetRenderer());;
 	//GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
 //	GetComponent<CRenderer>()->SetGameObject(this);
 	m_direction = Vector2(FRAND_RANGE(-1, 1), FRAND_RANGE(-1, 1));
@@ -35,13 +34,14 @@ void BulletGameObject::Update()
 void BulletGameObject::Clear()
 {
 	m_transform->ResetLocalPosition();
-	GetComponent<CRenderer>()->m_isOn = false;
+	GetComponent<CRenderer>()->SetRendererOnOff(false);
 	m_isActive = false;
 }
 
 void BulletGameObject::Start()
 {
 	m_isActive = true;
-	GetComponent<CRenderer>()->m_isOn = true;
+	GetComponent<CRenderer>()->SetRendererOnOff( true);
+	GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\bulletRed.png", 1, 1));
 	return;
 }

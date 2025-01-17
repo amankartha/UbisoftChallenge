@@ -9,72 +9,53 @@
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
 
+
     void Renderer::RenderAll(Camera& currentCamera)   //todo:: this is slow must optimize
     {
-        App::Print(1000, 300, std::to_string(m_rendermap_[RenderLayer::Default].size()).c_str());
-        if (m_isShake)
-        {
+        App::Print(1000, 300, std::to_string(m_rendermap_[RenderLayer::Default]->size()).c_str());
             m_shakeValue.x = FRAND_RANGE(-4, 4);
             m_shakeValue.y = FRAND_RANGE(-4, 4);
-            for (const auto& [m_renderLayer, renderers] : m_rendermap_)
-            {
-             
-                if (m_renderLayer == RenderLayer::UI)
-                {
-                    for (IRenderable* renderer : renderers)
-                    {
-
-                        renderer->Render(currentCamera,true);
-                    }
-                }
-                else
-                {
-                    for (IRenderable* renderer : renderers)
-                    {
-
-                        renderer->Render(currentCamera);
-                    }
-                }
-            }
-        }
-        else
-        {
-            for (const auto& [m_renderLayer, renderers] : m_rendermap_)
+            for (const auto& element : m_rendermap_)
             {
                 
-                if (m_renderLayer == RenderLayer::UI)
+                if (element.first == RenderLayer::UI)
                 {
-                    for (IRenderable* renderer : renderers)
+                    auto& pool = element.second;
+                    for (size_t renderer : pool->activeIndices)
                     {
-                        if (renderer->m_isOn)  renderer->Render(currentCamera,true);
+                      
+                        pool->m_pool[renderer].obj.m_renderable->Render(currentCamera, true);
+                       
                     }
                 }
                 else
                 {
-                    for (IRenderable* renderer : renderers)
+
+                    auto& pool = element.second;
+                    for (size_t renderer : pool->activeIndices)
                     {
 
-                        if (renderer->m_isOn) renderer->Render(currentCamera);
+                        pool->m_pool[renderer].obj.m_renderable->Render(currentCamera, false);
+
                     }
                 }
             }
-        }
     }
 
-    void Renderer::AddRenderer(IRenderable& renderer)
+
+    Renderable* Renderer::GetRenderable(RenderLayer layer, size_t id)
     {
-        m_rendermap_[renderer.GetRenderLayer()].push_back(&renderer);
+        return m_rendermap_[layer]->GetDirect(id);
     }
 
-    void Renderer::RemoveRenderer(IRenderable& renderer)
+    int Renderer::AddRenderer(RenderLayer layer)
     {
-        auto& renderVector = m_rendermap_[renderer.GetRenderLayer()];
+       return m_rendermap_[layer]->Get()->m_index;
+    }
 
-
-        renderVector.erase(
-            std::remove(renderVector.begin(), renderVector.end(), &renderer),
-            renderVector.end()
-        );
+    void Renderer::RemoveRenderer(RenderLayer layer,size_t id)
+    {
+        m_rendermap_[layer]->Release(id);
     }
     void Renderer::SetShake(bool b)
     {

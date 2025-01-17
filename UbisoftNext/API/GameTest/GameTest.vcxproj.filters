@@ -264,6 +264,9 @@
     <ClInclude Include="CAgent.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="IRenderable.h">
+      <Filter>Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

@@ -4,14 +4,75 @@
 #include "GameObject.h"
 #include "appUtility.h"
 #include "Camera.h"
+
+CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): mainRenderer(renderer)
+{
+	m_isShake = false;
+	m_renderLayer = layer;
+	//m_id = mainRenderer->AddRenderer(m_renderLayer);
+	//mainRenderer->GetRenderable(m_renderLayer, m_id)->m_render_Function = [this](const Camera camera, bool isUI) { this->Render(camera, isUI); };
+	
+}
+
+CRenderer::~CRenderer()
+{
+	mainRenderer->RemoveRenderer(m_renderLayer,m_id);
+}
+
+CSimpleSprite* CRenderer::GetSprite()
+{
+	return &mainRenderer->GetRenderable(m_renderLayer,m_id)->m_sprite;
+}
+
+void CRenderer::SetSprite(CSimpleSprite sprite)
+{
+	mainRenderer->GetRenderable(m_renderLayer, m_id)->SetSprite(sprite);
+}
+
+RenderLayer CRenderer::GetRenderLayer()
+{
+	return m_renderLayer;
+}
+
+//void CRenderer::SetRenderLayer(RenderLayer layer)  /
+//{
+//	m_isShake = false;
+//	mainRenderer->RemoveRenderer(m_renderLayer,m_id);
+//	m_renderLayer = layer;
+//	m_id = mainRenderer->AddRenderer(layer);
+//	mainRenderer->GetRenderable(m_renderLayer, m_id)->m_render_Function = [this](const Camera camera, bool isUI) { this->Render(camera, isUI); };
+//}
+
+void CRenderer::SetRendererOnOff(bool state)
+{
+	if (state)
+	{
+		m_id = mainRenderer->AddRenderer(m_renderLayer);
+		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
+		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_renderable = this;
+		//mainRenderer->GetRenderable(m_renderLayer, m_id)->m_render_Function = &CRenderer::Render;
+	}
+	else
+	{
+		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
+		mainRenderer->RemoveRenderer(m_renderLayer, m_id);
+		m_id = -1;
+	}
+}
+
+void CRenderer::Shake(bool b)
+{
+	m_isShake = b;
+}
+
 void CRenderer::Update()
 {
 	if (m_enabled)
 	{
 		Ctransform* transform = &GetAttachedGameObject()->GetTransformComponent();
 		
-		sprite->SetPosition(transform->GetWorldPosition().x , transform->GetWorldPosition().y );   //TODO: does this need to be called every time hmmmmmmmmmmm
-		sprite->SetScale(transform->GetScale());
+		GetSprite()->SetPosition(transform->GetWorldPosition().x , transform->GetWorldPosition().y );   //TODO: does this need to be called every time hmmmmmmmmmmm
+		GetSprite()->SetScale(transform->GetScale());
 	}
 }
 
@@ -19,7 +80,7 @@ void CRenderer::Render(const Camera camera,bool isUI)
 {
 	if (isUI)
 	{
-		sprite->Draw();
+		GetSprite()->Draw();
 	}
 	else
 	{
@@ -52,14 +113,14 @@ void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom)
 
 	//TODO DONT DRAW IF NOT ON SCREEN
 	
-	sprite->SetScale(sprite->GetScale() * zoom);
+	GetSprite()->SetScale(GetSprite()->GetScale() * zoom);
 
-	sprite->SetPosition(calculatedPosition.x , calculatedPosition.y);
+	GetSprite()->SetPosition(calculatedPosition.x , calculatedPosition.y);
 	
 	
 	if (calculatedPosition.x >= 0 && calculatedPosition.x <= APP_VIRTUAL_WIDTH &&
 		calculatedPosition.y >= 0 && calculatedPosition.y <= APP_VIRTUAL_HEIGHT) {
-		sprite->Draw();
+		GetSprite()->Draw();
 	}
 
 }

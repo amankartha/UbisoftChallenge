@@ -25,13 +25,14 @@ struct PoolableObject {
     T obj;
     ObjectPool<T>* m_pool;
 
-    PoolableObject() : m_pool(nullptr), m_index(-1), obj()
-    {
-    }
+
 
     template <typename... Args>
     PoolableObject(ObjectPool<T>* pool, size_t index, Args&&... args)
         : m_pool(pool), m_index(index), obj(std::forward<Args>(args)...) {
+    }
+    PoolableObject(ObjectPool<T>* pool, size_t index)
+        : m_pool(pool), m_index(index), obj() {
     }
 };
 
@@ -42,8 +43,13 @@ struct PoolableObject {
 template <typename T>
 class ObjectPool {
 public:
-    ObjectPool(Game* gameInstance, size_t initialSize = 100)
-        : m_game_instance_(gameInstance) {
+    ObjectPool(Game* gameInstance, size_t initialSize = 100) 
+        : m_game_instance_(gameInstance) , activeIndices(0) {
+        m_pool.reserve(initialSize);
+        inUseFlags.resize(initialSize, false);
+    }
+    ObjectPool(size_t initialSize = 100)
+        : m_game_instance_(nullptr) , activeIndices(0) {
         m_pool.reserve(initialSize);
         inUseFlags.resize(initialSize, false);
     }
@@ -75,8 +81,10 @@ public:
         return &m_pool[index];
     }
 
+
+
     // Get The T object directly from the pool, if the index is not in use it returns false 
-    T* Get(size_t index) {
+    T* GetDirect(size_t index) {
         if (inUseFlags[index]) return &m_pool[index].obj;
 
         return nullptr;
@@ -135,11 +143,32 @@ private:
         inUseFlags[index] = false;
         availableIndices.push(index);
     }
-    
+
+  /*  void ExpandPool() {
+        size_t currentSize = m_pool.size();
+        size_t newSize = currentSize + (std::max)(currentSize / 2, size_t(1));
+        m_pool.reserve(newSize);
+        inUseFlags.resize(newSize, false);
+
+        for (size_t i = currentSize; i < newSize; ++i) {
+            EmplaceNewObject(i);
+        }
+    }
+
+    void EmplaceNewObject(size_t index) {
+        m_pool.emplace_back(this, index);
+        inUseFlags[index] = false;
+        availableIndices.push(index);
+    }*/
+
+
 private:
     Game* m_game_instance_;
-    std::vector<PoolableObject<T>> m_pool;
+   
     std::vector<bool> inUseFlags;
     std::stack<size_t> availableIndices;
+   
+public:
     std::vector<size_t> activeIndices;
+    std::vector<PoolableObject<T>> m_pool;
 };

@@ -55,18 +55,19 @@ void TestGame::InternalInit()
 	
 	GetCameraManager()->SetMainCamera(0);
 
-	GetGameObjectManager()->Find(player)->AddComponent<CRenderer>(GetRenderer())->CreateSprite(".\\TestData\\Test.bmp", 8, 4);
-	GetGameObjectManager()->Find(player)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
+	GetGameObjectManager()->Find(player)->AddComponent<CRenderer>(GetRenderer())->SetRendererOnOff(true);
+	GetGameObjectManager()->Find(player)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\Test.bmp", 8, 4));
+	//GetGameObjectManager()->Find(player)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
 	GetGameObjectManager()->Find(player)->AddComponent<CPoolManager<BulletGameObject>> (this,100,this);
 
 
-	GetGameObjectManager()->Find(mouse)->AddComponent<CRenderer>(GetRenderer());
-	GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1);
-	GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
+	GetGameObjectManager()->Find(mouse)->AddComponent<CRenderer>(GetRenderer(),RenderLayer::UI)->SetRendererOnOff(true);;
+	GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
+	//GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
 
-	GetGameObjectManager()->Find(CenterObject)->AddComponent<CRenderer>(GetRenderer());
-	GetGameObjectManager()->Find(CenterObject)->GetComponent<CRenderer>()->CreateSprite(".\\TestData\\tile_grey.png", 1, 1);
+	GetGameObjectManager()->Find(CenterObject)->AddComponent<CRenderer>(GetRenderer())->SetRendererOnOff(true);;
+	GetGameObjectManager()->Find(CenterObject)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\tile_grey.png", 1, 1));
 	GetGameObjectManager()->Find(CenterObject)->GetComponent<Ctransform>()->SetScale(0.1f);
 
 
