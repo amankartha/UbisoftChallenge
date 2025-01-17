@@ -7,10 +7,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 //------------------------------------------------------------------------
 #include "stdafx.h"
-#include "TestGame.h"
+
+#include "MiniGolfGame.h"
 
 
-TestGame GAME = TestGame();
+//TestGame GAME = TestGame();
+MiniGolfGame GAME = MiniGolfGame();
+
 
 void Init()
 {

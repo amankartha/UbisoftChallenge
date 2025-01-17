@@ -27,13 +27,13 @@ struct Renderable
 {
 public:
 
-	Renderable() :m_sprite(".\\TestData\\tile_grey.png", 1, 1) {} ;
+	Renderable() :m_sprite(".\\TestData\\tile_grey.png", 1, 1) {};   // Didnt want to touch Csprite so for no there is a default sprite
 
 
 	~Renderable() = default;
 
 	//
-	//Renderable(const Renderable& other)
+	//Renderable(const Renderable& other)                  //I dont need these but just incase ive commented them
 	//	: m_render_Function(other.m_render_Function),
 	//	m_isOn(other.m_isOn),
 	//	m_sprite(other.m_sprite) {
@@ -88,21 +88,8 @@ class Renderer
 {
 public:
 	
-	Renderer(Game* instance) 
-	{
-		for (int renderLayer = Background; renderLayer != end ; renderLayer++)
-		{
-			m_rendermap_[static_cast<RenderLayer>(renderLayer)] = std::make_unique<ObjectPool<Renderable>>(instance);
-		}
+	Renderer(Game* instance);
 
-		for (auto& layer : m_rendermap_)
-		{
-			layer.second.get()->InitializePool(100);
-		}
-		
-		m_shakeValue = Vector2(0, 0);
-		m_isShake = false;
-	}
 	~Renderer()
 	{
 

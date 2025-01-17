@@ -28,7 +28,7 @@ std::vector<GRID::Cell*> pathToDraw;
 void TestGame::InternalInit()
 {
 	Game::InternalInit();
-	GetGameObjectManager()->InitAll();
+
 
 
 	pathFinder = std::make_shared<Pathfinding>(m_gridSystem);
@@ -43,10 +43,10 @@ void TestGame::InternalInit()
 	OutputDebugStringW(L"My output string.");
 
 	while (ShowCursor(FALSE) >= 0);  //Some code I found online that hides the cursor while its above the window.
-	mouse = GetGameObjectManager()->Create("Mouse");
-	player = GetGameObjectManager()->Create("Player");
-	camera = GetGameObjectManager()->Create("Camera");
-	CenterObject = GetGameObjectManager()->Create("Center");
+	mouse = GetGameObjectManager()->Create<GameObject>("Mouse");
+	player = GetGameObjectManager()->Create<GameObject>("Player");
+	camera = GetGameObjectManager()->Create<GameObject>("Camera");
+	CenterObject = GetGameObjectManager()->Create<GameObject>("Center");
 
 	//m_renderer.SetShake(true);
 
@@ -61,12 +61,12 @@ void TestGame::InternalInit()
 	GetGameObjectManager()->Find(player)->AddComponent<CPoolManager<BulletGameObject>> (this,100,this);
 
 
-	GetGameObjectManager()->Find(mouse)->AddComponent<CRenderer>(GetRenderer(),RenderLayer::UI)->SetRendererOnOff(true);;
+	GetGameObjectManager()->Find(mouse)->AddComponent<CRenderer>(GetRenderer(),RenderLayer::UI)->SetRendererOnOff(true);
 	GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
 	//GetGameObjectManager()->Find(mouse)->GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::UI);
 
 
-	GetGameObjectManager()->Find(CenterObject)->AddComponent<CRenderer>(GetRenderer())->SetRendererOnOff(true);;
+	GetGameObjectManager()->Find(CenterObject)->AddComponent<CRenderer>(GetRenderer())->SetRendererOnOff(true);
 	GetGameObjectManager()->Find(CenterObject)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\tile_grey.png", 1, 1));
 	GetGameObjectManager()->Find(CenterObject)->GetComponent<Ctransform>()->SetScale(0.1f);
 
@@ -130,7 +130,7 @@ void TestGame::InternalUpdate(const float deltaTime)
 	{
 		GetGameObjectManager()->Find(CenterObject)->SetParent(GetGameObjectManager()->Find(player));
 	}
-	GetGameObjectManager()->UpdateAll();
+	
 }
 
 void TestGame::InternalRender()

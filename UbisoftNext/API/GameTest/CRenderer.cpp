@@ -5,7 +5,7 @@
 #include "appUtility.h"
 #include "Camera.h"
 
-CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): mainRenderer(renderer)
+CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): m_main_renderer_(renderer)
 {
 	m_isShake = false;
 	m_renderLayer = layer;
@@ -14,19 +14,26 @@ CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): mainRenderer(render
 	
 }
 
+CRenderer::CRenderer(Renderer* renderer, bool turnOnImmediately, RenderLayer layer) : m_main_renderer_(renderer)
+{
+	m_isShake = false;
+	m_renderLayer = layer;
+	SetRendererOnOff(turnOnImmediately);
+}
+
 CRenderer::~CRenderer()
 {
-	mainRenderer->RemoveRenderer(m_renderLayer,m_id);
+	m_main_renderer_->RemoveRenderer(m_renderLayer,m_id);
 }
 
 CSimpleSprite* CRenderer::GetSprite()
 {
-	return &mainRenderer->GetRenderable(m_renderLayer,m_id)->m_sprite;
+	return &m_main_renderer_->GetRenderable(m_renderLayer,m_id)->m_sprite;
 }
 
 void CRenderer::SetSprite(CSimpleSprite sprite)
 {
-	mainRenderer->GetRenderable(m_renderLayer, m_id)->SetSprite(sprite);
+	m_main_renderer_->GetRenderable(m_renderLayer, m_id)->SetSprite(sprite);
 }
 
 RenderLayer CRenderer::GetRenderLayer()
@@ -47,15 +54,15 @@ void CRenderer::SetRendererOnOff(bool state)
 {
 	if (state)
 	{
-		m_id = mainRenderer->AddRenderer(m_renderLayer);
-		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
-		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_renderable = this;
+		m_id = m_main_renderer_->AddRenderer(m_renderLayer);
+		m_main_renderer_->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
+		m_main_renderer_->GetRenderable(m_renderLayer, m_id)->m_renderable = this;
 		//mainRenderer->GetRenderable(m_renderLayer, m_id)->m_render_Function = &CRenderer::Render;
 	}
 	else
 	{
-		mainRenderer->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
-		mainRenderer->RemoveRenderer(m_renderLayer, m_id);
+		m_main_renderer_->GetRenderable(m_renderLayer, m_id)->m_isOn = state;
+		m_main_renderer_->RemoveRenderer(m_renderLayer, m_id);
 		m_id = -1;
 	}
 }

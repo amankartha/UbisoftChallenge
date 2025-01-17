@@ -10,7 +10,7 @@ namespace physics {
     class PhysicsSimulation;
 }
 class InputHandler;
-
+class SceneManager;
 
 
 class Game
@@ -23,6 +23,7 @@ protected:
     std::unique_ptr<Scheduler> m_scheduler;
     std::unique_ptr<physics::PhysicsSimulation> m_physicsSimulation;
     std::unique_ptr<InputHandler> m_input_handler;
+	std::unique_ptr<SceneManager> m_scene_manager;
 
 public:
     
@@ -44,6 +45,6 @@ public:
     Scheduler* GetScheduler() const;
     physics::PhysicsSimulation* GetPhysicsSimulation() const;
     InputHandler* GetInputHandler();
-
+	SceneManager* GetSceneManager();
 
 };

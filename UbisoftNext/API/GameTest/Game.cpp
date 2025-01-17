@@ -6,6 +6,7 @@
 #include "InputHandler.h"
 #include "PhysicsSimulation.h"
 #include "Renderer.h"
+#include "SceneManager.h"
 #include "Scheduler.h"
 
 
@@ -15,7 +16,8 @@ Game::Game()
 	m_cameraManager(std::make_unique<CameraManager>()),
 	m_scheduler(std::make_unique<Scheduler>()),
 	m_physicsSimulation(std::make_unique<physics::PhysicsSimulation>(this)),
-	m_input_handler(std::make_unique<InputHandler>())
+	m_input_handler(std::make_unique<InputHandler>()),
+	m_scene_manager(std::make_unique<SceneManager>(this))
 {
 	// You can initialize other members here if needed
 }
@@ -24,11 +26,15 @@ Game::~Game(){}  //need this for unique ptrs to work because it needs a place to
 
 void Game::InternalInit()
 {
-	/*auto GO = m_gameObjectManager.Create("MAINCAMERA");
-	GO.AddComponent<Ccamera>(m_cameraManager,0);
+	auto GO = m_gameObjectManager.get()->Create<GameObject>("MAINCAMERA");
+	GetGameObjectManager()->Find(GO)->AddComponent<Ccamera>(m_cameraManager.get(),0);
 
-	auto camera = m_cameraManager.CreateCamera(0);
-	*/
+	GetGameObjectManager()->Find(GO)->GetComponent<Ccamera>()->SetTransform(GetGameObjectManager()->Find(GO)->GetComponent<Ctransform>()->GetTransform());
+	GetCameraManager()->SetMainCamera(0);
+	
+	
+
+	GetGameObjectManager()->InitAll();
 }
 
 void Game::InternalUpdate(const float deltaTime)
@@ -36,6 +42,7 @@ void Game::InternalUpdate(const float deltaTime)
 	m_input_handler->Update();
 	m_input_handler->PollInputs();
 	m_scheduler->Update();
+	GetGameObjectManager()->UpdateAll();
 }
 
 void Game::InternalRender()
@@ -71,4 +78,9 @@ physics::PhysicsSimulation* Game::GetPhysicsSimulation() const
 InputHandler* Game::GetInputHandler()
 {
 	return m_input_handler.get();
+}
+
+SceneManager* Game::GetSceneManager()
+{
+	return m_scene_manager.get();
 }

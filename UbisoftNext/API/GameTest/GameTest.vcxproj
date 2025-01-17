@@ -205,6 +205,7 @@
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
     <ClInclude Include="Ctransform.h" />
+    <ClInclude Include="CursorGameObject.h" />
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="Game.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="IPoolable.h" />
     <ClInclude Include="IRenderable.h" />
+    <ClInclude Include="MiniGolfGame.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleGameObject.h" />
     <ClInclude Include="Pathfinding.h" />
@@ -223,6 +225,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RingBuffer.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
@@ -257,6 +261,7 @@
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
     <ClCompile Include="Ctransform.cpp" />
+    <ClCompile Include="CursorGameObject.cpp" />
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -264,10 +269,13 @@
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="IIDSystem.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="MiniGolfGame.cpp" />
     <ClCompile Include="ParticleGameObject.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PushDownAutomata.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
     <ClCompile Include="ObserverPattern.cpp" />

@@ -43,6 +43,22 @@
     }
 
 
+Renderer::Renderer(Game* instance)
+{
+	for (int renderLayer = Background; renderLayer != end ; renderLayer++)
+	{
+		m_rendermap_[static_cast<RenderLayer>(renderLayer)] = std::make_unique<ObjectPool<Renderable>>(instance);
+	}
+
+	for (auto& layer : m_rendermap_)
+	{
+		layer.second.get()->InitializePool(100);
+	}
+		
+	m_shakeValue = Vector2(0, 0);
+	m_isShake = false;
+}
+
     Renderable* Renderer::GetRenderable(RenderLayer layer, size_t id)
     {
         return m_rendermap_[layer]->GetDirect(id);

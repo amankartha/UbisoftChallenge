@@ -119,6 +119,18 @@
     <ClCompile Include="CAgent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="MiniGolfGame.cpp">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="CursorGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -267,6 +279,18 @@
     <ClInclude Include="IRenderable.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="MiniGolfGame.h">
+      <Filter>Game&amp;StartPoint</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="CursorGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -316,6 +340,9 @@
     </Filter>
     <Filter Include="Interfaces">
       <UniqueIdentifier>{3e9ebdc5-6a9c-4db0-90ee-bba158d5c5d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{3b4d3dfa-1111-4e01-9b58-20840c926ab4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

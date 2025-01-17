@@ -48,18 +48,6 @@ int GameObjectManager::GetNumberOfGameObjects() const
 	return m_gameObjectMap.size();
 }
 
-int GameObjectManager::Create(const std::string& name)
-{
-	//std::string uniqueName = generateUniqueName(name);
-	auto createdGO = std::make_unique<GameObject>(GetGameInstance());
-	int id = GenerateID();
-	m_gameObjectMap[id] = std::move(createdGO);
-	m_gameObjectMap[id]->m_name = name;
-	m_gameObjectMap[id]->AddComponent<Ctransform>();
-	App::PrintOutputMessage("GameObject " + name + " Created\n");
-	return id;
-   
-}
 
 //std::string GameObjectManager::generateUniqueName(const std::string& name)
 //{

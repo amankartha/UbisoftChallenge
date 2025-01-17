@@ -8,6 +8,7 @@ class CRenderer :
 {
 public:
     CRenderer(Renderer* renderer,RenderLayer layer = RenderLayer::Default);
+    CRenderer(Renderer* renderer,bool turnOnImmediately, RenderLayer layer = RenderLayer::Default);
 
     ~CRenderer() override;
 
@@ -33,7 +34,7 @@ public:
 
 private:
     size_t m_id;
-    Renderer* mainRenderer;
+    Renderer* m_main_renderer_;
     RenderLayer m_renderLayer;
     bool m_isShake;
 
