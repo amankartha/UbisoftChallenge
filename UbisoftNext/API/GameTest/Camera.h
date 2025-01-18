@@ -3,6 +3,9 @@
 #include <algorithm>
 #include "CustomMath.h"
 #include <App/AppSettings.h>
+
+#include "Ctransform.h"
+
 class Camera
 {
 
@@ -18,25 +21,26 @@ public:
 	}
 	void SetPosition(Vector2 newPos)
 	{
-		m_transform->position = newPos;
+		m_transform->SetPosition(newPos);
 	}
 	Vector2 GetPosition() const
 	{
-		return m_transform->position;
+		return m_transform->GetWorldPosition();
 	}
 	float GetAngle() const
 	{
-		return m_transform->angle;
+		return m_transform->GetAngle();
 	}
-	Transform& GetTransform() const
-	{
-		return *m_transform;
-	}
+	//Transform& GetTransform() const
+	//{
+	//	return *m_transform->GetTransform();
+	//}
+	
 	float GetZoom() const
 	{
 		return m_zoomFactor;
 	}
-	void SetTransform(Transform& transform)
+	void SetTransform(Ctransform& transform)
 	{
 		m_transform = &transform;
 	}
@@ -47,7 +51,7 @@ public:
 
 	
 private:
-	Transform* m_transform;
+	Ctransform* m_transform;  //TODO: ideally this shud just use transform but it gets ugly with heirarchy
 
 	float m_zoomFactor;
 	

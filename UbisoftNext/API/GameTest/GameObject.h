@@ -1,4 +1,6 @@
 #pragma once
+#include <cassert>
+
 #include "Component.h"
 #include "Ctransform.h"
 #include <unordered_map>
@@ -35,7 +37,7 @@ public:
 
 		if (m_components.contains(type))
 		{
-			throw std::logic_error("Component of this type already exists in GameObject");
+			assert("Component of this type already exists in GameObject");
 		}
 
 		m_components[type] = std::make_unique<T>(std::forward<Args>(args)...);

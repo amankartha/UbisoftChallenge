@@ -51,7 +51,7 @@ void TestGame::InternalInit()
 	//m_renderer.SetShake(true);
 
 	GetGameObjectManager()->Find(camera)->AddComponent<Ccamera>(GetCameraManager(),0);
-	GetGameObjectManager()->Find(camera)->GetComponent<Ccamera>()->SetTransform(GetGameObjectManager()->Find(camera)->GetTransformComponent().GetTransform());
+	GetGameObjectManager()->Find(camera)->GetComponent<Ccamera>()->SetTransform(&GetGameObjectManager()->Find(camera)->GetTransformComponent());
 	
 	GetCameraManager()->SetMainCamera(0);
 

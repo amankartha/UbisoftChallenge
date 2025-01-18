@@ -2,10 +2,11 @@
 #include <bitset>
 #include <unordered_map>
 
+#include "ObserverPattern.h"
 #include "RingBuffer.h"
 
 
-class InputHandler
+class InputHandler : public  Events::ISubject
 {
 public:
 
@@ -14,6 +15,8 @@ public:
 	~InputHandler();
 
 	void SetKeysToTrack(std::vector<int> keys);
+
+	bool IsKey(int key);
 
 	bool IsKeyPressed(int key);
 

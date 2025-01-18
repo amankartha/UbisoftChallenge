@@ -12,5 +12,5 @@ void Ccursor::Init()
 
 void Ccursor::Update()
 {
-	GetAttachedGameObject()->GetTransformComponent().SetPosition(GetAttachedGameObject()->GameInstance->GetCameraManager()->GetMainCamera().GetPosition() + App::GetMousePosVec2());
+	GetAttachedGameObject()->GetTransformComponent().SetPosition( App::GetMousePosVec2());
 }

@@ -57,7 +57,7 @@
       <Filter>Cameras&amp;Rendering</Filter>
     </ClCompile>
     <ClCompile Include="ObserverPattern.cpp">
-      <Filter>Observer</Filter>
+      <Filter>DataStructure&amp;Patterns\Observer</Filter>
     </ClCompile>
     <ClCompile Include="TestGame.cpp">
       <Filter>Game&amp;StartPoint</Filter>
@@ -131,6 +131,12 @@
     <ClCompile Include="CursorGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="MiniGolfCameraGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CCameraController.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -198,7 +204,7 @@
       <Filter>Cameras&amp;Rendering</Filter>
     </ClInclude>
     <ClInclude Include="ObserverPattern.h">
-      <Filter>Observer</Filter>
+      <Filter>DataStructure&amp;Patterns\Observer</Filter>
     </ClInclude>
     <ClInclude Include="TestGame.h">
       <Filter>Game&amp;StartPoint</Filter>
@@ -291,6 +297,12 @@
     <ClInclude Include="CursorGameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
+    <ClInclude Include="MiniGolfCameraGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CCameraController.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">
@@ -317,9 +329,6 @@
     <Filter Include="Physics">
       <UniqueIdentifier>{4184aade-8647-4117-a657-ac158d750138}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Observer">
-      <UniqueIdentifier>{60657d4f-a298-4252-a069-924d50b18ec0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game&amp;StartPoint">
       <UniqueIdentifier>{cac4cf7d-b950-4dba-b2f1-a7a92a07934a}</UniqueIdentifier>
     </Filter>
@@ -343,6 +352,9 @@
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{3b4d3dfa-1111-4e01-9b58-20840c926ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructure&amp;Patterns\Observer">
+      <UniqueIdentifier>{60657d4f-a298-4252-a069-924d50b18ec0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

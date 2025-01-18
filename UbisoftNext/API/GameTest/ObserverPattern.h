@@ -10,6 +10,7 @@ namespace Events
 	enum class EventType
 	{
 		base = 0,
+		Input
 	};
 
 	class IObserver

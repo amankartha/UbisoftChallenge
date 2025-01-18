@@ -7,13 +7,14 @@
 
 CursorGameObject::CursorGameObject(Game* instance) : GameObject(instance)
 {
-	AddComponent<Ccursor>();
-	AddComponent<CRenderer>(instance->GetRenderer(),true,RenderLayer::UI)->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
+	
 }
 
 void CursorGameObject::Init()
 {
 	GameObject::Init();
+	AddComponent<Ccursor>();
+	AddComponent<CRenderer>(GameInstance->GetRenderer(), true, RenderLayer::UI)->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
 }
 
 void CursorGameObject::Update()

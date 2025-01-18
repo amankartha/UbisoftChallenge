@@ -19,6 +19,16 @@ void InputHandler::SetKeysToTrack(std::vector<int> keys)
 		m_keyToBit[key] = i++;
 	}
 }
+//Is triggered is key is either held or pressed
+bool InputHandler::IsKey(int key)
+{
+	auto it = m_keyToBit.find(key);
+	if (it != m_keyToBit.end())
+	{
+		return m_currentState[it->second];
+	}
+	return false;
+}
 
 //Is triggered only on the frame that the button is pressed (Not continually)
 bool InputHandler::IsKeyPressed(int key)
@@ -40,6 +50,8 @@ bool InputHandler::IsKeyHeld(int key)
 	}
 	return false;
 }
+
+
 
 //Is triggered the frame that the button is released
 bool InputHandler::IsKeyReleased(int key)
@@ -71,7 +83,10 @@ void InputHandler::PollInputs()
 			m_currentState.set(it->second);
 		}
 	}
-	
+	if (!m_currentState.none())  // if any key is pressed send out an input event
+	{
+		NotifyObservers(Events::EventType::Input);
+	}
 }
 
 void InputHandler::Update()

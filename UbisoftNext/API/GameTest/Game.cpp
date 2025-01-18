@@ -19,18 +19,19 @@ Game::Game()
 	m_input_handler(std::make_unique<InputHandler>()),
 	m_scene_manager(std::make_unique<SceneManager>(this))
 {
-	// You can initialize other members here if needed
+
+	auto GO = m_gameObjectManager.get()->Create<GameObject>("MAINCAMERA");
+	GetGameObjectManager()->Find(GO)->AddComponent<Ccamera>(m_cameraManager.get(), 0);
+
+	GetGameObjectManager()->Find(GO)->GetComponent<Ccamera>()->SetTransform(GetGameObjectManager()->Find(GO)->GetComponent<Ctransform>());
+	GetCameraManager()->SetMainCamera(0);
 }
 
 Game::~Game(){}  //need this for unique ptrs to work because it needs a place to call its delete
 
 void Game::InternalInit()
 {
-	auto GO = m_gameObjectManager.get()->Create<GameObject>("MAINCAMERA");
-	GetGameObjectManager()->Find(GO)->AddComponent<Ccamera>(m_cameraManager.get(),0);
 
-	GetGameObjectManager()->Find(GO)->GetComponent<Ccamera>()->SetTransform(GetGameObjectManager()->Find(GO)->GetComponent<Ctransform>()->GetTransform());
-	GetCameraManager()->SetMainCamera(0);
 	
 	
 

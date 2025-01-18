@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include <Camera.h>
+#include <cassert>
 #include <unordered_map>
 
 class CameraManager
@@ -30,7 +31,7 @@ public:
      Camera& GetCamera(int id) {
         auto it = m_cameras.find(id);
         if (it == m_cameras.end()) {
-            throw std::runtime_error("Camera not found!");
+            assert("Camera not found!");
         }
         return *(it->second);
     }
@@ -42,9 +43,7 @@ public:
 
    
      Camera& GetMainCamera() {
-        if (!m_mainCamera) {
-            throw std::runtime_error("Main camera not set!");
-        }
+	 	assert(m_mainCamera && "Main camera not set!");
         return *m_mainCamera;
     }
 
