@@ -98,9 +98,6 @@
     <ClCompile Include="PushDownAutomata.cpp">
       <Filter>AI</Filter>
     </ClCompile>
-    <ClCompile Include="CPDAcontroller.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -114,9 +111,6 @@
       <Filter>Interfaces</Filter>
     </ClCompile>
     <ClCompile Include="CPoolManager.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="CAgent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="MiniGolfGame.cpp">
@@ -136,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="CCameraController.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FSM.cpp">
+      <Filter>AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,9 +246,6 @@
     <ClInclude Include="PushDownAutomata.h">
       <Filter>AI</Filter>
     </ClInclude>
-    <ClInclude Include="CPDAcontroller.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="RingBuffer.h">
       <Filter>DataStructure&amp;Patterns</Filter>
     </ClInclude>
@@ -279,9 +273,6 @@
     <ClInclude Include="CPoolManager.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="CAgent.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="IRenderable.h">
       <Filter>Interfaces</Filter>
     </ClInclude>
@@ -302,6 +293,9 @@
     </ClInclude>
     <ClInclude Include="CCameraController.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FSM.h">
+      <Filter>AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

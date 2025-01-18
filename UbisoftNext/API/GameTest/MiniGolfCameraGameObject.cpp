@@ -5,7 +5,7 @@
 #include "CCameraController.h"
 #include "Game.h"
 
-MiniGolfCameraGameObject::MiniGolfCameraGameObject(Game* instance) : GameObject(instance)
+MiniGolfCameraGameObject::MiniGolfCameraGameObject(Game* instance,int id) : GameObject(instance,id)
 {
 	AddComponent<Ccamera>(GameInstance->GetCameraManager(), 1);
 	AddComponent<CCameraController>();

@@ -4,7 +4,7 @@ class CursorGameObject :
     public GameObject
 {
 public:
-	CursorGameObject(Game* instance);
+	CursorGameObject(Game* instance,int id);
 
 	void Init() override;
 	void Update() override;

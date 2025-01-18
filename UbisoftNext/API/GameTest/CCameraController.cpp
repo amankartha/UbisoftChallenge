@@ -6,6 +6,12 @@
 #include "GameObject.h"
 #include "InputHandler.h"
 
+
+CCameraController::CCameraController() : m_state_(CameraState::FollowGolfBall)
+{
+	m_direction = Vector2(0, 0);
+}
+
 CCameraController::~CCameraController()
 {
 	GetAttachedGameObject()->GameInstance->GetInputHandler()->DeRegisterObserver(*this);
@@ -15,6 +21,7 @@ void CCameraController::Init()
 {
 	Component::Init();
 	GetAttachedGameObject()->GameInstance->GetInputHandler()->RegisterObserver(*this);
+
 }
 
 void CCameraController::Update()
@@ -25,29 +32,47 @@ void CCameraController::Update()
 
 void CCameraController::OnNotify(const Events::EventType event)
 {
-	if (event == Events::EventType::Input)
-	{
-		InputHandler* inputHandler = GetAttachedGameObject()->GameInstance->GetInputHandler();
-		if (inputHandler->IsKey('W'))
-		{
-			m_direction += Vector2(0, 1);
-		}
-		if (inputHandler->IsKey('S'))
-		{
-			m_direction += Vector2(0, -1);
-		}
-		if (inputHandler->IsKey('A'))
-		{
-			m_direction += Vector2(-1, 0);
-		}
-		if (inputHandler->IsKey('D'))
-		{
-			m_direction += Vector2(1, 0);
-		}
+	InputHandler* inputHandler = GetAttachedGameObject()->GameInstance->GetInputHandler();
 
-		GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
-		m_direction = Vector2(0, 0);
+	switch (m_state_) {
+		case CameraState::FollowGolfBall:
+			
+			if (inputHandler->IsKeyPressed('F'))
+			{
+				m_state_ = CameraState::FreeRoam;
+			}
+			break;
+		case CameraState::LerpToGolfBall:
+			break;
+		case CameraState::FreeRoam:
+			if (event == Events::EventType::Input)
+			{
+				if (inputHandler->IsKey('W'))
+				{
+					m_direction += Vector2(0, 1);
+				}
+				if (inputHandler->IsKey('S'))
+				{
+					m_direction += Vector2(0, -1);
+				}
+				if (inputHandler->IsKey('A'))
+				{
+					m_direction += Vector2(-1, 0);
+				}
+				if (inputHandler->IsKey('D'))
+				{
+					m_direction += Vector2(1, 0);
+				}
+				if (inputHandler->IsKeyPressed('F'))
+				{
+					m_state_ = CameraState::FollowGolfBall;
+					return;
+				}
+				GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
+				m_direction = Vector2(0, 0);
+			}
+			break;
 	}
+
+
 }
-
-

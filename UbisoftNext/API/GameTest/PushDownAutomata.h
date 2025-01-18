@@ -1,30 +1,68 @@
 #pragma once
+#include <memory>
 #include <stack>
+#include <variant>
 #include "State.h"
+
+struct CameraContext;
 
 namespace AI
 {
-
-	struct Context
-	{
-		
-	};
-
+	template<typename T>
 	class PushDownAutomata
 	{
 	public:
-		PushDownAutomata(Context context) : m_context(context){}
+		PushDownAutomata(T* Context)
+		{
+			m_context = Context;
+		}
+		~PushDownAutomata() {}
 
-		State* GetCurrentState();
-		void PushState(State& state);
-		void PopState();
-		void UpdateState();
-		void SetContext(Context context);
-	public:
-		Context m_context;
+		template<typename T>
+		State<T>* GetCurrentState()
+		{
+			if (!m_stateStack.empty())
+			{
+				return m_stateStack.top();
+			}
+			return nullptr;
+		}
+
+		
+		void PushState(State<T>* state) 
+		{
+			m_stateStack.push(state);
+			m_stateStack.top()->Enter();
+		};
+		
+		void PopState()
+		{
+			if (m_stateStack.empty())
+			{
+				return;
+			}
+			GetCurrentState<T>()->Exit();
+			m_stateStack.pop();
+		}
+		void UpdateState()
+		{
+			if (!m_stateStack.empty())
+			{
+				GetCurrentState<T>()->Update();
+			}
+		}
+		T* GetContext()
+		{
+			return m_context;
+		}
+		
 	private:
-		std::stack<State*> m_stateStack;
+		T* m_context;
+	protected:
+		std::stack <State<T>*> m_stateStack;
 	};
+
+
 };
 
 

@@ -81,12 +81,12 @@ public:
 		m_parent = nullptr;
 	}
 
-	GameObject(Game* gameInstance) 
+	GameObject(Game* gameInstance, int id = -1) 
 	{
 		m_isEnabled = true;
 		m_parent = nullptr;
 		GameInstance = gameInstance;
-		
+		m_id = id;
 	};
 
 
@@ -134,4 +134,5 @@ public:
 	std::string m_name;
 	GameObject* m_parent;
 	std::vector<GameObject*> m_children;
+	int m_id;
 };

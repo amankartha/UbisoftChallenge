@@ -193,7 +193,6 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="BulletGameObject.h" />
-    <ClInclude Include="CAgent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Ccamera.h" />
@@ -201,7 +200,6 @@
     <ClInclude Include="Ccursor.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="CPDAcontroller.h" />
     <ClInclude Include="CPoolManager.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
@@ -209,6 +207,7 @@
     <ClInclude Include="CursorGameObject.h" />
     <ClInclude Include="CustomMath.h" />
     <ClInclude Include="DataStructure.h" />
+    <ClInclude Include="FSM.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -248,7 +247,6 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="BulletGameObject.cpp" />
-    <ClCompile Include="CAgent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Ccamera.cpp" />
@@ -259,13 +257,13 @@
     <ClInclude Include="Collision.h" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="CPDAcontroller.cpp" />
     <ClCompile Include="CPoolManager.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
     <ClCompile Include="Ctransform.cpp" />
     <ClCompile Include="CursorGameObject.cpp" />
     <ClCompile Include="CustomMath.cpp" />
+    <ClCompile Include="FSM.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />

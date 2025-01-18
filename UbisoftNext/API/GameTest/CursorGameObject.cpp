@@ -5,7 +5,7 @@
 #include "CRenderer.h"
 #include "Game.h"
 
-CursorGameObject::CursorGameObject(Game* instance) : GameObject(instance)
+CursorGameObject::CursorGameObject(Game* instance,int id) : GameObject(instance,id)
 {
 	
 }
