@@ -27,6 +27,8 @@ void CCameraController::Init()
 void CCameraController::Update()
 {
 	Component::Update();
+	GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
+	m_direction = Vector2(0, 0);
 
 }
 
@@ -68,8 +70,6 @@ void CCameraController::OnNotify(const Events::EventType event)
 					m_state_ = CameraState::FollowGolfBall;
 					return;
 				}
-				GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
-				m_direction = Vector2(0, 0);
 			}
 			break;
 	}

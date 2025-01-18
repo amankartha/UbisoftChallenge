@@ -74,7 +74,7 @@ namespace GRID
 
         std::vector<Cell*> GetNeighbours(Cell* cell);
     
-    
+        std::vector<Vector2> GetAllFilledCells();
     
     
     private:
@@ -87,6 +87,7 @@ namespace GRID
       
         Vector2 m_origin;
         std::vector<std::vector<Cell>> m_grid;
+        std::unordered_map<IntVector2, Vector2> m_filled_cells;
     };
 
 };

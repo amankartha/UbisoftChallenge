@@ -3,6 +3,7 @@
 
 #include "appUtility.h"
 
+//Note this can register the same observer multiple times incase you want to call a function multiple times
 void Events::ISubject::RegisterObserver(IObserver& observer)
 {
 	m_observers_.push_back(&observer);

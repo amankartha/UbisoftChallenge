@@ -28,7 +28,7 @@ Vector2 GRID::GridSystem::GridToWorld(IntVector2 gridPosition) const
 void GRID::GridSystem::SetObstacle(IntVector2 gridPosition)
 {
 	m_grid[gridPosition.x][gridPosition.y].m_isObstacle = true;
-
+	m_filled_cells[gridPosition] = Vector2(GridToWorld(gridPosition));
 }
 
 void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
@@ -36,6 +36,7 @@ void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
 	IntVector2 gridPos = WorldToGrid(worldPosition);
 
 	m_grid[gridPos.x][gridPos.y].m_isObstacle = true;
+	m_filled_cells[gridPos] = Vector2(GridToWorld(gridPos));
 }
 
 //returns null_ptr if cell does not exist
@@ -79,6 +80,10 @@ std::vector<GRID::Cell*> GRID::GridSystem::GetNeighbours(GRID::Cell* cell)
 	}
 
 	return cells;
+}
+
+std::vector<Vector2> GRID::GridSystem::GetAllFilledCells()
+{
 }
 
 void GRID::GridSystem::CreateGrid()

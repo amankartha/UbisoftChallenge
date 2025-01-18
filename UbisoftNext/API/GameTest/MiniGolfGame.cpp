@@ -5,6 +5,7 @@
 
 #include "cameraManager.h"
 #include "CursorGameObject.h"
+#include "GameManager.h"
 #include "InputHandler.h"
 #include "GameObjectManager.h"
 #include "MiniGolfCameraGameObject.h"
@@ -20,7 +21,7 @@ MiniGolfGame::MiniGolfGame()
 	///Add Gameobjects that dont need to belong to a scene
 	GetGameObjectManager()->Create<CursorGameObject>("Cursor");
 	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
-
+	GetGameObjectManager()->Create<GameManager>("GameManager");
 
 	///--------------------------
 }
@@ -45,7 +46,9 @@ void MiniGolfGame::InternalRender()
 {
 	Game::InternalRender();
 	GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
-	App::Print(100, 100, GetCameraManager()->GetMainCamera().GetPosition().Print().c_str());
+//	App::Print(100, 100, GetCameraManager()->GetMainCamera().GetPosition().Print().c_str());
+	//App::Print(100, 100, GetRenderer()->.GetPosition().Print().c_str());
+	//App::Print(300, 100, std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
 }
 
 void MiniGolfGame::InternalShutdown()

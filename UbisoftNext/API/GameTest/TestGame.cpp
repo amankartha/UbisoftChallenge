@@ -50,10 +50,10 @@ void TestGame::InternalInit()
 
 	//m_renderer.SetShake(true);
 
-	GetGameObjectManager()->Find(camera)->AddComponent<Ccamera>(GetCameraManager(),0);
-	GetGameObjectManager()->Find(camera)->GetComponent<Ccamera>()->SetTransform(&GetGameObjectManager()->Find(camera)->GetTransformComponent());
+	//GetGameObjectManager()->Find(camera)->AddComponent<Ccamera>(GetCameraManager(),0);
+	//GetGameObjectManager()->Find(camera)->GetComponent<Ccamera>()->SetTransform(&GetGameObjectManager()->Find(camera)->GetTransformComponent());
 	
-	GetCameraManager()->SetMainCamera(0);
+	//GetCameraManager()->SetMainCamera(0);
 
 	GetGameObjectManager()->Find(player)->AddComponent<CRenderer>(GetRenderer())->SetRendererOnOff(true);
 	GetGameObjectManager()->Find(player)->GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\Test.bmp", 8, 4));

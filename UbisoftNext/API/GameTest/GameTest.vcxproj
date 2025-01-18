@@ -200,6 +200,7 @@
     <ClInclude Include="Ccursor.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="CPlaceObject.h" />
     <ClInclude Include="CPoolManager.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
@@ -209,9 +210,11 @@
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="GameplaySystem.h" />
+    <ClInclude Include="GolfBallGameObject.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IIDSystem.h" />
     <ClInclude Include="InputHandler.h" />
@@ -222,6 +225,7 @@
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleGameObject.h" />
     <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="PlayerGameObject.h" />
     <ClInclude Include="PushDownAutomata.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RigidBody.h" />
@@ -257,6 +261,7 @@
     <ClInclude Include="Collision.h" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="CPlaceObject.cpp" />
     <ClCompile Include="CPoolManager.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
@@ -265,8 +270,10 @@
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GolfBallGameObject.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="IIDSystem.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -274,6 +281,7 @@
     <ClCompile Include="MiniGolfGame.cpp" />
     <ClCompile Include="ParticleGameObject.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="PlayerGameObject.cpp" />
     <ClCompile Include="PushDownAutomata.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
