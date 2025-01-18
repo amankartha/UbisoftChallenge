@@ -2,19 +2,21 @@
 #include "CursorGameObject.h"
 
 #include "Ccursor.h"
+#include "CPlaceObject.h"
 #include "CRenderer.h"
 #include "Game.h"
 
 CursorGameObject::CursorGameObject(Game* instance,int id) : GameObject(instance,id)
 {
-	
+	AddComponent<Ccursor>();
+	AddComponent<CRenderer>(GameInstance->GetRenderer(), true, RenderLayer::UI);  
+	AddComponent<CPlaceObject>(GameInstance->GetInputHandler(), GameInstance->GetGridSystem());
 }
 
 void CursorGameObject::Init()
 {
 	GameObject::Init();
-	AddComponent<Ccursor>();
-	AddComponent<CRenderer>(GameInstance->GetRenderer(), true, RenderLayer::UI)->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
+	GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
 }
 
 void CursorGameObject::Update()

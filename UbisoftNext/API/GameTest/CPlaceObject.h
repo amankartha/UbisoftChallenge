@@ -4,7 +4,7 @@
 #include "InputHandler.h"
 
 class CPlaceObject :
-    public Component,Events::IObserver
+    public Component, public Events::IObserver
 {
 public:
 

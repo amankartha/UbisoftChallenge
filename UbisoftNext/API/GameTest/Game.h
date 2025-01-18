@@ -2,6 +2,11 @@
 #include <memory>  
 
 
+namespace GRID
+{
+	class GridSystem;
+}
+
 class GameObjectManager;
 class Renderer;
 class CameraManager;
@@ -46,5 +51,6 @@ public:
     physics::PhysicsSimulation* GetPhysicsSimulation() const;
     InputHandler* GetInputHandler();
 	SceneManager* GetSceneManager();
+    virtual GRID::GridSystem* GetGridSystem(); 
 
 };

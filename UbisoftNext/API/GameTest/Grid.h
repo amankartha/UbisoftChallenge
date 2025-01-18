@@ -4,6 +4,9 @@
 #include <memory> // For smart pointers
 #include <vector>
 #include <array>
+
+#include "Renderer.h"
+
 namespace GRID
 {
     struct Cell
@@ -65,6 +68,9 @@ namespace GRID
 
         void SetObstacle(Vector2 worldPosition);
 
+        void RemoveObstacle(IntVector2 gridPosition);
+
+        void RemoveObstacle(Vector2 worldPosition);
 
         Cell* GetCell(IntVector2 gridPosition);
 
@@ -74,9 +80,9 @@ namespace GRID
 
         std::vector<Cell*> GetNeighbours(Cell* cell);
     
-        std::vector<Vector2> GetAllFilledCells();
+        std::vector<Vector2> GetAllFilledCells() const;
     
-    
+        std::vector<IntVector2> GetAllFillCellsGridPositions() const;
     private:
         void CreateGrid();
 
@@ -89,5 +95,8 @@ namespace GRID
         std::vector<std::vector<Cell>> m_grid;
         std::unordered_map<IntVector2, Vector2> m_filled_cells;
     };
+
+
+
 
 };

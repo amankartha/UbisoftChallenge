@@ -15,7 +15,7 @@ MiniGolfGame::MiniGolfGame()
 {
 	 
 	/// Add Input to keep track of
-	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RIGHT, 'W', 'A', 'S', 'D','F'});
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D','F'});
 	///----------------------------------------------------------
 	///----------------------------------------------------------
 	///Add Gameobjects that dont need to belong to a scene
@@ -46,6 +46,7 @@ void MiniGolfGame::InternalRender()
 {
 	Game::InternalRender();
 	GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
+	GetRenderer()->DrawFilledCells(m_grid_system_);
 //	App::Print(100, 100, GetCameraManager()->GetMainCamera().GetPosition().Print().c_str());
 	//App::Print(100, 100, GetRenderer()->.GetPosition().Print().c_str());
 	//App::Print(300, 100, std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
@@ -56,7 +57,7 @@ void MiniGolfGame::InternalShutdown()
 	
 }
 
-GRID::GridSystem MiniGolfGame::GetGrid()
+GRID::GridSystem* MiniGolfGame::GetGridSystem() 
 {
-	return m_grid_system_;
+	return &m_grid_system_;
 }

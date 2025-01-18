@@ -108,12 +108,17 @@ public:
 	void SetShakeOff();
 
 	void DrawGridWithCamera(const Camera& camera,const GRID::GridSystem& gridSystem) const;
+
+	void DrawFilledCells(const GRID::GridSystem& gridSystem);
+
+	void RenderWithCamera(Vector2 offset, float a, float zoom, std::vector<Vector2> worldPositions);
 	 
 public:
 	Vector2 m_shakeValue;
 	bool m_isShake;
 private:
 	std::map<RenderLayer,std::unique_ptr<ObjectPool<Renderable>>> m_rendermap_;
-
+	CSimpleSprite* m_gridFill_sprite;
+	Game* m_game_instance;
 };
 

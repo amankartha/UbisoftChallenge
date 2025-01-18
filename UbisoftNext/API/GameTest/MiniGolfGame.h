@@ -13,7 +13,7 @@ public:
 	void InternalRender() override;
 	void InternalShutdown() override;
 
-	GRID::GridSystem GetGrid();
+	GRID::GridSystem* GetGridSystem() override;
 private:
 	GRID::GridSystem m_grid_system_;
 };

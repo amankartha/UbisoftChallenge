@@ -85,3 +85,8 @@ SceneManager* Game::GetSceneManager()
 {
 	return m_scene_manager.get();
 }
+
+GRID::GridSystem* Game::GetGridSystem()
+{
+	return nullptr;
+}

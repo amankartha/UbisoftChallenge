@@ -6,11 +6,54 @@
 #include "Camera.h"
 #include <algorithm>
 
+#include "cameraManager.h"
+#include "Game.h"
+
 //std::map<RenderLayer, std::vector<CRenderer*>> Renderer::RENDERMAP;
 
 
 
-    void Renderer::RenderAll(Camera& currentCamera)   //todo:: this is slow must optimize
+void Renderer::RenderWithCamera(Vector2 offset, float a, float zoom ,std::vector<Vector2> worldPositions)
+{
+    float angleRadians = a * static_cast<float>(PI / 180.0);
+    float cosAngle = cos(-angleRadians);
+    float sinAngle = sin(-angleRadians);
+
+    for (Vector2 worldPosition : worldPositions)
+    {
+
+        Vector2 currentPosition = worldPosition;
+
+        Vector2 relativePosition = currentPosition - offset;
+
+
+        Vector2 rotatedPosition = Vector2(cosAngle * (relativePosition.x) - sinAngle * (relativePosition.y),
+            sinAngle * (relativePosition.x) + cosAngle * (relativePosition.y)
+
+        );
+
+        Vector2 scaledPosition = rotatedPosition * zoom;
+
+        Vector2 calculatedPosition = scaledPosition + Vector2(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT / 2);
+
+        //TODO DONT DRAW IF NOT ON SCREEN
+
+        m_gridFill_sprite->SetScale(m_gridFill_sprite->GetScale() * zoom);
+
+        m_gridFill_sprite->SetPosition(calculatedPosition.x, calculatedPosition.y);
+
+
+        if (calculatedPosition.x >= 0 && calculatedPosition.x <= APP_VIRTUAL_WIDTH &&
+            calculatedPosition.y >= 0 && calculatedPosition.y <= APP_VIRTUAL_HEIGHT) {
+            m_gridFill_sprite->Draw();
+        }
+
+        m_gridFill_sprite->SetScale(0.25f);
+    }
+}
+
+
+void Renderer::RenderAll(Camera& currentCamera)   //todo:: this is slow must optimize
     {
         App::Print(1000, 300, std::to_string(m_rendermap_[RenderLayer::Default]->size()).c_str());
             m_shakeValue.x = FRAND_RANGE(-4, 4);
@@ -45,6 +88,10 @@
 
 Renderer::Renderer(Game* instance)
 {
+    m_game_instance = instance;
+    m_gridFill_sprite = App::CreateSprite(".\\MiniGolfAssets\\tile_grey.png", 1, 1);
+    m_gridFill_sprite->SetScale(0.35f);
+
 	for (int renderLayer = Background; renderLayer != end ; renderLayer++)
 	{
 		m_rendermap_[static_cast<RenderLayer>(renderLayer)] = std::make_unique<ObjectPool<Renderable>>(instance);
@@ -59,30 +106,30 @@ Renderer::Renderer(Game* instance)
 	m_isShake = false;
 }
 
-    Renderable* Renderer::GetRenderable(RenderLayer layer, size_t id)
-    {
-        return m_rendermap_[layer]->GetDirect(id);
-    }
+Renderable* Renderer::GetRenderable(RenderLayer layer, size_t id)
+{
+    return m_rendermap_[layer]->GetDirect(id);
+}
 
-    int Renderer::AddRenderer(RenderLayer layer)
-    {
-       return m_rendermap_[layer]->Get()->m_index;
-    }
+int Renderer::AddRenderer(RenderLayer layer)
+{
+   return m_rendermap_[layer]->Get()->m_index;
+}
 
-    void Renderer::RemoveRenderer(RenderLayer layer,size_t id)
-    {
-        m_rendermap_[layer]->Release(id);
-    }
-    void Renderer::SetShake(bool b)
-    {
-        m_isShake = b;
-    }
-    void Renderer::SetShakeOff()
-    {
-        m_isShake = false;
-    }
+void Renderer::RemoveRenderer(RenderLayer layer,size_t id)
+{
+    m_rendermap_[layer]->Release(id);
+}
+void Renderer::SetShake(bool b)
+{
+    m_isShake = b;
+}
+void Renderer::SetShakeOff()
+{
+    m_isShake = false;
+}
 
-    void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
+void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
     {
         Vector2 camPos = camera.GetPosition();
         Vector2 gridOrigin = gridSystem.GetOrigin();
@@ -136,6 +183,13 @@ Renderer::Renderer(Game* instance)
             App::DrawLine(screenStartX, screenY, screenEndX, screenY);
         }
     }
+
+void Renderer::DrawFilledCells(const GRID::GridSystem& gridSystem)
+{
+    std::vector<Vector2> positions = gridSystem.GetAllFilledCells();
+    Camera* maincam = &m_game_instance->GetCameraManager()->GetMainCamera();
+    RenderWithCamera(maincam->GetPosition(), maincam->GetAngle(), maincam->GetZoom(), positions);
+}
 
     
 

@@ -2,6 +2,7 @@
 #include "CPlaceObject.h"
 
 #include "BulletGameObject.h"
+#include "cameraManager.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 
@@ -30,9 +31,9 @@ void CPlaceObject::OnNotify(Events::EventType event)
 {
 	if (event == Events::EventType::Input)
 	{
-		if (m_handler_->IsKeyPressed(VK_RIGHT))
+		if (m_handler_->IsKeyPressed(VK_RBUTTON))
 		{
-		//	GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Create<>();
+			m_grid_system_->SetObstacle(App::ScreenToWorld(m_attachedGameObject->GameInstance->GetCameraManager()->GetMainCamera(),  m_attachedGameObject->GetTransformComponent().GetWorldPosition()));
 		}
 	}
 }

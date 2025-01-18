@@ -39,6 +39,26 @@ void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
 	m_filled_cells[gridPos] = Vector2(GridToWorld(gridPos));
 }
 
+void GRID::GridSystem::RemoveObstacle(IntVector2 gridPosition)
+{
+
+	if (m_filled_cells.contains(gridPosition))
+	{
+		m_filled_cells.erase(gridPosition);
+	}
+	GetCell(gridPosition)->m_isObstacle = false;
+}
+
+void GRID::GridSystem::RemoveObstacle(Vector2 worldPosition)
+{
+	IntVector2 gridPos = WorldToGrid(worldPosition);
+	if (m_filled_cells.contains(gridPos))
+	{
+		m_filled_cells.erase(gridPos);
+	}
+	GetCell(gridPos)->m_isObstacle = false;
+}
+
 //returns null_ptr if cell does not exist
 GRID::Cell* GRID::GridSystem::GetCell(IntVector2 gridPosition)
 {
@@ -82,9 +102,28 @@ std::vector<GRID::Cell*> GRID::GridSystem::GetNeighbours(GRID::Cell* cell)
 	return cells;
 }
 
-std::vector<Vector2> GRID::GridSystem::GetAllFilledCells()
+std::vector<Vector2> GRID::GridSystem::GetAllFilledCells() const
 {
+	std::vector<Vector2> filledCellsWorldPositions;
+	filledCellsWorldPositions.reserve(m_filled_cells.size());
+	for (auto kv : m_filled_cells)
+	{
+		filledCellsWorldPositions.push_back(kv.second);
+	}
+	return filledCellsWorldPositions;
 }
+
+std::vector<IntVector2> GRID::GridSystem::GetAllFillCellsGridPositions() const
+{
+	std::vector<IntVector2> gridpositions;
+	gridpositions.reserve(m_filled_cells.size());
+	for (auto kv : m_filled_cells)
+	{
+		gridpositions.push_back(kv.first);
+	}
+	return gridpositions;
+}
+
 
 void GRID::GridSystem::CreateGrid()
 {
