@@ -45,3 +45,8 @@ Vector2 Vector2::Normalize(Vector2 v2)
 	float mag = Magnitude(v2);
 	return (mag > 0) ? Vector2(v2.x / mag, v2.y / mag) : Vector2();
 }
+
+float Vector2::Dot(Vector2 a, Vector2 b)
+{
+	return a.x * b.x + a.y * b.y;
+}

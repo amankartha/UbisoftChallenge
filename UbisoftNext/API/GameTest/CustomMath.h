@@ -45,10 +45,7 @@ struct Vector2
 	static Vector2 Normalize(Vector2 v2);
 
 
-	float Dot(Vector2 a, Vector2 b) const
-	{
-		return a.x * b.x + a.y * b.y;
-	}
+	static float Dot(Vector2 a, Vector2 b);
 
 
 	//Taken from Unity API : v = inDirection - 2 * inNormal * dot(inDirection inNormal). 

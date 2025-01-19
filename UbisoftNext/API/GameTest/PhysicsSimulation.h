@@ -34,7 +34,7 @@ namespace physics
 		void DrawColliders();
 
 	private:
-		void ResolveCollision(RigidBody* A,RigidBody* B);
+		void ResolveCollision(RigidBody* A,RigidBody* B, Vector2 normal, float penetration);
 
 		void CheckCollisions();
 	private:

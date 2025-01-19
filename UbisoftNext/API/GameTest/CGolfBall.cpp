@@ -18,6 +18,6 @@ void CGolfBall::Update(float DeltaTime)
 	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKeyPressed('T'))
 	{
 
-		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(10, 15));
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(100, 150));
 	}
 }

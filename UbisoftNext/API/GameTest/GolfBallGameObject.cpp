@@ -17,6 +17,7 @@ void GolfBallGameObject::Init()
 	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 15.0f, 1.0f,false);
 	AddComponent<CGolfBall>();
 	GetComponent<Ctransform>()->SetScale(0.25f);
+	GetComponent<Ctransform>()->SetPosition(Vector2(FRAND_RANGE(-50, 50), FRAND_RANGE(-50, 50)));
 }
 
 void GolfBallGameObject::Update(float DeltaTime)

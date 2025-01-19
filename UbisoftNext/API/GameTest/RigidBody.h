@@ -14,8 +14,16 @@ namespace physics
 
 		MassData(float _mass)
 		{
-			mass = _mass;
-			inverse_mass = 1 / _mass;
+			if (_mass <= 0.01)
+			{
+				mass = 0;
+				inverse_mass = 100000000;
+			}
+			else
+			{
+				mass = _mass;
+				inverse_mass = 1 / _mass;
+			}
 		}
 	};
 	struct Material
@@ -23,7 +31,7 @@ namespace physics
 		float density;
 		float bounciness;
 
-		Material() : density(1), bounciness(0){}
+		Material() : density(1), bounciness(0.3){}
 	};
 	class RigidBody
 	{
@@ -97,8 +105,8 @@ namespace physics
 			 Collider* m_collider  = nullptr,
 			const Material& m_material = Material(),
 			const MassData& m_mass_data = MassData(1),
-			const Vector2& m_linear_velocity = 0,
-			const Vector2& m_rotational_velocity = 0,
+			const Vector2& m_linear_velocity = Vector2(0,0),
+			const Vector2& m_rotational_velocity = Vector2(0,0),
 			float m_gravity_scale = 1,
 			const Vector2& m_force = Vector2(0, 0))
 			: m_linearVelocity(m_linear_velocity),

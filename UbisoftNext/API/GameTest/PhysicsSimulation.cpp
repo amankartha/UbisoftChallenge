@@ -66,6 +66,24 @@ namespace physics
 		}
 	}
 
+	void PhysicsSimulation::ResolveCollision(RigidBody* A, RigidBody* B, Vector2 normal, float penetration)
+	{
+		// Calculate relative velocity
+		Vector2 relativeVelocity = B->GetVelocity() - A->GetVelocity();
+
+		// Calculate the coefficient of restitution (bounciness)
+		float e = (std::min)(A->GetMaterial().bounciness, B->GetMaterial().bounciness);
+
+		// Calculate the impulse scalar
+		float j = -(1.0f + e) * Vector2::Dot(relativeVelocity, normal);
+		j /= (1.0f / A->GetMass().mass) + (1.0f / B->GetMass().mass);
+
+		// Apply the impulse to the velocities
+		Vector2 impulse =  normal * j;
+
+		A->OffSetVelocity(impulse * (-1.0f / A->GetMass().mass));
+		B->OffSetVelocity(impulse * (1.0f / B->GetMass().mass));
+	}
 	void PhysicsSimulation::CheckCollisions()
 	{
 		for (int i = 0; i< m_rigidbody_pool_.activeIndices.size() -1; i++)
@@ -85,6 +103,8 @@ namespace physics
 					{
 						rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
 						rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+
+						ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
 					}
 				}
 				else if (valuesA.second > -0.05 && valuesB.second > -0.05)
@@ -93,6 +113,8 @@ namespace physics
 					{
 						rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
 						rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+
+						ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
 					}
 				}
 				else
@@ -105,6 +127,8 @@ namespace physics
 						{
 							rbA->OffsetPosition(swappedCollision.normal * -1 * swappedCollision.penetration / 2);
 							rbB->OffsetPosition(swappedCollision.normal * swappedCollision.penetration / 2);
+
+							ResolveCollision(rbA, rbB, swappedCollision.normal, swappedCollision.penetration);
 						}
 					}
 					else
@@ -113,6 +137,8 @@ namespace physics
 						{
 							rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
 							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+
+							ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
 						}
 					}
 					
