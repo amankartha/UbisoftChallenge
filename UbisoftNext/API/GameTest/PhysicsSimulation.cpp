@@ -181,16 +181,16 @@ namespace physics
 						{
 							if (rbA->m_isStatic)
 							{
-								rbB->OffsetPosition(collision.normal * collision.penetration);
+								rbB->OffsetPosition(collision.normal * -collision.penetration);
 							}
 							else if (rbB->m_isStatic)
 							{
-								rbA->OffsetPosition(collision.normal * -collision.penetration);
+								rbA->OffsetPosition(collision.normal * collision.penetration);
 							}
 							else
 							{
-								rbA->OffsetPosition(collision.normal * -collision.penetration / 2);
-								rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+								rbA->OffsetPosition(collision.normal * collision.penetration / 2);
+								rbB->OffsetPosition(collision.normal * -collision.penetration / 2);
 
 
 							}

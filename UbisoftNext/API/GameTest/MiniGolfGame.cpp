@@ -51,7 +51,7 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('P'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,0.4f, true);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,0.4f, false);
 		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 	}
 	if (GetInputHandler()->IsKeyPressed('L'))
