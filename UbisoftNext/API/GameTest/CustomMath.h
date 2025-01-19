@@ -23,7 +23,12 @@ struct Vector2
 	static const Vector2 DOWN; 
 	static const Vector2 LEFT; 
 	static const Vector2 RIGHT; 
-	
+
+	void Set(float x_,float y_)
+	{
+		x = x_;
+		y = y_;
+	}
 
 	void Reset()
 	{

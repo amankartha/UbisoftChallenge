@@ -103,6 +103,23 @@ namespace physics
 		{
 			return m_massData;
 		}
+		float GetStaticFriction()
+		{
+			return m_static_friction;
+		}
+		void SetStaticFriction(float val)
+		{
+			m_static_friction = std::clamp(val, 0.0f, 1.0f);
+		}
+		float GetDynamicFriction()
+		{
+			return m_dynamic_friction;
+		}
+		void SetDynamicFriction(float val)
+		{
+			m_dynamic_friction = std::clamp(val, 0.0f, 1.0f);
+		}
+
 
 		void Clear();
 		void Start();
@@ -123,7 +140,9 @@ namespace physics
 			const Vector2& m_linear_velocity = Vector2(0,0),
 			const Vector2& m_rotational_velocity = Vector2(0,0),
 			float m_gravity_scale = 1,
-			const Vector2& m_force = Vector2(0, 0))
+			const Vector2& m_force = Vector2(0, 0),
+			float staticFriction = 0.6f,
+			float dynamicFriction = 0.3f)
 			: m_linearVelocity(m_linear_velocity),
 			m_rotationalVelocity(m_rotational_velocity),
 			m_gravityScale(m_gravity_scale),
@@ -132,8 +151,9 @@ namespace physics
 			m_collider(m_collider),
 			m_force(m_force),
 			m_material(m_material),
-			m_massData(m_mass_data)
-
+			m_massData(m_mass_data),
+			m_static_friction(staticFriction),
+			m_dynamic_friction(dynamicFriction)
 		{
 		}
 
@@ -153,7 +173,9 @@ namespace physics
 			m_transform(other.m_transform),
 			m_force(std::move(other.m_force)),
 			m_material(std::move(other.m_material)),
-			m_massData(std::move(other.m_massData))
+			m_massData(std::move(other.m_massData)),
+			m_static_friction(other.m_static_friction),
+			m_dynamic_friction(other.m_dynamic_friction)
 		{
 			other.m_collider = nullptr; 
 			other.m_transform = nullptr;
@@ -178,18 +200,22 @@ namespace physics
 				m_force = std::move(other.m_force);
 				m_material = std::move(other.m_material);
 				m_massData = std::move(other.m_massData);
-
+				m_static_friction = (other.m_static_friction);
+				m_dynamic_friction =  (other.m_dynamic_friction);
 				
 				other.m_collider = nullptr;
 				other.m_transform = nullptr;
 			}
 			return *this;
 		}
+	private:
+		void AddFriction();
 	public:
 		Vector2 m_linearVelocity;
 		Vector2 m_rotationalVelocity;
 		float m_gravityScale;
 		bool m_isStatic;
+		
 	private:
 		Shape m_shape;
 		Collider* m_collider;
@@ -197,7 +223,8 @@ namespace physics
 		Vector2 m_force;
 		Material m_material;
 		MassData m_massData;
-		
+		float m_static_friction;
+		float m_dynamic_friction;
 	};
 };
 
