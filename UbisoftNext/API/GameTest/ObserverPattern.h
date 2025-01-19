@@ -1,9 +1,11 @@
 #pragma once
 #include <vector>
-#include <memory>
-#include "CustomMath.h"
-class GameObject;
 
+class GameObject;
+namespace physics
+{
+	struct Collision;
+}
 
 namespace Events
 {
@@ -33,6 +35,28 @@ namespace Events
 	private:
 	public:
 		std::vector<IObserver*> m_observers_;
+	};
+
+	class IPhysicsObserver : public IObserver
+	{
+		virtual ~IPhysicsObserver() = default;
+		virtual void OnTriggerEnter(physics::Collision collision) = 0;
+		virtual void OnCollisionEnter(physics::Collision collision) = 0;
+	};
+
+	class IPhysicsSubject : public ISubject
+	{
+
+		virtual ~IPhysicsSubject() = default;
+
+		
+		virtual void RegisterPhysicsObserver(IPhysicsObserver& observer) = 0;
+
+	
+		virtual void DeRegisterPhysicsObserver(IPhysicsObserver& observer) = 0;
+
+		
+		virtual void NotifyPhysicsObservers(physics::Collision) = 0;
 	};
 
 	

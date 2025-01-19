@@ -194,7 +194,7 @@ namespace physics
 
 
 							}
-							ResolveCollision(rbA, rbB, collision.normal, collision);
+							ResolveCollision(rbA, rbB, collision.normal * -1, collision);
 						}
 					}
 					//}

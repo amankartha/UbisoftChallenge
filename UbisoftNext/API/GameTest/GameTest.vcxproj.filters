@@ -149,6 +149,9 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="BoundaryGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -325,6 +328,9 @@
       <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundaryGameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

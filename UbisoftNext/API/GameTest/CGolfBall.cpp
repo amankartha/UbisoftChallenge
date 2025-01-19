@@ -23,7 +23,7 @@ void CGolfBall::Update(float DeltaTime)
 
 	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('W'))
 	{
-		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 10000));
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 10000000));
 	}
 	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('S'))
 	{
