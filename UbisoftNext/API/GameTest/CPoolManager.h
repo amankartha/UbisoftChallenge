@@ -18,7 +18,7 @@ public:
     }
 
     void Init() override;
-    void Update() override;
+    void Update(float DeltaTime) override;
 
     T* Spawn();
 
@@ -37,10 +37,10 @@ void CPoolManager<T>::Init()
 }
 
 template <typename T>
-void CPoolManager<T>::Update()
+void CPoolManager<T>::Update(float DeltaTime)
 {
-    Component::Update();
-    m_pool_.UpdateEachInUse();
+    Component::Update(DeltaTime);
+    m_pool_.UpdateEachInUse(DeltaTime);
 }
 
 template <typename T>

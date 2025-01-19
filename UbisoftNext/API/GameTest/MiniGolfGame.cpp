@@ -25,7 +25,7 @@ MiniGolfGame::MiniGolfGame()
 	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
 	GetGameObjectManager()->Create<GameManager>("GameManager");
 	int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-	GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(),15,10,1);
+	GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(),15.0f,10.0f,1.0f,false);
 	///--------------------------
 }
 
@@ -50,7 +50,17 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('P'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15, 1);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 1.0f,false);
+	}
+	if (App::IsKeyPressed('L'))
+	{
+		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f,10.0f, 1.0f,false);
+	}
+	if (App::IsKeyPressed('T'))
+	{
+
+		GetComponent<Crigidbody>()->AddForce(Vector2(10, 10));
 	}
 }
 

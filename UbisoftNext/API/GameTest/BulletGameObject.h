@@ -11,7 +11,7 @@ public:
 
 	
 	void Init() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 	void Clear();
 	void Start();
 private:

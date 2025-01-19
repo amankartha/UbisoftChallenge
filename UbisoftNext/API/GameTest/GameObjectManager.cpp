@@ -35,11 +35,11 @@ void GameObjectManager::InitAll()
 	}
 }
 
-void GameObjectManager::UpdateAll()
+void GameObjectManager::UpdateAll(float deltaTime)
 {
 	for (auto& it : m_gameObjectMap) {
 
-		it.second->Update();
+		it.second->Update(deltaTime);
 	}
 }
 

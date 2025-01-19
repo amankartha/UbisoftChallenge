@@ -44,11 +44,11 @@ namespace AI
 			GetCurrentState<T>()->Exit();
 			m_stateStack.pop();
 		}
-		void UpdateState()
+		void UpdateState(float DeltaTime)
 		{
 			if (!m_stateStack.empty())
 			{
-				GetCurrentState<T>()->Update();
+				GetCurrentState<T>()->Update(DeltaTime);
 			}
 		}
 		T* GetContext()

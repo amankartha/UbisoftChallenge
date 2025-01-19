@@ -56,7 +56,7 @@ public:
 
 	void InitAll();
 
-	void UpdateAll();
+	void UpdateAll(float deltaTime);
 
 	int GetNumberOfGameObjects() const;
 

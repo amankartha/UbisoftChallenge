@@ -45,7 +45,7 @@ public:
 
     Transform* GetTransform();
 
-    void Update() override;
+    void Update(float DeltaTime) override;
 private:
     Transform CombineTransform();
     void MarkAllChildrenDirty();

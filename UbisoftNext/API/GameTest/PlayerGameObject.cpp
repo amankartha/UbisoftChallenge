@@ -16,7 +16,12 @@ void PlayerGameObject::Init()
 	GameObject::Init();
 }
 
-void PlayerGameObject::Update()
+void PlayerGameObject::Update(float DeltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(DeltaTime);
+}
+
+void PlayerGameObject::GetGolfBallID()
+{
+	return m_golf_ball_id;
 }

@@ -14,7 +14,14 @@ namespace physics
 	{
 	}
 
-	
+	void RigidBody::Update(float deltaTime)
+	{
+		m_linearVelocity += m_force * deltaTime;
+		OffsetPosition(m_linearVelocity * deltaTime);
+		m_force.Reset();
+		//TODO: rotation
+	}
+
 
 	Collider* RigidBody::GetCollider()
 	{

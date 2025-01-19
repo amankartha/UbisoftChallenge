@@ -18,7 +18,19 @@ void GameManager::Init()
 	GameObject::Init();
 }
 
-void GameManager::Update()
+void GameManager::Update(float DeltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(DeltaTime);
+}
+
+int GameManager::GetPlayerID(bool player)
+{
+	if (player)
+	{
+		return m_player2_id;
+	}
+	else
+	{
+		return m_player1_id;
+	}
 }

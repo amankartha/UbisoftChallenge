@@ -20,7 +20,7 @@ void BulletGameObject::Init()
 	GameObject::Init();
 }
 
-void BulletGameObject::Update()
+void BulletGameObject::Update(float DeltaTime)
 {
 	if (m_isActive)
 	{

@@ -87,9 +87,9 @@ void Ctransform::OffsetRotation(float a)
     MarkAllChildrenDirty();
 }
 
-void Ctransform::Update()
+void Ctransform::Update(float DeltaTime)
 {
-	Component::Update();
+	Component::Update(DeltaTime);
    
 }
 

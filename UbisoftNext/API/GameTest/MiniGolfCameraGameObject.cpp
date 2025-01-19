@@ -18,8 +18,8 @@ void MiniGolfCameraGameObject::Init()
 	GetComponent<Ccamera>()->SetTransform(&GetTransformComponent());  //TODO: this is bad
 }
 
-void MiniGolfCameraGameObject::Update()
+void MiniGolfCameraGameObject::Update(float DeltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(DeltaTime);
 }
 

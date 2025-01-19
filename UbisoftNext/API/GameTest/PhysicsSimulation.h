@@ -27,7 +27,7 @@ namespace physics
 
 		RigidBody* GetBody(size_t id);
 
-		void Update();
+		void Update(float deltaTime);
 
 		void Init(int rigidBodyCount);
 

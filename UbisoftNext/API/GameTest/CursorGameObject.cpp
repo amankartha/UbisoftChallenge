@@ -19,12 +19,12 @@ void CursorGameObject::Init()
 {
 	GameObject::Init();
 	GetComponent<CRenderer>()->SetSprite(*App::CreateSprite(".\\TestData\\cursor_pointerFlat.png", 1, 1));
-	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 15, 1);
+	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 15.0f,15.0f, 1.0f,true);
 }
 
-void CursorGameObject::Update()
+void CursorGameObject::Update(float DeltaTime)
 {
-	GameObject::Update();
+	GameObject::Update(DeltaTime);
 }
 
 CursorGameObject::~CursorGameObject()

@@ -22,9 +22,9 @@ void CPlaceObject::Init()
 	m_handler_->RegisterObserver(*this);
 }
 
-void CPlaceObject::Update()
+void CPlaceObject::Update(float DeltaTime)
 {
-	Component::Update();
+	Component::Update(DeltaTime);
 }
 
 void CPlaceObject::OnNotify(Events::EventType event)

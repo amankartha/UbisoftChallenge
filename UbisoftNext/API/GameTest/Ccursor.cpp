@@ -10,7 +10,7 @@ void Ccursor::Init()
 	
 }
 
-void Ccursor::Update()
+void Ccursor::Update(float DeltaTime)
 {
 	GetAttachedGameObject()->GetTransformComponent().SetPosition( App::GetMousePosVec2());
 }

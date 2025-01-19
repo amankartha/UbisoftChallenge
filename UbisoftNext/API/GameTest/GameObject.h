@@ -73,7 +73,7 @@ public:
 	}
 
 	virtual void Init();
-	virtual void Update();
+	virtual void Update(float DeltaTime);
 
 	GameObject() 
 	{

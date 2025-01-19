@@ -31,10 +31,6 @@ Game::~Game(){}  //need this for unique ptrs to work because it needs a place to
 
 void Game::InternalInit()
 {
-
-	
-	
-
 	GetGameObjectManager()->InitAll();
 }
 
@@ -43,8 +39,8 @@ void Game::InternalUpdate(const float deltaTime)
 	m_input_handler->Update();
 	m_input_handler->PollInputs();
 	m_scheduler->Update();
-	GetGameObjectManager()->UpdateAll();
-	GetPhysicsSimulation()->Update();
+	GetGameObjectManager()->UpdateAll(deltaTime);
+	GetPhysicsSimulation()->Update(deltaTime);
 }
 
 void Game::InternalRender()

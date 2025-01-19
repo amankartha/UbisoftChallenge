@@ -41,6 +41,28 @@ namespace physics
 		{
 			m_transform->OffsetPosition(direction);
 		}
+
+		Vector2 GetVelocity()
+		{
+			return m_linearVelocity;
+		}
+		void SetVelocity(Vector2 newVelocity)
+		{
+			m_linearVelocity = newVelocity;
+		}
+
+		void OffSetVelocity(Vector2 OffsetVelocity)
+		{
+			m_linearVelocity += OffsetVelocity;
+		}
+		void SetForce(Vector2 force)
+		{
+			m_force = force;
+		}
+		void AddForce(Vector2 force)
+		{
+			m_force += force;
+		}
 		Material GetMaterial()
 		{
 			return m_material;
@@ -61,7 +83,7 @@ namespace physics
 
 		void Clear();
 		void Start();
-
+		void Update(float deltaTime);
 
 		Collider* GetCollider();
 

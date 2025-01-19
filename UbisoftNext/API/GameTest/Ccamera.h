@@ -12,7 +12,7 @@ public:
     }
     Ccamera(GameObject* gameObject,CameraManager* manager) :Component(gameObject),  m_camera(&manager->GetMainCamera()) {}
     void Init() override;
-    void Update() override;
+    void Update(float DeltaTime) override;
     void SetTransform(Ctransform* transform) const {m_camera->SetTransform(*transform);}
 
 private:

@@ -4,11 +4,11 @@
 
 
 
-void GameObject::Update()
+void GameObject::Update(float DeltaTime)
 {
 	for (auto& pair : m_components) {
 		auto& component = pair.second;   
-		component->Update();             
+		component->Update(DeltaTime);             
 	}
 }
 //

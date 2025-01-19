@@ -2,7 +2,7 @@
 #include "stdafx.h"
 #include "RigidBody.h"
 #include "Collider.h"
-
+///
 
 namespace physics
 {
@@ -99,39 +99,47 @@ namespace physics
 
         return true;
     }
-
+    //NOTE THE A MEMBER MUST BE THE AABB FOR THIS TO WORK ;) // ALSO REALLY BUGGY 
     bool AABBVsCircle(Collision* collision)
     {
-        RigidBody* A = collision->A; // AABB
-        RigidBody* B = collision->B; // Circle
+        RigidBody* A = collision->A;
+        RigidBody* B = collision->B;
 
         Vector2 APosition = A->GetPosition();
         Vector2 BPosition = B->GetPosition();
 
-        auto dimensionsA = A->GetCollider()->GetValues(); 
-        float radiusB = B->GetCollider()->GetValues().first; 
+        auto AABBvalues = A->GetCollider()->GetValues();
+        float halfWidthA = AABBvalues.first / 2.0f;
+        float halfHeightA = AABBvalues.second / 2.0f;
 
-        float halfWidthA = dimensionsA.first / 2.0f;
-        float halfHeightA = dimensionsA.second / 2.0f;
+        float radiusB = B->GetCollider()->GetValues().first;
 
-     
-        float closestX = std::clamp(BPosition.x, APosition.x - halfWidthA, APosition.x + halfWidthA);
-        float closestY = std::clamp(BPosition.y, APosition.y - halfHeightA, APosition.y + halfHeightA);
+        Vector2 n = BPosition - APosition;
 
-        Vector2 closestPoint(closestX, closestY);
+        float closestX = std::clamp(n.x, -halfWidthA, halfWidthA);
+        float closestY = std::clamp(n.y, -halfHeightA, halfHeightA);
 
-    
-        Vector2 diff = BPosition - closestPoint;
-        float distanceSquared = Vector2::DistanceSquared(BPosition, closestPoint);
+        Vector2 closest = APosition + Vector2(closestX, closestY);
+
+        Vector2 diff = BPosition - closest;
+        float distanceSquared = Vector2::DistanceSquared(BPosition, closest);
 
         if (distanceSquared > radiusB * radiusB) {
-            return false; 
+            return false;
         }
 
         float distance = std::sqrt(distanceSquared);
-        collision->normal = (distance > 0) ? Vector2::Normalize(diff) : Vector2(1.0f, 0.0f); 
+
+        collision->normal = (distance > 0) ? Vector2::Normalize(diff) : Vector2(1.0f, 0.0f);
+
         collision->penetration = radiusB - distance;
+
+        if (distance == 0.0f) {
+            collision->normal = n * -1;
+            collision->penetration = radiusB;
+        }
 
         return true;
     }
+    
 };

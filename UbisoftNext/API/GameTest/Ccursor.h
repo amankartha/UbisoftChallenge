@@ -9,6 +9,6 @@ class Ccursor :
 public:
     Ccursor(GameObject* gameObject) : Component(gameObject) {}
     void Init() override;
-    void Update() override;
+    void Update(float DeltaTime) override;
 };
 

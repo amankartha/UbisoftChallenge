@@ -24,9 +24,9 @@ void CCameraController::Init()
 
 }
 
-void CCameraController::Update()
+void CCameraController::Update(float DeltaTime)
 {
-	Component::Update();
+	Component::Update(DeltaTime);
 	GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
 	m_direction = Vector2(0, 0);
 

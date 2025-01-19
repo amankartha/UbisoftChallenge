@@ -24,7 +24,13 @@ struct Vector2
 	static const Vector2 LEFT; 
 	static const Vector2 RIGHT; 
 	
-	
+
+	void Reset()
+	{
+		x = 0.0f;
+		y = 0.0f;
+	}
+
 	float Magnitude() const {
 		return std::sqrt(x * x +y * y);
 	}

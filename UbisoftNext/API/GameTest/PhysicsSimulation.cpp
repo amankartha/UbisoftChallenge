@@ -75,7 +75,7 @@ namespace physics
 			{
 				RigidBody* rbB = &m_rigidbody_pool_.m_pool[m_rigidbody_pool_.activeIndices[j]].obj;
 
-				Collision collision = Collision(rbA, rbB);
+				Collision collision(rbA, rbB);
 
 				auto valuesA  = rbA->GetCollider()->GetValues();
 				auto valuesB = rbB->GetCollider()->GetValues();
@@ -99,7 +99,7 @@ namespace physics
 				{
 					if (valuesA.second < 0)
 					{
-						Collision swappedCollision = Collision(rbB, rbA);  //TODO: if time fix this awful code
+						Collision swappedCollision(rbB, rbA);  //TODO: if time fix this awful code
 
 						if (AABBVsCircle(&swappedCollision))
 						{
@@ -121,7 +121,7 @@ namespace physics
 		}
 	}
 
-	void PhysicsSimulation::Update()
+	void PhysicsSimulation::Update(float deltaTime)
 	{
 		CheckCollisions();
 	}

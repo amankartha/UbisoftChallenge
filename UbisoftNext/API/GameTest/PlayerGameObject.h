@@ -8,8 +8,9 @@ public:
 
 	PlayerGameObject(Game* instance, int id);
 	void Init() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 
+	int GetGolfBallID();
 private:
 	int m_golf_ball_id;
 };

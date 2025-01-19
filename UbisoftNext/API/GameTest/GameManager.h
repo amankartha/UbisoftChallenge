@@ -20,7 +20,7 @@ class GameManager : public GameObject
 public:
 	GameManager(Game* instance,int id);
 	void Init() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 private:
 	int m_player1_id;
 	int m_player2_id;

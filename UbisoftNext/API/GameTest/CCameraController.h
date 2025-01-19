@@ -19,7 +19,7 @@ public:
 	~CCameraController();
 
 	void Init() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 	void OnNotify(const Events::EventType event) override;
 private:
 	CameraState m_state_;

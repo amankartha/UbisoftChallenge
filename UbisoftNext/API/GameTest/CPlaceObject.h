@@ -11,7 +11,7 @@ public:
 	CPlaceObject(GameObject* gameObject, InputHandler* handler,GRID::GridSystem* grid_system);
 	~CPlaceObject();
 	void Init() override;
-	void Update() override;
+	void Update(float DeltaTime) override;
 
 	void OnNotify(Events::EventType event) override;
 private:

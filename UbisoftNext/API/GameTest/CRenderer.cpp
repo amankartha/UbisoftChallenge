@@ -72,7 +72,7 @@ void CRenderer::Shake(bool b)
 	m_isShake = b;
 }
 
-void CRenderer::Update()
+void CRenderer::Update(float DeltaTime)
 {
 	if (m_enabled)
 	{

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Component.h"
 
-void Component::Update()
+void Component::Update(float DeltaTime)
 {
 	if (m_useTick)  // only run ever n number of frames
 	{

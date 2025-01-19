@@ -7,7 +7,7 @@ class ParticleGameObject :
 public:
 
     void Free();
-    void Update() override;
+    void Update(float DeltaTime) override;
     void Start();
 };
 

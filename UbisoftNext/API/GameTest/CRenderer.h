@@ -25,7 +25,7 @@ public:
 
     void Shake(bool b);
 
-    void Update() override;
+    void Update(float DeltaTime) override;
 
     void Render(const Camera camera,bool isUI) override;
 

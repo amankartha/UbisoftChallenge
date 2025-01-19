@@ -10,7 +10,7 @@ template <typename T>
 concept HasRequiredFunctions = requires(T obj) {
     { obj.Clear() } -> std::same_as<void>;
     { obj.Start() } -> std::same_as<void>;
-    { obj.Update() } -> std::same_as<void>;
+    { obj.Update(std::declval<float>()) } -> std::same_as<void>;
 };
 
 // Forward Declarations
@@ -113,12 +113,12 @@ public:
     }
 
     // Update all in-use objects   //TODO: this needs to be optimized
-    void UpdateEachInUse() {
+    void UpdateEachInUse(float DeltaTime) {
         if constexpr (!HasRequiredFunctions<T>) {
             return;
         }
         for (size_t i : activeIndices) {
-            m_pool[i].obj.Update();
+            m_pool[i].obj.Update(DeltaTime);
         }
     }
 
