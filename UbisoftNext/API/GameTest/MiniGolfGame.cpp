@@ -58,7 +58,7 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('L'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f,10.0f, 1.0f,false);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 30.0f,30.0f, 1.0f,false);
 	}
 }
 

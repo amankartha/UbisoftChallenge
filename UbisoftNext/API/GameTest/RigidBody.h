@@ -17,7 +17,7 @@ namespace physics
 			if (_mass <= 0.01)
 			{
 				mass = 0;
-				inverse_mass = 100000000;
+				inverse_mass = 100000000.0f;
 			}
 			else
 			{

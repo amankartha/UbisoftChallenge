@@ -34,6 +34,10 @@ struct Vector2
 	float Magnitude() const {
 		return std::sqrt(x * x +y * y);
 	}
+	float MagnitudeSquared() const
+	{
+		return x * x + y * y;
+	}
 	
 	static float Magnitude(Vector2 vector2);
 

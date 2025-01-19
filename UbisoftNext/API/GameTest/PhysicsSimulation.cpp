@@ -125,8 +125,8 @@ namespace physics
 
 						if (AABBVsCircle(&swappedCollision))
 						{
-							rbA->OffsetPosition(swappedCollision.normal * -1 * swappedCollision.penetration / 2);
-							rbB->OffsetPosition(swappedCollision.normal * swappedCollision.penetration / 2);
+							rbA->OffsetPosition(swappedCollision.normal  * swappedCollision.penetration / 2);
+							rbB->OffsetPosition(swappedCollision.normal  * -swappedCollision.penetration / 2);
 
 							ResolveCollision(rbA, rbB, swappedCollision.normal, swappedCollision.penetration);
 						}
@@ -135,7 +135,7 @@ namespace physics
 					{
 						if (AABBVsCircle(&collision))
 						{
-							rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
+							rbA->OffsetPosition(collision.normal  * -collision.penetration / 2);
 							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
 
 							ResolveCollision(rbA, rbB, collision.normal, collision.penetration);

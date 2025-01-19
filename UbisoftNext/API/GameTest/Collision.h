@@ -12,6 +12,7 @@ namespace physics
 		RigidBody* B;
 		float penetration;
 		Vector2 normal;
+        bool isFlipped = false;
 	};
 
 	struct Pair
@@ -99,47 +100,107 @@ namespace physics
 
         return true;
     }
-    //NOTE THE A MEMBER MUST BE THE AABB FOR THIS TO WORK ;) // ALSO REALLY BUGGY 
+    ////NOTE THE A MEMBER MUST BE THE AABB FOR THIS TO WORK ;) // ALSO REALLY BUGGY 
+    //bool AABBVsCircle(Collision* collision)
+    //{
+    //    RigidBody* A = collision->A;
+    //    RigidBody* B = collision->B;
+
+    //    Vector2 APosition = A->GetPosition();
+    //    Vector2 CirclePosition = B->GetPosition();
+
+    //    auto AABBvalues = A->GetCollider()->GetValues();
+    //    float halfWidthA = AABBvalues.first / 2.0f;
+    //    float halfHeightA = AABBvalues.second / 2.0f;
+
+    //    auto colliderB = B->GetCollider();
+    //    if (colliderB == nullptr) {
+    //        return false; 
+    //    }
+    //    float radiusB = colliderB->GetValues().first;
+
+    //    Vector2 n = CirclePosition - APosition;
+
+    //    float closestX = std::clamp(n.x, -halfWidthA, halfWidthA);
+    //    float closestY = std::clamp(n.y, -halfHeightA, halfHeightA);
+
+    //    Vector2 closest = APosition + Vector2(closestX, closestY);
+
+    //    Vector2 diff = CirclePosition - closest;
+    //    float distanceSquared = Vector2::DistanceSquared(CirclePosition, closest);
+
+    //    if (distanceSquared > radiusB * radiusB) {
+    //        return false;
+    //    }
+
+    //    float distance = std::sqrt(distanceSquared);
+
+    //    collision->normal = (distance > 0) ? Vector2::Normalize(diff) : Vector2(1.0f, 0.0f);
+    //    collision->penetration = radiusB - distance;
+
+    //    if (distance == 0.0f) {
+    //        collision->normal = Vector2(1.0f, 0.0f); 
+    //        collision->penetration = radiusB;
+    //    }
+
+    //    return true;
+    //}
+    //
+
     bool AABBVsCircle(Collision* collision)
     {
         RigidBody* A = collision->A;
         RigidBody* B = collision->B;
 
-        Vector2 APosition = A->GetPosition();
-        Vector2 BPosition = B->GetPosition();
+        Vector2 n = B->GetPosition() - A->GetPosition();
+        Vector2 closestPosition = n;
 
-        auto AABBvalues = A->GetCollider()->GetValues();
-        float halfWidthA = AABBvalues.first / 2.0f;
-        float halfHeightA = AABBvalues.second / 2.0f;
+        float x_extent = A->GetCollider()->GetValues().first / 2;
+        float y_extent = A->GetCollider()->GetValues().second / 2;
 
-        float radiusB = B->GetCollider()->GetValues().first;
+        closestPosition.x = std::clamp(closestPosition.x, -x_extent, x_extent);
+        closestPosition.y = std::clamp(closestPosition.y, -y_extent, y_extent);
 
-        Vector2 n = BPosition - APosition;
+        bool inside = false;
 
-        float closestX = std::clamp(n.x, -halfWidthA, halfWidthA);
-        float closestY = std::clamp(n.y, -halfHeightA, halfHeightA);
+        if ((n - closestPosition).MagnitudeSquared() < 0.000001f)
+        {
+            inside = true;
 
-        Vector2 closest = APosition + Vector2(closestX, closestY);
+            if (std::abs(n.x) > std::abs(n.y))
+            {
+                closestPosition.x = (closestPosition.x > 0) ? x_extent : -x_extent;
+                B->OffsetPosition(Vector2(closestPosition.x,0));
+            }
+            else
+            {
+                closestPosition.y = (closestPosition.y > 0) ? y_extent : -y_extent;
+                B->OffsetPosition(Vector2(0,closestPosition.y));
+            }
+            
+        }
 
-        Vector2 diff = BPosition - closest;
-        float distanceSquared = Vector2::DistanceSquared(BPosition, closest);
+        float d = (n - closestPosition).MagnitudeSquared();
+        float radius = B->GetCollider()->GetValues().first;
 
-        if (distanceSquared > radiusB * radiusB) {
+        if (d > (radius * radius) && !inside)
+        {
             return false;
         }
 
-        float distance = std::sqrt(distanceSquared);
+        Vector2 normal = (n - closestPosition).Normalize();
 
-        collision->normal = (distance > 0) ? Vector2::Normalize(diff) : Vector2(1.0f, 0.0f);
-
-        collision->penetration = radiusB - distance;
-
-        if (distance == 0.0f) {
-            collision->normal = n * -1;
-            collision->penetration = radiusB;
+        if (inside)
+        {
+            collision->normal = normal * -1;
+            collision->penetration = radius - std::sqrt(d);
+        }
+        else
+        {
+            collision->normal = normal;
+            collision->penetration = radius - std::sqrt(d);
         }
 
         return true;
     }
-    
 };
