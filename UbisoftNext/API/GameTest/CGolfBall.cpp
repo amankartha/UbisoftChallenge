@@ -15,9 +15,28 @@ void CGolfBall::Update(float DeltaTime)
 {
 	Component::Update(DeltaTime);
 
-	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKeyPressed('T'))
+	/*if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('T'))
 	{
 
-		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(100, 150));
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 10000));
+	}*/
+
+	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('W'))
+	{
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 1000));
 	}
+	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('S'))
+	{
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, -1000));
+	}
+	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('A'))
+	{
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(-1000, 0));
+	}
+	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('D'))
+	{
+		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(1000, 0));
+	}
+	
+
 }

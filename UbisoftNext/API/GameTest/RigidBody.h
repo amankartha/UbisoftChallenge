@@ -11,9 +11,10 @@ namespace physics
 		float inverse_mass;
 		float inertia;
 		float inverse_inertia;
-
-		MassData(float _mass)
+		bool is_static;
+		MassData(float _mass, bool isStatic)
 		{
+			is_static = isStatic;
 			if (_mass <= 0.01)
 			{
 				mass = 0;
@@ -25,13 +26,25 @@ namespace physics
 				inverse_mass = 1 / _mass;
 			}
 		}
+
+		float GetInverseMass()
+		{
+			if (is_static)
+			{
+				return 0;
+			}
+			else
+			{
+				return inverse_mass;
+			}
+		}
 	};
 	struct Material
 	{
 		float density;
 		float bounciness;
 
-		Material() : density(1), bounciness(0.3){}
+		Material() : density(1), bounciness(0.8f){}
 	};
 	class RigidBody
 	{
@@ -69,7 +82,7 @@ namespace physics
 		}
 		void AddForce(Vector2 force)
 		{
-			m_force += force;
+			m_force = force;
 		}
 		Material GetMaterial()
 		{
@@ -104,7 +117,7 @@ namespace physics
 			Shape m_shape = Shape::BOX,
 			 Collider* m_collider  = nullptr,
 			const Material& m_material = Material(),
-			const MassData& m_mass_data = MassData(1),
+			const MassData& m_mass_data = MassData(1,false),
 			const Vector2& m_linear_velocity = Vector2(0,0),
 			const Vector2& m_rotational_velocity = Vector2(0,0),
 			float m_gravity_scale = 1,

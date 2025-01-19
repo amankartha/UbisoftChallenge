@@ -151,6 +151,7 @@ namespace physics
     {
         RigidBody* A = collision->A;
         RigidBody* B = collision->B;
+      
 
         Vector2 n = B->GetPosition() - A->GetPosition();
         Vector2 closestPosition = n;
@@ -182,6 +183,65 @@ namespace physics
 
         float d = (n - closestPosition).MagnitudeSquared();
         float radius = B->GetCollider()->GetValues().first;
+
+        if (d > (radius * radius) && !inside)
+        {
+            return false;
+        }
+
+        Vector2 normal = (n - closestPosition).Normalize();
+
+        if (inside)
+        {
+            collision->normal = normal * -1;
+            collision->penetration = radius - std::sqrt(d);
+        }
+        else
+        {
+            collision->normal = normal;
+            collision->penetration = radius - std::sqrt(d);
+        }
+
+        return true;
+    }
+
+    bool CircleVsAABB(Collision* collision)
+    {
+
+        RigidBody* A = collision->A;
+        RigidBody* B = collision->B;
+
+
+        Vector2 n = A->GetPosition() - B->GetPosition();
+        Vector2 closestPosition = n;
+
+        float x_extent = B->GetCollider()->GetValues().first / 2;
+        float y_extent = B->GetCollider()->GetValues().second / 2;
+
+        closestPosition.x = std::clamp(closestPosition.x, -x_extent, x_extent);
+        closestPosition.y = std::clamp(closestPosition.y, -y_extent, y_extent);
+
+        bool inside = false;
+
+        if ((n - closestPosition).MagnitudeSquared() < 0.000001f)
+        {
+            inside = true;
+
+            if (std::abs(n.x) > std::abs(n.y))
+            {
+                closestPosition.x = (closestPosition.x > 0) ? x_extent : -x_extent;
+                A->OffsetPosition(Vector2(closestPosition.x, 0));
+            }
+            else
+            {
+                closestPosition.y = (closestPosition.y > 0) ? y_extent : -y_extent;
+                A->OffsetPosition(Vector2(0, closestPosition.y));
+            }
+
+        }
+
+        float d = (n - closestPosition).MagnitudeSquared();
+        float radius = A->GetCollider()->GetValues().first;
 
         if (d > (radius * radius) && !inside)
         {

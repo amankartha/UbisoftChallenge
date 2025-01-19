@@ -27,8 +27,6 @@ MiniGolfGame::MiniGolfGame()
 	GetGameObjectManager()->Create<CursorGameObject>("Cursor");
 	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
 	GameManagerID =  GetGameObjectManager()->Create<GameManager>("GameManager");
-	int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-	GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(),15.0f,10.0f,1.0f,false);
 	///--------------------------
 }
 
@@ -53,12 +51,14 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('P'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 1.0f,false);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,false);
+		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 	}
 	if (App::IsKeyPressed('L'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 30.0f,30.0f, 1.0f,false);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 30.0f,30.0f, 0.3f,true);
+		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 	}
 }
 

@@ -16,7 +16,9 @@ namespace physics
 
 	void RigidBody::Update(float deltaTime)
 	{
-		m_linearVelocity += m_force * deltaTime;
+
+		Vector2 acceleration = m_force / m_massData.mass;
+		m_linearVelocity += acceleration * deltaTime;
 		OffsetPosition(m_linearVelocity * deltaTime);
 		m_force.Reset();
 		//TODO: rotation
@@ -30,7 +32,7 @@ namespace physics
 
 	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
 	{
-		float area = PI * radius * radius;
+		float area = PI * radius * radius * 0.1f;
 
 		if (area < MIN_BODY_SIZE)
 		{
@@ -40,7 +42,7 @@ namespace physics
 		m_isStatic = is_static;
 		m_collider = new Circle(radius);
 		m_material = material;
-		m_massData = MassData(area * density);
+		m_massData = MassData(area * density,is_static);
 
 	
 
@@ -50,7 +52,7 @@ namespace physics
 	void RigidBody::SetAABBRigidBody(bool is_static, float width, float height, float density,
 		Material material)
 	{
-		float area = width * height;
+		float area = width * height * 0.1f;
 		float mass = area * density;
 
 		if (area < MIN_BODY_SIZE)
@@ -61,6 +63,6 @@ namespace physics
 		m_isStatic = is_static;
 		m_collider = new AABB(width,height);
 		m_material = material;
-		m_massData = MassData(area * density);
+		m_massData = MassData(area * density,is_static);
 	}
 };
