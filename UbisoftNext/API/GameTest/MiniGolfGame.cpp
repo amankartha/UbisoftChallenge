@@ -4,11 +4,13 @@
 #include "MiniGolfGame.h"
 
 #include "cameraManager.h"
+#include "Crigidbody.h"
 #include "CursorGameObject.h"
 #include "GameManager.h"
 #include "InputHandler.h"
 #include "GameObjectManager.h"
 #include "MiniGolfCameraGameObject.h"
+#include "PhysicsSimulation.h"
 #include "Renderer.h"
 
 MiniGolfGame::MiniGolfGame()
@@ -22,7 +24,8 @@ MiniGolfGame::MiniGolfGame()
 	GetGameObjectManager()->Create<CursorGameObject>("Cursor");
 	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
 	GetGameObjectManager()->Create<GameManager>("GameManager");
-
+	int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
+	GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(),15,10,1);
 	///--------------------------
 }
 
@@ -40,6 +43,15 @@ void MiniGolfGame::InternalInit()
 void MiniGolfGame::InternalUpdate(const float deltaTime)
 {
 	Game::InternalUpdate(deltaTime);
+	if (App::IsKeyPressed('B'))
+	{
+		GetGridSystem()->isFound = false;
+	}
+	if (App::IsKeyPressed('P'))
+	{
+		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15, 1);
+	}
 }
 
 void MiniGolfGame::InternalRender()
@@ -47,7 +59,13 @@ void MiniGolfGame::InternalRender()
 	Game::InternalRender();
 	GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
 	GetRenderer()->DrawFilledCells(m_grid_system_);
-//	App::Print(100, 100, GetCameraManager()->GetMainCamera().GetPosition().Print().c_str());
+	GetPhysicsSimulation()->DrawColliders();
+	if (GetGridSystem()->isFound)
+	{
+		App::Print(500, 500, "FOUNDDDDDDDDD");
+	}
+	
+	
 	//App::Print(100, 100, GetRenderer()->.GetPosition().Print().c_str());
 	//App::Print(300, 100, std::to_string(GetGameObjectManager()->GetNumberOfGameObjects()).c_str());
 }

@@ -23,6 +23,11 @@ float Vector2::Distance(Vector2 a, Vector2 b)
 		((a.y - b.y) * (a.y - b.y)));
 }
 
+float Vector2::DistanceSquared(Vector2 a, Vector2 b)
+{
+	return ((a.x - b.x) * (a.x - b.x)) +
+		   ((a.y - b.y) * (a.y - b.y));
+}
 
 
 Vector2 operator*(float s, const Vector2& v)
@@ -30,3 +35,13 @@ Vector2 operator*(float s, const Vector2& v)
 	return  Vector2(v.x * s, v.y * s);
 }
 
+float Vector2::Magnitude(Vector2 vector2)
+{
+	return std::sqrt(vector2.x * vector2.x  +vector2.y * vector2.y);
+}
+
+Vector2 Vector2::Normalize(Vector2 v2)
+{
+	float mag = Magnitude(v2);
+	return (mag > 0) ? Vector2(v2.x / mag, v2.y / mag) : Vector2();
+}

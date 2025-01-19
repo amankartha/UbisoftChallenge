@@ -6,12 +6,12 @@ class GameObject;
 class Component
 {
 public:
-	Component()
+	Component(GameObject* attachedObject ) :m_attachedGameObject(attachedObject)
 	{
-		m_attachedGameObject = 0;
 		m_tick_frame_count = 0;
 		m_enabled = true;
 		m_useTick = false;
+
 	};
 	virtual ~Component() = default;
 
@@ -35,7 +35,7 @@ public:
 	void SetGameObject(GameObject* go)  {   m_attachedGameObject = go;  }
 public:
 	bool m_enabled;
-	GameObject* m_attachedGameObject;
+	GameObject* m_attachedGameObject;  //TODO:: I think this has the chance to become dangled, maybe use ID if errors
 	bool m_useTick;
 	int m_tick_frame_count;
 protected:

@@ -40,7 +40,7 @@ public:
 			assert("Component of this type already exists in GameObject");
 		}
 
-		m_components[type] = std::make_unique<T>(std::forward<Args>(args)...);
+		m_components[type] = std::make_unique<T>(this,std::forward<Args>(args)...);
 
 		m_components[type]->SetGameObject(this);
 

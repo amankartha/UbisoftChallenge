@@ -7,7 +7,7 @@
 #include "InputHandler.h"
 
 
-CCameraController::CCameraController() : m_state_(CameraState::FollowGolfBall)
+CCameraController::CCameraController(GameObject* gameObject) : Component(gameObject), m_state_(CameraState::FollowGolfBall)
 {
 	m_direction = Vector2(0, 0);
 }

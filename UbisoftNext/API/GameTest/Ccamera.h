@@ -7,10 +7,10 @@ class Ccamera :
     public Component
 {
 public:
-    Ccamera(CameraManager* manager,int id)  {
+    Ccamera(GameObject* gameObject, CameraManager* manager,int id) : Component(gameObject) {
         m_camera = &manager->CreateCamera(id);
     }
-    Ccamera(CameraManager* manager) :  m_camera(&manager->GetMainCamera()) {}
+    Ccamera(GameObject* gameObject,CameraManager* manager) :Component(gameObject),  m_camera(&manager->GetMainCamera()) {}
     void Init() override;
     void Update() override;
     void SetTransform(Ctransform* transform) const {m_camera->SetTransform(*transform);}

@@ -5,6 +5,7 @@
 #include <vector>
 #include <array>
 
+#include "ObserverPattern.h"
 #include "Renderer.h"
 
 namespace GRID
@@ -41,7 +42,8 @@ namespace GRID
         Cell* m_parentCell;
     };
 
-    class GridSystem
+
+    class GridSystem : public Events::ISubject
     {
     public:
         GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0), IntVector2 gridSize = IntVector2(50, 50))
@@ -76,24 +78,37 @@ namespace GRID
 
         Cell* GetCellFromWorldPosition(Vector2 worldPosition);
 
-
-
         std::vector<Cell*> GetNeighbours(Cell* cell);
     
         std::vector<Vector2> GetAllFilledCells() const;
     
         std::vector<IntVector2> GetAllFillCellsGridPositions() const;
+
+        std::vector<uint64_t> ConvertPatternToHashes(const std::vector<std::vector<int>>& pattern);
+
+    	std::pair<bool,std::vector<IntVector2>> MatchPatternsAroundNewCell(const std::vector<std::vector<int>>& pattern, IntVector2 center, bool clear = false);
+
+        std::vector<std::vector<std::vector<int>>> GenerateAllRotations(const std::vector<std::vector<int>>& pattern); //basically returns a vector of matrices, looks scarier than it is
+
+    	void UpdateRowHash(int row);
+
+        std::vector<std::vector<int>> Rotate90(const std::vector<std::vector<int>>& pattern);
+
     private:
         void CreateGrid();
+        void ClearCells(std::vector<IntVector2> cells);
 
     public:
         IntVector2 m_gridSize;
+        bool isFound = false;
     private:
         int m_cellSize;
       
         Vector2 m_origin;
         std::vector<std::vector<Cell>> m_grid;
         std::unordered_map<IntVector2, Vector2> m_filled_cells;
+        std::vector<uint64_t> m_rowHash_;
+
     };
 
 

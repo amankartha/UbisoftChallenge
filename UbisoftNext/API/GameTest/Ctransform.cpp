@@ -7,6 +7,7 @@ void Ctransform::SetPosition(Vector2 vec)
 {
     m_transform_local.position = vec;
     MarkAllChildrenDirty();
+    NotifyObservers(Events::EventType::Transform);
 }
 
 void Ctransform::ResetLocalPosition()
@@ -35,6 +36,7 @@ void Ctransform::OffsetPosition(Vector2 vec)
 {
     m_transform_local.position += vec;
     MarkAllChildrenDirty();
+    NotifyObservers(Events::EventType::Transform);
 }
 
 Vector2 Ctransform::GetWorldPosition()

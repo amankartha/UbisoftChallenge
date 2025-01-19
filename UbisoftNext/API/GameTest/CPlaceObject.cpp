@@ -6,7 +6,7 @@
 #include "Game.h"
 #include "GameObjectManager.h"
 
-CPlaceObject::CPlaceObject(InputHandler* handler,GRID::GridSystem* grid_system) : m_handler_(handler), m_grid_system_(grid_system) 
+CPlaceObject::CPlaceObject(GameObject* gameObject, InputHandler* handler,GRID::GridSystem* grid_system) :Component(gameObject),  m_handler_(handler), m_grid_system_(grid_system) 
 {
 
 }

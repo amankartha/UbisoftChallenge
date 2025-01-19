@@ -22,6 +22,9 @@ namespace App
 	}
 
 	void PrintOutputMessage(std::string message);
+
+	void DrawCircle(const float cx, const float cy, const float r, const float segments = 100, const float red = 1.0f, const float green = 1.0f, const float blue = 1.0f);
+	void DrawBox(const float cx, const float cy, const float width,const float height, const float red = 1.0f, const float green = 1.0f, const float blue = 1.0f);
 };
 
 

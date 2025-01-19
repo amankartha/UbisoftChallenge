@@ -11,7 +11,7 @@ class CPoolManager :
 {
 public:
     template<typename... Args>
-    CPoolManager(Game* instance,size_t initialSize, Args&&... args) :  m_pool_(instance)
+    CPoolManager(GameObject* gameObject, Game* instance,size_t initialSize, Args&&... args) : Component(gameObject),  m_pool_(instance)
     {
         m_game_ = instance;
         m_pool_.InitializePool(initialSize,std::forward<Args>(args)...);

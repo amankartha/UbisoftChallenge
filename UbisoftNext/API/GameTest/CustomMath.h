@@ -24,25 +24,32 @@ struct Vector2
 	static const Vector2 LEFT; 
 	static const Vector2 RIGHT; 
 	
-	//returns the magnitude of the vector 2
+	
 	float Magnitude() const {
-		return std::sqrt(x * x * +y * y);
+		return std::sqrt(x * x +y * y);
 	}
-	//Normalizes the vector 
+	
+	static float Magnitude(Vector2 vector2);
+
 	Vector2 Normalize() const {
 		float mag = Magnitude();
 		return (mag > 0) ? Vector2(x / mag, y / mag) : Vector2();
 	}
-	//Returns the Dot product of the two vectors
+
+	static Vector2 Normalize(Vector2 v2);
+
+
 	float Dot(Vector2 a, Vector2 b) const
 	{
 		return a.x * b.x + a.y * b.y;
 	}
+
+
 	//Taken from Unity API : v = inDirection - 2 * inNormal * dot(inDirection inNormal). 
 	//returns the reflection based on the normal
 	Vector2 Reflect(Vector2 inDir, Vector2 inNorm)
 	{
-		return (inDir - (inNorm*2) * Dot(inDir, inNorm));
+		return inDir - inNorm * (2 * Dot(inDir, inNorm));
 	}
 
 	Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
@@ -90,6 +97,8 @@ struct Vector2
 
 	//Returns distance but sqrt is bad and slow so avoid if possible
 	static float Distance(Vector2 a, Vector2 b);
+
+	static float DistanceSquared(Vector2 a, Vector2 b);
 
 	std::string Print()
 	{

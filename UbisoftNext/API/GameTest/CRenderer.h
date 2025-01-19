@@ -7,8 +7,8 @@ class CRenderer :
     public Component,public IRenderable
 {
 public:
-    CRenderer(Renderer* renderer,RenderLayer layer = RenderLayer::Default);
-    CRenderer(Renderer* renderer,bool turnOnImmediately, RenderLayer layer = RenderLayer::Default);
+    CRenderer(GameObject* gameObject,  Renderer* renderer, RenderLayer layer = RenderLayer::Default);
+    CRenderer(GameObject* gameObject, Renderer* renderer,bool turnOnImmediately, RenderLayer layer = RenderLayer::Default);
 
     ~CRenderer() override;
 

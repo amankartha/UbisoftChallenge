@@ -1,6 +1,8 @@
 #pragma once
 #include "appUtility.h"
 #include "Collider.h"
+#include "Ctransform.h"
+
 namespace physics
 {
 	struct MassData
@@ -20,6 +22,8 @@ namespace physics
 	{
 		float density;
 		float bounciness;
+
+		Material() : density(1), bounciness(0){}
 	};
 	class RigidBody
 	{
@@ -27,15 +31,23 @@ namespace physics
 
 		Vector2 GetPosition() const
 		{
-			return m_transform->position;
+			return m_transform->GetWorldPosition();
 		}
 		void SetPosition(Vector2 pos)
 		{
-			m_transform->position = pos;
+			m_transform->SetPosition(pos);
+		}
+		void OffsetPosition(Vector2 direction)
+		{
+			m_transform->OffsetPosition(direction);
 		}
 		Material GetMaterial()
 		{
 			return m_material;
+		}
+		void SetTransform(Ctransform* transfom)
+		{
+			m_transform = transfom;
 		}
 		void SetMaterial(Material value)
 		{
@@ -47,14 +59,20 @@ namespace physics
 			return m_massData;
 		}
 
+		void Clear();
+		void Start();
+
+
+		Collider* GetCollider();
+
 		void SetCircleRigidBody(bool is_static, float radius, float density, Material material);
-		void SetAABBRigidBody(bool is_static, float length, float width, float density, Material material);
+		void SetAABBRigidBody(bool is_static, float width, float height, float density, Material material);
 
 
 
 		RigidBody(bool m_is_static = false,
 			Shape m_shape = Shape::BOX,
-			const Collider& m_collider  = Collider(),
+			 Collider* m_collider  = nullptr,
 			const Material& m_material = Material(),
 			const MassData& m_mass_data = MassData(1),
 			const Vector2& m_linear_velocity = 0,
@@ -73,6 +91,55 @@ namespace physics
 
 		{
 		}
+
+		~RigidBody()
+		{
+			delete m_collider;
+		}
+
+		// Move Constructor
+		RigidBody(RigidBody&& other) noexcept
+			: m_linearVelocity(std::move(other.m_linearVelocity)),
+			m_rotationalVelocity(std::move(other.m_rotationalVelocity)),
+			m_gravityScale(other.m_gravityScale),
+			m_isStatic(other.m_isStatic),
+			m_shape(other.m_shape),
+			m_collider(other.m_collider),
+			m_transform(other.m_transform),
+			m_force(std::move(other.m_force)),
+			m_material(std::move(other.m_material)),
+			m_massData(std::move(other.m_massData))
+		{
+			other.m_collider = nullptr; 
+			other.m_transform = nullptr;
+		}
+
+		// Move Assignment Operator
+		RigidBody& operator=(RigidBody&& other) noexcept
+		{
+			if (this != &other)
+			{
+				
+				delete m_collider;
+
+				
+				m_linearVelocity = std::move(other.m_linearVelocity);
+				m_rotationalVelocity = std::move(other.m_rotationalVelocity);
+				m_gravityScale = other.m_gravityScale;
+				m_isStatic = other.m_isStatic;
+				m_shape = other.m_shape;
+				m_collider = other.m_collider;
+				m_transform = other.m_transform;
+				m_force = std::move(other.m_force);
+				m_material = std::move(other.m_material);
+				m_massData = std::move(other.m_massData);
+
+				
+				other.m_collider = nullptr;
+				other.m_transform = nullptr;
+			}
+			return *this;
+		}
 	public:
 		Vector2 m_linearVelocity;
 		Vector2 m_rotationalVelocity;
@@ -80,13 +147,12 @@ namespace physics
 		bool m_isStatic;
 	private:
 		Shape m_shape;
-		Collider m_collider;
-		Transform* m_transform;
+		Collider* m_collider;
+		Ctransform* m_transform;
 		Vector2 m_force;
-
 		Material m_material;
 		MassData m_massData;
-
+		
 	};
 };
 

@@ -1,22 +1,22 @@
 #pragma once
 #include "Component.h"
 #include "CustomMath.h"
-
+#include "ObserverPattern.h"
 
 
 class GameObject;
 
 class Ctransform :
-    public Component
+    public Component , public Events::ISubject
 {
 
 public:
-    Ctransform() : Component()
+    Ctransform(GameObject* gameObject) : Component(gameObject)
     {
         MarkAllChildrenDirty();
     }
 
-    Ctransform(float x, float y) : Component()
+    Ctransform(GameObject* gameObject, float x, float y) : Component(gameObject)
     {
         m_transform_local.position = Vector2(x, y);
         m_transform_world.angle = 0.0f;

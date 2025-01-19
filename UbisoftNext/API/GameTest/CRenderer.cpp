@@ -5,7 +5,7 @@
 #include "appUtility.h"
 #include "Camera.h"
 
-CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): m_main_renderer_(renderer)
+CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer,RenderLayer layer ): Component(gameObject), m_main_renderer_(renderer)
 {
 	m_isShake = false;
 	m_renderLayer = layer;
@@ -14,7 +14,7 @@ CRenderer::CRenderer(Renderer* renderer,RenderLayer layer ): m_main_renderer_(re
 	
 }
 
-CRenderer::CRenderer(Renderer* renderer, bool turnOnImmediately, RenderLayer layer) : m_main_renderer_(renderer)
+CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer, bool turnOnImmediately, RenderLayer layer) : Component(gameObject), m_main_renderer_(renderer)
 {
 	m_isShake = false;
 	m_renderLayer = layer;

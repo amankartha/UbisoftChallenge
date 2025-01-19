@@ -10,7 +10,9 @@ namespace Events
 	enum class EventType
 	{
 		base = 0,
-		Input
+		Input,
+		Pattern,
+		Transform
 	};
 
 	class IObserver
@@ -18,6 +20,7 @@ namespace Events
 	public:
 		virtual ~IObserver() = default;
 		virtual void OnNotify(EventType event) = 0;
+		
 	};
 
 	class ISubject
@@ -31,6 +34,7 @@ namespace Events
 	public:
 		std::vector<IObserver*> m_observers_;
 	};
+
 	
 }
 

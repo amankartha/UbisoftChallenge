@@ -14,7 +14,7 @@ enum class CameraState
 class CCameraController : public Component, public Events::IObserver
 {
 public:
-	CCameraController();
+	CCameraController(GameObject* gameObject);
 
 	~CCameraController();
 

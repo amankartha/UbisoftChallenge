@@ -8,7 +8,7 @@ class CPlaceObject :
 {
 public:
 
-	CPlaceObject(InputHandler* handler,GRID::GridSystem* grid_system);
+	CPlaceObject(GameObject* gameObject, InputHandler* handler,GRID::GridSystem* grid_system);
 	~CPlaceObject();
 	void Init() override;
 	void Update() override;

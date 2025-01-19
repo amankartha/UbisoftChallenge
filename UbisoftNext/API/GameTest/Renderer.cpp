@@ -48,7 +48,7 @@ void Renderer::RenderWithCamera(Vector2 offset, float a, float zoom ,std::vector
             m_gridFill_sprite->Draw();
         }
 
-        m_gridFill_sprite->SetScale(0.25f);
+        m_gridFill_sprite->SetScale(0.6f);
     }
 }
 
@@ -90,7 +90,7 @@ Renderer::Renderer(Game* instance)
 {
     m_game_instance = instance;
     m_gridFill_sprite = App::CreateSprite(".\\MiniGolfAssets\\tile_grey.png", 1, 1);
-    m_gridFill_sprite->SetScale(0.35f);
+    m_gridFill_sprite->SetScale(0.6f);
 
 	for (int renderLayer = Background; renderLayer != end ; renderLayer++)
 	{
