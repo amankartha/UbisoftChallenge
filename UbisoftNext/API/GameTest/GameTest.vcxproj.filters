@@ -146,6 +146,9 @@
     <ClCompile Include="GolfBallGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="CGolfBall.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -320,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="GolfBallGameObject.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGolfBall.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

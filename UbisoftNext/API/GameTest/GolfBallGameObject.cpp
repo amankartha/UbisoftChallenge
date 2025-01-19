@@ -1,6 +1,7 @@
 ﻿#include "stdafx.h"
 #include "GolfBallGameObject.h"
 
+#include "CGolfBall.h"
 #include "CRenderer.h"
 #include "Crigidbody.h"
 #include "Game.h"
@@ -14,6 +15,7 @@ void GolfBallGameObject::Init()
 	GameObject::Init();
 	AddComponent<CRenderer>(GameInstance->GetRenderer(), true)->SetSprite(*App::CreateSprite(".\\MiniGolfAssets\\ballGrey_06.png", 1, 1));
 	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 15.0f, 1.0f,false);
+	AddComponent<CGolfBall>();
 	GetComponent<Ctransform>()->SetScale(0.25f);
 }
 

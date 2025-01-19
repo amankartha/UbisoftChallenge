@@ -5,14 +5,6 @@
 
 class PlayerGameObject;
 
-class Player1State : public AI::FSMState
-{
-public:
-	void OnEnter() override;
-	void OnExit() override; 
-	void OnUpdate() override;
-};
-
 
 
 class GameManager : public GameObject
@@ -21,6 +13,7 @@ public:
 	GameManager(Game* instance,int id);
 	void Init() override;
 	void Update(float DeltaTime) override;
+	int GetPlayerID(bool player);
 private:
 	int m_player1_id;
 	int m_player2_id;

@@ -36,7 +36,7 @@ namespace physics
 
 	RigidBody* PhysicsSimulation::GetBody(size_t id)
 	{
-		return &m_rigidbody_pool_.Get(id)->obj;
+		return m_rigidbody_pool_.GetDirect(id);
 	}
 
 	void PhysicsSimulation::Init(int rigidBodyCount)
@@ -124,6 +124,7 @@ namespace physics
 	void PhysicsSimulation::Update(float deltaTime)
 	{
 		CheckCollisions();
+		m_rigidbody_pool_.UpdateEachInUse(deltaTime);
 	}
 
 };

@@ -198,6 +198,7 @@
     <ClInclude Include="Ccamera.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="Ccursor.h" />
+    <ClInclude Include="CGolfBall.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CPlaceObject.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="Ccursor.cpp" />
+    <ClCompile Include="CGolfBall.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />

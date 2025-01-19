@@ -9,21 +9,24 @@
 #include "GameManager.h"
 #include "InputHandler.h"
 #include "GameObjectManager.h"
+#include "GolfBallGameObject.h"
 #include "MiniGolfCameraGameObject.h"
 #include "PhysicsSimulation.h"
 #include "Renderer.h"
 
+int GameManagerID;
+int golfBallID;
 MiniGolfGame::MiniGolfGame()
 {
 	 
 	/// Add Input to keep track of
-	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D','F'});
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T' });
 	///----------------------------------------------------------
 	///----------------------------------------------------------
 	///Add Gameobjects that dont need to belong to a scene
 	GetGameObjectManager()->Create<CursorGameObject>("Cursor");
 	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
-	GetGameObjectManager()->Create<GameManager>("GameManager");
+	GameManagerID =  GetGameObjectManager()->Create<GameManager>("GameManager");
 	int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
 	GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(),15.0f,10.0f,1.0f,false);
 	///--------------------------
@@ -56,11 +59,6 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
 		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f,10.0f, 1.0f,false);
-	}
-	if (App::IsKeyPressed('T'))
-	{
-
-		GetComponent<Crigidbody>()->AddForce(Vector2(10, 10));
 	}
 }
 

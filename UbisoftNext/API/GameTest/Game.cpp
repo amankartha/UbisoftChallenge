@@ -39,8 +39,8 @@ void Game::InternalUpdate(const float deltaTime)
 	m_input_handler->Update();
 	m_input_handler->PollInputs();
 	m_scheduler->Update();
-	GetGameObjectManager()->UpdateAll(deltaTime);
-	GetPhysicsSimulation()->Update(deltaTime);
+	GetGameObjectManager()->UpdateAll(deltaTime/1000);
+	GetPhysicsSimulation()->Update(deltaTime/1000);
 }
 
 void Game::InternalRender()

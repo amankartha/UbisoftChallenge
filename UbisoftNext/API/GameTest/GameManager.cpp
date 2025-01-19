@@ -13,12 +13,12 @@ GameManager::GameManager(Game* instance,int id): GameObject(instance,id)
 
 
 
-void GameManager::Init()
+void GameManager::Init() 
 {
 	GameObject::Init();
 }
 
-void GameManager::Update(float DeltaTime)
+void GameManager::Update(float DeltaTime) 
 {
 	GameObject::Update(DeltaTime);
 }

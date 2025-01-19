@@ -27,9 +27,10 @@ public:
 
     }
 
-    ~Crigidbody();
+    ~Crigidbody() override;
 
-    void AddForce(Vector2 force);
+    void AddForce(Vector2 force) const;
+
 private:
     size_t m_rigidbody_id;
     physics::PhysicsSimulation* m_simulation_;
