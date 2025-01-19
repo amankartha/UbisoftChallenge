@@ -8,7 +8,7 @@
 GameManager::GameManager(Game* instance,int id): GameObject(instance,id)
 {
 	m_player1_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player1") ;
-	m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
+	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }
 
 

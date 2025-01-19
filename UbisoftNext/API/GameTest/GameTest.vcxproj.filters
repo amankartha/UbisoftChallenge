@@ -137,9 +137,6 @@
     <ClCompile Include="CPlaceObject.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
@@ -148,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="CGolfBall.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>GameObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -315,9 +315,6 @@
     <ClInclude Include="CPlaceObject.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerGameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
@@ -326,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="CGolfBall.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

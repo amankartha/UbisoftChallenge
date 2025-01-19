@@ -64,7 +64,7 @@ namespace physics
 		}
 	}
 
-	void PhysicsSimulation::ResolveCollision(RigidBody* A, RigidBody* B, Vector2 normal, float penetration)
+	void PhysicsSimulation::ResolveCollision(RigidBody* A, RigidBody* B, Vector2 normal, Collision collision)
 	{
 	
 		Vector2 relativeVelocity = B->GetVelocity() - A->GetVelocity();
@@ -76,7 +76,7 @@ namespace physics
 			return;
 		}
 
-		float e = (std::min)(A->GetMaterial().bounciness, B->GetMaterial().bounciness);
+		float e = (std::min)(A->GetMaterial().m_bounciness, B->GetMaterial().m_bounciness);
 
 		
 		float j = -(1.0f + e) * velAlongNormal;
@@ -85,8 +85,10 @@ namespace physics
 		
 		Vector2 impulse =  normal * j;
 
-		A->OffSetVelocity(impulse *  -A->GetMass().GetInverseMass());
-		B->OffSetVelocity(impulse *  B->GetMass().GetInverseMass());
+		
+		A->OffSetVelocity(impulse * -A->GetMass().GetInverseMass());
+		B->OffSetVelocity(impulse * B->GetMass().GetInverseMass());
+		
 	}
 	void PhysicsSimulation::CheckCollisions() //TODO: if time fix this awful code
 	{ 
@@ -122,7 +124,7 @@ namespace physics
 							rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
 							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
 						}
-						ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
+						ResolveCollision(rbA, rbB, collision.normal, collision);
 					
 					}
 				}
@@ -143,36 +145,15 @@ namespace physics
 							rbA->OffsetPosition(collision.normal * - collision.penetration / 2);
 							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
 						}
-						ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
+						ResolveCollision(rbA, rbB, collision.normal, collision);
 					}
 				}
 				else
 				{
+					
 					if (rbA->GetCollider()->GetValues().second == -1)
 					{
-						if (CircleVsAABB(&collision))
-						{
-							if (rbA->m_isStatic)
-							{
-								rbB->OffsetPosition(collision.normal * -collision.penetration);
-							}
-							else if (rbB->m_isStatic)
-							{
-								rbA->OffsetPosition(collision.normal * collision.penetration);
-							}
-							else
-							{
-								rbA->OffsetPosition(collision.normal * collision.penetration / 2);
-								rbB->OffsetPosition(collision.normal * -collision.penetration / 2);
-
-
-							}
-							ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
-						}
-					}
-					else
-					{
-						if (AABBVsCircle(&collision))
+						if (IntersectionUsingSAT(&collision))
 						{
 							if (rbA->m_isStatic)
 							{
@@ -189,7 +170,31 @@ namespace physics
 
 
 							}
-							ResolveCollision(rbA, rbB, collision.normal, collision.penetration);
+							ResolveCollision(rbA, rbB, collision.normal, collision);
+						}
+					}
+					else
+					{
+						collision = Collision(rbB,rbA);
+
+						if (IntersectionUsingSAT(&collision))
+						{
+							if (rbA->m_isStatic)
+							{
+								rbB->OffsetPosition(collision.normal * collision.penetration);
+							}
+							else if (rbB->m_isStatic)
+							{
+								rbA->OffsetPosition(collision.normal * -collision.penetration);
+							}
+							else
+							{
+								rbA->OffsetPosition(collision.normal * -collision.penetration / 2);
+								rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+
+
+							}
+							ResolveCollision(rbA, rbB, collision.normal, collision);
 						}
 					}
 					//}

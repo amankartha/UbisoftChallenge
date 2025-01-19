@@ -13,16 +13,16 @@ class Crigidbody :
     public Component
 {
 public:
-    Crigidbody(GameObject* gameobject, physics::PhysicsSimulation* simulation,float radius,float density,bool isStatic ) : Component(gameobject),
+    Crigidbody(GameObject* gameobject, physics::PhysicsSimulation* simulation, float radius, float density, float bounciness ,bool isStatic) : Component(gameobject),
 	m_simulation_(simulation),
-	m_rigidbody_id(simulation->AddBody(physics::Shape::CIRCLE,isStatic,radius,density, physics::Material(),&GetAttachedGameObject()->GetTransformComponent()))
+	m_rigidbody_id(simulation->AddBody(physics::Shape::CIRCLE,isStatic,radius,density, physics::Material(density,bounciness),&GetAttachedGameObject()->GetTransformComponent()))
     {
         
     }
 
-    Crigidbody(GameObject* gameobject, physics::PhysicsSimulation* simulation, float width,float height, float density, bool isStatic ) : Component(gameobject),
+    Crigidbody(GameObject* gameobject, physics::PhysicsSimulation* simulation, float width,float height, float density, float bounciness, bool isStatic ) : Component(gameobject),
         m_simulation_(simulation),
-        m_rigidbody_id(simulation->AddBody(physics::Shape::BOX, isStatic, width,height, density, physics::Material(), &GetAttachedGameObject()->GetTransformComponent()))
+        m_rigidbody_id(simulation->AddBody(physics::Shape::BOX, isStatic, width,height, density, physics::Material(density,bounciness), &GetAttachedGameObject()->GetTransformComponent()))
     {
 
     }
@@ -30,6 +30,8 @@ public:
     ~Crigidbody() override;
 
     void AddForce(Vector2 force) const;
+
+    Vector2 GetVelocity();
 
 private:
     size_t m_rigidbody_id;

@@ -15,7 +15,7 @@ namespace physics
 		MassData(float _mass, bool isStatic)
 		{
 			is_static = isStatic;
-			if (_mass <= 0.01)
+			if (_mass <= 0.0001)
 			{
 				mass = 0;
 				inverse_mass = 100000000.0f;
@@ -41,10 +41,12 @@ namespace physics
 	};
 	struct Material
 	{
-		float density;
-		float bounciness;
+		float m_density;
+		float m_bounciness;
 
-		Material() : density(1), bounciness(0.8f){}
+		Material() : m_density(1), m_bounciness(0.8f){}
+
+		Material(float density, float bounciness) : m_density(density), m_bounciness(bounciness){}
 	};
 	class RigidBody
 	{
@@ -94,8 +96,8 @@ namespace physics
 		}
 		void SetMaterial(Material value)
 		{
-			m_material.bounciness = std::clamp(value.bounciness, 0.0f, 1.0f);
-			m_material.density = value.density;
+			m_material.m_bounciness = std::clamp(value.m_bounciness, 0.0f, 1.0f);
+			m_material.m_density = value.m_density;
 		}
 		MassData GetMass() const
 		{

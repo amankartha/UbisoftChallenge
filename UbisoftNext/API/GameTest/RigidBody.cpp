@@ -32,7 +32,7 @@ namespace physics
 
 	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
 	{
-		float area = PI * radius * radius * 0.1f;
+		float area = PI * radius * radius ;
 
 		if (area < MIN_BODY_SIZE)
 		{
@@ -41,7 +41,7 @@ namespace physics
 		m_shape = Shape::CIRCLE; 
 		m_isStatic = is_static;
 		m_collider = new Circle(radius);
-		m_material = material;
+		SetMaterial(material);
 		m_massData = MassData(area * density,is_static);
 
 	
@@ -52,7 +52,7 @@ namespace physics
 	void RigidBody::SetAABBRigidBody(bool is_static, float width, float height, float density,
 		Material material)
 	{
-		float area = width * height * 0.1f;
+		float area = width * height ;
 		float mass = area * density;
 
 		if (area < MIN_BODY_SIZE)
@@ -62,7 +62,7 @@ namespace physics
 		m_shape = Shape::BOX;
 		m_isStatic = is_static;
 		m_collider = new AABB(width,height);
-		m_material = material;
+		SetMaterial(material);
 		m_massData = MassData(area * density,is_static);
 	}
 };

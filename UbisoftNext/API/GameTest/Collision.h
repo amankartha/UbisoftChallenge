@@ -147,7 +147,7 @@ namespace physics
     //}
     //
 
-    bool AABBVsCircle(Collision* collision)
+    /*bool AABBVsCircle(Collision* collision)
     {
         RigidBody* A = collision->A;
         RigidBody* B = collision->B;
@@ -159,8 +159,8 @@ namespace physics
         float x_extent = A->GetCollider()->GetValues().first / 2;
         float y_extent = A->GetCollider()->GetValues().second / 2;
 
-        closestPosition.x = std::clamp(closestPosition.x, -x_extent, x_extent);
-        closestPosition.y = std::clamp(closestPosition.y, -y_extent, y_extent);
+        closestPosition.x = std::clamp(closestPosition.x, -x_extent , x_extent );
+        closestPosition.y = std::clamp(closestPosition.y, -y_extent, y_extent );
 
         bool inside = false;
 
@@ -189,7 +189,7 @@ namespace physics
             return false;
         }
 
-        Vector2 normal = (n - closestPosition).Normalize();
+        Vector2 normal = n - closestPosition;
 
         if (inside)
         {
@@ -211,6 +211,7 @@ namespace physics
         RigidBody* A = collision->A;
         RigidBody* B = collision->B;
 
+        collision->isFlipped = true;
 
         Vector2 n = A->GetPosition() - B->GetPosition();
         Vector2 closestPosition = n;
@@ -218,8 +219,8 @@ namespace physics
         float x_extent = B->GetCollider()->GetValues().first / 2;
         float y_extent = B->GetCollider()->GetValues().second / 2;
 
-        closestPosition.x = std::clamp(closestPosition.x, -x_extent, x_extent);
-        closestPosition.y = std::clamp(closestPosition.y, -y_extent, y_extent);
+        closestPosition.x = std::clamp(closestPosition.x, -x_extent , x_extent );
+        closestPosition.y = std::clamp(closestPosition.y, -y_extent , y_extent );
 
         bool inside = false;
 
@@ -248,7 +249,7 @@ namespace physics
             return false;
         }
 
-        Vector2 normal = (n - closestPosition).Normalize();
+        Vector2 normal = n - closestPosition;
 
         if (inside)
         {
@@ -260,6 +261,153 @@ namespace physics
             collision->normal = normal;
             collision->penetration = radius - std::sqrt(d);
         }
+
+        return true;
+    }*/
+
+	void ProjectVertices(float* min,float* max,Vector2 axis, std::vector<Vector2> vertices)
+    {
+        *min = 1000000000000.0f;
+        *max = 0;
+
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            Vector2 v = vertices[i];
+            float proj = Vector2::Dot(v, axis);
+
+            if (proj < *min) { *min = proj; }
+            if (proj > *max) { *max = proj; }
+        }
+    }
+    void ProjectCircle(Vector2 center,float radius,Vector2 axis,float* min,float* max)
+    {
+        Vector2 direction = axis.Normalize();
+        Vector2 directionAjdusted = direction * radius;
+
+        Vector2 p1 = center + directionAjdusted;
+        Vector2 p2 = center - directionAjdusted;
+
+        *min = Vector2::Dot(p1, axis);
+        *max = Vector2::Dot(p2, axis);
+
+        if (*min > *max)
+        {
+            float temp = *min;
+            *min = *max;
+            *max = temp;
+        }
+    }
+	int ClosestPointToCircleInVector(Vector2 circleCenter, std::vector<Vector2> vertices)
+    {
+        int result = -100;
+        float minDistance = 1000000;
+
+        
+        for (int i = 0 ; i < vertices.size(); ++i)
+        {
+            Vector2 vec = vertices[i];
+            float distance =  Vector2::Distance(circleCenter, vec);
+
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                result = i;
+            }
+        }
+        return result;
+    }
+    bool IntersectionUsingSAT(Collision* collision)
+    {
+
+        std::vector<Vector2> vertices;
+
+        
+
+        RigidBody* A = collision->A;
+        RigidBody* B = collision->B;
+
+        float x_extent = A->GetCollider()->GetValues().first / 2;
+        float y_extent = A->GetCollider()->GetValues().second / 2;
+
+
+        Vector2 APosition = collision->A->GetPosition();
+        Vector2 BPosition = collision->B->GetPosition();
+
+        vertices.emplace_back(APosition.x + x_extent, APosition.y + y_extent);
+        vertices.emplace_back(APosition.x - x_extent, APosition.y + y_extent);
+        vertices.emplace_back(APosition.x + x_extent, APosition.y - y_extent);
+        vertices.emplace_back(APosition.x - x_extent, APosition.y - y_extent);
+
+
+    	
+        float depth = 1000000000000000;
+
+        Vector2 axis(0,0);
+
+        float axisDepth = 0.0f;
+
+        float minA, maxA, minB, maxB;
+
+        float radius = A->GetCollider()->GetValues().first;
+
+        for (int i = 0; i < vertices.size(); i++)
+        {
+            Vector2 va = vertices[i];
+            Vector2 vb = vertices[(i + 1) % vertices.size()];
+
+            Vector2 edge = vb - va;
+            axis = Vector2(-edge.y, edge.x);
+            axis = axis.Normalize();
+
+
+
+            ProjectVertices( &minA, &maxA,axis,vertices);
+            ProjectCircle(BPosition, radius, axis, &minB, &maxB);
+
+            if (minA >= maxB || minB >= maxA)
+            {
+                return false;
+            }
+
+            axisDepth = (std::min)(maxB - minA, maxA - minB);
+
+            if (axisDepth < depth)
+            {
+                collision->penetration = axisDepth;
+                collision->normal = axis;
+            }
+        }
+        Vector2 closestPoint = vertices[ClosestPointToCircleInVector(APosition, vertices)];
+
+        axis = closestPoint - APosition;
+
+
+        ProjectVertices(&minA, &maxA, axis, vertices);
+        ProjectCircle(BPosition, radius, axis, &minB, &maxB);
+
+        if (minA >= maxB || minB >= maxA)
+        {
+            return false;
+        }
+
+        axisDepth = (std::min)(maxB - minA, maxA - minB);
+
+        if (axisDepth < depth)
+        {
+            collision->penetration = axisDepth;
+            collision->normal = axis;
+        }
+
+        collision->penetration /= collision->normal.Magnitude();
+        collision->normal = collision->normal.Normalize();
+
+        Vector2 direction = BPosition - APosition;
+
+        if (Vector2::Dot(direction, collision->normal) < 0.0f)
+        {
+            collision->normal = collision->normal * -1;
+        }
+
 
         return true;
     }

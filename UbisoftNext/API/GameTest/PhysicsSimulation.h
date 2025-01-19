@@ -5,6 +5,7 @@
 #include "RigidBody.h"
 namespace physics
 {
+	struct Collision;
 	enum class Shape;
 }
 
@@ -34,7 +35,7 @@ namespace physics
 		void DrawColliders();
 
 	private:
-		void ResolveCollision(RigidBody* A,RigidBody* B, Vector2 normal, float penetration);
+		void ResolveCollision(RigidBody* A,RigidBody* B, Vector2 normal, Collision collision);
 
 		void CheckCollisions();
 	private:

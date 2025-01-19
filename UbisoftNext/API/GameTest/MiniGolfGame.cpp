@@ -20,7 +20,7 @@ MiniGolfGame::MiniGolfGame()
 {
 	 
 	/// Add Input to keep track of
-	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T' });
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T','L' });
 	///----------------------------------------------------------
 	///----------------------------------------------------------
 	///Add Gameobjects that dont need to belong to a scene
@@ -51,13 +51,13 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('P'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,false);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,0.4f, true);
 		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 	}
-	if (App::IsKeyPressed('L'))
+	if (GetInputHandler()->IsKeyPressed('L'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 30.0f,30.0f, 0.3f,true);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 30.0f,30.0f, 0.3f,0.4 ,true);
 		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 	}
 }

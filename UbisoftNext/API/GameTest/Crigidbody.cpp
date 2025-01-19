@@ -11,3 +11,8 @@ void Crigidbody::AddForce(Vector2 force) const
 	m_simulation_->GetBody(m_rigidbody_id)->AddForce(force);
 }
 
+Vector2 Crigidbody::GetVelocity()
+{
+	return m_simulation_->GetBody(m_rigidbody_id)->m_linearVelocity;
+}
+
