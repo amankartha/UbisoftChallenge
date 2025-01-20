@@ -7,8 +7,6 @@
 
 GameManager::GameManager(Game* instance,int id): GameObject(instance,id)
 {
-	m_player1_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player1") ;
-	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }
 
 
@@ -16,6 +14,9 @@ GameManager::GameManager(Game* instance,int id): GameObject(instance,id)
 void GameManager::Init() 
 {
 	GameObject::Init();
+
+	m_player1_id = GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player1");
+	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }
 
 void GameManager::Update(float DeltaTime) 

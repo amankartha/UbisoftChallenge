@@ -7,14 +7,15 @@
 
 MiniGolfCameraGameObject::MiniGolfCameraGameObject(Game* instance,int id) : GameObject(instance,id)
 {
-	AddComponent<Ccamera>(GameInstance->GetCameraManager(), 1);
-	AddComponent<CCameraController>();
-	GameInstance->GetCameraManager()->SetMainCamera(1);
+
 }
 
 void MiniGolfCameraGameObject::Init()
 {
 	GameObject::Init();
+	AddComponent<Ccamera>(GameInstance->GetCameraManager(), 1);
+	AddComponent<CCameraController>();
+	GameInstance->GetCameraManager()->SetMainCamera(1);
 	GetComponent<Ccamera>()->SetTransform(&GetTransformComponent());  //TODO: this is bad
 }
 

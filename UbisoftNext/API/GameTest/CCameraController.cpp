@@ -27,9 +27,22 @@ void CCameraController::Init()
 void CCameraController::Update(float DeltaTime)
 {
 	Component::Update(DeltaTime);
-	GetAttachedGameObject()->GetTransformComponent().OffsetPosition(m_direction);
-	m_direction = Vector2(0, 0);
 
+	if (m_transformToFollow != nullptr)
+	{
+
+		Ctransform* transform = &GetAttachedGameObject()->GetTransformComponent();
+
+		transform->OffsetPosition(m_direction);
+		m_direction = Vector2(0, 0);
+
+
+
+		transform->SetPosition(
+			Vector2::Lerp(transform->GetWorldPosition(),
+				m_transformToFollow->GetWorldPosition(),
+				DeltaTime * 10));
+	}
 }
 
 void CCameraController::OnNotify(const Events::EventType event)

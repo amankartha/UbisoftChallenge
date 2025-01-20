@@ -131,6 +131,7 @@ void Renderer::SetShakeOff()
 
 void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& gridSystem) const
     {
+
         Vector2 camPos = camera.GetPosition();
         Vector2 gridOrigin = gridSystem.GetOrigin();
         int cellSize = gridSystem.GetCellSize();
@@ -184,12 +185,92 @@ void Renderer::DrawGridWithCamera(const Camera& camera, const GRID::GridSystem& 
         }
     }
 
+void Renderer::DrawGridWithCameraAroundTransform(Ctransform* cameraTransform, const GRID::GridSystem& gridSystem,
+	Ctransform* cursorTransform)
+{
+        Vector2 camPos = cameraTransform->GetWorldPosition();
+        Vector2 gridOrigin = gridSystem.GetOrigin();
+        int cellSize = gridSystem.GetCellSize();
+        IntVector2 gridSize = gridSystem.m_gridSize;
+
+       
+        Vector2 centeredOrigin = gridOrigin - Vector2(gridSize.x * cellSize / 2.0f, gridSize.y * cellSize / 2.0f);
+
+       
+        float gridWorldLeft = centeredOrigin.x;
+        float gridWorldRight = centeredOrigin.x + gridSize.x * cellSize;
+        float gridWorldTop = centeredOrigin.y;
+        float gridWorldBottom = centeredOrigin.y + gridSize.y * cellSize;
+
+  
+        float camLeft = camPos.x - APP_VIRTUAL_WIDTH / 2.0f;
+        float camRight = camPos.x + APP_VIRTUAL_WIDTH / 2.0f;
+        float camTop = camPos.y - APP_VIRTUAL_HEIGHT / 2.0f;
+        float camBottom = camPos.y + APP_VIRTUAL_HEIGHT / 2.0f;
+
+       
+        float startX = (std::max)(gridWorldLeft, std::floor(camLeft / cellSize) * cellSize);
+        float endX = (std::min)(gridWorldRight, std::ceil(camRight / cellSize) * cellSize);
+        float startY = (std::max)(gridWorldTop, std::floor(camTop / cellSize) * cellSize);
+        float endY = (std::min)(gridWorldBottom, std::ceil(camBottom / cellSize) * cellSize);
+
+        Vector2 cusorPosition = cursorTransform->GetWorldPosition() - Vector2(APP_VIRTUAL_WIDTH / 2.0f,APP_VIRTUAL_HEIGHT/2 ) + camPos;
+
+		
+        // Draw vertical grid lines
+        for (float x = startX; x <= endX; x += cellSize)
+        {
+         
+            float screenX = x - camPos.x + APP_VIRTUAL_WIDTH / 2.0f;
+
+           
+            float screenStartY = gridWorldTop - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f;
+            float screenEndY = gridWorldBottom - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f;
+
+            float distX = screenX - (cusorPosition.x - camPos.x + APP_VIRTUAL_WIDTH / 2.0f);
+            if (distX * distX < 150 * 150)
+            {
+                float maxDistY = std::sqrt(150 * 150 - distX * distX);
+                screenStartY = std::max(screenStartY, cusorPosition.y - maxDistY - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f);
+                screenEndY = std::min(screenEndY, cusorPosition.y + maxDistY - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f);
+
+                if (screenStartY <= screenEndY) 
+                    App::DrawLine(screenX, screenStartY, screenX, screenEndY,0,0,1);
+            }
+        }
+
+        // Draw horizontal grid lines
+        for (float y = startY; y <= endY; y += cellSize)
+        {
+            
+            float screenY = y - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f;
+
+            // Calculate screen X range for this Y and clamp to the circle
+            float screenStartX = gridWorldLeft - camPos.x + APP_VIRTUAL_WIDTH / 2.0f;
+            float screenEndX = gridWorldRight - camPos.x + APP_VIRTUAL_WIDTH / 2.0f;
+
+            // Clamp the line within the circle
+            float distY = screenY - (cusorPosition.y - camPos.y + APP_VIRTUAL_HEIGHT / 2.0f);
+            if (distY * distY < 150 * 150)
+            {
+                float maxDistX = std::sqrt(150 * 150 - distY * distY);
+                screenStartX = std::max(screenStartX, cusorPosition.x - maxDistX - camPos.x + APP_VIRTUAL_WIDTH / 2.0f);
+                screenEndX = std::min(screenEndX, cusorPosition.x + maxDistX - camPos.x + APP_VIRTUAL_WIDTH / 2.0f);
+
+                if (screenStartX <= screenEndX) // Only draw if inside circle
+                    App::DrawLine(screenStartX, screenY, screenEndX, screenY,0,0,1);
+            }
+        }
+}
+
 void Renderer::DrawFilledCells(const GRID::GridSystem& gridSystem)
 {
     std::vector<Vector2> positions = gridSystem.GetAllFilledCells();
     Camera* maincam = &m_game_instance->GetCameraManager()->GetMainCamera();
     RenderWithCamera(maincam->GetPosition(), maincam->GetAngle(), maincam->GetZoom(), positions);
 }
+
+
 
     
 

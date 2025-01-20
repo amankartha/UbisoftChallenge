@@ -44,6 +44,8 @@ public:
 
 		m_components[type]->SetGameObject(this);
 
+		m_components[type]->Init();
+
 		return dynamic_cast<T*>(m_components[type].get());
 	}
 

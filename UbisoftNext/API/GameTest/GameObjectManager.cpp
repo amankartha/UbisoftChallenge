@@ -6,6 +6,28 @@
 #include "Gameobject.h"
 
 
+void GameObjectManager::AddToLookupTable(std::string name, int id)
+{
+	while (m_lookupTable.find(name) != m_lookupTable.end())
+	{
+		name = name + "+";
+	}
+	m_lookupTable[name] = id;
+}
+
+int GameObjectManager::SearchTable(std::string name)
+{
+	if (m_lookupTable.find(name) == m_lookupTable.end())
+	{
+		return -1;
+	}
+	else
+	{
+		return m_lookupTable[name];
+	}
+}
+
+
 void GameObjectManager::Destroy(int ID)
 {
 	m_gameObjectMap.erase(ID);
@@ -25,6 +47,17 @@ GameObject* GameObjectManager::Find(int ID)
 	}
 
 	return nullptr;
+}
+
+GameObject* GameObjectManager::FindUsingTable(std::string name)
+{
+	int id = SearchTable(name);
+	if (id  == -1 )
+	{
+		return nullptr;
+	}
+	
+	return Find(id);
 }
 
 void GameObjectManager::InitAll()

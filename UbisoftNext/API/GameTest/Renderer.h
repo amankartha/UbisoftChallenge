@@ -109,9 +109,13 @@ public:
 
 	void DrawGridWithCamera(const Camera& camera,const GRID::GridSystem& gridSystem) const;
 
+	static void DrawGridWithCameraAroundTransform(Ctransform* cameraTransform, const GRID::GridSystem& gridSystem, Ctransform* cursorTransform);
+
 	void DrawFilledCells(const GRID::GridSystem& gridSystem);
 
+
 	void RenderWithCamera(Vector2 offset, float a, float zoom, std::vector<Vector2> worldPositions);
+	
 	 
 public:
 	Vector2 m_shakeValue;

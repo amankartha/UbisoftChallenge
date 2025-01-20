@@ -21,7 +21,14 @@ public:
 	void Init() override;
 	void Update(float DeltaTime) override;
 	void OnNotify(const Events::EventType event) override;
+	void SetTransformToFollow(Ctransform* transform);
 private:
 	CameraState m_state_;
 	Vector2 m_direction;
+	Ctransform* m_transformToFollow;
 };
+
+inline void CCameraController::SetTransformToFollow(Ctransform* transform)
+{
+	m_transformToFollow = transform;
+}

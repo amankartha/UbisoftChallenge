@@ -199,6 +199,7 @@
     <ClInclude Include="Ccamera.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="Ccursor.h" />
+    <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGolfBall.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
@@ -224,6 +225,7 @@
     <ClInclude Include="IRenderable.h" />
     <ClInclude Include="MiniGolfCameraGameObject.h" />
     <ClInclude Include="MiniGolfGame.h" />
+    <ClInclude Include="MiniGolfGameStates.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="ParticleGameObject.h" />
     <ClInclude Include="Pathfinding.h" />
@@ -259,6 +261,7 @@
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="Ccursor.cpp" />
+    <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGolfBall.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClInclude Include="Collider.h" />
@@ -283,6 +286,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="MiniGolfCameraGameObject.cpp" />
     <ClCompile Include="MiniGolfGame.cpp" />
+    <ClCompile Include="MiniGolfGameStates.cpp" />
     <ClCompile Include="ParticleGameObject.cpp" />
     <ClCompile Include="Pathfinding.cpp" />
     <ClCompile Include="PlayerGameObject.cpp" />

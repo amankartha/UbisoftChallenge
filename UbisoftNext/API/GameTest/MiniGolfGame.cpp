@@ -5,6 +5,7 @@
 
 #include "BoundaryGameObject.h"
 #include "cameraManager.h"
+#include "CCameraController.h"
 #include "Crigidbody.h"
 #include "CursorGameObject.h"
 #include "GameManager.h"
@@ -17,22 +18,10 @@
 
 int GameManagerID;
 int golfBallID;
+int camId;
 MiniGolfGame::MiniGolfGame()
 {
-	 
-	/// Add Input to keep track of
-	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T','L' });
-	///----------------------------------------------------------
-	///----------------------------------------------------------
-	///Add Gameobjects that dont need to belong to a scene
-	GetGameObjectManager()->Create<CursorGameObject>("Cursor");
-	GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
-	GameManagerID =  GetGameObjectManager()->Create<GameManager>("GameManager");
-	int id = GetGameObjectManager()->Create<BoundaryGameObject>("Boundary");
-	GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()->SetPosition(Vector2(0, 350));
-	 id = GetGameObjectManager()->Create<BoundaryGameObject>("BoundarySouth");
-	GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()->SetPosition(Vector2(0, -350));
-	///--------------------------
+	
 }
 
 MiniGolfGame::~MiniGolfGame()
@@ -43,6 +32,24 @@ void MiniGolfGame::InternalInit()
 {
 	Game::InternalInit();
 	while (ShowCursor(FALSE) >= 0);
+
+	/// Add Input to keep track of
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T', 'L' });
+	///----------------------------------------------------------
+	///----------------------------------------------------------
+	///Add Gameobjects that dont need to belong to a scene
+	GetGameObjectManager()->AddToLookupTable("Cursor", GetGameObjectManager()->Create<CursorGameObject>("Cursor"));
+	camId =  GetGameObjectManager()->Create<MiniGolfCameraGameObject>("MiniGolfCamera");
+	GameManagerID = GetGameObjectManager()->Create<GameManager>("GameManager");
+	int id = GetGameObjectManager()->Create<BoundaryGameObject>("Boundary");
+	GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()->SetPosition(Vector2(0, 350));
+	id = GetGameObjectManager()->Create<BoundaryGameObject>("BoundarySouth");
+	GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()->SetPosition(Vector2(0, -350));
+
+	GetGameObjectManager()->Find(camId)->GetComponent<CCameraController>()->SetTransformToFollow(
+		GetGameObjectManager()->Find(GetGameObjectManager()->SearchTable("GolfBall"))->GetComponent<Ctransform>()
+		);
+	///--------------------------
 
 }
 
@@ -56,7 +63,7 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 	if (App::IsKeyPressed('P'))
 	{
 		int id = GetGameObjectManager()->Create<GameObject>("testRigidbody");
-		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,0.8f, true);
+		GetGameObjectManager()->Find(id)->AddComponent<Crigidbody>(GetPhysicsSimulation(), 15.0f, 0.3f,0.8f, false);
 		GetGameObjectManager()->Find(id)->GetTransformComponent().SetPosition(Vector2(FRAND_RANGE(-400, 400), FRAND_RANGE(-400, 400)));
 		
 	}
@@ -72,8 +79,10 @@ void MiniGolfGame::InternalUpdate(const float deltaTime)
 void MiniGolfGame::InternalRender()
 {
 	Game::InternalRender();
-	GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
-	GetRenderer()->DrawFilledCells(m_grid_system_);
+	//GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
+	GetRenderer()->DrawFilledCells (m_grid_system_);
+	GetRenderer()->DrawGridWithCameraAroundTransform(&GetGameObjectManager()->Find(camId)->GetTransformComponent(),
+		m_grid_system_, GetGameObjectManager()->FindUsingTable("Cursor")->GetComponent<Ctransform>());
 	GetPhysicsSimulation()->DrawColliders();
 	if (GetGridSystem()->isFound)
 	{

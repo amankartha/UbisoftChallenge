@@ -31,7 +31,7 @@ Game::~Game(){}  //need this for unique ptrs to work because it needs a place to
 
 void Game::InternalInit()
 {
-	GetGameObjectManager()->InitAll();
+	//GetGameObjectManager()->InitAll();
 }
 
 void Game::InternalUpdate(const float deltaTime)

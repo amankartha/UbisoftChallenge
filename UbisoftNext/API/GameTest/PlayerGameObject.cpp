@@ -8,12 +8,14 @@
 
 PlayerGameObject::PlayerGameObject(Game* instance, int id) : GameObject(instance,id)
 {
-	m_golf_ball_id = instance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall", this);
+
 }
 
 void PlayerGameObject::Init()
 {
 	GameObject::Init();
+	GameInstance->GetGameObjectManager()->AddToLookupTable("GolfBall", 
+		GameInstance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall", this));
 }
 
 void PlayerGameObject::Update(float DeltaTime)

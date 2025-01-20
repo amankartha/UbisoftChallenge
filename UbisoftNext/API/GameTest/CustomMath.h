@@ -64,14 +64,7 @@ struct Vector2
 		return inDir - inNorm * (2 * Dot(inDir, inNorm));
 	}
 
-	Vector2 Lerp(const Vector2& a, const Vector2& b, float t)
-	{
-		t = std::clamp(t, 0.0f, 1.0f);
-		return {
-			a.x + (b.x - a.x) * t,
-			a.y + (b.y - a.y) * t
-		};
-	}
+	static Vector2 Lerp(const Vector2& a, const Vector2& b, float t);
 
 	bool operator==(const Vector2& other) const {
 		return x == other.x && y == other.y;
