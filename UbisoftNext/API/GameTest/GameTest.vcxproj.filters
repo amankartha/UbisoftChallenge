@@ -167,6 +167,7 @@
     <ClCompile Include="BoostPadGameObject.cpp" />
     <ClCompile Include="CBoostPad.cpp" />
     <ClCompile Include="CSpawner.cpp" />
+    <ClCompile Include="GridBlockGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -363,6 +364,7 @@
     <ClInclude Include="BoostPadGameObject.h" />
     <ClInclude Include="CBoostPad.h" />
     <ClInclude Include="CSpawner.h" />
+    <ClInclude Include="GridBlockGameObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

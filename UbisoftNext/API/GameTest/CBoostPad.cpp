@@ -6,15 +6,17 @@
 #include "Game.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
+#include "Grid.h"
 #include "PhysicsSimulation.h"
 
-CBoostPad::CBoostPad(GameObject* attachedObject) : Component(attachedObject)
+CBoostPad::CBoostPad(GameObject* attachedObject, std::vector<IntVector2> ids) : Component(attachedObject) , m_ids_to_clear(ids)
 {
 }
 
 CBoostPad::~CBoostPad()
 {
 	GetAttachedGameObject()->GameInstance->GetPhysicsSimulation()->DeRegisterPhysicsObserver(*this);
+	GetAttachedGameObject()->GameInstance->GetGridSystem()->ClearPlaceAble(m_ids_to_clear);
 }
 
 void CBoostPad::Init()

@@ -8,7 +8,7 @@ class CRenderer :
 {
 public:
     CRenderer(GameObject* gameObject,  Renderer* renderer, RenderLayer layer = RenderLayer::Default);
-    CRenderer(GameObject* gameObject, Renderer* renderer,bool turnOnImmediately, RenderLayer layer = RenderLayer::Default);
+    CRenderer(GameObject* gameObject, Renderer* renderer,bool turnOnImmediately , RenderLayer layer = RenderLayer::Default);
 
     ~CRenderer() override;
 

@@ -218,6 +218,7 @@
     <ClInclude Include="DataStructure.h" />
     <ClInclude Include="FSM.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GridBlockGameObject.h" />
     <ClInclude Include="MiniGolfGameManagerGameObject.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
@@ -287,6 +288,7 @@
     <ClCompile Include="CustomMath.cpp" />
     <ClCompile Include="FSM.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GridBlockGameObject.cpp" />
     <ClCompile Include="MiniGolfGameManagerGameObject.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />

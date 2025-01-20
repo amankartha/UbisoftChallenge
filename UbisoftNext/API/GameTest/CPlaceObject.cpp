@@ -37,11 +37,15 @@ CGameManager* CPlaceObject::GetGameManager()
 	return m_game_manager_;
 }
 
-void CPlaceObject::OnNotify(Events::EventType event)
+void CPlaceObject::OnNotify(Events::EventType event) //Todo: Cleanup
 {
 	if (event == Events::EventType::Input)
 	{
-		if (m_handler_->IsKeyPressed(VK_RBUTTON) && GetGameManager()->RemoveATBFromPlayer(GetGameManager()->m_current_player,1))
+		if (m_handler_->IsKeyPressed(VK_RBUTTON)
+			&& GetAttachedGameObject()->GameInstance->GetGridSystem()
+			->GetCellFromWorldPosition(App::ScreenToWorld(m_attachedGameObject->GameInstance->GetCameraManager()->GetMainCamera(), m_attachedGameObject->GetTransformComponent().GetWorldPosition()))
+			->m_isPlaceable
+			&& GetGameManager()->RemoveATBFromPlayer(GetGameManager()->m_current_player,1))
 		{
 			m_grid_system_->SetObstacle(App::ScreenToWorld(m_attachedGameObject->GameInstance->GetCameraManager()->GetMainCamera(),  m_attachedGameObject->GetTransformComponent().GetWorldPosition()));
 		}

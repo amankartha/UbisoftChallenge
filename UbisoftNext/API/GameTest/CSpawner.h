@@ -1,5 +1,8 @@
 #pragma once
 #include "Component.h"
+#include "CPoolManager.h"
+#include "GridBlockGameObject.h"
+#include "ObjectPool.h"
 #include "ObserverPattern.h"
 
 class Game;
@@ -13,8 +16,8 @@ class CSpawner :
     public Component , public Events::IPatternObserver
 {
 public:
-	CSpawner(GameObject* attachedObject)
-		: Component(attachedObject)
+	CSpawner(GameObject* attachedObject, CPoolManager<GridBlockGameObject>* go)
+		: Component(attachedObject) ,m_gridBlock_pool_(go)
 	{
 	}
 	~CSpawner();
@@ -29,5 +32,7 @@ private:
 private:
 	GRID::GridSystem* m_grid_system_;
 	Game* m_game_;
+	CPoolManager<GridBlockGameObject>* m_gridBlock_pool_;
+	std::unordered_map<IntVector2, int> m_initialized_pool_objects_;
 };
 

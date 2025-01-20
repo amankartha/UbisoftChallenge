@@ -48,13 +48,28 @@ Game* CSpawner::GetGame()
 
 void CSpawner::OnNotify(Events::PatternEventType event, IntVector2 gridPosition)
 {
+
+	std::pair<int,GridBlockGameObject*> block = m_gridBlock_pool_->SpawnAndReturnId();
+	block.second->GetTransformComponent().SetPosition(GetGridSystem()->GridToWorld(gridPosition));
+	m_initialized_pool_objects_[gridPosition] = block.first;
+
 	std::pair<bool, std::vector<IntVector2>> results = 
 		GetGridSystem()->MatchPatternsAroundNewCell({{ 1,1,1 }, { 0,0,0 }, { 1,1,1 }}, gridPosition, true);
 	if (results.first )
 	{
-		int id = GetGame()->GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad");
+		int id = GetGame()->GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad",results.second);
 		GetGame()->GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()
 		->SetPosition(GetGridSystem()->GridToWorld(CalculateCenter(results.second)));
+	}
+
+	for (IntVector2 location : results.second )
+	{
+		auto it = m_initialized_pool_objects_.find(location);
+		if (it!=m_initialized_pool_objects_.end())
+		{
+			m_gridBlock_pool_->Release(it->second);
+			m_initialized_pool_objects_.erase(it);
+		}
 	}
 
 }

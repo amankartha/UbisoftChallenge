@@ -17,7 +17,8 @@ void MiniGolfGameManagerGameObject::Init()
 {
 	GameObject::Init();
 	AddComponent<CGameManager>(2);
-	AddComponent<CSpawner>();
+	CPoolManager<GridBlockGameObject>* gbgo = AddComponent<CPoolManager<GridBlockGameObject>>(GameInstance,100,GameInstance);
+	AddComponent<CSpawner>(gbgo);
 	//m_player1_id = GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player1");
 	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }

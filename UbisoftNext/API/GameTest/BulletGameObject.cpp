@@ -8,7 +8,7 @@
 BulletGameObject::BulletGameObject(Game* instance) : GameObject(instance)
 {
 	m_transform = AddComponent<Ctransform>();
-	AddComponent<CRenderer>(instance->GetRenderer());;
+	AddComponent<CRenderer>(instance->GetRenderer());
 	//GetComponent<CRenderer>()->SetRenderLayer(RenderLayer::Default);
 //	GetComponent<CRenderer>()->SetGameObject(this);
 	m_direction = Vector2(FRAND_RANGE(-1, 1), FRAND_RANGE(-1, 1));

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "CustomMath.h"
 #include "ObjectPool.h"
 #include "Game.h"
 class Scheduler;
@@ -21,6 +22,9 @@ public:
     void Update(float DeltaTime) override;
 
     T* Spawn();
+    std::pair<int, T*> SpawnAndReturnId();
+
+    void Release(size_t id);
 
     int GetObjectPoolCount();
     size_t GetObjectPoolSize();
@@ -50,6 +54,21 @@ T* CPoolManager<T>::Spawn()
     size_t id = g->m_index;
     //m_game_->GetScheduler()->AddTask([this, id]() {m_pool_.Release(id); }, 5000);
     return &g->obj;
+}
+
+template <typename T>
+std::pair<int, T*> CPoolManager<T>::SpawnAndReturnId()
+{
+    PoolableObject<T>* g = m_pool_.Get(m_game_);
+    size_t id = g->m_index;
+    //m_game_->GetScheduler()->AddTask([this, id]() {m_pool_.Release(id); }, 5000);
+    return  std::make_pair(g->m_index, &g->obj);
+}
+
+template <typename T>
+void CPoolManager<T>::Release(size_t id)
+{
+    m_pool_.Release(id);
 }
 
 

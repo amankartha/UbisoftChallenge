@@ -29,9 +29,11 @@ Vector2 GRID::GridSystem::GridToWorld(IntVector2 gridPosition) const
 void GRID::GridSystem::SetObstacle(IntVector2 gridPosition)
 {
     if (gridPosition.x >= 0 && gridPosition.y >= 0 &&
-        gridPosition.x < m_gridSize.x && gridPosition.y < m_gridSize.y)
+        gridPosition.x < m_gridSize.x && gridPosition.y < m_gridSize.y &&
+        m_grid[gridPosition.x][gridPosition.y].m_isPlaceable)
     {
         m_grid[gridPosition.x][gridPosition.y].m_isObstacle = true;
+        m_grid[gridPosition.x][gridPosition.y].m_isPlaceable = false;
         m_filled_cells[gridPosition] = GridToWorld(gridPosition);
         UpdateRowHash(gridPosition.y);
         NotifyObservers(Events::PatternEventType::base,gridPosition);
@@ -43,7 +45,7 @@ void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
 {
     SetObstacle(WorldToGrid(worldPosition));
     UpdateRowHash(WorldToGrid(worldPosition).y);
-    NotifyObservers(Events::PatternEventType::base, WorldToGrid(worldPosition));
+    //NotifyObservers(Events::PatternEventType::base, WorldToGrid(worldPosition));
    // isFound |=  MatchPatternsAroundNewCell({ {1,1,1} ,{1,0,1},{1,1,1} }, WorldToGrid(worldPosition),true).first;
 }
 
@@ -53,13 +55,23 @@ void GRID::GridSystem::RemoveObstacle(IntVector2 gridPosition)
     {
         m_filled_cells.erase(gridPosition);
         GetCell(gridPosition)->m_isObstacle = false;
-        UpdateRowHash(gridPosition.y);
+     
     }
 }
 
 void GRID::GridSystem::RemoveObstacle(Vector2 worldPosition)
 {
     RemoveObstacle(WorldToGrid(worldPosition));
+}
+
+void GRID::GridSystem::RemovePlaceAble(IntVector2 gridPosition) //todo: safety checks here
+{
+        //m_filled_cells.erase(gridPosition);
+        GetCell(gridPosition)->m_isPlaceable = true;
+}
+void GRID::GridSystem::RemovePlaceAble(Vector2 worldPosition)
+{
+    RemovePlaceAble(WorldToGrid(worldPosition));
 }
 
 GRID::Cell* GRID::GridSystem::GetCell(IntVector2 gridPosition)
@@ -276,5 +288,13 @@ void GRID::GridSystem::ClearCells(std::vector<IntVector2> cells)
     for (auto cell : cells)
     {
         RemoveObstacle(cell);
+    }
+}
+void GRID::GridSystem::ClearPlaceAble(std::vector<IntVector2> cells)
+{
+
+    for (auto cell : cells)
+    {
+        RemovePlaceAble(cell);
     }
 }

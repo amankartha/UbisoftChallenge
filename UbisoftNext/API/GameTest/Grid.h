@@ -13,7 +13,7 @@ namespace GRID
     struct Cell
     {
     public:
-        Cell(IntVector2 gridPosition,bool isObstacle) : m_gridPosition(gridPosition), m_isObstacle(false), m_gCost(0), m_hCost(0) {
+        Cell(IntVector2 gridPosition,bool isObstacle) : m_gridPosition(gridPosition), m_isObstacle(false), m_isPlaceable(true), m_gCost(0), m_hCost(0) {
          
         }
         Cell() : m_gridPosition(IntVector2(0,0)), m_isObstacle(false), m_gCost(0), m_hCost(0) {}
@@ -35,6 +35,8 @@ namespace GRID
 
     public:
         bool m_isObstacle;
+        bool m_isPlaceable;
+
         IntVector2 m_gridPosition;
         Vector2 m_worldPosition;
         int m_gCost;
@@ -73,6 +75,8 @@ namespace GRID
         void RemoveObstacle(IntVector2 gridPosition);
 
         void RemoveObstacle(Vector2 worldPosition);
+        void RemovePlaceAble(IntVector2 gridPosition);
+        void RemovePlaceAble(Vector2 worldPosition);
 
         Cell* GetCell(IntVector2 gridPosition);
 
@@ -94,9 +98,9 @@ namespace GRID
 
         std::vector<std::vector<int>> Rotate90(const std::vector<std::vector<int>>& pattern);
 
-    private:
         void CreateGrid();
         void ClearCells(std::vector<IntVector2> cells);
+        void ClearPlaceAble(std::vector<IntVector2> cells);
 
     public:
         IntVector2 m_gridSize;

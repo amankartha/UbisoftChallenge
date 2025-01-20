@@ -85,7 +85,7 @@ void MiniGolfGame::InternalRender()
 	
 	Game::InternalRender();
 	//GetRenderer()->DrawGridWithCamera(GetCameraManager()->GetMainCamera(), m_grid_system_);
-	GetRenderer()->DrawFilledCells (m_grid_system_);
+	//GetRenderer()->DrawFilledCells (m_grid_system_);
 	GetPhysicsSimulation()->DrawColliders();
 	
 
