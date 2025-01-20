@@ -11,7 +11,8 @@
 CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) :Component(attachedObject),
                                                                         m_player_one_turn_state_(this),
 																		m_empty_state_(this),
-                                                                        m_game_fsm_(&m_empty_state_)
+                                                                        m_game_fsm_(&m_empty_state_),
+																		moving_state_(this)
 {
 	for (int i = 0;i<PlayerCount;++i)
 	{
@@ -35,6 +36,7 @@ void CGameManager::Init()
 void CGameManager::Update(float DeltaTime)
 {
 	Component::Update(DeltaTime);
+	m_game_fsm_.Update();
 }
 
 void CGameManager::Render()
@@ -73,9 +75,25 @@ Ctransform* CGameManager::GetCurrentPlayerGolfBallTransform()
 	return GetMiniGolfPlayer(m_current_player)->GetGolfBall()->GetAttachedGameObject()->GetComponent<Ctransform>();
 }
 
+CGolfBall* CGameManager::GetCurrentPlayerGolfBall()
+{
+	return GetMiniGolfPlayer(m_current_player)->GetGolfBall();
+}
+
+CGolfBall* CGameManager::GetPlayerGolfBall(int index)
+{
+	return GetMiniGolfPlayer(index)->GetGolfBall();
+}
+
+
 void CGameManager::StartGame()
 {
 	m_game_fsm_.Transition(&m_player_one_turn_state_);
+}
+
+int CGameManager::GetPreviousPlayerIndex()
+{
+	return (m_current_player - 1) % m_player_ATBs_.size();
 }
 
 CMiniGolfPlayer* CGameManager::GetMiniGolfPlayer(int index)
@@ -91,4 +109,9 @@ void CGameManager::SetMiniGolfPlayerState(int index, PlayerState states)
 void CGameManager::NextPlayerTurn()
 {
 	m_current_player = (m_current_player + 1) % m_player_ATBs_.size();
+}
+
+void CGameManager::Transition(AI::FSMState* state)
+{
+	m_game_fsm_.Transition(state);
 }

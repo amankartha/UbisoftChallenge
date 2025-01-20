@@ -6,7 +6,8 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "CGameManager.h"
-CMiniGolfPlayer::CMiniGolfPlayer(GameObject* attachedObject,int id): Component(attachedObject) ,m_state_(PlayerState::idle) ,m_golf_ball_id(id)
+CMiniGolfPlayer::CMiniGolfPlayer(GameObject* attachedObject, int id, CGameManager* gm)
+	: Component(attachedObject), m_state_(PlayerState::idle), m_golf_ball_id(id), m_game_manager_(gm)
 {
 	
 }
@@ -48,5 +49,5 @@ CGolfBall* CMiniGolfPlayer::GetGolfBall()
 void CMiniGolfPlayer::SetState(PlayerState state)
 {
 	m_state_ = state;
-	GetGolfBall()->UpdateState(state);
+	//GetGolfBall()->UpdateState(state);
 }

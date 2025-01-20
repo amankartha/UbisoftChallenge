@@ -2,26 +2,30 @@
 #include "Component.h"
 #include "ObserverPattern.h"
 
+class CGameManager;
 enum class PlayerState;
 class InputHandler;
 class Crigidbody;
 
 
 class CGolfBall :
-    public Component , Events::IObserver
+    public Component , Events::IObserver , Events::ISubject
 {
 public:
-	 CGolfBall(GameObject* attachedObject,int OwnerIndex);
-	 ~CGolfBall();
+	 CGolfBall(GameObject* attachedObject,int OwnerIndex,int ownerID);
+	 ~CGolfBall() override;
 	void Init() override;
 	void Update(float DeltaTime) override;
-	void UpdateState(PlayerState state);
 	 void OnNotify(Events::EventType event) override;
 	 Crigidbody* GetRigidBody();
 	 InputHandler* GetInputHandler();
+	 PlayerState* GetPlayerState();
+	 void RegisterGameManagerObserver(CGameManager* observer);
+		 void RemoveGameManagerObserver(CGameManager* observer);
  private:
 	int m_owner_index_;
-	PlayerState m_state;
+	int m_owner_id;
+	PlayerState* m_state; 
 	InputHandler* m_handler_;
 	Crigidbody* m_crigidbody_;
 };

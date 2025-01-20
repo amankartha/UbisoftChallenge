@@ -14,7 +14,8 @@ namespace Events
 		base = 0,
 		Input,
 		Pattern,
-		Transform
+		Transform,
+		BallHit
 	};
 
 	class IObserver

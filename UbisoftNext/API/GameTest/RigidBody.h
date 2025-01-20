@@ -142,7 +142,7 @@ namespace physics
 			float m_gravity_scale = 1,
 			const Vector2& m_force = Vector2(0, 0),
 			float staticFriction = 0.3f,
-			float dynamicFriction = 0.1f)
+			float dynamicFriction = 0.3f)
 			: m_linearVelocity(m_linear_velocity),
 			m_rotationalVelocity(m_rotational_velocity),
 			m_gravityScale(m_gravity_scale),

@@ -2,15 +2,18 @@
 #include "CGolfBall.h"
 
 #include "cameraManager.h"
+#include "CGameManager.h"
 #include "CMiniGolfPlayer.h"
 #include "Crigidbody.h"
 #include "Game.h"
 #include "GameObject.h"
+#include "GameObjectManager.h"
 #include "InputHandler.h"
 
-CGolfBall::CGolfBall(GameObject* attachedObject, int OwnerIndex): Component(attachedObject), m_owner_index_(OwnerIndex),
-                                                                  m_state(PlayerState::idle),
-                                                                  m_crigidbody_(nullptr)
+CGolfBall::CGolfBall(GameObject* attachedObject, int OwnerIndex, int ownerID) : Component(attachedObject), m_owner_index_(OwnerIndex),
+m_state(nullptr),
+m_crigidbody_(nullptr),
+m_owner_id(ownerID)
 {
 	int m_owner_id;
 	this->GetAttachedGameObject()->GameInstance->GetInputHandler()->RegisterObserver(*this);
@@ -58,16 +61,16 @@ void CGolfBall::Update(float DeltaTime)
 
 }
 
-void CGolfBall::UpdateState(PlayerState state)
-{
-	m_state = state;
-}
+//void CGolfBall::UpdateState(PlayerState state)
+//{
+//	m_state = state;
+//}
 
 void CGolfBall::OnNotify(Events::EventType event)
 {
 	if (event == Events::EventType::Input)
 	{
-		switch (m_state) {
+		switch (*GetPlayerState()) {
 		
 		case PlayerState::idle:
 			break;
@@ -78,6 +81,7 @@ void CGolfBall::OnNotify(Events::EventType event)
 				Vector2 mousePosition = App::ScreenToWorld(GetAttachedGameObject()->GameInstance->GetCameraManager()->GetMainCamera(), App::GetMousePosVec2());
 				Vector2 direction = this->GetAttachedGameObject()->GetTransformComponent().GetWorldPosition() - mousePosition;
 				GetRigidBody()->AddForce(direction * 10000);
+				NotifyObservers(Events::EventType::BallHit);
 			}
 			break;
 		}
@@ -100,3 +104,24 @@ InputHandler* CGolfBall::GetInputHandler()
 	}
 	return m_handler_;
 }
+
+PlayerState* CGolfBall::GetPlayerState()
+{
+	if (m_state == nullptr)
+	{
+		m_state = &GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Find(m_owner_id)->GetComponent<CMiniGolfPlayer>()->m_state_;
+	}
+	return m_state;
+}
+
+void CGolfBall::RegisterGameManagerObserver(CGameManager* observer)
+{
+	RegisterObserver(*observer);
+}
+
+void CGolfBall::RemoveGameManagerObserver(CGameManager* observer)
+{
+	DeRegisterObserver(*observer);
+}
+
+

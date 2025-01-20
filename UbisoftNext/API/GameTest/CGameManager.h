@@ -5,14 +5,15 @@
 #include "MiniGolfGameStates.h"
 
 class CMiniGolfPlayer;
-class PlayerOneTurnState;
+class PlayerTurnState;
 
 class CGameManager :
-    public Component
+    public Component , public Events::IObserver
 {
 public:
 	//Friend classes to states
-	friend PlayerOneTurnState;
+	friend PlayerTurnState;
+	friend BallMovingState;
 	//
 	CGameManager(GameObject* attachedObject,int playerCount);
 
@@ -23,18 +24,25 @@ public:
 	 bool RemoveATBFromPlayer(int playernumber, int number);
 	 int  GetCurrentPlayerIndex();
 	 Ctransform* GetCurrentPlayerGolfBallTransform();
+	 CGolfBall* GetCurrentPlayerGolfBall();
+	 CGolfBall* GetPlayerGolfBall(int index);
 	 void StartGame();
+	 int GetPreviousPlayerIndex();
 private:
 	CMiniGolfPlayer* GetMiniGolfPlayer(int index);
-	
 	void SetMiniGolfPlayerState(int index, PlayerState states);
 	void NextPlayerTurn();
+	void Transition(AI::FSMState* state);
+
 
 public:
+	void OnNotify(Events::EventType event) override;
+
 	int m_current_player;
 private:
-	PlayerOneTurnState m_player_one_turn_state_;
+	PlayerTurnState m_player_one_turn_state_;
 	EmptyState m_empty_state_;
+	BallMovingState moving_state_;
 private:
 	AI::FSM m_game_fsm_;
 
@@ -43,4 +51,13 @@ private:
 	//States
 
 };
+
+inline void CGameManager::OnNotify(Events::EventType event)
+{
+	if (event == Events::EventType::BallHit)
+	{
+		Transition(&moving_state_);
+		SetMiniGolfPlayerState(m_current_player, PlayerState::idle);
+	}
+}
 
