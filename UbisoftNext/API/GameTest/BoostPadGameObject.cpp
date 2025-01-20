@@ -18,7 +18,7 @@ void BoostPadGameObject::Init()
 	AddComponent<CRenderer>(GameInstance->GetRenderer(), true)->SetSprite(*App::CreateSprite(".\\MiniGolfAssets\\Boost_Arrows.png", 1, 1));
 	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 150.0f,150.0f, 0.3f, 0.8f, false,true);
 	//AddComponent<CGolfBall>(m_player_index, m_player_id);
-	GetComponent<Ctransform>()->SetScale(1.25f);
+	GetComponent<Ctransform>()->SetScale(3.0f);
 	//GetComponent<Ctransform>()->SetPosition(Vector2(0,300));
 	AddComponent<CBoostPad>(m_idsToClear);
 }

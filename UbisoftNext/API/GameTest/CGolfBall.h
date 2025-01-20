@@ -16,12 +16,15 @@ public:
 	 ~CGolfBall() override;
 	void Init() override;
 	void Update(float DeltaTime) override;
+	void Render() override;
 	 void OnNotify(Events::EventType event) override;
 	 Crigidbody* GetRigidBody();
 	 InputHandler* GetInputHandler();
 	 PlayerState* GetPlayerState();
 	 void RegisterGameManagerObserver(CGameManager* observer);
 		 void RemoveGameManagerObserver(CGameManager* observer);
+private:
+	void DrawArrow();
  private:
 	int m_owner_index_;
 	int m_owner_id;

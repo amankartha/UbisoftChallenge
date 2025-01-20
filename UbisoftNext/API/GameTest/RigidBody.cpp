@@ -12,6 +12,7 @@ namespace physics
 
 	void RigidBody::Start()
 	{
+		m_linearVelocity.Reset();
 	}
 
 	void RigidBody::Update(float deltaTime)
@@ -20,10 +21,10 @@ namespace physics
 		Vector2 acceleration = m_force / m_massData.mass;
 		m_linearVelocity += acceleration * deltaTime;
 
-		App::PrintOutputMessage(m_linearVelocity.Print() + '\n');
+		//App::PrintOutputMessage(m_linearVelocity.Print() + '\n');
 		AddFriction();
 		OffsetPosition(m_linearVelocity * deltaTime);
-		App::PrintOutputMessage(m_linearVelocity.Print() + '\n' );
+		//App::PrintOutputMessage(m_linearVelocity.Print() + '\n' );
 
 		m_force.Reset();
 

@@ -2,9 +2,11 @@
 #include "CSpawner.h"
 
 #include "BoostPadGameObject.h"
+#include "ExtraBallGameObject.h"
 #include "Game.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
+#include "GoalGameObject.h"
 #include "Grid.h"
 
 CSpawner::~CSpawner()
@@ -46,31 +48,25 @@ Game* CSpawner::GetGame()
 	return m_game_;
 }
 
+
 void CSpawner::OnNotify(Events::PatternEventType event, IntVector2 gridPosition)
 {
-
+	//place block on grid
 	std::pair<int,GridBlockGameObject*> block = m_gridBlock_pool_->SpawnAndReturnId();
 	block.second->GetTransformComponent().SetPosition(GetGridSystem()->GridToWorld(gridPosition));
 	m_initialized_pool_objects_[gridPosition] = block.first;
 
-	std::pair<bool, std::vector<IntVector2>> results = 
-		GetGridSystem()->MatchPatternsAroundNewCell({{ 1,1,1 }, { 0,0,0 }, { 1,1,1 }}, gridPosition, true);
-	if (results.first )
-	{
-		int id = GetGame()->GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad",results.second);
-		GetGame()->GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()
-		->SetPosition(GetGridSystem()->GridToWorld(CalculateCenter(results.second)));
-	}
 
-	for (IntVector2 location : results.second )
-	{
-		auto it = m_initialized_pool_objects_.find(location);
-		if (it!=m_initialized_pool_objects_.end())
-		{
-			m_gridBlock_pool_->Release(it->second);
-			m_initialized_pool_objects_.erase(it);
-		}
-	}
+	//smallBalls
+	FindMatch<ExtraBallGameObject>(gridPosition, { {1,1},{1,1} }, "ExtraBall");
+	//match patterns
+	//Boost Pad
+	FindMatch<BoostPadGameObject>(gridPosition, { { 1,1,1 }, { 0,0,0 }, { 1,1,1 } },"boostPad");
+
+	FindMatch<GoalGameObject>(gridPosition, { { 1,1,1 }, { 1,0,1 }, { 1,1,1 } },"Goal");
+
+
+
 
 }
 

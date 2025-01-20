@@ -12,6 +12,7 @@
 
 void PlayerTurnState::OnEnter()
 {
+	m_manager_->m_turn_counter_++;
 	m_manager_->GetPlayerGolfBall(m_manager_->GetPreviousPlayerIndex())->RemoveGameManagerObserver(m_manager_);
 	m_manager_->AddATBToPlayer(m_manager_->m_current_player, 3);
   m_manager_->SetMiniGolfPlayerState(m_manager_->m_current_player,PlayerState::playing);

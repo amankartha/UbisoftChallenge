@@ -13,11 +13,13 @@ CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) :Componen
                                                                         m_player_one_turn_state_(this),
 																		m_empty_state_(this),
                                                                         m_game_fsm_(&m_empty_state_),
-																		moving_state_(this)
+																		moving_state_(this),
+																		m_turn_counter_(0)
 {
 	for (int i = 0;i<PlayerCount;++i)
 	{
 		m_player_ATBs_.push_back(2);
+		m_playerScores.push_back(0);
 		m_playerGameObjectIds.push_back(GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player", i));
 	}
 	m_current_player = 0;
@@ -44,7 +46,12 @@ void CGameManager::Render()
 {
 	Component::Render();
 	App::Print(20, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[0]).c_str());
-	App::Print(APP_VIRTUAL_WIDTH - 20, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[1]).c_str());
+	App::Print(APP_VIRTUAL_WIDTH - 200, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[1]).c_str());
+
+	App::Print(20, APP_VIRTUAL_HEIGHT - 50, ("Score:  " + std::to_string(m_playerScores[0])).c_str());
+	App::Print(APP_VIRTUAL_WIDTH - 200, APP_VIRTUAL_HEIGHT - 50, ("Score:  " + std::to_string(m_playerScores[1])).c_str());
+
+	App::Print( 150, APP_VIRTUAL_HEIGHT - 20, ("Turn Number: " + std::to_string(m_turn_counter_)).c_str());
 	App::Print(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 20, ("It\'s player" + std::to_string(m_current_player + 1) + "'s turn").c_str());
 }
 
@@ -103,6 +110,11 @@ void CGameManager::StartGame()
 int CGameManager::GetPreviousPlayerIndex()
 {
 	return (m_current_player - 1) % m_player_ATBs_.size();
+}
+
+void CGameManager::AddScoreToCurrentPlayer()
+{
+	m_playerScores[m_current_player] += 1;
 }
 
 CMiniGolfPlayer* CGameManager::GetMiniGolfPlayer(int index)

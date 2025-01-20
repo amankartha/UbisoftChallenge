@@ -29,6 +29,7 @@ public:
 	 std::vector<size_t> GetAllGolfBallRigidBodies();
 	 void StartGame();
 	 int GetPreviousPlayerIndex();
+	 void AddScoreToCurrentPlayer();
 private:
 	CMiniGolfPlayer* GetMiniGolfPlayer(int index);
 	void SetMiniGolfPlayerState(int index, PlayerState states);
@@ -49,6 +50,8 @@ private:
 
 	std::vector<int> m_player_ATBs_;
 	std::vector<int> m_playerGameObjectIds;
+	std::vector<int> m_playerScores;
+	int m_turn_counter_;
 	//States
 
 };

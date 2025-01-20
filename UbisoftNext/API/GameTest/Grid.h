@@ -99,6 +99,7 @@ namespace GRID
         std::vector<std::vector<int>> Rotate90(const std::vector<std::vector<int>>& pattern);
 
         void CreateGrid();
+        void SetCellsNotPlaceAble(std::vector<IntVector2> cells);
         void ClearCells(std::vector<IntVector2> cells);
         void ClearPlaceAble(std::vector<IntVector2> cells);
 

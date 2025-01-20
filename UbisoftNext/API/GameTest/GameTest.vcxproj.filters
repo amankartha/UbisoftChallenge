@@ -164,10 +164,26 @@
     <ClCompile Include="CMiniGolfPlayer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="BoostPadGameObject.cpp" />
-    <ClCompile Include="CBoostPad.cpp" />
-    <ClCompile Include="CSpawner.cpp" />
-    <ClCompile Include="GridBlockGameObject.cpp" />
+    <ClCompile Include="BoostPadGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoostPad.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CSmallBall.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpawner.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtraBallGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GridBlockGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GoalGameObject.cpp" />
+    <ClCompile Include="CGoal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -361,10 +377,26 @@
     <ClInclude Include="CMiniGolfPlayer.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="BoostPadGameObject.h" />
-    <ClInclude Include="CBoostPad.h" />
-    <ClInclude Include="CSpawner.h" />
-    <ClInclude Include="GridBlockGameObject.h" />
+    <ClInclude Include="BoostPadGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoostPad.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CSmallBall.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpawner.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtraBallGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GridBlockGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GoalGameObject.h" />
+    <ClInclude Include="CGoal.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

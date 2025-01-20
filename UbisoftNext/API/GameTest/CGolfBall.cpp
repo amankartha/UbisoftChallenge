@@ -61,6 +61,20 @@ void CGolfBall::Update(float DeltaTime)
 
 }
 
+void CGolfBall::Render()
+{
+	Component::Render();
+
+	switch (*GetPlayerState()) {
+	case PlayerState::idle:
+		break;
+	case PlayerState::playing:
+		DrawArrow();
+		break;
+	}
+
+}
+
 //void CGolfBall::UpdateState(PlayerState state)
 //{
 //	m_state = state;
@@ -80,7 +94,7 @@ void CGolfBall::OnNotify(Events::EventType event)
 			{
 				Vector2 mousePosition = App::ScreenToWorld(GetAttachedGameObject()->GameInstance->GetCameraManager()->GetMainCamera(), App::GetMousePosVec2());
 				Vector2 direction = this->GetAttachedGameObject()->GetTransformComponent().GetWorldPosition() - mousePosition;
-				GetRigidBody()->AddForce(direction * 10000);
+				GetRigidBody()->AddForce(direction * 100000);
 				NotifyObservers(Events::EventType::BallHit);
 			}
 			break;
@@ -125,3 +139,35 @@ void CGolfBall::RemoveGameManagerObserver(CGameManager* observer)
 }
 
 
+void CGolfBall::DrawArrow()
+{
+	Ctransform* transform = &GetAttachedGameObject()->GetTransformComponent();
+	Vector2 worldPosition = transform->GetWorldPosition();
+	Camera* mainCam = &GetAttachedGameObject()->GameInstance->GetCameraManager()->GetMainCamera();
+	Vector2 mousePosition = App::ScreenToWorld(*mainCam, App::GetMousePosVec2());
+	float dx = mousePosition.x - worldPosition.x;
+	float dy = mousePosition.y - worldPosition.y;
+
+	float magnitude = Vector2(dx, dy).Magnitude();
+
+	if (magnitude > 0)
+	{
+		Vector2 delta(dx,dy);
+		delta = delta.Normalize();
+
+		Vector2 arrow(-delta.x * magnitude * 2,-delta.y * magnitude * 2);
+
+		float t = std::clamp(magnitude / 100,0.0f, 1.0f); 
+		float red = t;     
+		float green = 1.0f - t;
+
+		Vector2 convertedToscreen = App::WorldToScreen(*mainCam, worldPosition);
+		//Draw arrow
+		App::DrawLine(convertedToscreen.x-0.3, convertedToscreen.y-0.3, convertedToscreen.x + arrow.x -0.3,convertedToscreen.y + arrow.y-0.3, red, green);
+		App::DrawLine(convertedToscreen.x, convertedToscreen.y, convertedToscreen.x + arrow.x,convertedToscreen.y + arrow.y, red, green);
+		App::DrawLine(convertedToscreen.x+0.3, convertedToscreen.y+0.3, convertedToscreen.x + arrow.x+0.3,convertedToscreen.y + arrow.y+0.3, red, green);
+		
+
+
+	}
+}

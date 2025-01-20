@@ -283,6 +283,15 @@ void GRID::GridSystem::CreateGrid()
     }
 }
 
+void GRID::GridSystem::SetCellsNotPlaceAble(std::vector<IntVector2> cells)
+{
+
+    for (auto cell : cells)
+    {
+        GetCell(cell)->m_isPlaceable =false;
+    }
+}
+
 void GRID::GridSystem::ClearCells(std::vector<IntVector2> cells)
 {
     for (auto cell : cells)
