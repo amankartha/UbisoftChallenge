@@ -43,7 +43,7 @@ namespace GRID
     };
 
 
-    class GridSystem : public Events::ISubject
+    class GridSystem : public Events::IPatternSubject
     {
     public:
         GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0), IntVector2 gridSize = IntVector2(100, 100))

@@ -18,7 +18,7 @@ void BoostPadGameObject::Init()
 	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 150.0f,150.0f, 0.3f, 0.8f, false,true);
 	//AddComponent<CGolfBall>(m_player_index, m_player_id);
 	GetComponent<Ctransform>()->SetScale(1.25f);
-	GetComponent<Ctransform>()->SetPosition(Vector2(0,300));
+	//GetComponent<Ctransform>()->SetPosition(Vector2(0,300));
 	AddComponent<CBoostPad>();
 }
 

@@ -30,6 +30,32 @@ void Events::ISubject::NotifyObservers(EventType event)
     }
 }
 
+void Events::IPatternSubject::RegisterObserver(IPatternObserver& observer)
+{
+    m_observers_.push_back(&observer);
+}
+
+void Events::IPatternSubject::DeRegisterObserver(IPatternObserver& observer)
+{
+    App::RemoveFromVector(m_observers_, &observer);
+}
+
+void Events::IPatternSubject::NotifyObservers(PatternEventType event,IntVector2 gridPosition)
+{
+    for (auto it = m_observers_.begin(); it != m_observers_.end(); )
+    {
+        if (*it)
+        {
+            (*it)->OnNotify(event,gridPosition);
+            ++it;
+        }
+        else
+        {
+            it = m_observers_.erase(it);
+        }
+    }
+}
+
 void Events::IPhysicsSubject::RegisterPhysicsObserver(IPhysicsObserver& observer)
 {
     m_Physics_observers_.push_back(&observer);

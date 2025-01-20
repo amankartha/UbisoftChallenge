@@ -34,7 +34,8 @@ void GRID::GridSystem::SetObstacle(IntVector2 gridPosition)
         m_grid[gridPosition.x][gridPosition.y].m_isObstacle = true;
         m_filled_cells[gridPosition] = GridToWorld(gridPosition);
         UpdateRowHash(gridPosition.y);
-       isFound |=  MatchPatternsAroundNewCell({ {1,1,1} ,{1,0,1},{1,1,1} }, gridPosition,true).first;
+        NotifyObservers(Events::PatternEventType::base,gridPosition);
+      // isFound |=  MatchPatternsAroundNewCell({ {1,1,1} ,{0,0,0},{1,1,1} }, gridPosition,true).first;
     }
 }
 
@@ -42,7 +43,8 @@ void GRID::GridSystem::SetObstacle(Vector2 worldPosition)
 {
     SetObstacle(WorldToGrid(worldPosition));
     UpdateRowHash(WorldToGrid(worldPosition).y);
-    isFound |=  MatchPatternsAroundNewCell({ {1,1,1} ,{1,0,1},{1,1,1} }, WorldToGrid(worldPosition),true).first;
+    NotifyObservers(Events::PatternEventType::base, WorldToGrid(worldPosition));
+   // isFound |=  MatchPatternsAroundNewCell({ {1,1,1} ,{1,0,1},{1,1,1} }, WorldToGrid(worldPosition),true).first;
 }
 
 void GRID::GridSystem::RemoveObstacle(IntVector2 gridPosition)
@@ -196,7 +198,7 @@ std::pair<bool,std::vector<IntVector2>> GRID::GridSystem::MatchPatternsAroundNew
                     {
                         ClearCells(patternCells);
                     }
-                    NotifyObservers(Events::EventType::Pattern);
+                   // NotifyObservers(Events::EventType::Pattern);
                     return std::make_pair(true, patternCells);
                 }
             }

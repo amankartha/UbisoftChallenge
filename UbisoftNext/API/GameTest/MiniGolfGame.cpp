@@ -66,7 +66,7 @@ void MiniGolfGame::InternalInit()
 
 	int id = GetGameObjectManager()->Create<BackGroundArtGameObject>("Background");
 	GetGameObjectManager()->Find(id)->GetComponent<CRenderer>()->SetTiled(IntVector2(10, 5));
-	GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad");
+//	GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad");
 
 	///--------------------------
 	

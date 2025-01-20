@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 
+#include "CustomMath.h"
+
 class GameObject;
 namespace physics
 {
@@ -37,6 +39,35 @@ namespace Events
 	public:
 		std::vector<IObserver*> m_observers_;
 	};
+
+	enum class PatternEventType
+	{
+		base = 0,
+		Speed,
+		Bomb
+	};
+
+	class IPatternObserver
+	{
+	public:
+		virtual ~IPatternObserver() = default;
+		virtual void OnNotify(PatternEventType event,IntVector2 gridPosition) = 0;
+
+	};
+
+	class IPatternSubject
+	{
+	public:
+		virtual ~IPatternSubject() = default;
+		void RegisterObserver(IPatternObserver& observer);
+		void DeRegisterObserver(IPatternObserver& observer);
+		void NotifyObservers(PatternEventType event,IntVector2 gridPosition);
+	private:
+	public:
+		std::vector<IPatternObserver*> m_observers_;
+	};
+
+
 
 	class IPhysicsObserver 
 	{

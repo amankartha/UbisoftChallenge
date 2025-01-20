@@ -2,6 +2,7 @@
 #include "MiniGolfGameManagerGameObject.h"
 
 #include "CGameManager.h"
+#include "CSpawner.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 #include "PlayerGameObject.h"
@@ -16,7 +17,7 @@ void MiniGolfGameManagerGameObject::Init()
 {
 	GameObject::Init();
 	AddComponent<CGameManager>(2);
-
+	AddComponent<CSpawner>();
 	//m_player1_id = GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player1");
 	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }
