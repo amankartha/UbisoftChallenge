@@ -146,7 +146,7 @@
     <ClCompile Include="CGolfBall.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="GameManager.cpp">
+    <ClCompile Include="MiniGolfGameManagerGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="BoundaryGameObject.cpp">
@@ -337,7 +337,7 @@
     <ClInclude Include="CGolfBall.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
+    <ClInclude Include="MiniGolfGameManagerGameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="BoundaryGameObject.h">

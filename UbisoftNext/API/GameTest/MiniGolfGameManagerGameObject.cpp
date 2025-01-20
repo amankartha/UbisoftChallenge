@@ -1,18 +1,18 @@
 ﻿#include "stdafx.h"
-#include "GameManager.h"
+#include "MiniGolfGameManagerGameObject.h"
 
 #include "CGameManager.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 #include "PlayerGameObject.h"
 
-GameManager::GameManager(Game* instance,int id,int playerCount): GameObject(instance,id)
+MiniGolfGameManagerGameObject::MiniGolfGameManagerGameObject(Game* instance,int id,int playerCount): GameObject(instance,id)
 {
 }
 
 
 
-void GameManager::Init() 
+void MiniGolfGameManagerGameObject::Init() 
 {
 	GameObject::Init();
 	AddComponent<CGameManager>(2);
@@ -21,7 +21,7 @@ void GameManager::Init()
 	//m_player2_id = instance->GetGameObjectManager()->Create<PlayerGameObject>("player2");
 }
 
-void GameManager::Update(float DeltaTime) 
+void MiniGolfGameManagerGameObject::Update(float DeltaTime) 
 {
 	GameObject::Update(DeltaTime);
 }

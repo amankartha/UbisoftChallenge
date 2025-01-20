@@ -1,12 +1,14 @@
 ﻿#include "stdafx.h"
 #include "PlayerGameObject.h"
 
+#include "CMiniGolfPlayer.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 #include "GolfBallGameObject.h"
+#include "CGameManager.h"
+#include "CGolfBall.h"
 
-
-PlayerGameObject::PlayerGameObject(Game* instance, int id) : GameObject(instance,id)
+PlayerGameObject::PlayerGameObject(Game* instance, int id,int ownIndex) : GameObject(instance,id), m_ownIndex(ownIndex)
 {
 
 }
@@ -14,8 +16,10 @@ PlayerGameObject::PlayerGameObject(Game* instance, int id) : GameObject(instance
 void PlayerGameObject::Init()
 {
 	GameObject::Init();
-	GameInstance->GetGameObjectManager()->AddToLookupTable("GolfBall", 
-		GameInstance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall", this));
+	int id = GameInstance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall",m_ownIndex);
+	// + m_ownIndex,m_ownIndex);
+
+	AddComponent<CMiniGolfPlayer>(id);
 }
 
 void PlayerGameObject::Update(float DeltaTime)

@@ -20,8 +20,10 @@ namespace physics
 		Vector2 acceleration = m_force / m_massData.mass;
 		m_linearVelocity += acceleration * deltaTime;
 
+		App::PrintOutputMessage(m_linearVelocity.Print() + '\n');
 		AddFriction();
 		OffsetPosition(m_linearVelocity * deltaTime);
+		App::PrintOutputMessage(m_linearVelocity.Print() + '\n' );
 
 		m_force.Reset();
 
@@ -41,7 +43,7 @@ namespace physics
 
 	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
 	{
-		float area = PI * radius * radius * 0.1f ;
+		float area = PI * radius * radius ;
 
 		if (area < MIN_BODY_SIZE)
 		{

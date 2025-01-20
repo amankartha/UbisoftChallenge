@@ -7,10 +7,11 @@
 #include "BoundaryGameObject.h"
 #include "cameraManager.h"
 #include "CCameraController.h"
+#include "CGameManager.h"
 #include "CRenderer.h"
 #include "Crigidbody.h"
 #include "CursorGameObject.h"
-#include "GameManager.h"
+#include "MiniGolfGameManagerGameObject.h"
 #include "InputHandler.h"
 #include "GameObjectManager.h"
 #include "GolfBallGameObject.h"
@@ -47,7 +48,7 @@ void MiniGolfGame::InternalInit()
 
 	GetGameObjectManager()->CreateAndAddToLookUpTable<MiniGolfCameraGameObject>("MiniGolfCamera");
 
-	GetGameObjectManager()->CreateAndAddToLookUpTable<GameManager>("GameManager",2);
+	int managerid = GetGameObjectManager()->CreateAndAddToLookUpTable<MiniGolfGameManagerGameObject>("GameManager",2);
 
 	//Game Boundaries  //todo: this can be its own gameobject prefab
     GetGameObjectManager()->Create<BoundaryGameObject>("BoundaryNorth",Vector2(0,1400),4000,100);
@@ -58,14 +59,15 @@ void MiniGolfGame::InternalInit()
 
 
 
-	GetGameObjectManager()->FindUsingTable("MiniGolfCamera")->GetComponent<CCameraController>()->SetTransformToFollow(
-		GetGameObjectManager()->Find(GetGameObjectManager()->SearchTable("GolfBall"))->GetComponent<Ctransform>()
-		);
+	//GetGameObjectManager()->FindUsingTable("MiniGolfCamera")->GetComponent<CCameraController>()->SetTransformToFollow(
+	//	GetGameObjectManager()->Find(GetGameObjectManager()->SearchTable("GolfBall"))->GetComponent<Ctransform>()
+	//	);
 
 	int id = GetGameObjectManager()->Create<BackGroundArtGameObject>("Background");
 	GetGameObjectManager()->Find(id)->GetComponent<CRenderer>()->SetTiled(IntVector2(10, 5));
 	///--------------------------
-
+	GetGameObjectManager()->Find(managerid)->GetComponent<CGameManager>()->StartGame();
+	
 }
 
 void MiniGolfGame::InternalUpdate(const float deltaTime)

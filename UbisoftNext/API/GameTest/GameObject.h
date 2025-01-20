@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 #include <iostream>
+
+#include "appUtility.h"
 #include "Windows.h"
 
 using CallBack = std::function<void()>;
@@ -42,8 +44,8 @@ public:
 
 		m_components[type] = std::make_unique<T>(this,std::forward<Args>(args)...);
 
-		m_components[type]->SetGameObject(this);
-
+		//m_components[type]->SetGameObject(this);
+		App::PrintOutputMessage("Added Component" + std::string(type.name()) + " to GameObject " + this->m_name + " \n");
 		m_components[type]->Init();
 
 		return dynamic_cast<T*>(m_components[type].get());

@@ -3,7 +3,7 @@
 
 AI::FSM::FSM(AI::FSMState* initialState)
 {
-	initialState->OnEnter();
+	//initialState->OnEnter();
 	m_current_state_ = initialState;
 }
 

@@ -7,10 +7,10 @@ class PlayerGameObject;
 
 
 
-class GameManager : public GameObject
+class MiniGolfGameManagerGameObject : public GameObject
 {
 public:
-	GameManager(Game* instance,int id,int playerCount);
+	MiniGolfGameManagerGameObject(Game* instance,int id,int playerCount);
 	void Init() override;
 	void Update(float DeltaTime) override;
 private:
