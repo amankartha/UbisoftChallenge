@@ -29,6 +29,7 @@ void CBoostPad::Init()
 void CBoostPad::Update(float DeltaTime)
 {
 	Component::Update(DeltaTime);
+	//if (m_mark_for_deletion) GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Destroy(this->GetAttachedGameObject()->m_id);
 }
 
 void CBoostPad::Render()
@@ -46,6 +47,10 @@ void CBoostPad::OnTriggerEnter(int idOne, int idTwo)
 		{
 			physics::RigidBody* rb = GetAttachedGameObject()->GameInstance->GetPhysicsSimulation()->GetBody(m_rigibody_ids[i]);
 			rb->AddForce(rb->GetVelocity() * 100000);
+			GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Destroy(this->GetAttachedGameObject()->m_id);
+			//GetAttachedGameObject()->GameInstance->GetPhysicsSimulation()->DeRegisterPhysicsObserver(*this);
+			//m_mark_for_deletion = true;
+			
 		}
 	}
 }

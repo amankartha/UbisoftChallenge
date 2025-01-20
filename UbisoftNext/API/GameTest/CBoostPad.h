@@ -16,5 +16,6 @@ public:
 
 private:
 	std::vector<size_t> m_rigibody_ids;
+	//bool m_mark_for_deletion = false;
 };
 

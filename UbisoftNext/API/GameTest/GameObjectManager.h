@@ -82,6 +82,8 @@ public:
 
 	void UpdateAll(float deltaTime);
 
+	void CleanUpAndDelete();
+
 	void RenderAll();
 
 	int GetNumberOfGameObjects() const;
@@ -93,6 +95,7 @@ private:
 	
 private:
 	std::unordered_map<int, std::unique_ptr<GameObject>> m_gameObjectMap;
+	std::vector<int> m_idsToDestroy;
 	
 
 };

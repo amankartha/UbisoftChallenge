@@ -166,6 +166,7 @@
     </ClCompile>
     <ClCompile Include="BoostPadGameObject.cpp" />
     <ClCompile Include="CBoostPad.cpp" />
+    <ClCompile Include="CSpawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -361,6 +362,7 @@
     </ClInclude>
     <ClInclude Include="BoostPadGameObject.h" />
     <ClInclude Include="CBoostPad.h" />
+    <ClInclude Include="CSpawner.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

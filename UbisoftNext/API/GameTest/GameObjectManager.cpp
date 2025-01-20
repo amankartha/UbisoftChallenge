@@ -30,7 +30,7 @@ int GameObjectManager::SearchTable(std::string name)
 
 void GameObjectManager::Destroy(int ID)
 {
-	m_gameObjectMap.erase(ID);
+	m_idsToDestroy.push_back(ID);
 }
 
 //void GameObjectManager::Destroy(std::shared_ptr<GameObject> go)
@@ -75,6 +75,17 @@ void GameObjectManager::UpdateAll(float deltaTime)
 		it.second->Update(deltaTime);
 	}
 }
+
+void GameObjectManager::CleanUpAndDelete()
+{
+	for (int ID : m_idsToDestroy)
+	{
+		m_gameObjectMap.erase(ID);
+		
+	}
+	m_idsToDestroy.clear();
+}
+
 void GameObjectManager::RenderAll()
 {
 	for (auto& it : m_gameObjectMap) {

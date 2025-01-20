@@ -211,6 +211,7 @@
     <ClInclude Include="CPoolManager.h" />
     <ClInclude Include="CRenderer.h" />
     <ClInclude Include="Crigidbody.h" />
+    <ClInclude Include="CSpawner.h" />
     <ClInclude Include="Ctransform.h" />
     <ClInclude Include="CursorGameObject.h" />
     <ClInclude Include="CustomMath.h" />
@@ -280,6 +281,7 @@
     <ClCompile Include="CPoolManager.cpp" />
     <ClCompile Include="CRenderer.cpp" />
     <ClCompile Include="Crigidbody.cpp" />
+    <ClCompile Include="CSpawner.cpp" />
     <ClCompile Include="Ctransform.cpp" />
     <ClCompile Include="CursorGameObject.cpp" />
     <ClCompile Include="CustomMath.cpp" />
