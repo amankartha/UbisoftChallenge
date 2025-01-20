@@ -2,6 +2,7 @@
 #include "CBoostPad.h"
 
 #include "CGameManager.h"
+#include "Crigidbody.h"
 #include "Game.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
@@ -37,12 +38,14 @@ void CBoostPad::Render()
 
 void CBoostPad::OnTriggerEnter(int idOne, int idTwo)
 {
+	size_t ownRbID = GetAttachedGameObject()->GetComponent<Crigidbody>()->GetRigidBodyId();
+
 	for (int i = 0; i < m_rigibody_ids.size(); ++i)
 	{
-		if (idOne == m_rigibody_ids[i] || idTwo == m_rigibody_ids[i])
+		if ((idOne == m_rigibody_ids[i] || idTwo == m_rigibody_ids[i]) && (idOne == ownRbID || idTwo == ownRbID))
 		{
 			physics::RigidBody* rb = GetAttachedGameObject()->GameInstance->GetPhysicsSimulation()->GetBody(m_rigibody_ids[i]);
-			rb->AddForce(rb->GetVelocity() * 10000);
+			rb->AddForce(rb->GetVelocity() * 100000);
 		}
 	}
 }

@@ -111,6 +111,10 @@ namespace physics
 
 				auto valuesA  = rbA->GetCollider()->GetValues();
 				auto valuesB = rbB->GetCollider()->GetValues();
+
+				size_t rbAID = m_rigidbody_pool_.m_pool[m_rigidbody_pool_.activeIndices[i]].m_index;
+				size_t rbBID = m_rigidbody_pool_.m_pool[m_rigidbody_pool_.activeIndices[j]].m_index;
+
 				std::pair<int, int> pair = std::make_pair(i, j);
 
 				if (valuesA.second < 0 && valuesB.second < 0)
@@ -122,7 +126,7 @@ namespace physics
 							{
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(true, i, j);
+									NotifyPhysicsObservers(true, rbAID, rbBID);
 									m_has_triggered_map[pair] = true;
 								}
 							}
@@ -144,7 +148,7 @@ namespace physics
 								ResolveCollision(rbA, rbB, collision.normal, collision);
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(false, i, j);
+									NotifyPhysicsObservers(false, rbAID, rbBID);
 									m_has_triggered_map[pair] = true;
 								}
 							}
@@ -164,7 +168,7 @@ namespace physics
 						{
 							if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 							{
-								NotifyPhysicsObservers(true, i, j);
+								NotifyPhysicsObservers(true, rbAID, rbBID);
 								m_has_triggered_map[pair] = true;
 							}
 						}
@@ -186,7 +190,7 @@ namespace physics
 							ResolveCollision(rbA, rbB, collision.normal, collision);
 							if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 							{
-								NotifyPhysicsObservers(false, i, j);
+								NotifyPhysicsObservers(false, rbAID, rbBID);
 								m_has_triggered_map[pair] = true;
 							}
 						}
@@ -204,7 +208,7 @@ namespace physics
 							{
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(true, i, j);
+									NotifyPhysicsObservers(true, rbAID, rbBID);
 									m_has_triggered_map[pair] = true;
 								}
 							}
@@ -228,7 +232,7 @@ namespace physics
 								ResolveCollision(rbA, rbB, collision.normal, collision);
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(true, i, j);
+									NotifyPhysicsObservers(false, rbAID, rbBID);
 									m_has_triggered_map[pair] = false;
 								}
 							}
@@ -249,7 +253,7 @@ namespace physics
 							{
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(true, i, j);
+									NotifyPhysicsObservers(true, rbAID, rbBID);
 									m_has_triggered_map[pair] = true;
 								}
 							}
@@ -273,7 +277,7 @@ namespace physics
 								ResolveCollision(rbA, rbB, collision.normal * -1, collision);
 								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
 								{
-									NotifyPhysicsObservers(false, i, j);
+									NotifyPhysicsObservers(false, rbAID, rbBID);
 									m_has_triggered_map[pair] = true;
 								}
 							}

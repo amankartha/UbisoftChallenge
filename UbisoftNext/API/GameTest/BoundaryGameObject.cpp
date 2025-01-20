@@ -12,7 +12,7 @@ GameObject(instance, id) , m_position(position), m_width(width), m_height(height
 void BoundaryGameObject::Init()
 {
 	GameObject::Init();
-	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), m_width,m_height ,0.3f, 0.8f, true);
+	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), m_width,m_height ,0.3f, 0.4f, true,false);
 	GetComponent<Ctransform>()->SetPosition(m_position);
 }
 

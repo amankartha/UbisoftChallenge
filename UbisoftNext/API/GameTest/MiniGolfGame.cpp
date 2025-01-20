@@ -52,8 +52,8 @@ void MiniGolfGame::InternalInit()
 	int managerid = GetGameObjectManager()->CreateAndAddToLookUpTable<MiniGolfGameManagerGameObject>("GameManager",2);
 
 	//Game Boundaries  //todo: this can be its own gameobject prefab
-    GetGameObjectManager()->Create<BoundaryGameObject>("BoundaryNorth",Vector2(0,1400),4000,100);
-    GetGameObjectManager()->Create<BoundaryGameObject>("BoundarySouth",Vector2(0,-1400),4000,100);
+    GetGameObjectManager()->Create<BoundaryGameObject>("BoundaryNorth",Vector2(0,900),4000,100);
+    GetGameObjectManager()->Create<BoundaryGameObject>("BoundarySouth",Vector2(0,-900),4000,100);
     GetGameObjectManager()->Create<BoundaryGameObject>("BoundaryWest",Vector2(-2000,0),100,2800);
     GetGameObjectManager()->Create<BoundaryGameObject>("BoundaryEast",Vector2(2000,0),100,2800);
 
