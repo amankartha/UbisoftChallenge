@@ -4,6 +4,7 @@
 #include "MiniGolfGame.h"
 
 #include "BackGroundArtGameObject.h"
+#include "BoostPadGameObject.h"
 #include "BoundaryGameObject.h"
 #include "cameraManager.h"
 #include "CCameraController.h"
@@ -65,7 +66,10 @@ void MiniGolfGame::InternalInit()
 
 	int id = GetGameObjectManager()->Create<BackGroundArtGameObject>("Background");
 	GetGameObjectManager()->Find(id)->GetComponent<CRenderer>()->SetTiled(IntVector2(10, 5));
+	GetGameObjectManager()->Create<BoostPadGameObject>("BoostPad");
+
 	///--------------------------
+	
 	GetGameObjectManager()->Find(managerid)->GetComponent<CGameManager>()->StartGame();
 	
 }

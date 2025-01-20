@@ -16,3 +16,8 @@ Vector2 Crigidbody::GetVelocity()
 	return m_simulation_->GetBody(m_rigidbody_id)->m_linearVelocity;
 }
 
+size_t Crigidbody::GetRigidBodyId()
+{
+	return m_rigidbody_id;
+}
+

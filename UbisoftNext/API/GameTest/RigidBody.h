@@ -127,8 +127,8 @@ namespace physics
 
 		Collider* GetCollider();
 
-		void SetCircleRigidBody(bool is_static, float radius, float density, Material material);
-		void SetAABBRigidBody(bool is_static, float width, float height, float density, Material material);
+		void SetCircleRigidBody(bool is_static, float radius, float density, Material material, bool is_trigger);
+		void SetAABBRigidBody(bool is_static, float width, float height, float density, Material material, bool is_trigger);
 
 
 
@@ -215,7 +215,7 @@ namespace physics
 		Vector2 m_rotationalVelocity;
 		float m_gravityScale;
 		bool m_isStatic;
-		
+		bool m_isTrigger;
 	private:
 		Shape m_shape;
 		Collider* m_collider;

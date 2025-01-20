@@ -26,6 +26,7 @@ public:
 	 Ctransform* GetCurrentPlayerGolfBallTransform();
 	 CGolfBall* GetCurrentPlayerGolfBall();
 	 CGolfBall* GetPlayerGolfBall(int index);
+	 std::vector<size_t> GetAllGolfBallRigidBodies();
 	 void StartGame();
 	 int GetPreviousPlayerIndex();
 private:

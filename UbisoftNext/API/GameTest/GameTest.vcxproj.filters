@@ -164,6 +164,8 @@
     <ClCompile Include="CMiniGolfPlayer.cpp">
       <Filter>Components</Filter>
     </ClCompile>
+    <ClCompile Include="BoostPadGameObject.cpp" />
+    <ClCompile Include="CBoostPad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -357,6 +359,8 @@
     <ClInclude Include="CMiniGolfPlayer.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="BoostPadGameObject.h" />
+    <ClInclude Include="CBoostPad.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

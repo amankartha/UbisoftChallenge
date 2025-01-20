@@ -1,9 +1,6 @@
 #pragma once
 #include "stdafx.h"
 #include <utility>
-#include <vector>
-
-#include "CustomMath.h"
 
 namespace physics
 {

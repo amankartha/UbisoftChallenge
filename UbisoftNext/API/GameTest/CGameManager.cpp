@@ -3,6 +3,7 @@
 
 #include "CGolfBall.h"
 #include "CMiniGolfPlayer.h"
+#include "Crigidbody.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 #include "PlayerGameObject.h"
@@ -83,6 +84,14 @@ CGolfBall* CGameManager::GetCurrentPlayerGolfBall()
 CGolfBall* CGameManager::GetPlayerGolfBall(int index)
 {
 	return GetMiniGolfPlayer(index)->GetGolfBall();
+}
+
+std::vector<size_t> CGameManager::GetAllGolfBallRigidBodies()
+{
+	std::vector<size_t> ids;
+	for (int i = 0; i < m_playerGameObjectIds.size(); ++i)
+		ids.push_back(GetPlayerGolfBall(i)->GetRigidBody()->GetRigidBodyId());
+	return ids;
 }
 
 

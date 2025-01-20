@@ -193,10 +193,12 @@
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
     <ClInclude Include="BackGroundArtGameObject.h" />
+    <ClInclude Include="BoostPadGameObject.h" />
     <ClInclude Include="BoundaryGameObject.h" />
     <ClInclude Include="BulletGameObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="CBoostPad.h" />
     <ClInclude Include="Ccamera.h" />
     <ClInclude Include="CCameraController.h" />
     <ClInclude Include="Ccursor.h" />
@@ -257,10 +259,12 @@
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
     <ClCompile Include="BackGroundArtGameObject.cpp" />
+    <ClCompile Include="BoostPadGameObject.cpp" />
     <ClCompile Include="BoundaryGameObject.cpp" />
     <ClCompile Include="BulletGameObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="CBoostPad.cpp" />
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="CCameraController.cpp" />
     <ClCompile Include="Ccursor.cpp" />

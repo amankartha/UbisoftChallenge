@@ -41,7 +41,7 @@ namespace physics
 		return m_collider;
 	}
 
-	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
+	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material, bool is_trigger)
 	{
 		float area = PI * radius * radius ;
 
@@ -57,7 +57,7 @@ namespace physics
 	}
 
 	void RigidBody::SetAABBRigidBody(bool is_static, float width, float height, float density,
-		Material material)
+	                                 Material material, bool is_trigger)
 	{
 		float area = width * height ;
 		float mass = area * density;

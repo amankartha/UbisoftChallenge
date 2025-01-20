@@ -29,3 +29,49 @@ void Events::ISubject::NotifyObservers(EventType event)
         }
     }
 }
+
+void Events::IPhysicsSubject::RegisterPhysicsObserver(IPhysicsObserver& observer)
+{
+    m_Physics_observers_.push_back(&observer);
+}
+
+void Events::IPhysicsSubject::DeRegisterPhysicsObserver(IPhysicsObserver& observer)
+{
+    App::RemoveFromVector(m_Physics_observers_, &observer);
+}
+
+void Events::IPhysicsSubject::NotifyPhysicsObservers(bool isTrigger, int idOne, int idTwo)
+{
+    if (isTrigger)
+    {
+
+        for (auto it = m_Physics_observers_.begin(); it != m_Physics_observers_.end(); )
+        {
+            if (*it)
+            {
+                (*it)->OnTriggerEnter(idOne,idTwo);
+                ++it;
+            }
+            else
+            {
+                it = m_Physics_observers_.erase(it);
+            }
+        }
+    }
+    else
+    {
+
+        for (auto it = m_Physics_observers_.begin(); it != m_Physics_observers_.end(); )
+        {
+            if (*it)
+            {
+                (*it)->OnCollisionEnter(idOne, idTwo);
+                ++it;
+            }
+            else
+            {
+                it = m_Physics_observers_.erase(it);
+            }
+        }
+    }
+}

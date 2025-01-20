@@ -9,19 +9,23 @@ namespace physics
 {
 	
 
-	size_t PhysicsSimulation::AddBody(Shape rigidBodyShape, bool is_static, float radius, float density, Material material,Ctransform* transform)
+	size_t PhysicsSimulation::AddBody(Shape rigidBodyShape, bool is_static, float radius, float density, Material material, Ctransform* transform, bool
+	                                  is_trigger)
 	{
 		PoolableObject<RigidBody>* rb = m_rigidbody_pool_.Get();
-		 rb->obj.SetCircleRigidBody(is_static, radius, density, material);
+		 rb->obj.SetCircleRigidBody(is_static, radius, density, material, false);
 		 rb->obj.SetTransform(transform);
+		 rb->obj.m_isTrigger = is_trigger;
 		 return rb->m_index;
 	}
 
-	size_t PhysicsSimulation::AddBody(Shape rigidBodyShape, bool is_static,float width,float height, float density, Material material, Ctransform* transform)
+	size_t PhysicsSimulation::AddBody(Shape rigidBodyShape, bool is_static, float width, float height, float density, Material material, Ctransform* transform, bool
+	                                  is_trigger)
 	{
 		PoolableObject<RigidBody>* rb = m_rigidbody_pool_.Get();
-		rb->obj.SetAABBRigidBody(is_static, width,height, density, material);
+		rb->obj.SetAABBRigidBody(is_static, width,height, density, material, false);
 		rb->obj.SetTransform(transform);
+		rb->obj.m_isTrigger = is_trigger;
 		return rb->m_index;
 	}
 
@@ -107,53 +111,64 @@ namespace physics
 
 				auto valuesA  = rbA->GetCollider()->GetValues();
 				auto valuesB = rbB->GetCollider()->GetValues();
+				std::pair<int, int> pair = std::make_pair(i, j);
+
 				if (valuesA.second < 0 && valuesB.second < 0)
 				{
 					if (CircleVsCircle(&collision))
 					{
-						if (rbA->m_isStatic)
-						{
-							rbB->OffsetPosition(collision.normal * collision.penetration);
-						}
-						else if (rbB->m_isStatic)
-						{
-							rbA->OffsetPosition(collision.normal * -collision.penetration);
-						}
-						else
-						{
-							rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
-							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
-						}
-						ResolveCollision(rbA, rbB, collision.normal, collision);
-					
+						
+							if (rbA->m_isTrigger || rbB->m_isTrigger)
+							{
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(true, i, j);
+									m_has_triggered_map[pair] = true;
+								}
+							}
+							else
+							{
+								if (rbA->m_isStatic)
+								{
+									rbB->OffsetPosition(collision.normal * collision.penetration);
+								}
+								else if (rbB->m_isStatic)
+								{
+									rbA->OffsetPosition(collision.normal * -collision.penetration);
+								}
+								else
+								{
+									rbA->OffsetPosition(collision.normal * -1 * collision.penetration / 2);
+									rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+								}
+								ResolveCollision(rbA, rbB, collision.normal, collision);
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(false, i, j);
+									m_has_triggered_map[pair] = true;
+								}
+							}
 					}
+					else
+					{
+						m_has_triggered_map[pair] = false;
+					}
+					
+					
 				}
 				else if (valuesA.second > -0.05 && valuesB.second > -0.05)
 				{
 					if (AABBVsAABB(&collision))
 					{
-						if (rbA->m_isStatic)
+						if (rbA->m_isTrigger || rbB->m_isTrigger)
 						{
-							rbB->OffsetPosition(collision.normal * collision.penetration);
-						}
-						else if (rbB->m_isStatic)
-						{
-							rbA->OffsetPosition(collision.normal * -collision.penetration);
+							if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+							{
+								NotifyPhysicsObservers(true, i, j);
+								m_has_triggered_map[pair] = true;
+							}
 						}
 						else
-						{
-							rbA->OffsetPosition(collision.normal * - collision.penetration / 2);
-							rbB->OffsetPosition(collision.normal * collision.penetration / 2);
-						}
-						ResolveCollision(rbA, rbB, collision.normal, collision);
-					}
-				}
-				else
-				{
-					
-					if (rbA->GetCollider()->GetValues().second == -1)
-					{
-						if (IntersectionUsingSAT(&collision))
 						{
 							if (rbA->m_isStatic)
 							{
@@ -167,39 +182,109 @@ namespace physics
 							{
 								rbA->OffsetPosition(collision.normal * -collision.penetration / 2);
 								rbB->OffsetPosition(collision.normal * collision.penetration / 2);
-
-
 							}
 							ResolveCollision(rbA, rbB, collision.normal, collision);
+							if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+							{
+								NotifyPhysicsObservers(false, i, j);
+								m_has_triggered_map[pair] = true;
+							}
 						}
 					}
 					else
 					{
+						m_has_triggered_map[pair] = false;
+					}
+				}
+				else  if (rbA->GetCollider()->GetValues().second == -1)
+					{
+						if (IntersectionUsingSAT(&collision))
+						{
+							if (rbA->m_isTrigger || rbB->m_isTrigger)
+							{
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(true, i, j);
+									m_has_triggered_map[pair] = true;
+								}
+							}
+							else
+							{
+								if (rbA->m_isStatic)
+								{
+									rbB->OffsetPosition(collision.normal * collision.penetration);
+								}
+								else if (rbB->m_isStatic)
+								{
+									rbA->OffsetPosition(collision.normal * -collision.penetration);
+								}
+								else
+								{
+									rbA->OffsetPosition(collision.normal * -collision.penetration / 2);
+									rbB->OffsetPosition(collision.normal * collision.penetration / 2);
+
+
+								}
+								ResolveCollision(rbA, rbB, collision.normal, collision);
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(true, i, j);
+									m_has_triggered_map[pair] = false;
+								}
+							}
+						}
+						else
+						{
+							m_has_triggered_map[pair] = false;
+						}
+					}
+				else   
+				{
 						collision = Collision(rbB,rbA);
 
 						if (IntersectionUsingSAT(&collision))
 						{
-							if (rbA->m_isStatic)
+
+							if (rbA->m_isTrigger || rbB->m_isTrigger)
 							{
-								rbB->OffsetPosition(collision.normal * -collision.penetration);
-							}
-							else if (rbB->m_isStatic)
-							{
-								rbA->OffsetPosition(collision.normal * collision.penetration);
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(true, i, j);
+									m_has_triggered_map[pair] = true;
+								}
 							}
 							else
 							{
-								rbA->OffsetPosition(collision.normal * collision.penetration / 2);
-								rbB->OffsetPosition(collision.normal * -collision.penetration / 2);
+								if (rbA->m_isStatic)
+								{
+									rbB->OffsetPosition(collision.normal * -collision.penetration);
+								}
+								else if (rbB->m_isStatic)
+								{
+									rbA->OffsetPosition(collision.normal * collision.penetration);
+								}
+								else
+								{
+									rbA->OffsetPosition(collision.normal * collision.penetration / 2);
+									rbB->OffsetPosition(collision.normal * -collision.penetration / 2);
 
 
+								}
+								ResolveCollision(rbA, rbB, collision.normal * -1, collision);
+								if (m_has_triggered_map.contains(pair) && !m_has_triggered_map[pair])
+								{
+									NotifyPhysicsObservers(false, i, j);
+									m_has_triggered_map[pair] = true;
+								}
 							}
-							ResolveCollision(rbA, rbB, collision.normal * -1, collision);
 						}
-					}
-					//}
-					
+						else
+						{
+							m_has_triggered_map[pair] = false;
+						}
+
 				}
+
 			}
 		}
 	}

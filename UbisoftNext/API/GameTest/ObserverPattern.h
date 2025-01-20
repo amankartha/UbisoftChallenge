@@ -38,26 +38,30 @@ namespace Events
 		std::vector<IObserver*> m_observers_;
 	};
 
-	class IPhysicsObserver : public IObserver
+	class IPhysicsObserver 
 	{
+	public:
 		virtual ~IPhysicsObserver() = default;
-		virtual void OnTriggerEnter(physics::Collision collision) = 0;
-		virtual void OnCollisionEnter(physics::Collision collision) = 0;
+		virtual void OnTriggerEnter(int idOne, int idTwo) = 0;
+		virtual void OnCollisionEnter(int idOne, int idTwo) = 0;
 	};
 
-	class IPhysicsSubject : public ISubject
+	class IPhysicsSubject 
 	{
-
+	public:
 		virtual ~IPhysicsSubject() = default;
 
 		
-		virtual void RegisterPhysicsObserver(IPhysicsObserver& observer) = 0;
+		virtual void RegisterPhysicsObserver(IPhysicsObserver& observer) ;
 
 	
-		virtual void DeRegisterPhysicsObserver(IPhysicsObserver& observer) = 0;
+		virtual void DeRegisterPhysicsObserver(IPhysicsObserver& observer) ;
 
 		
-		virtual void NotifyPhysicsObservers(physics::Collision) = 0;
+		virtual void NotifyPhysicsObservers(bool isTrigger, int idOne, int idTwo) ;
+
+	public:
+		std::vector<IPhysicsObserver*> m_Physics_observers_;
 	};
 
 	
