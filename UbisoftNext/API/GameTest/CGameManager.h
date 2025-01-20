@@ -22,9 +22,11 @@ public:
 	 void AddATBToPlayer(int playernumber,int number);
 	 bool RemoveATBFromPlayer(int playernumber, int number);
 	 int  GetCurrentPlayerIndex();
+	 Ctransform* GetCurrentPlayerGolfBallTransform();
 	 void StartGame();
 private:
 	CMiniGolfPlayer* GetMiniGolfPlayer(int index);
+	
 	void SetMiniGolfPlayerState(int index, PlayerState states);
 	void NextPlayerTurn();
 

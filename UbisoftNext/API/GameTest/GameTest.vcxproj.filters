@@ -161,7 +161,9 @@
     <ClCompile Include="CGameManager.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="CMiniGolfPlayer.cpp" />
+    <ClCompile Include="CMiniGolfPlayer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -352,7 +354,9 @@
     <ClInclude Include="CGameManager.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="CMiniGolfPlayer.h" />
+    <ClInclude Include="CMiniGolfPlayer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

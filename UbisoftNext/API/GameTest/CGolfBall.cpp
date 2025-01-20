@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CGolfBall.h"
 
+#include "cameraManager.h"
 #include "CMiniGolfPlayer.h"
 #include "Crigidbody.h"
 #include "Game.h"
@@ -74,7 +75,9 @@ void CGolfBall::OnNotify(Events::EventType event)
 			
 			if (GetInputHandler()->IsKeyPressed(VK_LBUTTON))
 			{
-				GetRigidBody()->AddForce(Vector2(5000, 50000000));
+				Vector2 mousePosition = App::ScreenToWorld(GetAttachedGameObject()->GameInstance->GetCameraManager()->GetMainCamera(), App::GetMousePosVec2());
+				Vector2 direction = this->GetAttachedGameObject()->GetTransformComponent().GetWorldPosition() - mousePosition;
+				GetRigidBody()->AddForce(direction * 10000);
 			}
 			break;
 		}

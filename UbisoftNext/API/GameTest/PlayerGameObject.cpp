@@ -16,7 +16,7 @@ PlayerGameObject::PlayerGameObject(Game* instance, int id,int ownIndex) : GameOb
 void PlayerGameObject::Init()
 {
 	GameObject::Init();
-	int id = GameInstance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall",m_ownIndex);
+	int id = GameInstance->GetGameObjectManager()->Create<GolfBallGameObject>("GolfBall" + m_ownIndex,m_ownIndex);
 	// + m_ownIndex,m_ownIndex);
 
 	AddComponent<CMiniGolfPlayer>(id);

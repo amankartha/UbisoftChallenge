@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CGameManager.h"
 
+#include "CGolfBall.h"
 #include "CMiniGolfPlayer.h"
 #include "Game.h"
 #include "GameObjectManager.h"
@@ -65,6 +66,11 @@ bool CGameManager::RemoveATBFromPlayer(int playerNumber, int number)
 int CGameManager::GetCurrentPlayerIndex()
 {
 	return m_current_player;
+}
+
+Ctransform* CGameManager::GetCurrentPlayerGolfBallTransform()
+{
+	return GetMiniGolfPlayer(m_current_player)->GetGolfBall()->GetAttachedGameObject()->GetComponent<Ctransform>();
 }
 
 void CGameManager::StartGame()
