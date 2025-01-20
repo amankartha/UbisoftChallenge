@@ -76,7 +76,7 @@ public:
 
 	virtual void Init();
 	virtual void Update(float DeltaTime);
-
+	virtual void Render();
 	GameObject() 
 	{
 		m_isEnabled = true;

@@ -27,21 +27,30 @@ void CCameraController::Init()
 void CCameraController::Update(float DeltaTime)
 {
 	Component::Update(DeltaTime);
+	Ctransform* transform = &GetAttachedGameObject()->GetTransformComponent();
+	switch (m_state_) {
+	case CameraState::FollowGolfBall:
 
-	if (m_transformToFollow != nullptr)
-	{
 
-		Ctransform* transform = &GetAttachedGameObject()->GetTransformComponent();
+		if (m_transformToFollow != nullptr)
+		{
 
+			
+
+
+
+			transform->SetPosition(
+				Vector2::Lerp(transform->GetWorldPosition(),
+					m_transformToFollow->GetWorldPosition(),
+					DeltaTime * 6));
+		}
+		break;
+	case CameraState::LerpToGolfBall:
+		break;
+	case CameraState::FreeRoam:
 		transform->OffsetPosition(m_direction);
-		m_direction = Vector2(0, 0);
-
-
-
-		transform->SetPosition(
-			Vector2::Lerp(transform->GetWorldPosition(),
-				m_transformToFollow->GetWorldPosition(),
-				DeltaTime * 10));
+		m_direction.Reset();
+		break;
 	}
 }
 
@@ -81,8 +90,8 @@ void CCameraController::OnNotify(const Events::EventType event)
 				if (inputHandler->IsKeyPressed('F'))
 				{
 					m_state_ = CameraState::FollowGolfBall;
-					return;
 				}
+				m_direction = m_direction * 5;
 			}
 			break;
 	}

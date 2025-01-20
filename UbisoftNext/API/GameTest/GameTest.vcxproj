@@ -192,6 +192,7 @@
     <ClInclude Include="App\SimpleController.h" />
     <ClInclude Include="App\SimpleSound.h" />
     <ClInclude Include="App\SimpleSprite.h" />
+    <ClInclude Include="BackGroundArtGameObject.h" />
     <ClInclude Include="BoundaryGameObject.h" />
     <ClInclude Include="BulletGameObject.h" />
     <ClInclude Include="Camera.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Ccursor.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGolfBall.h" />
+    <ClInclude Include="CMiniGolfPlayer.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="CPlaceObject.h" />
@@ -254,6 +256,7 @@
     <ClCompile Include="App\SimpleController.cpp" />
     <ClCompile Include="App\SimpleSound.cpp" />
     <ClCompile Include="App\SimpleSprite.cpp" />
+    <ClCompile Include="BackGroundArtGameObject.cpp" />
     <ClCompile Include="BoundaryGameObject.cpp" />
     <ClCompile Include="BulletGameObject.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -263,6 +266,7 @@
     <ClCompile Include="Ccursor.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGolfBall.cpp" />
+    <ClCompile Include="CMiniGolfPlayer.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />

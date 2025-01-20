@@ -3,6 +3,8 @@
 #include "Grid.h"
 #include "InputHandler.h"
 
+class CGameManager;
+
 class CPlaceObject :
     public Component, public Events::IObserver
 {
@@ -13,9 +15,12 @@ public:
 	void Init() override;
 	void Update(float DeltaTime) override;
 
+	CGameManager* GetGameManager();
+
 	void OnNotify(Events::EventType event) override;
 private:
 	InputHandler* m_handler_;
 	GRID::GridSystem* m_grid_system_;
+	CGameManager* m_game_manager_;
 };
 

@@ -11,15 +11,18 @@ void GameObject::Update(float DeltaTime)
 		component->Update(DeltaTime);             
 	}
 }
-//
-//void GameObject::Render()   moved to Renderer
-//{
-//	for (auto& pair : m_components) {
-//		auto& type = pair.first;
-//		auto& component = pair.second;
-//		component->Render();
-//	}
-//}
+
+
+
+
+void GameObject::Render() 
+{
+	for (auto& pair : m_components) {
+		auto& type = pair.first;
+		auto& component = pair.second;
+		component->Render();
+	}
+}
 
 void GameObject::SetChild(GameObject* childObject)
 {

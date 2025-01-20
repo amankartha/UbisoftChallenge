@@ -46,6 +46,7 @@ void Game::InternalUpdate(const float deltaTime)
 void Game::InternalRender()
 {
 	m_renderer->RenderAll(GetCameraManager()->GetMainCamera());
+	GetGameObjectManager()->RenderAll();
 }
 
 Renderer* Game::GetRenderer() const

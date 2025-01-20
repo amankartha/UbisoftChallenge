@@ -5,20 +5,22 @@
 #include "appUtility.h"
 #include "Camera.h"
 
-CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer,RenderLayer layer ): Component(gameObject), m_main_renderer_(renderer)
+CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer,RenderLayer layer ): Component(gameObject), m_main_renderer_(renderer) , m_tiling(IntVector2(0,0))
 {
 	m_isShake = false;
 	m_renderLayer = layer;
 	//m_id = mainRenderer->AddRenderer(m_renderLayer);
 	//mainRenderer->GetRenderable(m_renderLayer, m_id)->m_render_Function = [this](const Camera camera, bool isUI) { this->Render(camera, isUI); };
-	
+	m_isTiled = false;
 }
 
-CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer, bool turnOnImmediately, RenderLayer layer) : Component(gameObject), m_main_renderer_(renderer)
+CRenderer::CRenderer(GameObject* gameObject, Renderer* renderer, bool turnOnImmediately, RenderLayer layer) : Component(gameObject), m_main_renderer_(renderer), m_tiling(IntVector2(0, 0))
 {
 	m_isShake = false;
 	m_renderLayer = layer;
 	SetRendererOnOff(turnOnImmediately);
+	m_isTiled = false;
+	
 }
 
 CRenderer::~CRenderer()
@@ -95,6 +97,11 @@ void CRenderer::Render(const Camera camera,bool isUI)
 	}
 }
 
+void CRenderer::SetTiled(IntVector2 tilingSize)
+{
+	m_isTiled = true;
+	m_tiling = tilingSize;
+}
 
 
 void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom) 
@@ -123,12 +130,37 @@ void CRenderer::RenderWithCamera(Vector2 offset,float a,float zoom)
 	GetSprite()->SetScale(GetSprite()->GetScale() * zoom);
 
 	GetSprite()->SetPosition(calculatedPosition.x , calculatedPosition.y);
-	
-	
-	if (calculatedPosition.x >= 0 && calculatedPosition.x <= APP_VIRTUAL_WIDTH &&
-		calculatedPosition.y >= 0 && calculatedPosition.y <= APP_VIRTUAL_HEIGHT) {
-		GetSprite()->Draw();
+
+
+	if (!m_isTiled)
+	{
+		if (calculatedPosition.x >= 0 - GetSprite()->GetWidth() / 2 && calculatedPosition.x - GetSprite()->GetWidth() / 2 <= APP_VIRTUAL_WIDTH &&
+			calculatedPosition.y >= 0 - GetSprite()->GetHeight() / 2 && calculatedPosition.y - GetSprite()->GetHeight() / 2 <= APP_VIRTUAL_HEIGHT) {
+			GetSprite()->Draw();
+		}
 	}
+	else
+	{
+		float height = GetSprite()->GetHeight();
+		float width = GetSprite()->GetWidth();
+		Vector2 adjustedCalculatedPosition = calculatedPosition;
+
+		for (int i = -m_tiling.x;i <= m_tiling.x ; ++i)
+		{
+			for (int j = -m_tiling.y;j <= m_tiling.y;++j)
+			{
+				adjustedCalculatedPosition += Vector2(i * height/2 , j * width/2);
+				GetSprite()->SetPosition(adjustedCalculatedPosition.x,adjustedCalculatedPosition.y);
+				if (adjustedCalculatedPosition.x >= 0 - width / 2 && adjustedCalculatedPosition.x - width / 2 <= APP_VIRTUAL_WIDTH &&
+					adjustedCalculatedPosition.y >= 0 - height / 2 && adjustedCalculatedPosition.y - height / 2 <= APP_VIRTUAL_HEIGHT) {
+					GetSprite()->Draw();
+				}
+				adjustedCalculatedPosition = calculatedPosition;
+			}
+		}
+	}
+	
+	
 
 }
 

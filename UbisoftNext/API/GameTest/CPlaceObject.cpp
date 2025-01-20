@@ -3,6 +3,7 @@
 
 #include "BulletGameObject.h"
 #include "cameraManager.h"
+#include "CGameManager.h"
 #include "Game.h"
 #include "GameObjectManager.h"
 
@@ -27,11 +28,20 @@ void CPlaceObject::Update(float DeltaTime)
 	Component::Update(DeltaTime);
 }
 
+CGameManager* CPlaceObject::GetGameManager()
+{
+	if (m_game_manager_ == nullptr)
+	{
+		m_game_manager_ = GetAttachedGameObject()->GameInstance->GetGameObjectManager()->FindUsingTable("GameManager")->GetComponent<CGameManager>();
+	}
+	return m_game_manager_;
+}
+
 void CPlaceObject::OnNotify(Events::EventType event)
 {
 	if (event == Events::EventType::Input)
 	{
-		if (m_handler_->IsKeyPressed(VK_RBUTTON))
+		if (m_handler_->IsKeyPressed(VK_RBUTTON) && GetGameManager()->RemoveATBFromPlayer(GetGameManager()->m_current_player,1))
 		{
 			m_grid_system_->SetObstacle(App::ScreenToWorld(m_attachedGameObject->GameInstance->GetCameraManager()->GetMainCamera(),  m_attachedGameObject->GetTransformComponent().GetWorldPosition()));
 		}

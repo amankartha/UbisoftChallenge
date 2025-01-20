@@ -36,16 +36,6 @@ public:
 
   
 
-#pragma region Additional
-
-//Just added this - aman
-
-
-    void SetPositionWithOffset(const float x, const float y) { m_xpos += x;  m_ypos += y; }
-
-#pragma endregion
-
-
 
 
 

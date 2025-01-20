@@ -29,6 +29,7 @@ public:
 
     void Render(const Camera camera,bool isUI) override;
 
+    void SetTiled(IntVector2 tilingSize);
     
     void RenderWithCamera(Vector2 offset,float a,float zoom);
 
@@ -37,6 +38,8 @@ private:
     Renderer* m_main_renderer_;
     RenderLayer m_renderLayer;
     bool m_isShake;
+    bool m_isTiled;
+    IntVector2 m_tiling;
 
 };
 

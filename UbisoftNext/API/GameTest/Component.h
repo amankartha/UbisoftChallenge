@@ -29,6 +29,8 @@ public:
 
 	virtual void Init() {};
 	virtual void Update(float DeltaTime);
+
+	virtual void Render() {};
 	
 	GameObject* GetAttachedGameObject() { return m_attachedGameObject; }
 

@@ -21,7 +21,7 @@ void CGolfBall::Update(float DeltaTime)
 		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 10000));
 	}*/
 
-	if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('W'))
+	/*if (GetAttachedGameObject()->GameInstance->GetInputHandler()->IsKey('W'))
 	{
 		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(0, 5000));
 	}
@@ -37,6 +37,6 @@ void CGolfBall::Update(float DeltaTime)
 	{
 		GetAttachedGameObject()->GetComponent<Crigidbody>()->AddForce(Vector2(5000, 0));
 	}
-	App::Print(500, 500, GetAttachedGameObject()->GetComponent<Crigidbody>()->GetVelocity().Print().c_str());
+	App::Print(500, 500, GetAttachedGameObject()->GetComponent<Crigidbody>()->GetVelocity().Print().c_str());*/
 
 }

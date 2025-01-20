@@ -15,7 +15,7 @@ void GolfBallGameObject::Init()
 	GameObject::Init();
 	AddComponent<CRenderer>(GameInstance->GetRenderer(), true)->SetSprite(*App::CreateSprite(".\\MiniGolfAssets\\ballGrey_06.png", 1, 1));
 	AddComponent<Crigidbody>(GameInstance->GetPhysicsSimulation(), 25.0f, 0.3f,0.8f,false);
-	AddComponent<CGolfBall>();
+	AddComponent<CGolfBall>(m_owner_id);
 	GetComponent<Ctransform>()->SetScale(0.25f);
 	GetComponent<Ctransform>()->SetPosition(Vector2(FRAND_RANGE(-50, 50), FRAND_RANGE(-50, 50)));
 }

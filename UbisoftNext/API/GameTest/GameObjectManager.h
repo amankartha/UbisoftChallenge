@@ -82,6 +82,8 @@ public:
 
 	void UpdateAll(float deltaTime);
 
+	void RenderAll();
+
 	int GetNumberOfGameObjects() const;
 
 public:
@@ -94,4 +96,6 @@ private:
 	
 
 };
+
+
 

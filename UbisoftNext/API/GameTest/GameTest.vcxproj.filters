@@ -152,10 +152,16 @@
     <ClCompile Include="BoundaryGameObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="MiniGolfGameStates.cpp">
       <Filter>AI</Filter>
     </ClCompile>
+    <ClCompile Include="BackGroundArtGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameManager.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CMiniGolfPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -337,10 +343,16 @@
     <ClInclude Include="BoundaryGameObject.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="CGameManager.h" />
     <ClInclude Include="MiniGolfGameStates.h">
       <Filter>AI</Filter>
     </ClInclude>
+    <ClInclude Include="BackGroundArtGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameManager.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CMiniGolfPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

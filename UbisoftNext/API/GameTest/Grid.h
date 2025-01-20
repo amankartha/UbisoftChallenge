@@ -46,7 +46,7 @@ namespace GRID
     class GridSystem : public Events::ISubject
     {
     public:
-        GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0), IntVector2 gridSize = IntVector2(50, 50))
+        GridSystem(int cellSize = 50, Vector2 origin = Vector2(0, 0), IntVector2 gridSize = IntVector2(100, 100))
             : m_cellSize(cellSize), m_origin(origin), m_gridSize(gridSize)
         {
             CreateGrid();

@@ -75,6 +75,13 @@ void GameObjectManager::UpdateAll(float deltaTime)
 		it.second->Update(deltaTime);
 	}
 }
+void GameObjectManager::RenderAll()
+{
+	for (auto& it : m_gameObjectMap) {
+
+		it.second->Render();
+	}
+}
 
 int GameObjectManager::GetNumberOfGameObjects() const
 {
