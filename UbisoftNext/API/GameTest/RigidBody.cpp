@@ -25,7 +25,7 @@ namespace physics
 
 		m_force.Reset();
 
-		if (m_linearVelocity.MagnitudeSquared() < 0.01f)
+		if (m_linearVelocity.MagnitudeSquared() < 0.0001f)
 		{
 			m_linearVelocity.Reset();
 		}
@@ -41,7 +41,7 @@ namespace physics
 
 	void RigidBody::SetCircleRigidBody(bool is_static, float radius, float density, Material material)
 	{
-		float area = PI * radius * radius ;
+		float area = PI * radius * radius * 0.1f ;
 
 		if (area < MIN_BODY_SIZE)
 		{
@@ -52,10 +52,6 @@ namespace physics
 		m_collider = new Circle(radius);
 		SetMaterial(material);
 		m_massData = MassData(area * density,is_static);
-
-	
-
-		
 	}
 
 	void RigidBody::SetAABBRigidBody(bool is_static, float width, float height, float density,

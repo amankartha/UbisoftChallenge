@@ -296,6 +296,7 @@ namespace physics
             *min = *max;
             *max = temp;
         }
+       
     }
 	int ClosestPointToCircleInVector(Vector2 circleCenter, std::vector<Vector2> vertices)
     {
@@ -332,8 +333,9 @@ namespace physics
 
         vertices.emplace_back(BPosition.x + x_extent, BPosition.y + y_extent);
         vertices.emplace_back(BPosition.x - x_extent, BPosition.y + y_extent);
-        vertices.emplace_back(BPosition.x + x_extent, BPosition.y - y_extent);
         vertices.emplace_back(BPosition.x - x_extent, BPosition.y - y_extent);
+    	vertices.emplace_back(BPosition.x + x_extent, BPosition.y - y_extent);
+      
 
         Vector2 normal(0, 0);
         float depth = std::numeric_limits<float>::infinity();
