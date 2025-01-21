@@ -59,11 +59,11 @@ namespace physics
 
 			if (object->GetCollider()->GetValues().second == -1)
 			{
-				App::DrawCircle(position.x, position.y,  object->GetCollider()->GetValues().first, 30,0,1,0);
+				App::DrawCircle(position.x, position.y,  object->GetCollider()->GetValues().first, 30,1,0,0);
 			}
 			else
 			{
-				App::DrawBox(position.x, position.y, object->GetCollider()->GetValues().first, object->GetCollider()->GetValues().second, 0, 1, 0);
+				App::DrawBox(position.x, position.y, object->GetCollider()->GetValues().first, object->GetCollider()->GetValues().second, 1, 0, 0);
 			}
 		}
 	}

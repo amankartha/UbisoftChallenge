@@ -58,6 +58,7 @@ void CSpawner::OnNotify(Events::PatternEventType event, IntVector2 gridPosition)
 
 
 	//smallBalls
+	FindMatch<ExtraBallGameObject>(gridPosition, { {0,1,0},{1,1,1} }, "ExtraBall",5);
 	FindMatch<ExtraBallGameObject>(gridPosition, { {1,1},{1,1} }, "ExtraBall");
 	//match patterns
 	//Boost Pad

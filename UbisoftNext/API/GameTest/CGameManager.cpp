@@ -46,10 +46,10 @@ void CGameManager::Render()
 {
 	Component::Render();
 	App::Print(20, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[0]).c_str());
-	App::Print(APP_VIRTUAL_WIDTH - 200, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[1]).c_str());
+	App::Print(APP_VIRTUAL_WIDTH - 100, APP_VIRTUAL_HEIGHT - 20, std::to_string(m_player_ATBs_[1]).c_str());
 
 	App::Print(20, APP_VIRTUAL_HEIGHT - 50, ("Score:  " + std::to_string(m_playerScores[0])).c_str());
-	App::Print(APP_VIRTUAL_WIDTH - 200, APP_VIRTUAL_HEIGHT - 50, ("Score:  " + std::to_string(m_playerScores[1])).c_str());
+	App::Print(APP_VIRTUAL_WIDTH - 100, APP_VIRTUAL_HEIGHT - 50, ("Score:  " + std::to_string(m_playerScores[1])).c_str());
 
 	App::Print( 150, APP_VIRTUAL_HEIGHT - 20, ("Turn Number: " + std::to_string(m_turn_counter_)).c_str());
 	App::Print(APP_VIRTUAL_WIDTH / 2, APP_VIRTUAL_HEIGHT - 20, ("It\'s player" + std::to_string(m_current_player + 1) + "'s turn").c_str());
