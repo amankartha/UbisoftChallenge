@@ -184,6 +184,8 @@
     </ClCompile>
     <ClCompile Include="GoalGameObject.cpp" />
     <ClCompile Include="CGoal.cpp" />
+    <ClCompile Include="SizeChangeGameObject.cpp" />
+    <ClCompile Include="CChangeSize.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -397,6 +399,8 @@
     </ClInclude>
     <ClInclude Include="GoalGameObject.h" />
     <ClInclude Include="CGoal.h" />
+    <ClInclude Include="SizeChangeGameObject.h" />
+    <ClInclude Include="CChangeSize.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="API">

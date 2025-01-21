@@ -8,6 +8,7 @@
 #include "GameObjectManager.h"
 #include "GoalGameObject.h"
 #include "Grid.h"
+#include "SizeChangeGameObject.h"
 
 CSpawner::~CSpawner()
 {
@@ -58,15 +59,15 @@ void CSpawner::OnNotify(Events::PatternEventType event, IntVector2 gridPosition)
 
 
 	//smallBalls
-	FindMatch<ExtraBallGameObject>(gridPosition, { {0,1,0},{1,1,1} }, "ExtraBall",5);
-	FindMatch<ExtraBallGameObject>(gridPosition, { {1,1},{1,1} }, "ExtraBall");
+	FindMatch<ExtraBallGameObject>(gridPosition, { {0,1,1,0},{1,1,1,1} }, "ExtraBall",8,false);
+	FindMatch<ExtraBallGameObject>(gridPosition, { {1,1},{1,1} }, "ExtraBall",1,false);
 	//match patterns
 	//Boost Pad
 	FindMatch<BoostPadGameObject>(gridPosition, { { 1,1,1 }, { 0,0,0 }, { 1,1,1 } },"boostPad");
-
+	//goal
 	FindMatch<GoalGameObject>(gridPosition, { { 1,1,1 }, { 1,0,1 }, { 1,1,1 } },"Goal");
-
-
+	//Increase Size
+	FindMatch<SizeChangeGameObject>(gridPosition, { { 0,1,0 }, { 1,1,1 }, { 0,1,0 } }, "IncreaseSizeBuff");
 
 
 }

@@ -14,6 +14,8 @@ namespace physics
 	struct Collider
 	{
 		virtual std::pair<float,float> GetValues() = 0;
+		virtual void ChangeSize(float mult) = 0;
+		virtual void ChangeSize(std::pair<float,float> pair) = 0;
 	};
 
 	struct AABB : Collider
@@ -25,7 +27,18 @@ namespace physics
 		{
 			return std::make_pair(m_width, m_height);
 		}
-	private:
+
+		void ChangeSize(float mult) override
+		{
+			m_width *= mult;
+			m_height *= mult;
+		}
+		void ChangeSize(std::pair<float, float> pair) override
+		{
+			m_width = pair.first;
+			m_height = pair.second;
+		}
+	
 		float m_width;
 		float m_height;
 	};
@@ -38,7 +51,14 @@ namespace physics
 		{
 			return std::make_pair(m_radius, -1.0f);
 		}
-	public:
+		void ChangeSize(float mult) override
+		{
+			m_radius *= mult;
+		}
+		void ChangeSize(std::pair<float, float> pair) override
+		{
+			m_radius = pair.first;
+		}
 		float m_radius;
 	};
 

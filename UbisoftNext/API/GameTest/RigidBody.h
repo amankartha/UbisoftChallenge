@@ -64,7 +64,7 @@ namespace physics
 		{
 			m_transform->OffsetPosition(direction);
 		}
-
+		void SetScale(float scale);
 		Vector2 GetVelocity()
 		{
 			return m_linearVelocity;
@@ -119,8 +119,13 @@ namespace physics
 		{
 			m_dynamic_friction = std::clamp(val, 0.0f, 1.0f);
 		}
-
-
+		Ctransform* GetTransform()
+		{
+			return m_transform;
+		}
+		void SetValues(std::pair<float, float> values);
+		void IncreaseSize(float percent);
+		
 		void Clear();
 		void Start();
 		void Update(float deltaTime);
@@ -142,7 +147,7 @@ namespace physics
 			float m_gravity_scale = 1,
 			const Vector2& m_force = Vector2(0, 0),
 			float staticFriction = 0.3f,
-			float dynamicFriction = 0.3f)
+			float dynamicFriction = 0.5f)
 			: m_linearVelocity(m_linear_velocity),
 			m_rotationalVelocity(m_rotational_velocity),
 			m_gravityScale(m_gravity_scale),

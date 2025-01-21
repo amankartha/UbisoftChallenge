@@ -6,6 +6,24 @@
 #include "Collider.h"
 namespace physics
 {
+	void RigidBody::SetScale(float scale)
+	{
+		m_transform->SetScale(scale);
+	}
+
+	void RigidBody::SetValues(std::pair<float, float> values)
+	{
+		
+		m_collider->ChangeSize(values);
+		
+	}
+
+	void RigidBody::IncreaseSize(float percent)
+	{
+		m_collider->ChangeSize(percent);
+		//m_transform->SetScale(percent);
+	}
+
 	void RigidBody::Clear()
 	{
 	}

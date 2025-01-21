@@ -41,7 +41,7 @@ void MiniGolfGame::InternalInit()
 	while (ShowCursor(FALSE) >= 0);
 
 	/// Add Input to keep track of
-	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F', 'T', 'L', VK_RETURN});
+	GetInputHandler()->SetKeysToTrack(std::vector<int>{VK_LBUTTON, VK_RBUTTON, 'W', 'A', 'S', 'D', 'F'});
 	///----------------------------------------------------------
 	///----------------------------------------------------------
 	///Add Gameobjects that dont need to belong to a scene

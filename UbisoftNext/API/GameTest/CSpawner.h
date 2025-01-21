@@ -39,7 +39,7 @@ private:
 
 
 	template<typename T>
-	void FindMatch(IntVector2 gridPosition, std::vector<std::vector<int>> pattern, std::string name,int count = 1)
+	void FindMatch(IntVector2 gridPosition, std::vector<std::vector<int>> pattern, std::string name,int count = 1,bool setNotPLaceable =true)
 	{
 		std::pair<bool, std::vector<IntVector2>> results =
 			GetGridSystem()->MatchPatternsAroundNewCell(pattern, gridPosition, true);
@@ -51,10 +51,18 @@ private:
 				int id = GetGame()->GetGameObjectManager()->Create<T>(name, results.second);
 
 				GetGame()->GetGameObjectManager()->Find(id)->GetComponent<Ctransform>()
-					->SetPosition(GetGridSystem()->GridToWorld(CalculateCenter(results.second)));
+					->SetPosition(GetGridSystem()->GridToWorld(CalculateCenter(results.second)) 
+						+ Vector2(FRAND_RANGE(-30,30),FRAND_RANGE(-30,30)));
 			}
 			//Set the cells to not be placeable on top of new pattern
-			if (count == 1)GetGridSystem()->SetCellsNotPlaceAble(results.second);
+			if (setNotPLaceable)
+			{
+				GetGridSystem()->SetCellsNotPlaceAble(results.second);
+			}
+			else
+			{
+				GetGridSystem()->ClearPlaceAble(results.second);
+			}
 			//clear blocks when pattern found
 			for (IntVector2 location : results.second)
 			{

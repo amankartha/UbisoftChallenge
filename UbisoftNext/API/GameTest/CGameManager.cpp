@@ -9,7 +9,7 @@
 #include "PlayerGameObject.h"
 #include "App/app.h"
 
-CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) :Component(attachedObject),
+CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) : Component(attachedObject),
                                                                         m_player_one_turn_state_(this),
 																		m_empty_state_(this),
                                                                         m_game_fsm_(&m_empty_state_),
@@ -18,7 +18,7 @@ CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) :Componen
 {
 	for (int i = 0;i<PlayerCount;++i)
 	{
-		m_player_ATBs_.push_back(2);
+		m_player_ATBs_.push_back(4);
 		m_playerScores.push_back(0);
 		m_playerGameObjectIds.push_back(GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player", i));
 	}
@@ -28,12 +28,6 @@ CGameManager::CGameManager(GameObject* attachedObject,int PlayerCount) :Componen
 void CGameManager::Init()
 {
 	Component::Init();
-
-	//for (int i = 0; i < m_player_ATBs_.size(); ++i)
-	//{
-	//	m_playerGameObjectIds.push_back(GetAttachedGameObject()->GameInstance->GetGameObjectManager()->Create<PlayerGameObject>("player",i));
-	//}
-
 }
 
 void CGameManager::Update(float DeltaTime)

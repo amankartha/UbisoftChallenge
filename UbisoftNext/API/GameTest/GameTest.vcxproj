@@ -201,6 +201,7 @@
     <ClInclude Include="CBoostPad.h" />
     <ClInclude Include="Ccamera.h" />
     <ClInclude Include="CCameraController.h" />
+    <ClInclude Include="CChangeSize.h" />
     <ClInclude Include="Ccursor.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGoal.h" />
@@ -246,6 +247,7 @@
     <ClInclude Include="RingBuffer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SizeChangeGameObject.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TestGame.h" />
     <ClInclude Include="miniaudio\miniaudio.h" />
@@ -273,6 +275,7 @@
     <ClCompile Include="CBoostPad.cpp" />
     <ClCompile Include="Ccamera.cpp" />
     <ClCompile Include="CCameraController.cpp" />
+    <ClCompile Include="CChangeSize.cpp" />
     <ClCompile Include="Ccursor.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGoal.cpp" />
@@ -314,6 +317,7 @@
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SizeChangeGameObject.cpp" />
     <ClCompile Include="StartingPoint.cpp" />
     <ClCompile Include="miniaudio\miniaudio.cpp" />
     <ClCompile Include="ObserverPattern.cpp" />
